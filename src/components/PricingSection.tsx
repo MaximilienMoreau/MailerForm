@@ -1,0 +1,152 @@
+import { motion } from 'framer-motion'
+import { useInView } from '../hooks/useInView'
+import { ArrowRight, CheckCircle2, Zap } from 'lucide-react'
+
+const plans = [
+  {
+    name: 'Starter',
+    price: 'Free',
+    sub: 'No credit card',
+    description: 'Perfect for testing and small projects.',
+    cta: 'Get started',
+    ctaStyle: 'btn-secondary',
+    features: [
+      '10,000 emails / month',
+      '1 sending domain',
+      'Transactional stream',
+      'Pre-send analysis (10/mo)',
+      'Basic analytics',
+      'Email support',
+    ],
+  },
+  {
+    name: 'Growth',
+    price: '$29',
+    sub: '/ month',
+    badge: 'Most popular',
+    description: 'For growing SaaS and dev teams.',
+    cta: 'Start free trial',
+    ctaStyle: 'btn-primary',
+    features: [
+      '200,000 emails / month',
+      '5 sending domains',
+      'Transactional + Marketing streams',
+      'Unlimited pre-send analysis',
+      'CRM (up to 25k contacts)',
+      'Automation workflows',
+      'Webhooks',
+      'Priority support',
+    ],
+  },
+  {
+    name: 'Scale',
+    price: '$149',
+    sub: '/ month',
+    description: 'For high-volume senders who need full control.',
+    cta: 'Start free trial',
+    ctaStyle: 'btn-secondary',
+    features: [
+      '2,000,000 emails / month',
+      'Unlimited domains',
+      'Dedicated IPs',
+      'White-label option',
+      'Unlimited CRM contacts',
+      'Advanced automation',
+      'Custom webhooks & API rate limits',
+      'SLA + dedicated CSM',
+    ],
+  },
+]
+
+export default function PricingSection() {
+  const { ref, inView } = useInView(0.1)
+
+  return (
+    <section ref={ref} id="pricing" className="py-24 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_40%_at_50%_100%,rgba(51,102,255,0.07),transparent)]" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-14"
+        >
+          <span className="tag bg-brand-500/10 text-brand-400 border border-brand-500/20 inline-flex mb-4">
+            <Zap size={12} fill="currentColor" />
+            Simple pricing
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            Start free, scale when ready
+          </h2>
+          <p className="text-gray-400 max-w-lg mx-auto">
+            No per-email charge surprises. Flat monthly plans with generous limits — upgrade only when you need to.
+          </p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {plans.map((plan, i) => (
+            <motion.div
+              key={plan.name}
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className={`relative rounded-2xl p-6 flex flex-col ${
+                plan.badge
+                  ? 'bg-brand-500/[0.08] border-2 border-brand-500/40 shadow-xl shadow-brand-500/10'
+                  : 'bg-white/[0.03] border border-white/[0.07]'
+              }`}
+            >
+              {plan.badge && (
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 tag bg-brand-500 text-white text-[10px] font-bold px-3 py-1 rounded-full">
+                  {plan.badge}
+                </span>
+              )}
+
+              <div className="mb-5">
+                <h3 className="text-base font-bold text-white mb-1">{plan.name}</h3>
+                <div className="flex items-baseline gap-1 mb-1">
+                  <span className="text-4xl font-extrabold text-white">{plan.price}</span>
+                  <span className="text-gray-500 text-sm">{plan.sub}</span>
+                </div>
+                <p className="text-sm text-gray-400">{plan.description}</p>
+              </div>
+
+              <a href="#" className={`${plan.ctaStyle} text-sm mb-6 justify-center`}>
+                {plan.cta}
+                <ArrowRight size={14} />
+              </a>
+
+              <ul className="space-y-2.5 mt-auto">
+                {plan.features.map(f => (
+                  <li key={f} className="flex items-start gap-2.5 text-sm text-gray-400">
+                    <CheckCircle2 size={14} className="text-emerald-400 flex-shrink-0 mt-0.5" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Enterprise callout */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-8 max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 bg-white/[0.03] border border-white/[0.07] rounded-2xl px-8 py-5"
+        >
+          <div>
+            <p className="text-white font-semibold">Need custom volume or white-label?</p>
+            <p className="text-sm text-gray-400 mt-0.5">Enterprise plans with dedicated infrastructure, custom contracts, and SLA.</p>
+          </div>
+          <a href="#" className="btn-secondary text-sm flex-shrink-0">
+            Talk to sales
+            <ArrowRight size={14} />
+          </a>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
