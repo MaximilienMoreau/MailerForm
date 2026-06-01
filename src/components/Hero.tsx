@@ -105,9 +105,9 @@ export default function Hero() {
           className="mt-20 grid grid-cols-2 sm:grid-cols-4 gap-8 w-full max-w-3xl"
         >
           {stats.map((s, i) => (
-            <div key={i} className="flex flex-col items-center">
-              <dd className="text-3xl font-extrabold text-white tracking-tight m-0">{s.value}</dd>
+            <div key={i} className="flex flex-col-reverse items-center">
               <dt className="text-sm text-gray-500 mt-1 text-center">{s.label}</dt>
+              <dd className="text-3xl font-extrabold text-white tracking-tight m-0">{s.value}</dd>
             </div>
           ))}
         </motion.dl>
