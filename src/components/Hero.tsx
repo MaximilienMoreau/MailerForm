@@ -98,7 +98,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Stats */}
-        <motion.div
+        <motion.dl
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
@@ -106,11 +106,11 @@ export default function Hero() {
         >
           {stats.map((s, i) => (
             <div key={i} className="flex flex-col items-center">
-              <span className="text-3xl font-extrabold text-white tracking-tight">{s.value}</span>
-              <span className="text-sm text-gray-500 mt-1 text-center">{s.label}</span>
+              <dd className="text-3xl font-extrabold text-white tracking-tight m-0">{s.value}</dd>
+              <dt className="text-sm text-gray-500 mt-1 text-center">{s.label}</dt>
             </div>
           ))}
-        </motion.div>
+        </motion.dl>
 
         {/* Hero visual — deliverability card */}
         <motion.div
@@ -169,10 +169,11 @@ function DeliverabilityCard() {
             </div>
             <div className="score-bar">
               <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: `${s.invert ? s.value : s.value}%` }}
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: s.value / 100 }}
                 transition={{ duration: 1, delay: 0.8, ease: 'easeOut' }}
-                className={`h-full rounded-full ${s.color}`}
+                style={{ originX: 0 }}
+                className={`h-full w-full rounded-full ${s.color}`}
               />
             </div>
           </div>

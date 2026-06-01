@@ -9,12 +9,21 @@ const links = [
   { label: 'Docs', href: '#docs' },
 ]
 
+const sectionIds = links.map(l => l.href.slice(1))
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('')
 
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > 20)
+    let current = ''
+    for (const id of sectionIds) {
+      const el = document.getElementById(id)
+      if (el && el.offsetTop - 80 <= window.scrollY) current = id
+    }
+    setActiveSection(current)
   }, [])
 
   useEffect(() => {
@@ -43,15 +52,22 @@ export default function Navbar() {
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
-            {links.map(l => (
-              <a
-                key={l.label}
-                href={l.href}
-                className="text-sm text-gray-400 hover:text-white px-3 py-2 rounded-lg hover:bg-white/5 transition-all"
-              >
-                {l.label}
-              </a>
-            ))}
+            {links.map(l => {
+              const isActive = activeSection === l.href.slice(1)
+              return (
+                <a
+                  key={l.label}
+                  href={l.href}
+                  className={`text-sm px-3 py-2 rounded-lg transition-all ${
+                    isActive
+                      ? 'text-white bg-white/5'
+                      : 'text-gray-400 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  {l.label}
+                </a>
+              )
+            })}
           </nav>
 
           {/* Desktop CTA */}

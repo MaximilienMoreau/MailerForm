@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
 import { ArrowRight, CheckCircle2, Zap } from 'lucide-react'
@@ -6,7 +7,9 @@ const plans = [
   {
     name: 'Starter',
     price: 'Free',
+    yearlyPrice: 'Free',
     sub: 'No credit card',
+    yearlySub: 'No credit card',
     description: 'Perfect for testing and small projects.',
     cta: 'Get started',
     ctaStyle: 'btn-secondary',
@@ -22,7 +25,9 @@ const plans = [
   {
     name: 'Growth',
     price: '$29',
+    yearlyPrice: '$23',
     sub: '/ month',
+    yearlySub: '/ mo, billed yearly',
     badge: 'Most popular',
     description: 'For growing SaaS and dev teams.',
     cta: 'Start free trial',
@@ -41,7 +46,9 @@ const plans = [
   {
     name: 'Scale',
     price: '$149',
+    yearlyPrice: '$119',
     sub: '/ month',
+    yearlySub: '/ mo, billed yearly',
     description: 'For high-volume senders who need full control.',
     cta: 'Start free trial',
     ctaStyle: 'btn-secondary',
@@ -60,6 +67,7 @@ const plans = [
 
 export default function PricingSection() {
   const { ref, inView } = useInView(0.1)
+  const [yearly, setYearly] = useState(false)
 
   return (
     <section ref={ref} id="pricing" className="py-24 relative overflow-hidden">
@@ -71,7 +79,7 @@ export default function PricingSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="text-center mb-14"
+          className="text-center mb-10"
         >
           <span className="tag bg-brand-500/10 text-brand-400 border border-brand-500/20 inline-flex mb-4">
             <Zap size={12} fill="currentColor" />
@@ -83,6 +91,39 @@ export default function PricingSection() {
           <p className="text-gray-400 max-w-lg mx-auto">
             No per-email charge surprises. Flat monthly plans with generous limits — upgrade only when you need to.
           </p>
+        </motion.div>
+
+        {/* Billing toggle */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          className="flex items-center justify-center gap-3 mb-12"
+        >
+          <span className={`text-sm font-medium transition-colors ${!yearly ? 'text-white' : 'text-gray-500'}`}>
+            Monthly
+          </span>
+          <button
+            role="switch"
+            aria-checked={yearly}
+            aria-label={yearly ? 'Switch to monthly billing' : 'Switch to yearly billing'}
+            onClick={() => setYearly(y => !y)}
+            className={`relative w-11 h-6 rounded-full transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-400 ${
+              yearly ? 'bg-brand-500' : 'bg-white/10'
+            }`}
+          >
+            <span
+              className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform duration-200 ${
+                yearly ? 'translate-x-5' : 'translate-x-0'
+              }`}
+            />
+          </button>
+          <span className={`text-sm font-medium transition-colors ${yearly ? 'text-white' : 'text-gray-500'}`}>
+            Yearly
+            <span className="ml-2 text-xs bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 rounded-full px-2 py-0.5 font-semibold">
+              Save 20%
+            </span>
+          </span>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -107,8 +148,16 @@ export default function PricingSection() {
               <div className="mb-5">
                 <h3 className="text-base font-bold text-white mb-1">{plan.name}</h3>
                 <div className="flex items-baseline gap-1 mb-1">
-                  <span className="text-4xl font-extrabold text-white">{plan.price}</span>
-                  <span className="text-gray-500 text-sm">{plan.sub}</span>
+                  <motion.span
+                    key={yearly ? 'yearly' : 'monthly'}
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="text-4xl font-extrabold text-white"
+                  >
+                    {yearly ? plan.yearlyPrice : plan.price}
+                  </motion.span>
+                  <span className="text-gray-500 text-sm">{yearly ? plan.yearlySub : plan.sub}</span>
                 </div>
                 <p className="text-sm text-gray-400">{plan.description}</p>
               </div>

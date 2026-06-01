@@ -79,18 +79,18 @@ export default function ComparisonSection() {
           <table className="w-full">
             <thead>
               <tr className="border-b border-white/[0.07]">
-                <th className="px-4 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider w-64">Feature</th>
-                <th className="px-4 py-4 text-center bg-brand-500/5 border-x border-brand-500/10">
+                <th scope="col" className="px-4 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider w-64">Feature</th>
+                <th scope="col" className="px-4 py-4 text-center bg-brand-500/5 border-x border-brand-500/10">
                   <span className="text-sm font-bold text-white">MailForm</span>
                   <span className="block text-[10px] text-brand-400 font-medium mt-0.5">All-in-one</span>
                 </th>
-                <th className="px-4 py-4 text-center">
+                <th scope="col" className="px-4 py-4 text-center">
                   <span className="text-sm font-semibold text-gray-400">SendGrid</span>
                 </th>
-                <th className="px-4 py-4 text-center">
+                <th scope="col" className="px-4 py-4 text-center">
                   <span className="text-sm font-semibold text-gray-400">Mailgun</span>
                 </th>
-                <th className="px-4 py-4 text-center">
+                <th scope="col" className="px-4 py-4 text-center">
                   <span className="text-sm font-semibold text-gray-400">Resend</span>
                 </th>
               </tr>
@@ -98,7 +98,7 @@ export default function ComparisonSection() {
             <tbody className="divide-y divide-white/[0.05]">
               {rows.map((row) => (
                 <tr key={row.label} className="hover:bg-white/[0.02] transition-colors">
-                  <td className="px-4 py-3 text-sm text-gray-400">{row.label}</td>
+                  <th scope="row" className="px-4 py-3 text-sm text-gray-400 font-normal text-left">{row.label}</th>
                   <Cell value={row.mailform as CellValue} highlight />
                   <Cell value={row.sendgrid as CellValue} />
                   <Cell value={row.mailgun as CellValue} />
