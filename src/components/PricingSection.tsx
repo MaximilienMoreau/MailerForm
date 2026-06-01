@@ -104,6 +104,7 @@ export default function PricingSection() {
             Monthly
           </span>
           <button
+            type="button"
             role="switch"
             aria-checked={yearly}
             aria-label={yearly ? 'Switch to monthly billing' : 'Switch to yearly billing'}
