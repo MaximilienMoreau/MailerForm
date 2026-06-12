@@ -1,19 +1,19 @@
 import { memo } from 'react'
 import { motion } from 'framer-motion'
-import { useInView } from '../hooks/useInView'
 import { features, type Feature } from '../data/features'
+import { staggerContainer, staggerItem } from './ui/FadeIn'
+
+const VP = { once: true, amount: 0.08 } as const
+const EASE = [0.22, 1, 0.36, 1] as const
 
 export default function FeaturesSection() {
-  const { ref, inView } = useInView<HTMLElement>(0.1)
-
   return (
-    <section ref={ref} id="features" className="py-24">
+    <section id="features" className="py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
+          transition={{ duration: 0.5, ease: EASE }}
           className="text-center mb-16"
         >
           <span className="tag bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-4 inline-flex">
@@ -31,37 +31,30 @@ export default function FeaturesSection() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {features.map((f, i) => (
-            <FeatureCard key={f.title} feature={f} index={i} inView={inView} />
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VP}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-5"
+        >
+          {features.map(f => (
+            <FeatureCard key={f.title} feature={f} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )
 }
 
-const FeatureCard = memo(function FeatureCard({
-  feature,
-  index,
-  inView,
-}: {
-  feature: Feature
-  index: number
-  inView: boolean
-}) {
+const FeatureCard = memo(function FeatureCard({ feature }: { feature: Feature }) {
   const Icon = feature.icon
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
-      className="card group"
-    >
+    <motion.div variants={staggerItem} className="card group">
       <div className="flex items-start justify-between mb-4">
         <div className={`w-10 h-10 rounded-xl ${feature.bg} border ${feature.border} flex items-center justify-center`}>
-          <Icon size={18} className={feature.color} />
+          <Icon size={18} className={feature.color} aria-hidden />
         </div>
         <span className={`tag text-[10px] border ${feature.tagColor}`}>{feature.tag}</span>
       </div>
@@ -69,10 +62,10 @@ const FeatureCard = memo(function FeatureCard({
       <h3 className="text-base font-bold text-white mb-2">{feature.title}</h3>
       <p className="text-sm text-gray-400 leading-relaxed mb-4">{feature.description}</p>
 
-      <ul className="space-y-1.5">
+      <ul className="space-y-1.5" aria-label={`${feature.title} capabilities`}>
         {feature.items.map(item => (
           <li key={item} className="flex items-center gap-2 text-xs text-gray-500">
-            <span className={`w-1 h-1 rounded-full ${feature.bg} border ${feature.border} inline-block`} />
+            <span className={`w-1 h-1 rounded-full ${feature.bg} border ${feature.border} inline-block flex-shrink-0`} aria-hidden />
             {item}
           </li>
         ))}
