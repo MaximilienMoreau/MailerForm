@@ -1,4 +1,4 @@
-# MailForm — Landing Page
+# MailForm: Landing Page
 
 Landing page for **MailForm**, an email infrastructure platform for SaaS teams. Built with React, TypeScript, Vite, and Tailwind CSS.
 
