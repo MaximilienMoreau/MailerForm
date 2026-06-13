@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, Shield } from 'lucide-react'
+import { EASE } from '@/lib/motion'
 
 interface Score {
   label:   string
@@ -50,7 +51,7 @@ export default function DeliverabilityCard() {
               <motion.div
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: s.value / 100 }}
-                transition={{ duration: 1, delay: 0.8 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 1, delay: 0.8 + i * 0.08, ease: EASE }}
                 style={{ originX: 0 }}
                 className={`h-full w-full rounded-full ${s.color}`}
               />

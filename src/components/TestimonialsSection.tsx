@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
-import { staggerContainer, staggerItem } from './ui/FadeIn'
-import { EASE, VP } from '../lib/motion'
+import { EASE, VP, staggerContainer, staggerItem } from '@/lib/motion'
 
 interface Testimonial {
   quote:   string
@@ -117,7 +116,7 @@ export default function TestimonialsSection() {
               )}
 
               <blockquote className="text-sm text-gray-400 leading-relaxed flex-1">
-                "{t.quote}"
+                &ldquo;{t.quote}&rdquo;
               </blockquote>
 
               <figcaption className="flex items-center gap-3 pt-4 border-t border-white/[0.06]">

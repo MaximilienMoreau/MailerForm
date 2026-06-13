@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useState, useId } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
-import { EASE, VP } from '../lib/motion'
+import { EASE, VP } from '@/lib/motion'
 
 interface FaqItem {
   question: string
@@ -37,6 +37,8 @@ const faqs: FaqItem[] = [
 
 function FaqRow({ item, defaultOpen = false }: { item: FaqItem; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen)
+  const uid = useId()
+  const answerId = `faq-answer-${uid}`
 
   return (
     <div className="border-b border-white/[0.07] last:border-b-0">
@@ -44,6 +46,7 @@ function FaqRow({ item, defaultOpen = false }: { item: FaqItem; defaultOpen?: bo
         type="button"
         onClick={() => setOpen(o => !o)}
         aria-expanded={open}
+        aria-controls={answerId}
         className="w-full flex items-center justify-between gap-4 py-5 text-left focus-ring rounded-lg px-1 -mx-1 group"
       >
         <span className="text-sm font-semibold text-white group-hover:text-brand-300 transition-colors">
@@ -56,22 +59,25 @@ function FaqRow({ item, defaultOpen = false }: { item: FaqItem; defaultOpen?: bo
         />
       </button>
 
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            key="answer"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: EASE }}
-            className="overflow-hidden"
-          >
-            <p className="pb-5 text-sm text-gray-400 leading-relaxed pr-8">
-              {item.answer}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Wrapper always present so aria-controls always resolves */}
+      <div id={answerId}>
+        <AnimatePresence initial={false}>
+          {open && (
+            <motion.div
+              key="answer"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: EASE }}
+              className="overflow-hidden"
+            >
+              <p className="pb-5 text-sm text-gray-400 leading-relaxed pr-8">
+                {item.answer}
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   )
 }
@@ -90,7 +96,7 @@ export default function FaqSection() {
             Frequently asked questions
           </h2>
           <p className="text-gray-400">
-            Everything you need to know before switching. If something's missing,{' '}
+            Everything you need to know before switching. If something&apos;s missing,{' '}
             <a href="mailto:hello@mailform.io" className="text-brand-400 hover:text-brand-300 transition-colors font-medium focus-ring rounded">
               reach out
             </a>.

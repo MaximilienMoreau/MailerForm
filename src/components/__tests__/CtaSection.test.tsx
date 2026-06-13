@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MotionConfig } from 'framer-motion'
 import { BrowserRouter } from 'react-router-dom'
-import CtaSection from '../CtaSection'
+import CtaSection from '@/components/CtaSection'
 
 function renderCta() {
   return render(

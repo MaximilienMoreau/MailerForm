@@ -24,7 +24,7 @@ export default function NotFound() {
 
         <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">Page not found</h1>
         <p className="text-gray-400 max-w-sm mx-auto mb-10 leading-relaxed">
-          The page you're looking for doesn't exist yet. We're working on it.
+          The page you&apos;re looking for doesn&apos;t exist yet. We&apos;re working on it.
         </p>
 
         <Link

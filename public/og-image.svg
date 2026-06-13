@@ -1,0 +1,80 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#030712"/>
+
+  <!-- Brand glow -->
+  <ellipse cx="600" cy="280" rx="480" ry="280" fill="url(#radialGlow)"/>
+
+  <!-- Subtle grid lines -->
+  <line x1="0" y1="210" x2="1200" y2="210" stroke="white" stroke-opacity="0.03" stroke-width="1"/>
+  <line x1="0" y1="420" x2="1200" y2="420" stroke="white" stroke-opacity="0.03" stroke-width="1"/>
+  <line x1="400" y1="0" x2="400" y2="630" stroke="white" stroke-opacity="0.03" stroke-width="1"/>
+  <line x1="800" y1="0" x2="800" y2="630" stroke="white" stroke-opacity="0.03" stroke-width="1"/>
+
+  <!-- Logo box -->
+  <rect x="549" y="162" width="102" height="102" rx="24" fill="#3366FF"/>
+  <rect x="549" y="162" width="102" height="102" rx="24" fill="url(#logoShine)" opacity="0.3"/>
+  <!-- Lightning bolt (Zap icon path, scaled to fit 102×102 box) -->
+  <path
+    d="M605 185 L582 216 H601 L595 245 L618 214 H599 Z"
+    fill="white"
+    opacity="0.95"
+  />
+
+  <!-- MailForm wordmark -->
+  <text
+    x="600" y="322"
+    text-anchor="middle"
+    fill="white"
+    font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif"
+    font-size="74"
+    font-weight="800"
+    letter-spacing="-2"
+  >MailForm</text>
+
+  <!-- Tagline -->
+  <text
+    x="600" y="385"
+    text-anchor="middle"
+    fill="#6B7280"
+    font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif"
+    font-size="26"
+    font-weight="400"
+    letter-spacing="0"
+  >Email Infrastructure Platform</text>
+
+  <!-- Value prop -->
+  <text
+    x="600" y="442"
+    text-anchor="middle"
+    fill="#4B5563"
+    font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif"
+    font-size="20"
+    font-weight="400"
+  >Stop hoping emails land in inbox. Know before you send.</text>
+
+  <!-- Bottom badges -->
+  <g transform="translate(388, 490)">
+    <rect width="132" height="34" rx="17" fill="#10B981" fill-opacity="0.1" stroke="#10B981" stroke-opacity="0.2" stroke-width="1"/>
+    <text x="66" y="22" text-anchor="middle" fill="#10B981" font-family="Inter, sans-serif" font-size="13" font-weight="600">GDPR compliant</text>
+  </g>
+  <g transform="translate(538, 490)">
+    <rect width="132" height="34" rx="17" fill="#10B981" fill-opacity="0.1" stroke="#10B981" stroke-opacity="0.2" stroke-width="1"/>
+    <text x="66" y="22" text-anchor="middle" fill="#10B981" font-family="Inter, sans-serif" font-size="13" font-weight="600">SOC 2 Type II</text>
+  </g>
+  <g transform="translate(688, 490)">
+    <rect width="132" height="34" rx="17" fill="#10B981" fill-opacity="0.1" stroke="#10B981" stroke-opacity="0.2" stroke-width="1"/>
+    <text x="66" y="22" text-anchor="middle" fill="#10B981" font-family="Inter, sans-serif" font-size="13" font-weight="600">10k emails free</text>
+  </g>
+
+  <defs>
+    <radialGradient id="radialGlow" cx="50%" cy="50%" r="50%" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#3366FF" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#030712" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="logoShine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="white" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg>

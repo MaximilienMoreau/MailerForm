@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { AlertTriangle, CheckCircle2, XCircle } from 'lucide-react'
-import { EASE, VP_MD } from '../lib/motion'
+import { EASE, VP_MD } from '@/lib/motion'
 
 const before = [
   'Send campaign to 50k contacts',
