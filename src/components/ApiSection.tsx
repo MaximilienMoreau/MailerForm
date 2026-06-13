@@ -1,17 +1,33 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Code2, Copy, CheckCheck } from 'lucide-react'
-import { renderTokens } from '../lib/tokenize'
-import { sdks, apiStats, codeExample } from '../data/api'
-import { EASE, VP } from '../lib/motion'
+import { renderTokens } from '@/lib/tokenize'
+import { sdks, apiStats, codeExample } from '@/data/api'
+import { EASE, VP } from '@/lib/motion'
 
 export default function ApiSection() {
   const [copied, setCopied] = useState(false)
 
   function handleCopy() {
-    navigator.clipboard.writeText(codeExample).catch(() => {})
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    navigator.clipboard.writeText(codeExample).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    }).catch(() => {
+      // Fallback for non-secure contexts (HTTP, sandboxed iframes)
+      try {
+        const el = document.createElement('textarea')
+        el.value = codeExample
+        el.style.cssText = 'position:fixed;opacity:0;pointer-events:none'
+        document.body.appendChild(el)
+        el.select()
+        document.execCommand('copy')
+        document.body.removeChild(el)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      } catch {
+        console.warn('Copy to clipboard failed')
+      }
+    })
   }
 
   return (
@@ -50,8 +66,9 @@ export default function ApiSection() {
                 </button>
               </div>
 
-              <div className="p-5 overflow-x-auto">
-                <pre className="text-sm font-mono leading-relaxed" tabIndex={0} aria-label="Code example: sending an email with MailForm SDK">
+              {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- scrollable code block needs keyboard focus */}
+              <div className="p-5 overflow-x-auto" tabIndex={0} aria-label="Code example: sending an email with MailForm SDK">
+                <pre className="text-sm font-mono leading-relaxed">
                   <code>
                     {codeExample.split('\n').map((line, i) => renderTokens(line, i))}
                   </code>

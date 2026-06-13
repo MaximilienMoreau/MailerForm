@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Zap } from 'lucide-react'
-import { staggerContainer, staggerItem } from './ui/FadeIn'
-import { EASE, VP } from '../lib/motion'
+import { EASE, VP, staggerContainer, staggerItem } from '@/lib/motion'
 
 interface Plan {
   name:        string
@@ -80,7 +79,16 @@ const plans: Plan[] = [
 ]
 
 export default function PricingSection() {
-  const [yearly, setYearly] = useState(false)
+  const [yearly, setYearly]               = useState(false)
+  const [billingAnnouncement, setBillingAnnouncement] = useState('')
+
+  function handleBillingToggle() {
+    const next = !yearly
+    setYearly(next)
+    setBillingAnnouncement(
+      next ? 'Yearly billing selected — 20% off applied' : 'Monthly billing selected'
+    )
+  }
 
   return (
     <section id="pricing" className="py-24 relative overflow-hidden">
@@ -119,7 +127,7 @@ export default function PricingSection() {
             role="switch"
             aria-checked={yearly}
             aria-labelledby="billing-monthly billing-yearly"
-            onClick={() => setYearly(y => !y)}
+            onClick={handleBillingToggle}
             className={`relative w-11 h-6 rounded-full transition-colors duration-200 focus-ring ${
               yearly ? 'bg-brand-500' : 'bg-white/10'
             }`}
@@ -137,6 +145,10 @@ export default function PricingSection() {
             </span>
           </span>
         </motion.div>
+        {/* Single live region — announces billing change once per toggle */}
+        <span className="sr-only" aria-live="polite" aria-atomic="true">
+          {billingAnnouncement}
+        </span>
 
         <motion.div
           variants={staggerContainer}
@@ -171,7 +183,6 @@ export default function PricingSection() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.2, ease: EASE }}
                     className="text-4xl font-extrabold text-white tabular-nums"
-                    aria-live="polite"
                   >
                     {yearly ? plan.yearlyPrice : plan.price}
                   </motion.span>

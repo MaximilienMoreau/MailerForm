@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MotionConfig } from 'framer-motion'
 import { BrowserRouter } from 'react-router-dom'
-import Navbar from '../Navbar'
+import Navbar from '@/components/Navbar'
 
 function renderNavbar() {
   return render(

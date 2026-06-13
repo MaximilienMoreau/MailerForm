@@ -1,7 +1,7 @@
-import { useRef, useState, type FormEvent } from 'react'
+import { useRef, useState, type ChangeEvent, type FormEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Loader2, Zap } from 'lucide-react'
-import { EASE, VP_LG } from '../lib/motion'
+import { EASE, VP_LG } from '@/lib/motion'
 
 type FormState = 'idle' | 'loading' | 'success' | 'error'
 
@@ -39,7 +39,7 @@ export default function CtaSection() {
     setState('success')
   }
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
     setEmail(e.target.value)
     if (state === 'error') {
       setState('idle')
@@ -100,7 +100,7 @@ export default function CtaSection() {
                 <div className="w-12 h-12 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center">
                   <CheckCircle2 size={22} className="text-emerald-400" />
                 </div>
-                <p className="text-white font-semibold text-lg">You're on the list!</p>
+                <p className="text-white font-semibold text-lg">You&apos;re on the list!</p>
                 <p className="text-sm text-gray-400">Check your inbox for your free account details.</p>
               </motion.div>
             ) : (

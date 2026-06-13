@@ -1,6 +1,7 @@
+import { type ReactElement } from 'react'
 import { motion } from 'framer-motion'
 import { AlertCircle, ArrowRight, CheckCircle2, Clock, Cpu } from 'lucide-react'
-import { EASE, VP_SM } from '../lib/motion'
+import { EASE, VP_SM } from '@/lib/motion'
 
 type CheckStatus = 'ok' | 'warn' | 'error'
 
@@ -21,7 +22,7 @@ const checks: Check[] = [
   { label: 'HTML/Text multipart',  status: 'ok',   detail: 'Both parts included' },
 ]
 
-const statusMeta: Record<CheckStatus, { icon: JSX.Element; color: string }> = {
+const statusMeta: Record<CheckStatus, { icon: ReactElement; color: string }> = {
   ok:    { icon: <CheckCircle2 size={13} className="text-emerald-400" aria-hidden />, color: 'text-gray-500' },
   warn:  { icon: <AlertCircle  size={13} className="text-amber-400"   aria-hidden />, color: 'text-amber-400' },
   error: { icon: <AlertCircle  size={13} className="text-red-400"     aria-hidden />, color: 'text-red-400' },

@@ -1,22 +1,25 @@
+import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { MotionConfig } from 'framer-motion'
-import ErrorBoundary from './components/ErrorBoundary'
-import SkipLink from './components/SkipLink'
-import CookieBanner from './components/CookieBanner'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import ProblemSection from './components/ProblemSection'
-import FeaturesSection from './components/FeaturesSection'
-import DeliverabilitySection from './components/DeliverabilitySection'
-import StreamSection from './components/StreamSection'
-import ApiSection from './components/ApiSection'
-import ComparisonSection from './components/ComparisonSection'
-import TestimonialsSection from './components/TestimonialsSection'
-import PricingSection from './components/PricingSection'
-import FaqSection from './components/FaqSection'
-import CtaSection from './components/CtaSection'
-import Footer from './components/Footer'
-import NotFound from './pages/NotFound'
+import ErrorBoundary from '@/components/ErrorBoundary'
+import SkipLink from '@/components/SkipLink'
+import CookieBanner from '@/components/CookieBanner'
+import Navbar from '@/components/Navbar'
+import Hero from '@/components/Hero'
+import ProblemSection from '@/components/ProblemSection'
+import FeaturesSection from '@/components/FeaturesSection'
+import DeliverabilitySection from '@/components/DeliverabilitySection'
+import StreamSection from '@/components/StreamSection'
+import ApiSection from '@/components/ApiSection'
+import NotFound from '@/pages/NotFound'
+
+// Sections below the fold — lazy loaded after the critical path renders
+const ComparisonSection  = lazy(() => import('@/components/ComparisonSection'))
+const TestimonialsSection = lazy(() => import('@/components/TestimonialsSection'))
+const PricingSection     = lazy(() => import('@/components/PricingSection'))
+const FaqSection         = lazy(() => import('@/components/FaqSection'))
+const CtaSection         = lazy(() => import('@/components/CtaSection'))
+const Footer             = lazy(() => import('@/components/Footer'))
 
 function LandingPage() {
   return (
@@ -29,13 +32,25 @@ function LandingPage() {
         <DeliverabilitySection />
         <StreamSection />
         <ApiSection />
-        <ComparisonSection />
-        <TestimonialsSection />
-        <PricingSection />
-        <FaqSection />
-        <CtaSection />
+        <Suspense fallback={null}>
+          <ComparisonSection />
+        </Suspense>
+        <Suspense fallback={null}>
+          <TestimonialsSection />
+        </Suspense>
+        <Suspense fallback={null}>
+          <PricingSection />
+        </Suspense>
+        <Suspense fallback={null}>
+          <FaqSection />
+        </Suspense>
+        <Suspense fallback={null}>
+          <CtaSection />
+        </Suspense>
       </main>
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
     </div>
   )
 }

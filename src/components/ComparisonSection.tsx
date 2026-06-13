@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Check, Minus, Star } from 'lucide-react'
-import { EASE, VP } from '../lib/motion'
+import { EASE, VP } from '@/lib/motion'
 
 type CellValue = boolean | 'best' | 'partial'
 

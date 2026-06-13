@@ -1,25 +1,25 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Cookie, X } from 'lucide-react'
+import { EASE } from '@/lib/motion'
 
 const STORAGE_KEY = 'mailform_cookie_consent'
 
 type Consent = 'accepted' | 'declined'
 
 export default function CookieBanner() {
-  const [consent, setConsent] = useState<Consent | null>(null)
+  // Read localStorage once on mount — avoids calling setState synchronously in an effect
+  const [consent, setConsent] = useState<Consent | null>(
+    () => localStorage.getItem(STORAGE_KEY) as Consent | null
+  )
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY) as Consent | null
-    if (stored) {
-      setConsent(stored)
-    } else {
-      // Small delay so the banner doesn't pop in immediately on load
-      const t = setTimeout(() => setVisible(true), 1500)
-      return () => clearTimeout(t)
-    }
-  }, [])
+    if (consent !== null) return
+    // Small delay so the banner doesn't pop in immediately on load
+    const t = setTimeout(() => setVisible(true), 1500)
+    return () => clearTimeout(t)
+  }, [consent])
 
   function handleAccept() {
     localStorage.setItem(STORAGE_KEY, 'accepted')
@@ -45,7 +45,7 @@ export default function CookieBanner() {
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.4, ease: EASE }}
           className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-sm z-50"
         >
           <div className="bg-gray-900 border border-white/10 rounded-2xl p-5 shadow-2xl shadow-black/60 backdrop-blur-xl">

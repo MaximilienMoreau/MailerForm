@@ -8,7 +8,7 @@ import prettierConfig from 'eslint-config-prettier'
 
 export default [
   { ignores: ['dist/**', 'node_modules/**', 'coverage/**'] },
-  js.recommended,
+  js.configs.recommended,
   {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
@@ -33,6 +33,23 @@ export default [
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
       '@typescript-eslint/no-explicit-any': 'warn',
       'jsx-a11y/anchor-is-valid': 'off',
+    },
+  },
+  // Vitest globals for test files
+  {
+    files: ['**/*.test.{ts,tsx}', '**/*.spec.{ts,tsx}', 'src/test/**'],
+    languageOptions: {
+      globals: {
+        vi: 'readonly',
+        describe: 'readonly',
+        it: 'readonly',
+        test: 'readonly',
+        expect: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
+      },
     },
   },
   prettierConfig,

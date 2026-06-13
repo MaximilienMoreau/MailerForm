@@ -1,8 +1,7 @@
 import { memo } from 'react'
 import { motion } from 'framer-motion'
-import { features, type Feature } from '../data/features'
-import { staggerContainer, staggerItem } from './ui/FadeIn'
-import { EASE, VP } from '../lib/motion'
+import { features, type Feature } from '@/data/features'
+import { EASE, VP, staggerContainer, staggerItem } from '@/lib/motion'
 
 export default function FeaturesSection() {
   return (

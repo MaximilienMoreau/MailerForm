@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import { GitBranch, Lock, Mail, Megaphone, TrendingUp } from 'lucide-react'
-import { staggerContainer, staggerItem } from './ui/FadeIn'
-import { EASE, VP_SM } from '../lib/motion'
+import { EASE, VP_SM, staggerContainer, staggerItem } from '@/lib/motion'
 
 const transactionalItems = ['Password resets', 'OTP codes', 'Purchase receipts', 'Account alerts'] as const
 const marketingItems     = ['Newsletters', 'Product updates', 'Lifecycle campaigns', 'Re-engagement flows'] as const

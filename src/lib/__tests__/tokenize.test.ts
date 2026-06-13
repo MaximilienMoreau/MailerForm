@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { tokenizeLine } from '../tokenize'
+import { tokenizeLine } from '@/lib/tokenize'
 
 describe('tokenizeLine', () => {
   it('tokenizes a keyword', () => {

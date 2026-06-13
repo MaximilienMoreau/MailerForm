@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Zap } from 'lucide-react'
-import { staggerContainer, staggerItem } from './ui/FadeIn'
 import DeliverabilityCard from './DeliverabilityCard'
-import { EASE } from '../lib/motion'
+import { EASE, staggerContainer, staggerItem } from '@/lib/motion'
 
 const EASE_OUT_QUART = (t: number) => 1 - Math.pow(1 - t, 4)
 
@@ -38,9 +37,10 @@ function fadeIn(delay = 0) {
 
 function useCountUp(target: number, decimals: number, duration = 1.8) {
   const [count, setCount] = useState(0)
+  const [done, setDone] = useState(false)
   const started = useRef(false)
 
-  function start() {
+  const start = useCallback(() => {
     if (started.current) return
     started.current = true
     const begin = performance.now()
@@ -49,18 +49,22 @@ function useCountUp(target: number, decimals: number, duration = 1.8) {
       const progress = Math.min(elapsed / duration, 1)
       const value = parseFloat((EASE_OUT_QUART(progress) * target).toFixed(decimals))
       setCount(value)
-      if (progress < 1) requestAnimationFrame(tick)
+      if (progress < 1) {
+        requestAnimationFrame(tick)
+      } else {
+        setDone(true)
+      }
     }
     requestAnimationFrame(tick)
-  }
+  }, [target, decimals, duration])
 
-  return { count, start }
+  return { count, done, start }
 }
 
 function StatItem({ stat }: { stat: Stat }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, amount: 0.5 })
-  const { count, start } = useCountUp(stat.value, stat.decimals)
+  const { count, done, start } = useCountUp(stat.value, stat.decimals)
 
   useEffect(() => {
     if (inView) start()
@@ -71,12 +75,21 @@ function StatItem({ stat }: { stat: Stat }) {
       ? count.toFixed(stat.decimals)
       : count.toFixed(0)
 
+  const finalDisplay =
+    stat.decimals > 0
+      ? stat.value.toFixed(stat.decimals)
+      : stat.value.toFixed(0)
+
   return (
     <motion.div ref={ref} variants={staggerItem} className="flex flex-col-reverse items-center">
       <dt className="text-sm text-gray-500 mt-1 text-center">{stat.label}</dt>
-      <dd className="text-3xl font-extrabold text-white tracking-tight tabular-nums" aria-live="polite">
+      <dd className="text-3xl font-extrabold text-white tracking-tight tabular-nums" aria-hidden>
         {stat.prefix}{display}{stat.suffix}
       </dd>
+      {/* Announce only the final value to screen readers, not every animation frame */}
+      <span className="sr-only" aria-live="polite" aria-atomic="true">
+        {done ? `${stat.prefix}${finalDisplay}${stat.suffix} ${stat.label}` : ''}
+      </span>
     </motion.div>
   )
 }
@@ -120,7 +133,7 @@ export default function Hero() {
         </motion.div>
 
         <motion.div {...fadeIn(0.38)} className="mt-10 flex flex-col sm:flex-row items-center gap-4">
-          <a href="#pricing" className="btn-primary text-base px-8 py-3.5">
+          <a href="#cta" className="btn-primary text-base px-8 py-3.5">
             Start for free
             <ArrowRight size={16} aria-hidden />
           </a>
