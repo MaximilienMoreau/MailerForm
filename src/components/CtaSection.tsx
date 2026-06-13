@@ -1,31 +1,49 @@
-import { useState, type FormEvent } from 'react'
+import { useRef, useState, type FormEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Loader2, Zap } from 'lucide-react'
-
-const VP   = { once: true, amount: 0.2 } as const
-const EASE = [0.22, 1, 0.36, 1] as const
+import { EASE, VP_LG } from '../lib/motion'
 
 type FormState = 'idle' | 'loading' | 'success' | 'error'
 
+function isValidEmail(value: string): boolean {
+  // Delegate to the browser's own RFC-compliant email validator
+  const input = document.createElement('input')
+  input.type = 'email'
+  input.value = value.trim()
+  return input.checkValidity()
+}
+
 export default function CtaSection() {
+  const inputRef = useRef<HTMLInputElement>(null)
   const [email, setEmail]       = useState('')
   const [state, setState]       = useState<FormState>('idle')
   const [errorMsg, setErrorMsg] = useState('')
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
-    if (!email.trim()) return
+    const value = email.trim()
+    if (!value) return
+
+    if (!isValidEmail(value)) {
+      setState('error')
+      setErrorMsg('Please enter a valid email address.')
+      inputRef.current?.focus()
+      return
+    }
 
     setState('loading')
     setErrorMsg('')
 
-    await new Promise(r => setTimeout(r, 1000))
+    // TODO: replace with real API call once backend is live
+    await new Promise(r => setTimeout(r, 900))
+    setState('success')
+  }
 
-    if (email.includes('@')) {
-      setState('success')
-    } else {
-      setState('error')
-      setErrorMsg('Please enter a valid email address.')
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setEmail(e.target.value)
+    if (state === 'error') {
+      setState('idle')
+      setErrorMsg('')
     }
   }
 
@@ -36,7 +54,7 @@ export default function CtaSection() {
 
       <div className="relative max-w-3xl mx-auto px-4 sm:px-6 text-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={VP}
+          initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={VP_LG}
           transition={{ duration: 0.5, ease: EASE }}
           className="w-14 h-14 bg-brand-500 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-xl shadow-brand-500/30"
           aria-hidden
@@ -45,7 +63,7 @@ export default function CtaSection() {
         </motion.div>
 
         <motion.h2
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP_LG}
           transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
           className="text-4xl sm:text-5xl font-extrabold text-white leading-tight mb-6"
         >
@@ -56,7 +74,7 @@ export default function CtaSection() {
         </motion.h2>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP_LG}
           transition={{ duration: 0.5, delay: 0.15, ease: EASE }}
           className="text-lg text-gray-400 mb-10 max-w-xl mx-auto"
         >
@@ -65,7 +83,7 @@ export default function CtaSection() {
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP_LG}
           transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
         >
           <AnimatePresence mode="wait">
@@ -100,15 +118,17 @@ export default function CtaSection() {
                     Email address
                   </label>
                   <input
+                    ref={inputRef}
                     id="cta-email"
                     type="email"
                     value={email}
-                    onChange={e => { setEmail(e.target.value); if (state === 'error') setState('idle') }}
+                    onChange={handleChange}
                     placeholder="you@company.com"
                     required
+                    autoComplete="email"
                     aria-invalid={state === 'error'}
                     aria-describedby={state === 'error' ? 'cta-email-error' : undefined}
-                    className="w-full h-full bg-white/[0.06] border border-white/[0.12] rounded-xl px-4 py-3.5 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-brand-500/60 focus:bg-white/[0.08] transition-all"
+                    className="w-full h-full bg-white/[0.06] border border-white/[0.12] rounded-xl px-4 py-3.5 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-brand-500/60 focus:bg-white/[0.08] transition-all aria-[invalid=true]:border-red-500/50"
                   />
                 </div>
                 <button
@@ -117,7 +137,7 @@ export default function CtaSection() {
                   className="btn-primary text-sm px-6 py-3.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0 whitespace-nowrap"
                 >
                   {state === 'loading'
-                    ? <Loader2 size={15} className="animate-spin" aria-hidden />
+                    ? <Loader2 size={15} className="animate-spin" aria-label="Loading…" />
                     : <>Start for free <ArrowRight size={15} aria-hidden /></>
                   }
                 </button>
@@ -139,7 +159,7 @@ export default function CtaSection() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={VP}
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={VP_LG}
           transition={{ duration: 0.6, delay: 0.35, ease: EASE }}
           className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6"
         >

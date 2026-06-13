@@ -1,16 +1,26 @@
-import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { motion, useInView } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Zap } from 'lucide-react'
 import { staggerContainer, staggerItem } from './ui/FadeIn'
 import DeliverabilityCard from './DeliverabilityCard'
+import { EASE } from '../lib/motion'
 
-const EASE = [0.22, 1, 0.36, 1] as const
+const EASE_OUT_QUART = (t: number) => 1 - Math.pow(1 - t, 4)
 
-const stats = [
-  { value: '99.2%', label: 'Inbox placement rate' },
-  { value: '260+',  label: 'API endpoints' },
-  { value: '<80ms', label: 'Delivery latency' },
-  { value: '10B+',  label: 'Emails analyzed' },
-] as const
+interface Stat {
+  prefix: string
+  value: number
+  suffix: string
+  decimals: number
+  label: string
+}
+
+const stats: Stat[] = [
+  { prefix: '', value: 99.2, suffix: '%',  decimals: 1, label: 'Inbox placement rate' },
+  { prefix: '', value: 260,  suffix: '+',  decimals: 0, label: 'API endpoints' },
+  { prefix: '<', value: 80,  suffix: 'ms', decimals: 0, label: 'Delivery latency' },
+  { prefix: '', value: 10,   suffix: 'B+', decimals: 0, label: 'Emails analyzed' },
+]
 
 const trust = [
   'GDPR & CAN-SPAM compliant',
@@ -24,6 +34,51 @@ function fadeIn(delay = 0) {
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.55, delay, ease: EASE },
   }
+}
+
+function useCountUp(target: number, decimals: number, duration = 1.8) {
+  const [count, setCount] = useState(0)
+  const started = useRef(false)
+
+  function start() {
+    if (started.current) return
+    started.current = true
+    const begin = performance.now()
+    function tick(now: number) {
+      const elapsed = (now - begin) / 1000
+      const progress = Math.min(elapsed / duration, 1)
+      const value = parseFloat((EASE_OUT_QUART(progress) * target).toFixed(decimals))
+      setCount(value)
+      if (progress < 1) requestAnimationFrame(tick)
+    }
+    requestAnimationFrame(tick)
+  }
+
+  return { count, start }
+}
+
+function StatItem({ stat }: { stat: Stat }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { once: true, amount: 0.5 })
+  const { count, start } = useCountUp(stat.value, stat.decimals)
+
+  useEffect(() => {
+    if (inView) start()
+  }, [inView, start])
+
+  const display =
+    stat.decimals > 0
+      ? count.toFixed(stat.decimals)
+      : count.toFixed(0)
+
+  return (
+    <motion.div ref={ref} variants={staggerItem} className="flex flex-col-reverse items-center">
+      <dt className="text-sm text-gray-500 mt-1 text-center">{stat.label}</dt>
+      <dd className="text-3xl font-extrabold text-white tracking-tight tabular-nums" aria-live="polite">
+        {stat.prefix}{display}{stat.suffix}
+      </dd>
+    </motion.div>
+  )
 }
 
 export default function Hero() {
@@ -81,10 +136,7 @@ export default function Hero() {
           className="mt-20 grid grid-cols-2 sm:grid-cols-4 gap-8 w-full max-w-3xl"
         >
           {stats.map(s => (
-            <motion.div key={s.label} variants={staggerItem} className="flex flex-col-reverse items-center">
-              <dt className="text-sm text-gray-500 mt-1 text-center">{s.label}</dt>
-              <dd className="text-3xl font-extrabold text-white tracking-tight tabular-nums">{s.value}</dd>
-            </motion.div>
+            <StatItem key={s.label} stat={s} />
           ))}
         </motion.dl>
 

@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
-
-const VP   = { once: true, amount: 0.08 } as const
-const EASE = [0.22, 1, 0.36, 1] as const
+import { EASE, VP } from '../lib/motion'
 
 interface FaqItem {
   question: string

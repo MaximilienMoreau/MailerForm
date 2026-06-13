@@ -1,11 +1,9 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Code2, Copy, CheckCheck } from 'lucide-react'
-import { renderTokens } from '../lib/tokenize.tsx'
+import { renderTokens } from '../lib/tokenize'
 import { sdks, apiStats, codeExample } from '../data/api'
-
-const VP   = { once: true, amount: 0.1 } as const
-const EASE = [0.22, 1, 0.36, 1] as const
+import { EASE, VP } from '../lib/motion'
 
 export default function ApiSection() {
   const [copied, setCopied] = useState(false)

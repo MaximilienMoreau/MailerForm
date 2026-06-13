@@ -2,9 +2,7 @@ import { memo } from 'react'
 import { motion } from 'framer-motion'
 import { features, type Feature } from '../data/features'
 import { staggerContainer, staggerItem } from './ui/FadeIn'
-
-const VP = { once: true, amount: 0.08 } as const
-const EASE = [0.22, 1, 0.36, 1] as const
+import { EASE, VP } from '../lib/motion'
 
 export default function FeaturesSection() {
   return (

@@ -2,9 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Zap } from 'lucide-react'
 import { staggerContainer, staggerItem } from './ui/FadeIn'
-
-const VP   = { once: true, amount: 0.08 } as const
-const EASE = [0.22, 1, 0.36, 1] as const
+import { EASE, VP } from '../lib/motion'
 
 interface Plan {
   name:        string
@@ -182,7 +180,7 @@ export default function PricingSection() {
                 <p className="text-sm text-gray-400">{plan.description}</p>
               </div>
 
-              <a href="#" className={`${plan.ctaStyle} text-sm mb-6 justify-center`}>
+              <a href="#cta" className={`${plan.ctaStyle} text-sm mb-6 justify-center`}>
                 {plan.cta}
                 <ArrowRight size={14} aria-hidden />
               </a>
