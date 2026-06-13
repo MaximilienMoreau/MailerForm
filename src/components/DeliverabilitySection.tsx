@@ -1,8 +1,6 @@
 import { motion } from 'framer-motion'
 import { AlertCircle, ArrowRight, CheckCircle2, Clock, Cpu } from 'lucide-react'
-
-const VP   = { once: true, amount: 0.12 } as const
-const EASE = [0.22, 1, 0.36, 1] as const
+import { EASE, VP_SM } from '../lib/motion'
 
 type CheckStatus = 'ok' | 'warn' | 'error'
 
@@ -48,7 +46,7 @@ export default function DeliverabilitySection() {
           {/* Copy */}
           <div>
             <motion.span
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP_SM}
               transition={{ duration: 0.5, ease: EASE }}
               className="tag bg-violet-500/10 text-violet-400 border border-violet-500/20 inline-flex mb-4"
             >
@@ -57,7 +55,7 @@ export default function DeliverabilitySection() {
             </motion.span>
 
             <motion.h2
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP_SM}
               transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
               className="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-6"
             >
@@ -68,7 +66,7 @@ export default function DeliverabilitySection() {
             </motion.h2>
 
             <motion.p
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP_SM}
               transition={{ duration: 0.5, delay: 0.15, ease: EASE }}
               className="text-gray-400 leading-relaxed mb-8"
             >
@@ -77,7 +75,7 @@ export default function DeliverabilitySection() {
             </motion.p>
 
             <motion.ul
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP_SM}
               transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
               className="space-y-3 mb-8"
               aria-label="Deliverability analysis capabilities"
@@ -91,7 +89,7 @@ export default function DeliverabilitySection() {
             </motion.ul>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP_SM}
               transition={{ duration: 0.5, delay: 0.25, ease: EASE }}
               className="flex items-center gap-4"
             >
@@ -108,7 +106,7 @@ export default function DeliverabilitySection() {
 
           {/* Report card */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={VP}
+            initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={VP_SM}
             transition={{ duration: 0.7, delay: 0.3, ease: EASE }}
           >
             <div className="bg-gray-900/80 border border-white/10 rounded-2xl overflow-hidden shadow-2xl shadow-black/50 backdrop-blur-sm">
@@ -130,7 +128,7 @@ export default function DeliverabilitySection() {
                   return (
                     <motion.div
                       key={c.label}
-                      initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={VP}
+                      initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={VP_SM}
                       transition={{ duration: 0.35, delay: 0.4 + i * 0.055, ease: EASE }}
                       role="listitem"
                       className="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-white/[0.03] transition-colors"

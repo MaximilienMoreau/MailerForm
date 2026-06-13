@@ -1,8 +1,6 @@
 import { motion } from 'framer-motion'
 import { Check, Minus, Star } from 'lucide-react'
-
-const VP   = { once: true, amount: 0.08 } as const
-const EASE = [0.22, 1, 0.36, 1] as const
+import { EASE, VP } from '../lib/motion'
 
 type CellValue = boolean | 'best' | 'partial'
 
@@ -27,12 +25,27 @@ const rows: ComparisonRow[] = [
   { label: 'GDPR / CAN-SPAM tools',              mailform: true,     sendgrid: true,      mailgun: true,      resend: 'partial' },
 ]
 
-function Cell({ value, highlight }: { value: CellValue; highlight?: boolean }) {
+const PROVIDERS = ['MailForm', 'SendGrid', 'Mailgun', 'Resend'] as const
+
+function cellLabel(value: CellValue, provider: string, feature: string): string {
+  if (value === 'best') return `${provider}: best-in-class for ${feature}`
+  if (value === true)   return `${provider}: supported for ${feature}`
+  if (value === 'partial') return `${provider}: partial support for ${feature}`
+  return `${provider}: not available for ${feature}`
+}
+
+function Cell({ value, highlight, provider, feature }: {
+  value: CellValue
+  highlight?: boolean
+  provider: string
+  feature: string
+}) {
   const base = `px-4 py-3 text-center ${highlight ? 'bg-brand-500/[0.04]' : ''}`
+  const label = cellLabel(value, provider, feature)
 
   if (value === 'best') {
     return (
-      <td className={base}>
+      <td className={base} aria-label={label}>
         <div className="flex items-center justify-center gap-1">
           <Star size={12} className="text-brand-400 fill-brand-400" aria-hidden />
           <span className="text-xs font-semibold text-brand-400">Best</span>
@@ -42,21 +55,21 @@ function Cell({ value, highlight }: { value: CellValue; highlight?: boolean }) {
   }
   if (value === true) {
     return (
-      <td className={base}>
-        <Check size={15} className="text-emerald-400 mx-auto" aria-label="Supported" />
+      <td className={base} aria-label={label}>
+        <Check size={15} className="text-emerald-400 mx-auto" aria-hidden />
       </td>
     )
   }
   if (value === 'partial') {
     return (
-      <td className={base}>
-        <Minus size={15} className="text-amber-400 mx-auto" aria-label="Partial support" />
+      <td className={base} aria-label={label}>
+        <Minus size={15} className="text-amber-400 mx-auto" aria-hidden />
       </td>
     )
   }
   return (
-    <td className={base}>
-      <div className="w-3 h-0.5 bg-gray-700 mx-auto rounded" aria-label="Not available" />
+    <td className={base} aria-label={label}>
+      <div className="w-3 h-0.5 bg-gray-700 mx-auto rounded" aria-hidden />
     </td>
   )
 }
@@ -84,37 +97,40 @@ export default function ComparisonSection() {
           transition={{ duration: 0.6, delay: 0.15, ease: EASE }}
           className="overflow-x-auto rounded-2xl border border-white/[0.07]"
         >
-          <table className="w-full" aria-label="Feature comparison between MailForm and competitors">
+          <table className="w-full min-w-[600px]" aria-label="Feature comparison between MailForm and competitors">
             <thead>
               <tr className="border-b border-white/[0.07]">
-                <th scope="col" className="px-4 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider w-64">
+                {/* Sticky feature-name column */}
+                <th
+                  scope="col"
+                  className="sticky left-0 z-10 bg-gray-950 px-4 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider w-52 border-r border-white/[0.04]"
+                >
                   Feature
                 </th>
                 <th scope="col" className="px-4 py-4 text-center bg-brand-500/[0.04] border-x border-brand-500/10">
                   <span className="text-sm font-bold text-white">MailForm</span>
                   <span className="block text-[10px] text-brand-400 font-medium mt-0.5">All-in-one</span>
                 </th>
-                <th scope="col" className="px-4 py-4 text-center">
-                  <span className="text-sm font-semibold text-gray-400">SendGrid</span>
-                </th>
-                <th scope="col" className="px-4 py-4 text-center">
-                  <span className="text-sm font-semibold text-gray-400">Mailgun</span>
-                </th>
-                <th scope="col" className="px-4 py-4 text-center">
-                  <span className="text-sm font-semibold text-gray-400">Resend</span>
-                </th>
+                {(['SendGrid', 'Mailgun', 'Resend'] as const).map(p => (
+                  <th key={p} scope="col" className="px-4 py-4 text-center">
+                    <span className="text-sm font-semibold text-gray-400">{p}</span>
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody className="divide-y divide-white/[0.05]">
               {rows.map(row => (
                 <tr key={row.label} className="hover:bg-white/[0.015] transition-colors">
-                  <th scope="row" className="px-4 py-3 text-sm text-gray-400 font-normal text-left">
+                  <th
+                    scope="row"
+                    className="sticky left-0 z-10 bg-gray-950 hover:bg-gray-900 transition-colors px-4 py-3 text-sm text-gray-400 font-normal text-left border-r border-white/[0.04]"
+                  >
                     {row.label}
                   </th>
-                  <Cell value={row.mailform} highlight />
-                  <Cell value={row.sendgrid} />
-                  <Cell value={row.mailgun} />
-                  <Cell value={row.resend} />
+                  <Cell value={row.mailform} highlight provider={PROVIDERS[0]} feature={row.label} />
+                  <Cell value={row.sendgrid}         provider={PROVIDERS[1]} feature={row.label} />
+                  <Cell value={row.mailgun}          provider={PROVIDERS[2]} feature={row.label} />
+                  <Cell value={row.resend}           provider={PROVIDERS[3]} feature={row.label} />
                 </tr>
               ))}
             </tbody>

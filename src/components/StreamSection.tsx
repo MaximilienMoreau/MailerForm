@@ -1,9 +1,7 @@
 import { motion } from 'framer-motion'
 import { GitBranch, Lock, Mail, Megaphone, TrendingUp } from 'lucide-react'
 import { staggerContainer, staggerItem } from './ui/FadeIn'
-
-const VP   = { once: true, amount: 0.12 } as const
-const EASE = [0.22, 1, 0.36, 1] as const
+import { EASE, VP_SM } from '../lib/motion'
 
 const transactionalItems = ['Password resets', 'OTP codes', 'Purchase receipts', 'Account alerts'] as const
 const marketingItems     = ['Newsletters', 'Product updates', 'Lifecycle campaigns', 'Re-engagement flows'] as const
@@ -14,7 +12,7 @@ export default function StreamSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP_SM}
           transition={{ duration: 0.5, ease: EASE }}
           className="text-center mb-16"
         >
@@ -24,8 +22,9 @@ export default function StreamSection() {
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight max-w-3xl mx-auto">
             Your marketing campaigns will{' '}
-            <span className="text-red-400 line-through decoration-red-400/60">never again</span>{' '}
-            <span className="text-sky-400">never</span> hurt your critical emails
+            <span className="text-sky-400">never</span>{' '}
+            <span className="text-red-400 line-through decoration-red-400/60">again</span>{' '}
+            hurt your critical emails
           </h2>
           <p className="mt-5 text-gray-400 max-w-2xl mx-auto">
             Transactional and marketing emails run on completely separate IP infrastructure with independent sender reputations.
@@ -36,7 +35,7 @@ export default function StreamSection() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={VP}
+          viewport={VP_SM}
           className="grid lg:grid-cols-3 gap-6 items-start max-w-5xl mx-auto"
         >
           {/* Transactional */}
@@ -61,7 +60,7 @@ export default function StreamSection() {
                 <span className="text-gray-500">Inbox rate</span>
                 <span className="text-sky-400 font-semibold tabular-nums">99.8%</span>
               </div>
-              <div className="score-bar" role="progressbar" aria-valuenow={99.8} aria-valuemin={0} aria-valuemax={100} aria-label="Transactional inbox rate">
+              <div className="score-bar" role="progressbar" aria-valuenow={99.8} aria-valuemin={0} aria-valuemax={100} aria-label="Transactional inbox rate: 99.8%">
                 <div className="h-full w-[99.8%] bg-sky-500 rounded-full" />
               </div>
             </div>
@@ -79,7 +78,7 @@ export default function StreamSection() {
               <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
                 <GitBranch size={16} className="text-gray-400" />
               </div>
-              <p className="text-xs text-gray-500 text-center leading-relaxed">Isolated IP pools &<br />independent reputation</p>
+              <p className="text-xs text-gray-500 text-center leading-relaxed">Isolated IP pools &amp;<br />independent reputation</p>
               <div className="h-px w-full bg-gradient-to-r from-sky-500/20 via-white/10 to-orange-500/20" />
             </div>
           </motion.div>
@@ -106,7 +105,7 @@ export default function StreamSection() {
                 <span className="text-gray-500">Inbox rate</span>
                 <span className="text-orange-400 font-semibold tabular-nums">96.1%</span>
               </div>
-              <div className="score-bar" role="progressbar" aria-valuenow={96.1} aria-valuemin={0} aria-valuemax={100} aria-label="Marketing inbox rate">
+              <div className="score-bar" role="progressbar" aria-valuenow={96.1} aria-valuemin={0} aria-valuemax={100} aria-label="Marketing inbox rate: 96.1%">
                 <div className="h-full w-[96.1%] bg-orange-400 rounded-full" />
               </div>
             </div>
@@ -114,7 +113,7 @@ export default function StreamSection() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP_SM}
           transition={{ duration: 0.5, delay: 0.3, ease: EASE }}
           className="mt-12 flex justify-center"
         >

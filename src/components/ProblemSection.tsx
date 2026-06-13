@@ -1,8 +1,6 @@
 import { motion } from 'framer-motion'
 import { AlertTriangle, CheckCircle2, XCircle } from 'lucide-react'
-
-const VP = { once: true, amount: 0.15 } as const
-const EASE = [0.22, 1, 0.36, 1] as const
+import { EASE, VP_MD } from '../lib/motion'
 
 const before = [
   'Send campaign to 50k contacts',
@@ -27,7 +25,7 @@ export default function ProblemSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP_MD}
           transition={{ duration: 0.5, ease: EASE }}
           className="flex justify-center mb-4"
         >
@@ -38,7 +36,7 @@ export default function ProblemSection() {
         </motion.div>
 
         <motion.h2
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP_MD}
           transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
           className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white text-center max-w-3xl mx-auto leading-tight mb-6"
         >
@@ -47,7 +45,7 @@ export default function ProblemSection() {
         </motion.h2>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP_MD}
           transition={{ duration: 0.5, delay: 0.15, ease: EASE }}
           className="text-gray-400 text-center text-lg max-w-2xl mx-auto mb-16"
         >
@@ -57,7 +55,7 @@ export default function ProblemSection() {
 
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, x: -32 }} whileInView={{ opacity: 1, x: 0 }} viewport={VP}
+            initial={{ opacity: 0, x: -32 }} whileInView={{ opacity: 1, x: 0 }} viewport={VP_MD}
             transition={{ duration: 0.6, delay: 0.2, ease: EASE }}
             className="bg-red-500/[0.04] border border-red-500/15 rounded-2xl p-6"
           >
@@ -78,7 +76,7 @@ export default function ProblemSection() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 32 }} whileInView={{ opacity: 1, x: 0 }} viewport={VP}
+            initial={{ opacity: 0, x: 32 }} whileInView={{ opacity: 1, x: 0 }} viewport={VP_MD}
             transition={{ duration: 0.6, delay: 0.3, ease: EASE }}
             className="bg-emerald-500/[0.04] border border-emerald-500/15 rounded-2xl p-6"
           >
@@ -100,7 +98,7 @@ export default function ProblemSection() {
         </div>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP_MD}
           transition={{ duration: 0.5, delay: 0.45, ease: EASE }}
           className="text-center text-sm text-gray-500 mt-10 max-w-lg mx-auto"
         >

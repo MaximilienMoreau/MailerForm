@@ -1,11 +1,36 @@
 import { Zap } from 'lucide-react'
 
-const nav = {
-  Product:    ['Features', 'Deliverability', 'Stream Separation', 'CRM & Automation', 'Changelog'],
-  Developers: ['API Reference', 'SDKs', 'OpenAPI Spec', 'Status page', 'GitHub'],
-  Company:    ['About', 'Blog', 'Careers', 'Press', 'Contact'],
-  Legal:      ['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'GDPR'],
-} as const
+type NavItem = { label: string; href: string; external?: boolean }
+
+const nav: Record<string, NavItem[]> = {
+  Product: [
+    { label: 'Features',          href: '#features' },
+    { label: 'Deliverability',    href: '#deliverability' },
+    { label: 'Stream Separation', href: '#streams' },
+    { label: 'CRM & Automation',  href: '#features' },
+    { label: 'Changelog',         href: '/changelog' },
+  ],
+  Developers: [
+    { label: 'API Reference',   href: 'https://docs.mailform.io/api',     external: true },
+    { label: 'SDKs',            href: 'https://docs.mailform.io/sdks',    external: true },
+    { label: 'OpenAPI Spec',    href: 'https://docs.mailform.io/openapi', external: true },
+    { label: 'Status page',     href: 'https://status.mailform.io',       external: true },
+    { label: 'GitHub',          href: 'https://github.com/mailform',      external: true },
+  ],
+  Company: [
+    { label: 'About',    href: '/about' },
+    { label: 'Blog',     href: '/blog' },
+    { label: 'Careers',  href: '/careers' },
+    { label: 'Press',    href: '/press' },
+    { label: 'Contact',  href: 'mailto:hello@mailform.io', external: true },
+  ],
+  Legal: [
+    { label: 'Privacy Policy',    href: '/privacy' },
+    { label: 'Terms of Service',  href: '/terms' },
+    { label: 'Cookie Policy',     href: '/cookies' },
+    { label: 'GDPR',              href: '/gdpr' },
+  ],
+}
 
 const socials = [
   {
@@ -45,7 +70,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-12">
           {/* Brand */}
           <div className="col-span-2">
-            <a href="#" className="inline-flex items-center gap-2 mb-4 focus-ring rounded-lg px-1 -ml-1 group">
+            <a href="/" className="inline-flex items-center gap-2 mb-4 focus-ring rounded-lg px-1 -ml-1 group">
               <div className="w-8 h-8 bg-brand-500 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-brand-500/40 transition-shadow">
                 <Zap size={14} className="text-white" fill="white" aria-hidden />
               </div>
@@ -71,17 +96,18 @@ export default function Footer() {
           </div>
 
           {/* Navigation columns */}
-          {(Object.entries(nav) as [keyof typeof nav, readonly string[]][]).map(([group, links]) => (
+          {(Object.entries(nav) as [string, NavItem[]][]).map(([group, items]) => (
             <div key={group}>
               <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">{group}</p>
               <ul className="space-y-2.5">
-                {links.map(link => (
-                  <li key={link}>
+                {items.map(item => (
+                  <li key={item.label}>
                     <a
-                      href="#"
+                      href={item.href}
+                      {...(item.external ? { target: '_blank', rel: 'noreferrer' } : {})}
                       className="text-sm text-gray-500 hover:text-gray-200 transition-colors focus-ring rounded"
                     >
-                      {link}
+                      {item.label}
                     </a>
                   </li>
                 ))}
@@ -95,10 +121,10 @@ export default function Footer() {
             © {new Date().getFullYear()} MailForm, Inc. All rights reserved.
           </p>
           <div className="flex items-center gap-5">
-            <a href="#" className="text-xs text-gray-600 hover:text-gray-400 transition-colors focus-ring rounded">
+            <a href="/privacy" className="text-xs text-gray-600 hover:text-gray-400 transition-colors focus-ring rounded">
               Privacy
             </a>
-            <a href="#" className="text-xs text-gray-600 hover:text-gray-400 transition-colors focus-ring rounded">
+            <a href="/terms" className="text-xs text-gray-600 hover:text-gray-400 transition-colors focus-ring rounded">
               Terms
             </a>
             <span className="flex items-center gap-1.5 text-xs text-gray-600">

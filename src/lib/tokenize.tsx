@@ -6,6 +6,7 @@ interface Token {
 }
 
 const KEYWORDS = ['import', 'from', 'const', 'await', 'if', 'new']
+const QUOTES = ["'", '`', '"'] as const
 
 export function tokenizeLine(line: string): Token[] {
   const tokens: Token[] = []
@@ -21,23 +22,28 @@ export function tokenizeLine(line: string): Token[] {
   }
 
   while (i < line.length) {
-    // Comment
+    // Single-line comment
     if (line[i] === '/' && line[i + 1] === '/') {
       tokens.push({ type: 'comment', value: line.slice(i) })
       break
     }
 
-    // String (single quote or backtick)
-    if (line[i] === "'" || line[i] === '`') {
+    // String literals: single-quote, double-quote, or backtick
+    if ((QUOTES as readonly string[]).includes(line[i])) {
       const quote = line[i]
       let j = i + 1
-      while (j < line.length && line[j] !== quote) j++
-      tokens.push({ type: 'string', value: line.slice(i, j + 1) })
-      i = j + 1
+      // Walk forward, respecting backslash escapes
+      while (j < line.length) {
+        if (line[j] === '\\') { j += 2; continue }
+        if (line[j] === quote) { j++; break }
+        j++
+      }
+      tokens.push({ type: 'string', value: line.slice(i, j) })
+      i = j
       continue
     }
 
-    // Keyword (only when followed by a non-word character)
+    // Keywords (only when followed by a non-word character)
     let matched = false
     for (const kw of KEYWORDS) {
       if (line.startsWith(kw, i)) {
@@ -52,7 +58,7 @@ export function tokenizeLine(line: string): Token[] {
     }
     if (matched) continue
 
-    // Number
+    // Numbers
     if (/\d/.test(line[i])) {
       let j = i
       while (j < line.length && /[\d.]/.test(line[j])) j++
@@ -85,7 +91,7 @@ export function renderTokens(line: string, lineIndex: number) {
           {t.value}
         </span>
       ))}
-      {tokens.length === 0 && ' '}
+      {tokens.length === 0 && ' '}
     </span>
   )
 }
