@@ -142,7 +142,7 @@ export default function Navbar() {
                       ? 'text-white bg-white/5'
                       : 'text-gray-400 hover:text-white hover:bg-white/5'
                   }`}
-                  aria-current={isActive ? 'true' : undefined}
+                  aria-current={isActive ? 'page' : undefined}
                 >
                   {l.label}
                 </a>
@@ -151,7 +151,12 @@ export default function Navbar() {
           </nav>
 
           <div className="hidden md:flex items-center gap-3">
-            <a href="#cta" className="text-sm text-gray-400 hover:text-white transition-colors font-medium focus-ring rounded-lg px-2 py-1">
+            <a
+              href="https://app.mailform.io/login"
+              target="_blank"
+              rel="noreferrer"
+              className="text-sm text-gray-400 hover:text-white transition-colors font-medium focus-ring rounded-lg px-2 py-1"
+            >
               Sign in
             </a>
             <a href="#pricing" className="btn-primary text-sm py-2 px-4">
@@ -202,7 +207,15 @@ export default function Navbar() {
                 )
               })}
               <div className="pt-3 border-t border-white/[0.06] mt-2 flex flex-col gap-2">
-                <a href="#cta" onClick={() => setOpen(false)} className="btn-secondary text-sm py-2.5 justify-center">Sign in</a>
+                <a
+                  href="https://app.mailform.io/login"
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => setOpen(false)}
+                  className="btn-secondary text-sm py-2.5 justify-center"
+                >
+                  Sign in
+                </a>
                 <a href="#pricing" onClick={() => setOpen(false)} className="btn-primary text-sm py-2.5 justify-center">
                   Start free
                 </a>

@@ -153,7 +153,12 @@ export default function Hero() {
           ))}
         </motion.dl>
 
-        <motion.div {...fadeIn(0.65)} transition={{ duration: 0.7, delay: 0.65, ease: EASE }} className="mt-20 w-full max-w-2xl">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.65, ease: EASE }}
+          className="mt-20 w-full max-w-2xl"
+        >
           <DeliverabilityCard />
         </motion.div>
       </div>

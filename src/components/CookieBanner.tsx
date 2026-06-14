@@ -33,11 +33,9 @@ export default function CookieBanner() {
     setVisible(false)
   }
 
-  if (consent !== null) return null
-
   return (
     <AnimatePresence>
-      {visible && (
+      {visible && consent === null && (
         <motion.div
           role="dialog"
           aria-label="Cookie consent"
