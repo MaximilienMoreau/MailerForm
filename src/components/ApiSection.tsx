@@ -13,20 +13,7 @@ export default function ApiSection() {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     }).catch(() => {
-      // Fallback for non-secure contexts (HTTP, sandboxed iframes)
-      try {
-        const el = document.createElement('textarea')
-        el.value = codeExample
-        el.style.cssText = 'position:fixed;opacity:0;pointer-events:none'
-        document.body.appendChild(el)
-        el.select()
-        document.execCommand('copy')
-        document.body.removeChild(el)
-        setCopied(true)
-        setTimeout(() => setCopied(false), 2000)
-      } catch {
-        console.warn('Copy to clipboard failed')
-      }
+      console.warn('Copy to clipboard failed')
     })
   }
 
@@ -113,13 +100,17 @@ export default function ApiSection() {
               <p className="text-xs text-gray-500 mb-3 font-semibold uppercase tracking-wider">Official SDKs</p>
               <div className="flex flex-wrap gap-2" role="list" aria-label="Official SDKs">
                 {sdks.map(sdk => (
-                  <span
+                  <a
                     key={sdk.lang}
+                    href="https://docs.mailform.io/sdks"
+                    target="_blank"
+                    rel="noreferrer"
                     role="listitem"
-                    className={`text-xs font-semibold font-mono px-3 py-1.5 rounded-lg bg-white/[0.04] border border-white/[0.08] ${sdk.color}`}
+                    aria-label={`${sdk.lang} SDK documentation`}
+                    className={`text-xs font-semibold font-mono px-3 py-1.5 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all focus-ring ${sdk.color}`}
                   >
                     {sdk.lang}
-                  </span>
+                  </a>
                 ))}
               </div>
             </motion.div>

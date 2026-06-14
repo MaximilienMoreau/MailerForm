@@ -75,7 +75,8 @@ src/
 │   ├── motion.ts            # Shared Framer Motion constants (EASE, VP, stagger)
 │   └── tokenize.tsx         # Lightweight syntax highlighter for the code block
 ├── pages/
-│   └── NotFound.tsx         # 404 page
+│   ├── NotFound.tsx         # 404 page
+│   └── ComingSoon.tsx       # Placeholder for unbuilt routes (About, Blog, Legal…)
 ├── test/
 │   └── setup.ts             # Testing Library setup
 ├── App.tsx                  # Router, ErrorBoundary, MotionConfig, lazy sections
@@ -99,7 +100,7 @@ import { EASE } from '@/lib/motion'
 
 **Accessibility** — skip link, focus trap in the mobile menu, `aria-controls` on accordion buttons, `aria-live` only on stable values (never on animated frames), `role="dialog"` + `aria-modal` on the mobile nav.
 
-**Routing** — React Router v7 with a `*` catch-all route rendering `NotFound`.
+**Routing** — React Router v7. The `/` route renders the landing page. Secondary routes (`/about`, `/blog`, `/changelog`, `/careers`, `/press`, `/privacy`, `/terms`, `/cookies`, `/gdpr`) render a lazy-loaded `ComingSoon` page. A `*` catch-all renders `NotFound`.
 
 **Performance** — sections below the fold (`ComparisonSection`, `TestimonialsSection`, `PricingSection`, `FaqSection`, `CtaSection`, `Footer`) are lazy-loaded via `React.lazy` + `<Suspense>`. Vite splits them into separate chunks automatically.
 
