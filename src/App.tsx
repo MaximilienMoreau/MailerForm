@@ -12,7 +12,6 @@ import DeliverabilitySection from '@/components/DeliverabilitySection'
 import StreamSection from '@/components/StreamSection'
 import ApiSection from '@/components/ApiSection'
 import NotFound from '@/pages/NotFound'
-import ComingSoon from '@/pages/ComingSoon'
 
 // Sections below the fold — lazy loaded after the critical path renders
 const ComparisonSection   = lazy(() => import('@/components/ComparisonSection'))
