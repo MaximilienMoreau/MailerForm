@@ -106,13 +106,14 @@ import { EASE } from '@/lib/motion'
 
 **Code splitting output (production build):**
 ```
-index.js             ~351 kB (gzip: ~111 kB)   ← critical path
+index.js             ~352 kB (gzip: ~111 kB)   ← critical path
 ComparisonSection.js  ~6 kB
 PricingSection.js     ~6 kB
-FaqSection.js         ~4 kB
 CtaSection.js         ~5 kB
+Footer.js             ~4 kB
+FaqSection.js         ~4 kB
 TestimonialsSection.js ~4 kB
-Footer.js             ~5 kB
+ComingSoon.js         ~2 kB
 ```
 
 ---
