@@ -96,13 +96,13 @@ import { EASE } from '@/lib/motion'
 
 ## Architecture notes
 
-**Animations** : all Framer Motion components share constants from `src/lib/motion.ts`. A single `<MotionConfig reducedMotion="user">` at the root automatically respects `prefers-reduced-motion`.
+**Animations** — all Framer Motion components share constants from `src/lib/motion.ts`. A single `<MotionConfig reducedMotion="user">` at the root automatically respects `prefers-reduced-motion`.
 
-**Accessibility** : skip link, focus trap in the mobile menu, `aria-controls` on accordion buttons, `aria-live` only on stable values (never on animated frames), `role="dialog"` + `aria-modal` on the mobile nav.
+**Accessibility** — skip link, focus trap in the mobile menu, `aria-controls` on accordion buttons, `aria-live` only on stable values (never on animated frames), `role="dialog"` + `aria-modal` on the mobile nav.
 
 **Routing** — React Router v7. The `/` route renders the landing page. Secondary routes (`/about`, `/blog`, `/changelog`, `/careers`, `/press`, `/privacy`, `/terms`, `/cookies`, `/gdpr`) render a lazy-loaded `ComingSoon` page. A `*` catch-all renders `NotFound`.
 
-**Performance** : sections below the fold (`ComparisonSection`, `TestimonialsSection`, `PricingSection`, `FaqSection`, `CtaSection`, `Footer`) are lazy-loaded via `React.lazy` + `<Suspense>`. Vite splits them into separate chunks automatically.
+**Performance** — sections below the fold (`ComparisonSection`, `TestimonialsSection`, `PricingSection`, `FaqSection`, `CtaSection`, `Footer`) are lazy-loaded via `React.lazy` + `<Suspense>`. Vite splits them into separate chunks automatically.
 
 **Code splitting output (production build):**
 ```
@@ -121,8 +121,8 @@ Footer.js             ~5 kB
 
 Brand palette and custom utilities are defined in `tailwind.config.cjs`:
 
-- `brand-{50…950}` : primary blue (`#3366ff` base)
-- `bg-grid-white` : subtle dot-grid background pattern
+- `brand-{50…950}` — primary blue (`#3366ff` base)
+- `bg-grid-white` — subtle dot-grid background pattern
 - `font-sans` → Inter · `font-mono` → JetBrains Mono
 
 Shared component classes live in `src/index.css`:
