@@ -10,9 +10,7 @@ const links = [
   { label: 'Docs',           href: 'https://docs.mailform.io', external: true },
 ] as const
 
-const sectionIds = links
-  .filter(l => !('external' in l) || !l.external)
-  .map(l => l.href.slice(1))
+const sectionIds = ['features', 'deliverability', 'streams', 'api', 'pricing', 'cta']
 
 const FOCUSABLE = [
   'a[href]',
