@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MotionConfig } from 'framer-motion'
@@ -16,6 +16,16 @@ function renderCta() {
 }
 
 describe('CtaSection', () => {
+  beforeEach(() => {
+    vi.stubEnv('VITE_FORMSPREE_ID', 'test_form_id')
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true }))
+  })
+
+  afterEach(() => {
+    vi.unstubAllEnvs()
+    vi.unstubAllGlobals()
+  })
+
   it('renders the email input and submit button', () => {
     renderCta()
     expect(screen.getByLabelText(/email address/i)).toBeInTheDocument()
@@ -57,6 +67,19 @@ describe('CtaSection', () => {
       expect(screen.getByRole('status')).toBeInTheDocument()
       expect(screen.getByText(/you're on the list/i)).toBeInTheDocument()
     }, { timeout: 3000 })
+  })
+
+  it('shows an error when the Formspree request fails', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false }))
+    const user = userEvent.setup()
+    renderCta()
+
+    await user.type(screen.getByLabelText(/email address/i), 'hello@example.com')
+    await user.click(screen.getByRole('button', { name: /start for free/i }))
+
+    await waitFor(() => {
+      expect(screen.getByRole('alert')).toBeInTheDocument()
+    })
   })
 
   it('does not submit when email is empty', async () => {
