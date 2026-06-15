@@ -12,6 +12,7 @@ import DeliverabilitySection from '@/components/DeliverabilitySection'
 import StreamSection from '@/components/StreamSection'
 import ApiSection from '@/components/ApiSection'
 import NotFound from '@/pages/NotFound'
+import ComingSoon from '@/pages/ComingSoon'
 
 // Sections below the fold — lazy loaded after the critical path renders
 const ComparisonSection  = lazy(() => import('@/components/ComparisonSection'))
@@ -63,7 +64,16 @@ export default function App() {
           <SkipLink />
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path="/about"     element={<ComingSoon />} />
+            <Route path="/blog"      element={<ComingSoon />} />
+            <Route path="/careers"   element={<ComingSoon />} />
+            <Route path="/press"     element={<ComingSoon />} />
+            <Route path="/changelog" element={<ComingSoon />} />
+            <Route path="/privacy"   element={<ComingSoon />} />
+            <Route path="/terms"     element={<ComingSoon />} />
+            <Route path="/cookies"   element={<ComingSoon />} />
+            <Route path="/gdpr"      element={<ComingSoon />} />
+            <Route path="*"          element={<NotFound />} />
           </Routes>
           <CookieBanner />
         </BrowserRouter>

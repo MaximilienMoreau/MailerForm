@@ -10,9 +10,7 @@ const links = [
   { label: 'Docs',           href: 'https://docs.mailform.io', external: true },
 ] as const
 
-const sectionIds = links
-  .filter(l => !('external' in l) || !l.external)
-  .map(l => l.href.slice(1))
+const sectionIds = ['features', 'deliverability', 'streams', 'api', 'pricing', 'cta']
 
 const FOCUSABLE = [
   'a[href]',
@@ -142,7 +140,7 @@ export default function Navbar() {
                       ? 'text-white bg-white/5'
                       : 'text-gray-400 hover:text-white hover:bg-white/5'
                   }`}
-                  aria-current={isActive ? 'true' : undefined}
+                  aria-current={isActive ? 'page' : undefined}
                 >
                   {l.label}
                 </a>

@@ -75,7 +75,8 @@ src/
 │   ├── motion.ts            # Shared Framer Motion constants (EASE, VP, stagger)
 │   └── tokenize.tsx         # Lightweight syntax highlighter for the code block
 ├── pages/
-│   └── NotFound.tsx         # 404 page
+│   ├── NotFound.tsx         # 404 page
+│   └── ComingSoon.tsx       # Placeholder for footer links not yet live
 ├── test/
 │   └── setup.ts             # Testing Library setup
 ├── App.tsx                  # Router, ErrorBoundary, MotionConfig, lazy sections
@@ -95,13 +96,13 @@ import { EASE } from '@/lib/motion'
 
 ## Architecture notes
 
-**Animations** — all Framer Motion components share constants from `src/lib/motion.ts`. A single `<MotionConfig reducedMotion="user">` at the root automatically respects `prefers-reduced-motion`.
+**Animations** : all Framer Motion components share constants from `src/lib/motion.ts`. A single `<MotionConfig reducedMotion="user">` at the root automatically respects `prefers-reduced-motion`.
 
-**Accessibility** — skip link, focus trap in the mobile menu, `aria-controls` on accordion buttons, `aria-live` only on stable values (never on animated frames), `role="dialog"` + `aria-modal` on the mobile nav.
+**Accessibility** : skip link, focus trap in the mobile menu, `aria-controls` on accordion buttons, `aria-live` only on stable values (never on animated frames), `role="dialog"` + `aria-modal` on the mobile nav.
 
-**Routing** — React Router v7 with a `*` catch-all route rendering `NotFound`.
+**Routing** : React Router v7. Footer links (`/about`, `/blog`, `/careers`, `/press`, `/changelog`, `/privacy`, `/terms`, `/cookies`, `/gdpr`) render `ComingSoon`. Unknown paths fall back to `NotFound`.
 
-**Performance** — sections below the fold (`ComparisonSection`, `TestimonialsSection`, `PricingSection`, `FaqSection`, `CtaSection`, `Footer`) are lazy-loaded via `React.lazy` + `<Suspense>`. Vite splits them into separate chunks automatically.
+**Performance** : sections below the fold (`ComparisonSection`, `TestimonialsSection`, `PricingSection`, `FaqSection`, `CtaSection`, `Footer`) are lazy-loaded via `React.lazy` + `<Suspense>`. Vite splits them into separate chunks automatically.
 
 **Code splitting output (production build):**
 ```
@@ -120,8 +121,8 @@ Footer.js             ~5 kB
 
 Brand palette and custom utilities are defined in `tailwind.config.cjs`:
 
-- `brand-{50…950}` — primary blue (`#3366ff` base)
-- `bg-grid-white` — subtle dot-grid background pattern
+- `brand-{50…950}` : primary blue (`#3366ff` base)
+- `bg-grid-white` : subtle dot-grid background pattern
 - `font-sans` → Inter · `font-mono` → JetBrains Mono
 
 Shared component classes live in `src/index.css`:
