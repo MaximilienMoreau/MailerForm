@@ -39,6 +39,11 @@ function useCountUp(target: number, decimals: number, duration = 1.8) {
   const [count, setCount] = useState(0)
   const [done, setDone] = useState(false)
   const started = useRef(false)
+  const frameRef = useRef(0)
+
+  useEffect(() => {
+    return () => { cancelAnimationFrame(frameRef.current) }
+  }, [])
 
   const start = useCallback(() => {
     if (started.current) return
@@ -50,12 +55,12 @@ function useCountUp(target: number, decimals: number, duration = 1.8) {
       const value = parseFloat((EASE_OUT_QUART(progress) * target).toFixed(decimals))
       setCount(value)
       if (progress < 1) {
-        requestAnimationFrame(tick)
+        frameRef.current = requestAnimationFrame(tick)
       } else {
         setDone(true)
       }
     }
-    requestAnimationFrame(tick)
+    frameRef.current = requestAnimationFrame(tick)
   }, [target, decimals, duration])
 
   return { count, done, start }

@@ -58,10 +58,20 @@ export function tokenizeLine(line: string): Token[] {
     }
     if (matched) continue
 
-    // Numbers
+    // Numbers — allow at most one dot (e.g. 99.2) but not 1.2.3
     if (/\d/.test(line[i])) {
       let j = i
-      while (j < line.length && /[\d.]/.test(line[j])) j++
+      let seenDot = false
+      while (j < line.length) {
+        if (/\d/.test(line[j])) {
+          j++
+        } else if (line[j] === '.' && !seenDot && /\d/.test(line[j + 1] ?? '')) {
+          seenDot = true
+          j++
+        } else {
+          break
+        }
+      }
       tokens.push({ type: 'number', value: line.slice(i, j) })
       i = j
       continue
