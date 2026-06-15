@@ -14,6 +14,7 @@ import ApiSection from '@/components/ApiSection'
 import NotFound from '@/pages/NotFound'
 
 // Sections below the fold — lazy loaded after the critical path renders
+const IntegrationsSection = lazy(() => import('@/components/IntegrationsSection'))
 const ComparisonSection   = lazy(() => import('@/components/ComparisonSection'))
 const TestimonialsSection = lazy(() => import('@/components/TestimonialsSection'))
 const PricingSection      = lazy(() => import('@/components/PricingSection'))
@@ -22,7 +23,13 @@ const CtaSection          = lazy(() => import('@/components/CtaSection'))
 const Footer              = lazy(() => import('@/components/Footer'))
 
 // Secondary pages
-const ComingSoon = lazy(() => import('@/pages/ComingSoon'))
+const ComingSoon    = lazy(() => import('@/pages/ComingSoon'))
+const AboutPage     = lazy(() => import('@/pages/AboutPage'))
+const ChangelogPage = lazy(() => import('@/pages/ChangelogPage'))
+const PrivacyPage   = lazy(() => import('@/pages/legal/PrivacyPage'))
+const TermsPage     = lazy(() => import('@/pages/legal/TermsPage'))
+const CookiesPage   = lazy(() => import('@/pages/legal/CookiesPage'))
+const GdprPage      = lazy(() => import('@/pages/legal/GdprPage'))
 
 function LandingPage() {
   return (
@@ -35,6 +42,9 @@ function LandingPage() {
         <DeliverabilitySection />
         <StreamSection />
         <ApiSection />
+        <Suspense fallback={null}>
+          <IntegrationsSection />
+        </Suspense>
         <Suspense fallback={null}>
           <ComparisonSection />
         </Suspense>
@@ -66,15 +76,15 @@ export default function App() {
           <SkipLink />
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/about"     element={<Suspense fallback={null}><ComingSoon /></Suspense>} />
+            <Route path="/about"     element={<Suspense fallback={null}><AboutPage /></Suspense>} />
+            <Route path="/changelog" element={<Suspense fallback={null}><ChangelogPage /></Suspense>} />
+            <Route path="/privacy"   element={<Suspense fallback={null}><PrivacyPage /></Suspense>} />
+            <Route path="/terms"     element={<Suspense fallback={null}><TermsPage /></Suspense>} />
+            <Route path="/cookies"   element={<Suspense fallback={null}><CookiesPage /></Suspense>} />
+            <Route path="/gdpr"      element={<Suspense fallback={null}><GdprPage /></Suspense>} />
             <Route path="/blog"      element={<Suspense fallback={null}><ComingSoon /></Suspense>} />
-            <Route path="/changelog" element={<Suspense fallback={null}><ComingSoon /></Suspense>} />
             <Route path="/careers"   element={<Suspense fallback={null}><ComingSoon /></Suspense>} />
             <Route path="/press"     element={<Suspense fallback={null}><ComingSoon /></Suspense>} />
-            <Route path="/privacy"   element={<Suspense fallback={null}><ComingSoon /></Suspense>} />
-            <Route path="/terms"     element={<Suspense fallback={null}><ComingSoon /></Suspense>} />
-            <Route path="/cookies"   element={<Suspense fallback={null}><ComingSoon /></Suspense>} />
-            <Route path="/gdpr"      element={<Suspense fallback={null}><ComingSoon /></Suspense>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <CookieBanner />
