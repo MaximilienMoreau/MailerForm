@@ -1,12 +1,12 @@
 import { Link, useLocation } from 'react-router-dom'
-import { ArrowLeft, Zap } from 'lucide-react'
+import { ArrowLeft, Hammer, Zap } from 'lucide-react'
 
-const labels: Record<string, string> = {
-  '/about':     'About',
+const PAGE_LABELS: Record<string, string> = {
+  '/about':     'About us',
   '/blog':      'Blog',
+  '/changelog': 'Changelog',
   '/careers':   'Careers',
   '/press':     'Press',
-  '/changelog': 'Changelog',
   '/privacy':   'Privacy Policy',
   '/terms':     'Terms of Service',
   '/cookies':   'Cookie Policy',
@@ -15,7 +15,7 @@ const labels: Record<string, string> = {
 
 export default function ComingSoon() {
   const { pathname } = useLocation()
-  const pageName = labels[pathname] ?? 'This page'
+  const label = PAGE_LABELS[pathname] ?? 'This page'
 
   return (
     <div className="min-h-screen bg-gray-950 flex flex-col items-center justify-center px-4 text-center">
@@ -33,9 +33,13 @@ export default function ComingSoon() {
           <span className="font-bold text-white text-lg tracking-tight">MailForm</span>
         </Link>
 
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">{pageName}</h1>
+        <div className="w-16 h-16 bg-brand-500/10 border border-brand-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <Hammer size={28} className="text-brand-400" aria-hidden />
+        </div>
+
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">{label}</h1>
         <p className="text-gray-400 max-w-sm mx-auto mb-10 leading-relaxed">
-          This page is coming soon. We&apos;re working on it.
+          This page is being built. Check back soon — or head back to the homepage to learn more about MailForm.
         </p>
 
         <Link

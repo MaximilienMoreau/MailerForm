@@ -62,13 +62,13 @@ export default function DeliverabilityCard() {
 
       <div className="mt-5 pt-5 border-t border-white/[0.06] flex items-center justify-between">
         <span className="text-xs text-gray-500">2 warnings · 0 blockers</span>
-        <button
-          type="button"
+        <a
+          href="#deliverability"
           className="text-xs text-brand-400 hover:text-brand-300 font-medium transition-colors flex items-center gap-1 focus-ring rounded"
           aria-label="View full deliverability report"
         >
           View full report <ArrowRight size={11} aria-hidden />
-        </button>
+        </a>
       </div>
     </div>
   )

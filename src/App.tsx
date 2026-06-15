@@ -15,12 +15,15 @@ import NotFound from '@/pages/NotFound'
 import ComingSoon from '@/pages/ComingSoon'
 
 // Sections below the fold — lazy loaded after the critical path renders
-const ComparisonSection  = lazy(() => import('@/components/ComparisonSection'))
+const ComparisonSection   = lazy(() => import('@/components/ComparisonSection'))
 const TestimonialsSection = lazy(() => import('@/components/TestimonialsSection'))
-const PricingSection     = lazy(() => import('@/components/PricingSection'))
-const FaqSection         = lazy(() => import('@/components/FaqSection'))
-const CtaSection         = lazy(() => import('@/components/CtaSection'))
-const Footer             = lazy(() => import('@/components/Footer'))
+const PricingSection      = lazy(() => import('@/components/PricingSection'))
+const FaqSection          = lazy(() => import('@/components/FaqSection'))
+const CtaSection          = lazy(() => import('@/components/CtaSection'))
+const Footer              = lazy(() => import('@/components/Footer'))
+
+// Secondary pages
+const ComingSoon = lazy(() => import('@/pages/ComingSoon'))
 
 function LandingPage() {
   return (
@@ -64,16 +67,16 @@ export default function App() {
           <SkipLink />
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/about"     element={<ComingSoon />} />
-            <Route path="/blog"      element={<ComingSoon />} />
-            <Route path="/careers"   element={<ComingSoon />} />
-            <Route path="/press"     element={<ComingSoon />} />
-            <Route path="/changelog" element={<ComingSoon />} />
-            <Route path="/privacy"   element={<ComingSoon />} />
-            <Route path="/terms"     element={<ComingSoon />} />
-            <Route path="/cookies"   element={<ComingSoon />} />
-            <Route path="/gdpr"      element={<ComingSoon />} />
-            <Route path="*"          element={<NotFound />} />
+            <Route path="/about"     element={<Suspense fallback={null}><ComingSoon /></Suspense>} />
+            <Route path="/blog"      element={<Suspense fallback={null}><ComingSoon /></Suspense>} />
+            <Route path="/changelog" element={<Suspense fallback={null}><ComingSoon /></Suspense>} />
+            <Route path="/careers"   element={<Suspense fallback={null}><ComingSoon /></Suspense>} />
+            <Route path="/press"     element={<Suspense fallback={null}><ComingSoon /></Suspense>} />
+            <Route path="/privacy"   element={<Suspense fallback={null}><ComingSoon /></Suspense>} />
+            <Route path="/terms"     element={<Suspense fallback={null}><ComingSoon /></Suspense>} />
+            <Route path="/cookies"   element={<Suspense fallback={null}><ComingSoon /></Suspense>} />
+            <Route path="/gdpr"      element={<Suspense fallback={null}><ComingSoon /></Suspense>} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <CookieBanner />
         </BrowserRouter>
