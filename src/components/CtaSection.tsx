@@ -34,9 +34,23 @@ export default function CtaSection() {
     setState('loading')
     setErrorMsg('')
 
-    // TODO: replace with real API call once backend is live
-    await new Promise(r => setTimeout(r, 900))
-    setState('success')
+    try {
+      const formId = import.meta.env.VITE_FORMSPREE_ID
+      if (!formId) throw new Error('no_form_id')
+
+      const res = await fetch(`https://formspree.io/f/${formId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ email: value }),
+      })
+
+      if (!res.ok) throw new Error('submit_failed')
+      setState('success')
+    } catch {
+      setState('error')
+      setErrorMsg('Something went wrong. Please try again or email us at hello@mailform.io.')
+      inputRef.current?.focus()
+    }
   }
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
