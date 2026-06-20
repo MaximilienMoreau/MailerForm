@@ -9,7 +9,7 @@ export const sdks = [
 export const apiStats = [
   { value: '260+', label: 'Endpoints' },
   { value: '<80ms', label: 'P99 latency' },
-  { value: '99.99%', label: 'API uptime' },
+  { value: '99.9%+', label: 'API uptime' },
 ]
 
 export const codeExample = `import MailForm from '@mailform/sdk'

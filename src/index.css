@@ -103,8 +103,3 @@
 ::-webkit-scrollbar-thumb   { @apply bg-white/10 rounded-full; }
 ::-webkit-scrollbar-thumb:hover { @apply bg-white/20; }
 
-/* Syntax highlight tokens */
-.code-token-key     { @apply text-sky-400; }
-.code-token-string  { @apply text-emerald-400; }
-.code-token-number  { @apply text-orange-400; }
-.code-token-comment { @apply text-gray-500; }

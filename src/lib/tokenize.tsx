@@ -5,7 +5,14 @@ interface Token {
   value: string
 }
 
-const KEYWORDS = ['import', 'from', 'const', 'await', 'if', 'new']
+const KEYWORDS = [
+  'import', 'export', 'from',
+  'const', 'let', 'var',
+  'function', 'class', 'type', 'interface',
+  'return', 'async', 'await',
+  'if', 'else', 'for', 'while',
+  'new', 'null', 'undefined', 'true', 'false',
+]
 const QUOTES = ["'", '`', '"'] as const
 
 export function tokenizeLine(line: string): Token[] {

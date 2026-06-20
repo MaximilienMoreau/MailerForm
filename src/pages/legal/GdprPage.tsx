@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import LegalLayout from '@/components/LegalLayout'
 import { ShieldCheck, FileText, Server, Mail } from 'lucide-react'
 
@@ -72,7 +73,7 @@ export default function GdprPage() {
       <p>
         For data about you and your team — your account information, billing details, support
         communications, and platform usage analytics — MailForm acts as a data controller. Our{' '}
-        <a href="/privacy">Privacy Policy</a> explains how we process this data and your rights
+        <Link to="/privacy">Privacy Policy</Link> explains how we process this data and your rights
         under GDPR Articles 13–22.
       </p>
 

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Zap } from 'lucide-react'
 
 type NavItem = { label: string; href: string; external?: boolean }
@@ -52,12 +53,12 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-12">
           {/* Brand */}
           <div className="col-span-2">
-            <a href="/" className="inline-flex items-center gap-2 mb-4 focus-ring rounded-lg px-1 -ml-1 group">
+            <Link to="/" className="inline-flex items-center gap-2 mb-4 focus-ring rounded-lg px-1 -ml-1 group">
               <div className="w-8 h-8 bg-brand-500 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-brand-500/40 transition-shadow">
                 <Zap size={14} className="text-white" fill="white" aria-hidden />
               </div>
               <span className="font-bold text-white">MailForm</span>
-            </a>
+            </Link>
             <p className="text-sm text-gray-500 leading-relaxed max-w-[200px] mb-6">
               Email infrastructure platform built for modern SaaS teams.
             </p>
@@ -84,13 +85,23 @@ export default function Footer() {
               <ul className="space-y-2.5">
                 {items.map(item => (
                   <li key={item.label}>
-                    <a
-                      href={item.href}
-                      {...(item.external ? { target: '_blank', rel: 'noreferrer' } : {})}
-                      className="text-sm text-gray-500 hover:text-gray-200 transition-colors focus-ring rounded"
-                    >
-                      {item.label}
-                    </a>
+                    {item.external ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-sm text-gray-500 hover:text-gray-200 transition-colors focus-ring rounded"
+                      >
+                        {item.label}
+                      </a>
+                    ) : (
+                      <Link
+                        to={item.href}
+                        className="text-sm text-gray-500 hover:text-gray-200 transition-colors focus-ring rounded"
+                      >
+                        {item.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -103,12 +114,12 @@ export default function Footer() {
             © {new Date().getFullYear()} MailForm, Inc. All rights reserved.
           </p>
           <div className="flex items-center gap-5">
-            <a href="/privacy" className="text-xs text-gray-600 hover:text-gray-400 transition-colors focus-ring rounded">
+            <Link to="/privacy" className="text-xs text-gray-600 hover:text-gray-400 transition-colors focus-ring rounded">
               Privacy
-            </a>
-            <a href="/terms" className="text-xs text-gray-600 hover:text-gray-400 transition-colors focus-ring rounded">
+            </Link>
+            <Link to="/terms" className="text-xs text-gray-600 hover:text-gray-400 transition-colors focus-ring rounded">
               Terms
-            </a>
+            </Link>
             <span className="flex items-center gap-1.5 text-xs text-gray-600">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden />
               All systems operational

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Cookie, X } from 'lucide-react'
 import { EASE } from '@/lib/motion'
@@ -63,9 +64,9 @@ export default function CookieBanner() {
 
             <p className="text-xs text-gray-400 leading-relaxed mb-4">
               We use essential cookies for site functionality. We do not sell your data.{' '}
-              <a href="/cookies" className="text-brand-400 hover:text-brand-300 transition-colors underline-offset-2 hover:underline">
+              <Link to="/cookies" className="text-brand-400 hover:text-brand-300 transition-colors underline-offset-2 hover:underline">
                 Cookie policy
-              </a>
+              </Link>
             </p>
 
             <div className="flex gap-2">

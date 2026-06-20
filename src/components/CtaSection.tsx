@@ -180,7 +180,7 @@ export default function CtaSection() {
           {[
             'GDPR & CAN-SPAM compliant',
             'SOC 2 Type II certified',
-            '99.99% API uptime SLA',
+            '99.9%+ API uptime SLA',
           ].map(item => (
             <span key={item} className="flex items-center gap-1.5 text-xs text-gray-500">
               <CheckCircle2 size={12} className="text-emerald-500" aria-hidden />
