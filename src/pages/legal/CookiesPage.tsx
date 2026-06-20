@@ -10,7 +10,7 @@ interface CookieRow {
 const cookies: CookieRow[] = [
   { name: 'mf_session',    purpose: 'Authenticates your dashboard session',         duration: '7 days',   type: 'Essential'  },
   { name: 'mf_csrf',       purpose: 'Prevents cross-site request forgery attacks',  duration: 'Session',  type: 'Essential'  },
-  { name: 'mf_cookie_ok',  purpose: 'Remembers your cookie banner preference',      duration: '1 year',   type: 'Preference' },
+  { name: 'mailform_cookie_consent', purpose: 'Remembers your cookie banner preference', duration: '1 year',   type: 'Preference' },
   { name: 'mf_billing',    purpose: 'Keeps billing country / VAT preference',       duration: '90 days',  type: 'Preference' },
   { name: '_plausible',    purpose: 'Privacy-first page-view analytics (no PII)',   duration: 'Session',  type: 'Analytics'  },
 ]
@@ -110,7 +110,9 @@ export default function CookiesPage() {
       <ul>
         <li>
           <strong>Cookie banner</strong> — when you first visit mailform.io we ask for your
-          preference. You can change it at any time in the footer by clicking &ldquo;Cookie settings&rdquo;.
+          preference. You can reset it at any time by clearing the{' '}
+          <code className="text-xs font-mono text-gray-300 bg-white/5 px-1.5 py-0.5 rounded">mailform_cookie_consent</code>{' '}
+          key from your browser&apos;s local storage.
         </li>
         <li>
           <strong>Browser settings</strong> — all modern browsers allow you to view, block, or

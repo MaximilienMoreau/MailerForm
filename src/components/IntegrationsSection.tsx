@@ -25,7 +25,7 @@ const integrations: Integration[] = [
   { name: 'Webhooks',  category: 'Native',    abbr: 'WH',  color: 'text-brand-400 bg-brand-500/10 border-brand-500/20',     description: 'Real-time event delivery' },
 ]
 
-const categories = ['All', 'SDK', 'No-code', 'Platform', 'Native'] as const
+const categories = ['SDK', 'No-code', 'Platform', 'Native'] as const
 
 const categoryColors: Record<string, string> = {
   SDK:      'text-sky-400 bg-sky-500/10 border-sky-500/20',
@@ -66,7 +66,7 @@ export default function IntegrationsSection() {
           className="flex flex-wrap items-center justify-center gap-2 mb-10"
           aria-label="Integration categories"
         >
-          {categories.filter(c => c !== 'All').map(cat => (
+          {categories.map(cat => (
             <span
               key={cat}
               className={`text-xs font-semibold px-3 py-1 rounded-full border ${categoryColors[cat]}`}

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import LegalLayout from '@/components/LegalLayout'
 
 export default function PrivacyPage() {
@@ -148,7 +149,7 @@ export default function PrivacyPage() {
       <h2>9. Cookies</h2>
       <p>
         We use a minimal set of cookies. For full details, see our{' '}
-        <a href="/cookies">Cookie Policy</a>.
+        <Link to="/cookies">Cookie Policy</Link>.
       </p>
 
       <h2>10. Children&apos;s Privacy</h2>

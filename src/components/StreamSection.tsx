@@ -5,6 +5,9 @@ import { EASE, VP_SM, staggerContainer, staggerItem } from '@/lib/motion'
 const transactionalItems = ['Password resets', 'OTP codes', 'Purchase receipts', 'Account alerts'] as const
 const marketingItems     = ['Newsletters', 'Product updates', 'Lifecycle campaigns', 'Re-engagement flows'] as const
 
+const TRANSACTIONAL_RATE = 99.8
+const MARKETING_RATE     = 96.1
+
 export default function StreamSection() {
   return (
     <section id="streams" className="py-24 relative">
@@ -57,10 +60,10 @@ export default function StreamSection() {
             <div className="mt-5 pt-4 border-t border-white/[0.06]">
               <div className="flex justify-between text-xs mb-1.5">
                 <span className="text-gray-500">Inbox rate</span>
-                <span className="text-sky-400 font-semibold tabular-nums">99.8%</span>
+                <span className="text-sky-400 font-semibold tabular-nums">{TRANSACTIONAL_RATE}%</span>
               </div>
-              <div className="score-bar" role="progressbar" aria-valuenow={99.8} aria-valuemin={0} aria-valuemax={100} aria-label="Transactional inbox rate: 99.8%">
-                <div className="h-full w-[99.8%] bg-sky-500 rounded-full" />
+              <div className="score-bar" role="progressbar" aria-valuenow={TRANSACTIONAL_RATE} aria-valuemin={0} aria-valuemax={100} aria-label={`Transactional inbox rate: ${TRANSACTIONAL_RATE}%`}>
+                <div className="h-full bg-sky-500 rounded-full" style={{ width: `${TRANSACTIONAL_RATE}%` }} />
               </div>
             </div>
           </motion.div>
@@ -102,10 +105,10 @@ export default function StreamSection() {
             <div className="mt-5 pt-4 border-t border-white/[0.06]">
               <div className="flex justify-between text-xs mb-1.5">
                 <span className="text-gray-500">Inbox rate</span>
-                <span className="text-orange-400 font-semibold tabular-nums">96.1%</span>
+                <span className="text-orange-400 font-semibold tabular-nums">{MARKETING_RATE}%</span>
               </div>
-              <div className="score-bar" role="progressbar" aria-valuenow={96.1} aria-valuemin={0} aria-valuemax={100} aria-label="Marketing inbox rate: 96.1%">
-                <div className="h-full w-[96.1%] bg-orange-400 rounded-full" />
+              <div className="score-bar" role="progressbar" aria-valuenow={MARKETING_RATE} aria-valuemin={0} aria-valuemax={100} aria-label={`Marketing inbox rate: ${MARKETING_RATE}%`}>
+                <div className="h-full bg-orange-400 rounded-full" style={{ width: `${MARKETING_RATE}%` }} />
               </div>
             </div>
           </motion.div>

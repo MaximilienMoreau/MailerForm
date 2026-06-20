@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Zap } from 'lucide-react'
 import { EASE } from '@/lib/motion'
@@ -10,7 +11,7 @@ const links = [
   { label: 'Docs',           href: 'https://docs.mailform.io', external: true },
 ] as const
 
-const sectionIds = ['features', 'deliverability', 'streams', 'api', 'pricing', 'cta']
+const sectionIds = ['features', 'deliverability', 'pricing']
 
 const FOCUSABLE = [
   'a[href]',
@@ -119,12 +120,12 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
 
-          <a href="/" className="flex items-center gap-2.5 group focus-ring rounded-lg px-1 -ml-1">
+          <Link to="/" className="flex items-center gap-2.5 group focus-ring rounded-lg px-1 -ml-1">
             <div className="w-8 h-8 bg-brand-500 rounded-lg flex items-center justify-center shadow-lg shadow-brand-500/30 group-hover:shadow-brand-500/50 transition-shadow">
               <Zap size={16} className="text-white" fill="white" aria-hidden />
             </div>
             <span className="font-bold text-white text-lg tracking-tight">MailForm</span>
-          </a>
+          </Link>
 
           <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
             {links.map(l => {
@@ -140,7 +141,7 @@ export default function Navbar() {
                       ? 'text-white bg-white/5'
                       : 'text-gray-400 hover:text-white hover:bg-white/5'
                   }`}
-                  aria-current={isActive ? 'page' : undefined}
+                  aria-current={isActive ? 'location' : undefined}
                 >
                   {l.label}
                 </a>

@@ -2,15 +2,9 @@ import { Link, useLocation } from 'react-router-dom'
 import { ArrowLeft, Hammer, Zap } from 'lucide-react'
 
 const PAGE_LABELS: Record<string, string> = {
-  '/about':     'About us',
-  '/blog':      'Blog',
-  '/changelog': 'Changelog',
-  '/careers':   'Careers',
-  '/press':     'Press',
-  '/privacy':   'Privacy Policy',
-  '/terms':     'Terms of Service',
-  '/cookies':   'Cookie Policy',
-  '/gdpr':      'GDPR',
+  '/blog':    'Blog',
+  '/careers': 'Careers',
+  '/press':   'Press',
 }
 
 export default function ComingSoon() {

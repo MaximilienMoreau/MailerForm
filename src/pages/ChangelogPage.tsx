@@ -16,6 +16,7 @@ interface ChangeEntry {
 interface Release {
   version: string
   date: string
+  isoDate: string
   badge?: 'Major' | 'Minor'
   summary: string
   changes: ChangeEntry[]
@@ -25,6 +26,7 @@ const releases: Release[] = [
   {
     version: '1.4.0',
     date: 'June 5, 2025',
+    isoDate: '2025-06-05',
     badge: 'Major',
     summary: 'Stream-level analytics dashboard and dedicated IP warm-up tooling.',
     changes: [
@@ -39,6 +41,7 @@ const releases: Release[] = [
   {
     version: '1.3.2',
     date: 'May 19, 2025',
+    isoDate: '2025-05-19',
     summary: 'Reliability and performance patch.',
     changes: [
       { type: 'fixed',    text: 'Webhook retries were not honouring the backoff schedule on 5xx responses' },
@@ -50,6 +53,7 @@ const releases: Release[] = [
   {
     version: '1.3.0',
     date: 'April 28, 2025',
+    isoDate: '2025-04-28',
     badge: 'Minor',
     summary: 'CRM automation workflows and GDPR bulk-export.',
     changes: [
@@ -64,6 +68,7 @@ const releases: Release[] = [
   {
     version: '1.2.1',
     date: 'March 14, 2025',
+    isoDate: '2025-03-14',
     summary: 'Security patch and SPF/DKIM validation improvements.',
     changes: [
       { type: 'fixed',    text: 'Resolved SSRF vulnerability in the link-safety scanner (reported via responsible disclosure)' },
@@ -75,6 +80,7 @@ const releases: Release[] = [
   {
     version: '1.2.0',
     date: 'February 10, 2025',
+    isoDate: '2025-02-10',
     badge: 'Minor',
     summary: 'White-label option and custom domain tracking.',
     changes: [
@@ -88,6 +94,7 @@ const releases: Release[] = [
   {
     version: '1.1.0',
     date: 'November 22, 2024',
+    isoDate: '2024-11-22',
     badge: 'Minor',
     summary: 'Public launch — Growth and Scale plans, full CRM.',
     changes: [
@@ -102,6 +109,7 @@ const releases: Release[] = [
   {
     version: '1.0.0',
     date: 'August 5, 2024',
+    isoDate: '2024-08-05',
     badge: 'Major',
     summary: 'Private beta — transactional stream and deliverability analysis.',
     changes: [
@@ -216,7 +224,7 @@ export default function ChangelogPage() {
                       </span>
                     )}
                   </div>
-                  <time className="text-sm text-gray-500" dateTime={release.date}>
+                  <time className="text-sm text-gray-500" dateTime={release.isoDate}>
                     {release.date}
                   </time>
                 </div>
@@ -225,11 +233,11 @@ export default function ChangelogPage() {
                   <p className="text-sm text-gray-400 mb-5 leading-relaxed">{release.summary}</p>
 
                   <ul className="space-y-3" aria-label={`Changes in v${release.version}`}>
-                    {release.changes.map((change, i) => {
+                    {release.changes.map((change) => {
                       const meta = entryMeta[change.type]
                       const Icon = meta.icon
                       return (
-                        <li key={i} className="flex items-start gap-3">
+                        <li key={change.text} className="flex items-start gap-3">
                           <span
                             className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full border flex-shrink-0 mt-0.5 ${meta.color}`}
                           >

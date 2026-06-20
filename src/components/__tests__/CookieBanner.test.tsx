@@ -2,15 +2,18 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { render, screen, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MotionConfig } from 'framer-motion'
+import { BrowserRouter } from 'react-router-dom'
 import CookieBanner from '@/components/CookieBanner'
 
 const STORAGE_KEY = 'mailform_cookie_consent'
 
 function renderBanner() {
   return render(
-    <MotionConfig reducedMotion="always">
-      <CookieBanner />
-    </MotionConfig>
+    <BrowserRouter>
+      <MotionConfig reducedMotion="always">
+        <CookieBanner />
+      </MotionConfig>
+    </BrowserRouter>
   )
 }
 
