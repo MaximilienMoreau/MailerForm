@@ -1,8 +1,8 @@
-import { Suspense, lazy } from 'react'
+import { Suspense, lazy, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, Zap, Target, Users, Globe } from 'lucide-react'
 import Navbar from '@/components/Navbar'
-import { EASE, VP, staggerContainer, staggerItem } from '@/lib/motion'
+import { EASE, VP, fadeUpView, staggerContainer, staggerItem } from '@/lib/motion'
 
 const Footer = lazy(() => import('@/components/Footer'))
 
@@ -39,7 +39,7 @@ const timeline = [
   {
     year: '2023',
     title: 'First version',
-    body: 'We built MailForm internally to scratch our own itch. The pre-send analysis engine went live in January, stream separation in March. By June we were sending 50M emails per month for our own products.',
+    body: 'We built MailerForm internally to scratch our own itch. The pre-send analysis engine went live in January, stream separation in March. By June we were sending 50M emails per month for our own products.',
   },
   {
     year: '2024',
@@ -49,20 +49,16 @@ const timeline = [
   {
     year: '2025',
     title: 'Public launch',
-    body: 'MailForm is now available to everyone. We\'re a small, focused team — still fully bootstrapped — obsessed with making email infrastructure something developers actually enjoy working with.',
+    body: 'MailerForm is now available to everyone. We\'re a small, focused team — still fully bootstrapped — obsessed with making email infrastructure something developers actually enjoy working with.',
   },
 ]
 
-function fadeIn(delay = 0) {
-  return {
-    initial: { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: VP,
-    transition: { duration: 0.5, delay, ease: EASE },
-  }
-}
-
 export default function AboutPage() {
+  useEffect(() => {
+    const prev = document.title
+    document.title = 'About — MailerForm'
+    return () => { document.title = prev }
+  }, [])
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -100,7 +96,7 @@ export default function AboutPage() {
               transition={{ duration: 0.55, delay: 0.2, ease: EASE }}
               className="text-lg text-gray-400 leading-relaxed"
             >
-              MailForm was born out of a real problem: email infrastructure that tells you about
+              MailerForm was born out of a real problem: email infrastructure that tells you about
               deliverability failures after they&apos;ve already damaged your sender reputation. We
               decided to build something better.
             </motion.p>
@@ -110,7 +106,7 @@ export default function AboutPage() {
         {/* Mission */}
         <section className="py-16">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div {...fadeIn()} className="bg-white/[0.03] border border-white/[0.07] rounded-2xl p-8 sm:p-10">
+            <motion.div {...fadeUpView()} className="bg-white/[0.03] border border-white/[0.07] rounded-2xl p-8 sm:p-10">
               <p className="text-xs text-brand-400 font-semibold uppercase tracking-widest mb-4">Our mission</p>
               <p className="text-2xl sm:text-3xl font-bold text-white leading-snug">
                 Make inbox placement predictable — not a guessing game.
@@ -128,7 +124,7 @@ export default function AboutPage() {
         {/* Values */}
         <section className="py-16">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.h2 {...fadeIn()} className="text-2xl sm:text-3xl font-extrabold text-white mb-10 text-center">
+            <motion.h2 {...fadeUpView()} className="text-2xl sm:text-3xl font-extrabold text-white mb-10 text-center">
               What we believe
             </motion.h2>
             <motion.div
@@ -157,7 +153,7 @@ export default function AboutPage() {
         {/* Timeline */}
         <section className="py-16">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.h2 {...fadeIn()} className="text-2xl sm:text-3xl font-extrabold text-white mb-12 text-center">
+            <motion.h2 {...fadeUpView()} className="text-2xl sm:text-3xl font-extrabold text-white mb-12 text-center">
               How we got here
             </motion.h2>
             <div className="relative">
@@ -214,7 +210,7 @@ export default function AboutPage() {
         {/* CTA */}
         <section className="py-16 pb-28">
           <div className="max-w-xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <motion.div {...fadeIn()} className="bg-brand-500/[0.07] border border-brand-500/20 rounded-2xl p-8 sm:p-10">
+            <motion.div {...fadeUpView()} className="bg-brand-500/[0.07] border border-brand-500/20 rounded-2xl p-8 sm:p-10">
               <h2 className="text-2xl font-extrabold text-white mb-3">Start for free today</h2>
               <p className="text-gray-400 mb-7 text-sm leading-relaxed">
                 10,000 emails per month, no credit card required. See for yourself how
@@ -225,7 +221,7 @@ export default function AboutPage() {
                   Get started free
                   <ArrowRight size={15} aria-hidden />
                 </a>
-                <a href="mailto:hello@mailform.io" className="btn-secondary text-sm px-6 py-3">
+                <a href="mailto:hello@mailerform.io" className="btn-secondary text-sm px-6 py-3">
                   Talk to us
                 </a>
               </div>

@@ -48,7 +48,7 @@ export default function CtaSection() {
       setState('success')
     } catch {
       setState('error')
-      setErrorMsg('Something went wrong. Please try again or email us at hello@mailform.io.')
+      setErrorMsg('Something went wrong. Please try again or email us at hello@mailerform.io.')
       inputRef.current?.focus()
     }
   }
@@ -92,7 +92,7 @@ export default function CtaSection() {
           transition={{ duration: 0.5, delay: 0.15, ease: EASE }}
           className="text-lg text-gray-400 mb-10 max-w-xl mx-auto"
         >
-          Join thousands of SaaS teams using MailForm to analyze, send, and optimize their email infrastructure.
+          Join thousands of SaaS teams using MailerForm to analyze, send, and optimize their email infrastructure.
           Free for up to 10,000 emails/month.
         </motion.p>
 
@@ -124,7 +124,7 @@ export default function CtaSection() {
                 animate={{ opacity: 1 }}
                 onSubmit={handleSubmit}
                 className="flex flex-col sm:flex-row items-stretch gap-3 max-w-md mx-auto"
-                aria-label="Sign up for MailForm"
+                aria-label="Sign up for MailerForm"
                 noValidate
               >
                 <div className="flex-1 relative">

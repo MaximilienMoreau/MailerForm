@@ -1,61 +1,56 @@
-# MailForm: Landing Page
+# MailerForm: Landing Page
 
-Landing page for **MailForm**, an email infrastructure platform for SaaS teams.
+Landing page for **MailerForm**, an email infrastructure platform for SaaS teams.
+Built with React 18, TypeScript, Vite, Tailwind CSS, and Framer Motion.
 
-**Live repo:** [github.com/MaximilienMoreau/MailerForm](https://github.com/MaximilienMoreau/MailerForm)
-
----
-
-## Stack
-
-| Tool | Version |
-|---|---|
-| React | 18 |
-| TypeScript | 5 |
-| Vite | 5 |
-| Tailwind CSS | 3 |
-| Framer Motion | 11 |
-| React Router | 7 |
-| Lucide React | 0.378 |
-| Vitest | 4 |
-
-Fonts: **Inter** (body) · **JetBrains Mono** (code blocks) loaded from Google Fonts with `display=swap`.
+**Repo:** [github.com/MaximilienMoreau/MailerForm](https://github.com/MaximilienMoreau/MailerForm)
 
 ---
 
-## Getting started
+## Table of contents
+
+- [Quick start](#quick-start)
+- [Stack](#stack)
+- [Project structure](#project-structure)
+- [Scripts](#scripts)
+- [Environment variables](#environment-variables)
+- [Architecture](#architecture)
+- [Design tokens](#design-tokens)
+- [Testing](#testing)
+- [CI](#ci)
+
+---
+
+## Quick start
 
 ```bash
 npm install
-npm run dev       # http://localhost:5173
+npm run dev        # → http://localhost:5173
 ```
 
-## Environment variables
-
-Copy `.env.example` to `.env` and fill in the values:
+Copy the environment file and fill in your Formspree ID (needed for the CTA form in production):
 
 ```bash
 cp .env.example .env
 ```
 
-| Variable | Required | Description |
-|---|---|---|
-| `VITE_FORMSPREE_ID` | Yes (production) | Formspree form ID for the CTA email capture. Get one at [formspree.io](https://formspree.io). Without it, form submissions fall back to an error state. |
-
 ---
 
-## Scripts
+## Stack
 
-| Command | Description |
-|---|---|
-| `npm run dev` | Start the dev server |
-| `npm run build` | Type-check + production build |
-| `npm run preview` | Preview the production build locally |
-| `npm test` | Run tests in watch mode |
-| `npm run test:run` | Run tests once (CI mode) |
-| `npm run test:coverage` | Run tests with coverage report |
-| `npm run lint` | ESLint (zero warnings allowed) |
-| `npm run format` | Prettier formatting |
+| Tool | Version | Role |
+|---|---|---|
+| [React](https://react.dev) | 18 | UI framework |
+| [TypeScript](https://www.typescriptlang.org) | 5 | Type safety (strict mode) |
+| [Vite](https://vitejs.dev) | 5 | Dev server & bundler |
+| [Tailwind CSS](https://tailwindcss.com) | 3 | Utility-first styling |
+| [Framer Motion](https://www.framer.com/motion/) | 11 | Animations |
+| [React Router](https://reactrouter.com) | 7 | Client-side routing |
+| [Lucide React](https://lucide.dev) | 0.378 | Icon library |
+| [Vitest](https://vitest.dev) | 4 | Unit & component tests |
+| [Testing Library](https://testing-library.com) | 16 | DOM testing utilities |
+
+**Fonts:** Inter (body) · JetBrains Mono (code blocks) — loaded from Google Fonts with `display=swap`.
 
 ---
 
@@ -64,53 +59,53 @@ cp .env.example .env
 ```
 src/
 ├── components/
-│   ├── __tests__/              # Component tests (Vitest + Testing Library)
-│   ├── Navbar.tsx               # Sticky nav with focus trap on mobile
-│   ├── Hero.tsx                 # Hero with animated stat counters
-│   ├── ProblemSection.tsx
-│   ├── FeaturesSection.tsx
-│   ├── DeliverabilitySection.tsx
-│   ├── DeliverabilityCard.tsx
-│   ├── StreamSection.tsx
-│   ├── ApiSection.tsx           # Syntax-highlighted code block + copy
-│   ├── IntegrationsSection.tsx  # SDK & no-code integration grid
-│   ├── ComparisonSection.tsx
-│   ├── TestimonialsSection.tsx
-│   ├── PricingSection.tsx       # Monthly/yearly toggle
-│   ├── FaqSection.tsx           # Accessible accordion
-│   ├── CtaSection.tsx           # Email sign-up form → Formspree
-│   ├── LegalLayout.tsx          # Shared layout for legal pages (Navbar + Footer)
+│   ├── __tests__/               # Component tests (Vitest + Testing Library)
+│   ├── Navbar.tsx                # Sticky nav, active section tracking, focus trap on mobile
+│   ├── Hero.tsx                  # Animated stat counters, deliverability card preview
+│   ├── ProblemSection.tsx        # Before/after comparison
+│   ├── FeaturesSection.tsx       # 6-feature card grid
+│   ├── DeliverabilitySection.tsx # Left copy + right animated report card
+│   ├── DeliverabilityCard.tsx    # Reusable deliverability score card
+│   ├── StreamSection.tsx         # Transactional vs marketing stream comparison
+│   ├── ApiSection.tsx            # Syntax-highlighted code block + copy button
+│   ├── IntegrationsSection.tsx   # SDK & no-code integration grid
+│   ├── ComparisonSection.tsx     # Feature matrix vs SendGrid / Mailgun / Resend
+│   ├── TestimonialsSection.tsx   # Customer quotes + logo strip
+│   ├── PricingSection.tsx        # 3-tier pricing with monthly/yearly toggle
+│   ├── FaqSection.tsx            # Accessible accordion
+│   ├── CtaSection.tsx            # Email sign-up form → Formspree
+│   ├── LegalLayout.tsx           # Shared layout for legal pages (Navbar + Footer)
 │   ├── Footer.tsx
-│   ├── CookieBanner.tsx         # Consent with localStorage persistence
-│   ├── ErrorBoundary.tsx        # React error boundary
-│   └── SkipLink.tsx             # Keyboard accessibility skip link
+│   ├── CookieBanner.tsx          # Cookie consent with localStorage persistence
+│   ├── ErrorBoundary.tsx         # React error boundary with reset
+│   └── SkipLink.tsx              # Keyboard accessibility skip link
 ├── data/
-│   ├── features.ts              # Feature cards data
-│   └── api.ts                   # API section code example + SDK list
+│   ├── features.ts               # Feature cards data
+│   └── api.ts                    # Code example, SDK list, API stats
 ├── lib/
-│   ├── motion.ts                # Shared Framer Motion constants (EASE, VP, stagger)
-│   └── tokenize.tsx             # Lightweight syntax highlighter for the code block
+│   ├── motion.ts                 # Shared Framer Motion constants (EASE, VP*, stagger, fadeUp)
+│   └── tokenize.tsx              # Lightweight syntax highlighter (no external dependency)
 ├── pages/
 │   ├── legal/
 │   │   ├── PrivacyPage.tsx
 │   │   ├── TermsPage.tsx
 │   │   ├── CookiesPage.tsx
 │   │   └── GdprPage.tsx
-│   ├── AboutPage.tsx            # Company story, values, timeline
-│   ├── ChangelogPage.tsx        # Versioned release history
-│   ├── NotFound.tsx             # 404 page
-│   └── ComingSoon.tsx           # Placeholder for /blog, /careers, /press
+│   ├── AboutPage.tsx             # Company story, values, timeline
+│   ├── ChangelogPage.tsx         # Versioned release history
+│   ├── NotFound.tsx              # 404 page
+│   └── ComingSoon.tsx            # Placeholder for /blog, /careers, /press
 ├── test/
-│   └── setup.ts                 # Testing Library setup
-├── App.tsx                      # Router, ErrorBoundary, MotionConfig, lazy sections
-├── main.tsx
-├── vite-env.d.ts                # import.meta.env type declarations
-└── index.css                    # Tailwind layers + shared component classes
+│   └── setup.ts                  # Testing Library setup
+├── App.tsx                       # Router, ErrorBoundary, MotionConfig, lazy sections
+├── main.tsx                      # React 18 entry point (StrictMode)
+├── vite-env.d.ts                 # import.meta.env type declarations
+└── index.css                     # Tailwind layers + shared component classes
 ```
 
 ### Path alias
 
-`@/` resolves to `src/` everywhere (Vite + TypeScript configured).
+`@/` resolves to `src/` (configured in both Vite and TypeScript):
 
 ```ts
 import { EASE } from '@/lib/motion'
@@ -118,34 +113,88 @@ import { EASE } from '@/lib/motion'
 
 ---
 
-## Architecture notes
+## Scripts
 
-**Animations** — all Framer Motion components share constants from `src/lib/motion.ts`. A single `<MotionConfig reducedMotion="user">` at the root automatically respects `prefers-reduced-motion`.
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the Vite dev server |
+| `npm run build` | Type-check then production build |
+| `npm run preview` | Preview the production build locally |
+| `npm test` | Run tests in watch mode |
+| `npm run test:run` | Run tests once (CI mode) |
+| `npm run test:coverage` | Run tests with v8 coverage report |
+| `npm run lint` | ESLint — zero warnings allowed |
+| `npm run format` | Prettier formatting |
 
-**Accessibility** — skip link, focus trap in the mobile menu, `aria-controls` on accordion buttons, `aria-live` only on stable values (never on animated frames), `role="dialog"` + `aria-modal` on the mobile nav.
+---
 
-**Routing** — React Router v7. The `/` route renders the landing page. The following routes have full page implementations: `/about`, `/changelog`, `/privacy`, `/terms`, `/cookies`, `/gdpr`. Routes `/blog`, `/careers`, and `/press` render the lazy-loaded `ComingSoon` placeholder. A `*` catch-all renders `NotFound`.
+## Environment variables
 
-**Performance** — sections below the fold (`IntegrationsSection`, `ComparisonSection`, `TestimonialsSection`, `PricingSection`, `FaqSection`, `CtaSection`, `Footer`) are lazy-loaded via `React.lazy` + `<Suspense>`. All secondary pages (`AboutPage`, `ChangelogPage`, legal pages) are also lazy-loaded. Vite splits them into separate chunks automatically.
+| Variable | Required | Description |
+|---|---|---|
+| `VITE_FORMSPREE_ID` | Production | Formspree form ID for the CTA email capture. Get one at [formspree.io](https://formspree.io). Without it the form falls back to an error state. |
 
-**Code splitting output (production build):**
+---
+
+## Architecture
+
+### Routing
+
+React Router v7. All routes are declared in `App.tsx`:
+
+| Path | Component | Notes |
+|---|---|---|
+| `/` | `LandingPage` | Full landing page |
+| `/about` | `AboutPage` | Company story & values |
+| `/changelog` | `ChangelogPage` | Versioned release history |
+| `/privacy` · `/terms` · `/cookies` · `/gdpr` | Legal pages | Shared `LegalLayout` |
+| `/blog` · `/careers` · `/press` | `ComingSoon` | Placeholder |
+| `*` | `NotFound` | 404 catch-all |
+
+### Code splitting
+
+Sections below the fold and all secondary pages are lazy-loaded via `React.lazy` + `<Suspense>`. Vite splits them into separate chunks automatically.
+
+**Production build output:**
+
 ```
-index.js                353 kB (gzip: 111 kB)   ← critical path
-GdprPage.js              12 kB (gzip:   4 kB)
-ChangelogPage.js         10 kB (gzip:   4 kB)
-AboutPage.js              9 kB (gzip:   3 kB)
-TermsPage.js              9 kB (gzip:   3 kB)
-PrivacyPage.js            8 kB (gzip:   3 kB)
-CookiesPage.js            6 kB (gzip:   2 kB)
-PricingSection.js         6 kB (gzip:   2 kB)
-ComparisonSection.js      6 kB (gzip:   2 kB)
-CtaSection.js             5 kB (gzip:   2 kB)
-IntegrationsSection.js    5 kB (gzip:   2 kB)
-Footer.js                 4 kB (gzip:   2 kB)
-FaqSection.js             4 kB (gzip:   2 kB)
-TestimonialsSection.js    4 kB (gzip:   2 kB)
-ComingSoon.js             2 kB (gzip:   1 kB)
+index.js                353 kB │ gzip: 111 kB   ← critical path
+GdprPage.js              12 kB │ gzip:   4 kB
+ChangelogPage.js         10 kB │ gzip:   4 kB
+AboutPage.js              9 kB │ gzip:   3 kB
+TermsPage.js              9 kB │ gzip:   3 kB
+PrivacyPage.js            8 kB │ gzip:   3 kB
+CookiesPage.js            6 kB │ gzip:   2 kB
+PricingSection.js         6 kB │ gzip:   2 kB
+ComparisonSection.js      6 kB │ gzip:   2 kB
+CtaSection.js             5 kB │ gzip:   2 kB
+IntegrationsSection.js    5 kB │ gzip:   2 kB
+Footer.js                 4 kB │ gzip:   2 kB
+FaqSection.js             4 kB │ gzip:   2 kB
+TestimonialsSection.js    4 kB │ gzip:   2 kB
+ComingSoon.js             2 kB │ gzip:   1 kB
 ```
+
+### Animations
+
+All Framer Motion components share constants from `src/lib/motion.ts`:
+
+- `EASE` — cubic-bezier `[0.22, 1, 0.36, 1]` used everywhere
+- `VP` / `VP_SM` / `VP_MD` / `VP_LG` — viewport configs with different trigger thresholds
+- `staggerContainer` / `staggerItem` — consistent list animations (80ms stagger)
+- `fadeUp(delay)` — mount-based fade-up for page entry animations
+- `fadeUpView(delay)` — scroll-triggered fade-up for sections below the fold
+
+A single `<MotionConfig reducedMotion="user">` at the root automatically respects `prefers-reduced-motion`.
+
+### Accessibility
+
+- Skip link (`SkipLink`) for keyboard navigation
+- Focus trap in the mobile menu with Escape-to-close and focus restoration
+- `aria-controls` + `aria-expanded` on all accordion buttons
+- `role="dialog"` + `aria-modal` on the mobile nav and cookie banner
+- `aria-live="polite"` only on stable values — never on animated counter frames
+- Semantic HTML throughout (`nav`, `main`, `section`, `article`, `figure`, `blockquote`)
 
 ---
 
@@ -157,40 +206,42 @@ Brand palette and custom utilities are defined in `tailwind.config.cjs`:
 - `bg-grid-white` — subtle dot-grid background pattern
 - `font-sans` → Inter · `font-mono` → JetBrains Mono
 
-Shared component classes live in `src/index.css`:
+Shared component classes in `src/index.css`:
 
 | Class | Usage |
 |---|---|
-| `.btn-primary` | Filled brand button |
-| `.btn-secondary` | Ghost button |
-| `.card` | Dark glass card |
+| `.btn-primary` | Filled brand button with hover lift |
+| `.btn-secondary` | Ghost button with border |
+| `.card` | Dark glass card with hover state |
 | `.tag` | Small pill label |
 | `.score-bar` | Progress bar track |
 | `.focus-ring` | Consistent keyboard focus outline |
-| `.prose-legal` | Typography styles for legal page content |
+| `.prose-legal` | Typography for legal page content |
 
 ---
 
 ## Testing
 
-Tests are written with [Vitest](https://vitest.dev/) + [Testing Library](https://testing-library.com/) and run in a `happy-dom` environment.
+Tests use [Vitest](https://vitest.dev/) + [Testing Library](https://testing-library.com/) in a `happy-dom` environment.
 
 ```bash
 npm run test:run       # run once
-npm run test:coverage  # with coverage report
+npm run test:coverage  # with v8 coverage report
 ```
 
-Coverage includes: `CtaSection`, `FaqSection`, `Navbar`, `CookieBanner`, `Hero`, `ComparisonSection`, `PricingSection`, `ErrorBoundary`, and the `tokenize` library (49 tests total).
+**Coverage:** `CtaSection`, `FaqSection`, `Navbar`, `CookieBanner`, `Hero`, `ComparisonSection`, `PricingSection`, `ErrorBoundary`, and the `tokenize` library — **49 tests total**.
 
-The `CtaSection` tests mock both `fetch` (via `vi.stubGlobal`) and `VITE_FORMSPREE_ID` (via `vi.stubEnv`) to test the Formspree integration without making real network requests.
+The `CtaSection` tests mock `fetch` via `vi.stubGlobal` and the `VITE_FORMSPREE_ID` env var via `vi.stubEnv` to test the Formspree integration without real network requests.
 
 ---
 
 ## CI
 
-GitHub Actions runs on every push to `main` and on pull requests:
+GitHub Actions runs on every push to `main` and on all pull requests:
 
-1. Type-check (`tsc --noEmit`)
-2. Lint (`eslint src --max-warnings 0`)
-3. Tests (`vitest run`)
-4. Production build (`vite build`)
+```
+1. tsc --noEmit          type-check
+2. eslint --max-warnings 0   lint
+3. vitest run            tests
+4. vite build            production build
+```

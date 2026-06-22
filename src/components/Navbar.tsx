@@ -8,7 +8,7 @@ const links = [
   { label: 'Features',       href: '#features' },
   { label: 'Deliverability', href: '#deliverability' },
   { label: 'Pricing',        href: '#pricing' },
-  { label: 'Docs',           href: 'https://docs.mailform.io', external: true },
+  { label: 'Docs',           href: 'https://docs.mailerform.io', external: true },
 ] as const
 
 const sectionIds = ['features', 'deliverability', 'pricing']
@@ -61,8 +61,9 @@ export default function Navbar() {
 
   // Escape closes menu and restores focus
   useEffect(() => {
+    if (!open) return
     function handleEsc(e: KeyboardEvent) {
-      if (e.key === 'Escape' && open) {
+      if (e.key === 'Escape') {
         setOpen(false)
         toggleRef.current?.focus()
       }
@@ -124,7 +125,7 @@ export default function Navbar() {
             <div className="w-8 h-8 bg-brand-500 rounded-lg flex items-center justify-center shadow-lg shadow-brand-500/30 group-hover:shadow-brand-500/50 transition-shadow">
               <Zap size={16} className="text-white" fill="white" aria-hidden />
             </div>
-            <span className="font-bold text-white text-lg tracking-tight">MailForm</span>
+            <span className="font-bold text-white text-lg tracking-tight">MailerForm</span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
@@ -151,7 +152,7 @@ export default function Navbar() {
 
           <div className="hidden md:flex items-center gap-3">
             <a
-              href="https://app.mailform.io/login"
+              href="https://app.mailerform.io/login"
               target="_blank"
               rel="noreferrer"
               className="text-sm text-gray-400 hover:text-white transition-colors font-medium focus-ring rounded-lg px-2 py-1"
@@ -207,7 +208,7 @@ export default function Navbar() {
               })}
               <div className="pt-3 border-t border-white/[0.06] mt-2 flex flex-col gap-2">
                 <a
-                  href="https://app.mailform.io/login"
+                  href="https://app.mailerform.io/login"
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => setOpen(false)}

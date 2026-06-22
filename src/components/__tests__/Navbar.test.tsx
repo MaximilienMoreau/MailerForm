@@ -16,9 +16,9 @@ function renderNavbar() {
 }
 
 describe('Navbar', () => {
-  it('renders the MailForm logo', () => {
+  it('renders the MailerForm logo', () => {
     renderNavbar()
-    expect(screen.getByText('MailForm')).toBeInTheDocument()
+    expect(screen.getByText('MailerForm')).toBeInTheDocument()
   })
 
   it('renders desktop nav links', () => {

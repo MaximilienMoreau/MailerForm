@@ -1,9 +1,9 @@
 export const sdks = [
-  { lang: 'Node.js', color: 'text-emerald-400' },
-  { lang: 'Python', color: 'text-sky-400' },
-  { lang: 'Ruby', color: 'text-red-400' },
-  { lang: 'Go', color: 'text-cyan-400' },
-  { lang: 'PHP', color: 'text-violet-400' },
+  { lang: 'Node.js', color: 'text-emerald-400', href: 'https://docs.mailerform.io/sdks/nodejs' },
+  { lang: 'Python',  color: 'text-sky-400',     href: 'https://docs.mailerform.io/sdks/python' },
+  { lang: 'Ruby',    color: 'text-red-400',     href: 'https://docs.mailerform.io/sdks/ruby' },
+  { lang: 'Go',      color: 'text-cyan-400',    href: 'https://docs.mailerform.io/sdks/go' },
+  { lang: 'PHP',     color: 'text-violet-400',  href: 'https://docs.mailerform.io/sdks/php' },
 ]
 
 export const apiStats = [
@@ -12,10 +12,10 @@ export const apiStats = [
   { value: '99.9%+', label: 'API uptime' },
 ]
 
-export const codeExample = `import MailForm from '@mailform/sdk'
+export const codeExample = `import MailerForm from '@mailerform/sdk'
 
-const client = new MailForm({
-  apiKey: process.env.MAILFORM_KEY,
+const client = new MailerForm({
+  apiKey: process.env.MAILERFORM_KEY,
 })
 
 // Analyze before sending

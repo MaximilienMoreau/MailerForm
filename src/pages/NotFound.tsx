@@ -1,7 +1,14 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowLeft, Zap } from 'lucide-react'
 
 export default function NotFound() {
+  useEffect(() => {
+    const prev = document.title
+    document.title = 'Page Not Found — MailerForm'
+    return () => { document.title = prev }
+  }, [])
+
   return (
     <div className="min-h-screen bg-gray-950 flex flex-col items-center justify-center px-4 text-center">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_40%,rgba(51,102,255,0.08),transparent)]" aria-hidden />
@@ -10,12 +17,12 @@ export default function NotFound() {
         <Link
           to="/"
           className="inline-flex items-center gap-2 mb-12 focus-ring rounded-lg"
-          aria-label="Back to MailForm homepage"
+          aria-label="Back to MailerForm homepage"
         >
           <div className="w-8 h-8 bg-brand-500 rounded-lg flex items-center justify-center shadow-lg shadow-brand-500/30">
             <Zap size={16} className="text-white" fill="white" aria-hidden />
           </div>
-          <span className="font-bold text-white text-lg tracking-tight">MailForm</span>
+          <span className="font-bold text-white text-lg tracking-tight">MailerForm</span>
         </Link>
 
         <p className="text-8xl font-black text-white tabular-nums mb-4 opacity-10 select-none" aria-hidden>

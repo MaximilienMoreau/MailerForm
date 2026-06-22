@@ -24,7 +24,7 @@ export default function FeaturesSection() {
             </span>
           </h2>
           <p className="mt-5 text-lg text-gray-400 max-w-2xl mx-auto">
-            Stop stitching together 4 tools. MailForm covers your full email infrastructure from a single dashboard and API.
+            Stop stitching together 4 tools. MailerForm covers your full email infrastructure from a single dashboard and API.
           </p>
         </motion.div>
 

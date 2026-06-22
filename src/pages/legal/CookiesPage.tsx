@@ -10,7 +10,7 @@ interface CookieRow {
 const cookies: CookieRow[] = [
   { name: 'mf_session',    purpose: 'Authenticates your dashboard session',         duration: '7 days',   type: 'Essential'  },
   { name: 'mf_csrf',       purpose: 'Prevents cross-site request forgery attacks',  duration: 'Session',  type: 'Essential'  },
-  { name: 'mailform_cookie_consent', purpose: 'Remembers your cookie banner preference', duration: '1 year',   type: 'Preference' },
+  { name: 'mailerform_cookie_consent', purpose: 'Remembers your cookie banner preference', duration: '1 year',   type: 'Preference' },
   { name: 'mf_billing',    purpose: 'Keeps billing country / VAT preference',       duration: '90 days',  type: 'Preference' },
   { name: '_plausible',    purpose: 'Privacy-first page-view analytics (no PII)',   duration: 'Session',  type: 'Analytics'  },
 ]
@@ -25,12 +25,12 @@ export default function CookiesPage() {
   return (
     <LegalLayout
       title="Cookie Policy"
-      subtitle="What cookies MailForm uses and why — kept short and honest."
+      subtitle="What cookies MailerForm uses and why — kept short and honest."
       lastUpdated="June 1, 2025"
     >
       <div className="section-box">
         <p>
-          We keep our cookie footprint as small as possible. MailForm uses{' '}
+          We keep our cookie footprint as small as possible. MailerForm uses{' '}
           <strong>no third-party advertising cookies</strong> and <strong>no cross-site tracking</strong>.
           This page explains every cookie we set, why we set it, and how you can control it.
         </p>
@@ -49,13 +49,13 @@ export default function CookiesPage() {
 
       <h2>2. Cookies We Use</h2>
       <p>
-        The table below lists every cookie placed by MailForm. We do not use any cookies from
+        The table below lists every cookie placed by MailerForm. We do not use any cookies from
         advertising networks, social media platforms, or data brokers.
       </p>
 
       {/* Cookie table */}
       <div className="overflow-x-auto rounded-xl border border-white/[0.07] mb-6">
-        <table className="w-full min-w-[540px] text-sm" aria-label="List of cookies used by MailForm">
+        <table className="w-full min-w-[540px] text-sm" aria-label="List of cookies used by MailerForm">
           <thead>
             <tr className="border-b border-white/[0.07]">
               <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Name</th>
@@ -109,9 +109,9 @@ export default function CookiesPage() {
       </p>
       <ul>
         <li>
-          <strong>Cookie banner</strong> — when you first visit mailform.io we ask for your
+          <strong>Cookie banner</strong> — when you first visit mailerform.io we ask for your
           preference. You can reset it at any time by clearing the{' '}
-          <code className="text-xs font-mono text-gray-300 bg-white/5 px-1.5 py-0.5 rounded">mailform_cookie_consent</code>{' '}
+          <code className="text-xs font-mono text-gray-300 bg-white/5 px-1.5 py-0.5 rounded">mailerform_cookie_consent</code>{' '}
           key from your browser&apos;s local storage.
         </li>
         <li>
@@ -148,7 +148,7 @@ export default function CookiesPage() {
       <h2>7. Contact</h2>
       <p>
         Questions about cookies?{' '}
-        <a href="mailto:privacy@mailform.io">privacy@mailform.io</a>
+        <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a>
       </p>
     </LegalLayout>
   )

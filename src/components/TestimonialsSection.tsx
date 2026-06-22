@@ -13,7 +13,7 @@ interface Testimonial {
 
 const testimonials: Testimonial[] = [
   {
-    quote:    "We switched from SendGrid + a separate inbox-testing tool to MailForm, and our transactional delivery went from 94% to 99.1% within two weeks. The pre-send analysis caught things I would never have spotted manually.",
+    quote:    "We switched from SendGrid + a separate inbox-testing tool to MailerForm, and our transactional delivery went from 94% to 99.1% within two weeks. The pre-send analysis caught things I would never have spotted manually.",
     name:     'Sarah Chen',
     role:     'Head of Engineering',
     company:  'Payhawk',
@@ -31,7 +31,7 @@ const testimonials: Testimonial[] = [
     metric:   { value: '99.8%', label: 'OTP delivery' },
   },
   {
-    quote:    "The comparison to SendGrid isn't even close. MailForm gives us one dashboard, one bill, and one API for everything. Our team spends zero time debugging email infrastructure issues now.",
+    quote:    "The comparison to SendGrid isn't even close. MailerForm gives us one dashboard, one bill, and one API for everything. Our team spends zero time debugging email infrastructure issues now.",
     name:     'Priya Nair',
     role:     'Platform Lead',
     company:  'Rows',
@@ -72,7 +72,7 @@ export default function TestimonialsSection() {
             Trusted by engineering teams
           </h2>
           <p className="text-gray-400 max-w-lg mx-auto">
-            From seed-stage startups to Series B SaaS — teams that care about deliverability choose MailForm.
+            From seed-stage startups to Series B SaaS — teams that care about deliverability choose MailerForm.
           </p>
         </motion.div>
 

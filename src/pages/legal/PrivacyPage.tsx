@@ -5,19 +5,19 @@ export default function PrivacyPage() {
   return (
     <LegalLayout
       title="Privacy Policy"
-      subtitle="How MailForm collects, uses, and protects your personal data."
+      subtitle="How MailerForm collects, uses, and protects your personal data."
       lastUpdated="June 1, 2025"
     >
       <div className="section-box">
         <p>
-          MailForm, Inc. (&ldquo;MailForm&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) operates the website{' '}
-          <a href="https://mailform.io">mailform.io</a> and the email infrastructure platform
-          accessible at <a href="https://app.mailform.io">app.mailform.io</a>. This Privacy Policy
+          MailerForm, Inc. (&ldquo;MailerForm&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) operates the website{' '}
+          <a href="https://mailerform.io">mailerform.io</a> and the email infrastructure platform
+          accessible at <a href="https://app.mailerform.io">app.mailerform.io</a>. This Privacy Policy
           explains what personal data we collect, why we collect it, how we use it, and your rights
           regarding that data.
         </p>
         <p>
-          By using MailForm&apos;s services you agree to the practices described in this policy. If you
+          By using MailerForm&apos;s services you agree to the practices described in this policy. If you
           do not agree, please discontinue use of the platform.
         </p>
       </div>
@@ -60,7 +60,7 @@ export default function PrivacyPage() {
 
       <h2>2. How We Use Your Data</h2>
       <ul>
-        <li>To provision, operate, and maintain the MailForm platform</li>
+        <li>To provision, operate, and maintain the MailerForm platform</li>
         <li>To process payments and manage your subscription</li>
         <li>To send you transactional emails (account alerts, invoices, security notices)</li>
         <li>To send product updates and newsletters — you can opt out at any time</li>
@@ -92,7 +92,7 @@ export default function PrivacyPage() {
         </li>
         <li>
           <strong>Legal authorities</strong> — when required by law, court order, or to protect
-          the safety of MailForm users.
+          the safety of MailerForm users.
         </li>
         <li>
           <strong>Business transfers</strong> — in the event of a merger or acquisition, your data
@@ -113,7 +113,7 @@ export default function PrivacyPage() {
 
       <h2>6. Data Security</h2>
       <p>
-        MailForm is SOC 2 Type II certified. We use TLS 1.3 for data in transit, AES-256
+        MailerForm is SOC 2 Type II certified. We use TLS 1.3 for data in transit, AES-256
         encryption at rest, role-based access controls, and regular third-party penetration tests.
         In the event of a data breach affecting your personal data, we will notify you within 72
         hours in accordance with GDPR Article 33.
@@ -141,7 +141,7 @@ export default function PrivacyPage() {
       </ul>
       <p>
         To exercise any of these rights, email us at{' '}
-        <a href="mailto:privacy@mailform.io">privacy@mailform.io</a>. We will respond within
+        <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a>. We will respond within
         30 days. You also have the right to lodge a complaint with your local data protection
         authority.
       </p>
@@ -154,9 +154,9 @@ export default function PrivacyPage() {
 
       <h2>10. Children&apos;s Privacy</h2>
       <p>
-        MailForm is not directed at children under 16. We do not knowingly collect personal data
+        MailerForm is not directed at children under 16. We do not knowingly collect personal data
         from anyone under 16. If you believe we have collected such data, contact us at{' '}
-        <a href="mailto:privacy@mailform.io">privacy@mailform.io</a> and we will delete it
+        <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a> and we will delete it
         promptly.
       </p>
 
@@ -172,8 +172,8 @@ export default function PrivacyPage() {
         For privacy-related questions or to exercise your rights:
       </p>
       <ul>
-        <li>Email: <a href="mailto:privacy@mailform.io">privacy@mailform.io</a></li>
-        <li>Postal: MailForm, Inc., 340 Pine Street, Suite 800, San Francisco, CA 94104, USA</li>
+        <li>Email: <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a></li>
+        <li>Postal: MailerForm, Inc., 340 Pine Street, Suite 800, San Francisco, CA 94104, USA</li>
       </ul>
     </LegalLayout>
   )

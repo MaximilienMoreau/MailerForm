@@ -4,13 +4,13 @@ export default function TermsPage() {
   return (
     <LegalLayout
       title="Terms of Service"
-      subtitle="The rules that govern your use of the MailForm platform."
+      subtitle="The rules that govern your use of the MailerForm platform."
       lastUpdated="June 1, 2025"
     >
       <div className="section-box">
         <p>
           These Terms of Service (&ldquo;Terms&rdquo;) form a legally binding agreement between you (or the
-          entity you represent) and <strong>MailForm, Inc.</strong> (&ldquo;MailForm&rdquo;). By creating an
+          entity you represent) and <strong>MailerForm, Inc.</strong> (&ldquo;MailerForm&rdquo;). By creating an
           account or using the platform you agree to these Terms. If you are accepting on behalf
           of a company, you represent that you have the authority to bind that company.
         </p>
@@ -18,7 +18,7 @@ export default function TermsPage() {
 
       <h2>1. The Service</h2>
       <p>
-        MailForm provides an email infrastructure platform including transactional email delivery,
+        MailerForm provides an email infrastructure platform including transactional email delivery,
         marketing campaign tools, deliverability analysis, CRM features, and related APIs
         (collectively, the &ldquo;Service&rdquo;). Features available to you depend on your subscription plan.
       </p>
@@ -32,7 +32,7 @@ export default function TermsPage() {
         You must provide accurate, complete, and up-to-date information when creating your account.
         You are responsible for maintaining the confidentiality of your credentials and for all
         activity that occurs under your account. Notify us immediately at{' '}
-        <a href="mailto:security@mailform.io">security@mailform.io</a> if you suspect unauthorized
+        <a href="mailto:security@mailerform.io">security@mailerform.io</a> if you suspect unauthorized
         access.
       </p>
       <p>
@@ -61,7 +61,7 @@ export default function TermsPage() {
 
       <h3>4.1 Plans</h3>
       <p>
-        MailForm offers free and paid subscription plans. Paid plans are billed in advance on a
+        MailerForm offers free and paid subscription plans. Paid plans are billed in advance on a
         monthly or annual basis. Annual plans are non-refundable except as required by law.
       </p>
 
@@ -95,7 +95,7 @@ export default function TermsPage() {
       <h2>6. Data Ownership & License</h2>
       <p>
         You retain full ownership of your data, including contact lists, email content, and
-        analytics. You grant MailForm a limited, non-exclusive license to process this data
+        analytics. You grant MailerForm a limited, non-exclusive license to process this data
         solely to provide the Service.
       </p>
       <p>
@@ -105,7 +105,7 @@ export default function TermsPage() {
 
       <h2>7. Intellectual Property</h2>
       <p>
-        MailForm owns all rights to the platform, including its software, design, documentation,
+        MailerForm owns all rights to the platform, including its software, design, documentation,
         and trademarks. Nothing in these Terms transfers any IP rights to you. You may not use
         our trademarks, logos, or brand assets without prior written consent.
       </p>
@@ -129,7 +129,7 @@ export default function TermsPage() {
 
       <h2>10. Disclaimer of Warranties</h2>
       <p>
-        The Service is provided &ldquo;as is&rdquo; and &ldquo;as available.&rdquo; MailForm disclaims all warranties,
+        The Service is provided &ldquo;as is&rdquo; and &ldquo;as available.&rdquo; MailerForm disclaims all warranties,
         express or implied, including merchantability, fitness for a particular purpose, and
         non-infringement. We do not guarantee that the Service will be error-free, uninterrupted,
         or that any specific email will be delivered to any specific inbox.
@@ -137,7 +137,7 @@ export default function TermsPage() {
 
       <h2>11. Limitation of Liability</h2>
       <p>
-        To the maximum extent permitted by law, MailForm&apos;s total liability to you for any claim
+        To the maximum extent permitted by law, MailerForm&apos;s total liability to you for any claim
         arising under these Terms shall not exceed the amount you paid us in the 12 months
         preceding the claim. We shall not be liable for indirect, incidental, special,
         consequential, or punitive damages, including lost profits or data, even if advised of
@@ -146,7 +146,7 @@ export default function TermsPage() {
 
       <h2>12. Indemnification</h2>
       <p>
-        You agree to indemnify and hold harmless MailForm and its officers, directors, employees,
+        You agree to indemnify and hold harmless MailerForm and its officers, directors, employees,
         and agents from any claims, damages, or expenses (including legal fees) arising out of
         your use of the Service, your violation of these Terms, or your violation of any third-party
         rights (including recipient consent obligations).
@@ -159,7 +159,7 @@ export default function TermsPage() {
         after which it will be permanently deleted.
       </p>
       <p>
-        MailForm may terminate your account immediately for material breach of these Terms,
+        MailerForm may terminate your account immediately for material breach of these Terms,
         especially violations of Section 3 (Acceptable Use).
       </p>
 
@@ -181,7 +181,7 @@ export default function TermsPage() {
       <h2>16. Contact</h2>
       <p>
         For questions about these Terms:{' '}
-        <a href="mailto:legal@mailform.io">legal@mailform.io</a>
+        <a href="mailto:legal@mailerform.io">legal@mailerform.io</a>
       </p>
     </LegalLayout>
   )

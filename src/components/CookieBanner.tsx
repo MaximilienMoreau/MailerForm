@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Cookie, X } from 'lucide-react'
 import { EASE } from '@/lib/motion'
 
-const STORAGE_KEY = 'mailform_cookie_consent'
+const STORAGE_KEY = 'mailerform_cookie_consent'
 
 type Consent = 'accepted' | 'declined'
 

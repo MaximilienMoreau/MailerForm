@@ -52,7 +52,7 @@ describe('PricingSection', () => {
   it('renders the enterprise contact callout', () => {
     renderPricing()
     expect(screen.getByText(/custom volume or white-label/i)).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /talk to sales/i })).toHaveAttribute('href', 'mailto:sales@mailform.io')
+    expect(screen.getByRole('link', { name: /talk to sales/i })).toHaveAttribute('href', 'mailto:sales@mailerform.io')
   })
 
   it('toggle has correct ARIA labelling', () => {

@@ -6,26 +6,26 @@ type CellValue = boolean | 'best' | 'partial'
 
 interface ComparisonRow {
   label:    string
-  mailform: CellValue
+  mailerform: CellValue
   sendgrid: CellValue
   mailgun:  CellValue
   resend:   CellValue
 }
 
 const rows: ComparisonRow[] = [
-  { label: 'Transactional email',                mailform: true,     sendgrid: true,      mailgun: true,      resend: true      },
-  { label: 'Marketing campaigns',                mailform: true,     sendgrid: true,      mailgun: 'partial', resend: false     },
-  { label: 'Deliverability analysis (pre-send)', mailform: 'best',   sendgrid: false,     mailgun: false,     resend: false     },
-  { label: 'Spam score prediction',              mailform: 'best',   sendgrid: false,     mailgun: false,     resend: false     },
-  { label: 'CRM & contact management',           mailform: true,     sendgrid: 'partial', mailgun: false,     resend: false     },
-  { label: 'Automation workflows',               mailform: true,     sendgrid: 'partial', mailgun: false,     resend: false     },
-  { label: 'Stream separation (isolated IPs)',   mailform: 'best',   sendgrid: true,      mailgun: true,      resend: true      },
-  { label: 'Webhook events',                     mailform: true,     sendgrid: true,      mailgun: true,      resend: true      },
-  { label: 'API-first design',                   mailform: 'best',   sendgrid: true,      mailgun: true,      resend: 'best'    },
-  { label: 'GDPR / CAN-SPAM tools',              mailform: true,     sendgrid: true,      mailgun: true,      resend: 'partial' },
+  { label: 'Transactional email',                mailerform: true,     sendgrid: true,      mailgun: true,      resend: true      },
+  { label: 'Marketing campaigns',                mailerform: true,     sendgrid: true,      mailgun: 'partial', resend: false     },
+  { label: 'Deliverability analysis (pre-send)', mailerform: 'best',   sendgrid: false,     mailgun: false,     resend: false     },
+  { label: 'Spam score prediction',              mailerform: 'best',   sendgrid: false,     mailgun: false,     resend: false     },
+  { label: 'CRM & contact management',           mailerform: true,     sendgrid: 'partial', mailgun: false,     resend: false     },
+  { label: 'Automation workflows',               mailerform: true,     sendgrid: 'partial', mailgun: false,     resend: false     },
+  { label: 'Stream separation (isolated IPs)',   mailerform: 'best',   sendgrid: true,      mailgun: true,      resend: true      },
+  { label: 'Webhook events',                     mailerform: true,     sendgrid: true,      mailgun: true,      resend: true      },
+  { label: 'API-first design',                   mailerform: 'best',   sendgrid: true,      mailgun: true,      resend: 'best'    },
+  { label: 'GDPR / CAN-SPAM tools',              mailerform: true,     sendgrid: true,      mailgun: true,      resend: 'partial' },
 ]
 
-const PROVIDERS = ['MailForm', 'SendGrid', 'Mailgun', 'Resend'] as const
+const PROVIDERS = ['MailerForm', 'SendGrid', 'Mailgun', 'Resend'] as const
 
 function cellLabel(value: CellValue, provider: string, feature: string): string {
   if (value === 'best') return `${provider}: best-in-class for ${feature}`
@@ -85,7 +85,7 @@ export default function ComparisonSection() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-4">
-            How MailForm compares
+            How MailerForm compares
           </h2>
           <p className="text-gray-400 max-w-xl mx-auto">
             The only platform that combines sending infrastructure, CRM, and deliverability intelligence in a single product.
@@ -97,7 +97,7 @@ export default function ComparisonSection() {
           transition={{ duration: 0.6, delay: 0.15, ease: EASE }}
           className="overflow-x-auto rounded-2xl border border-white/[0.07]"
         >
-          <table className="w-full min-w-[600px]" aria-label="Feature comparison between MailForm and competitors">
+          <table className="w-full min-w-[600px]" aria-label="Feature comparison between MailerForm and competitors">
             <thead>
               <tr className="border-b border-white/[0.07]">
                 {/* Sticky feature-name column */}
@@ -108,7 +108,7 @@ export default function ComparisonSection() {
                   Feature
                 </th>
                 <th scope="col" className="px-4 py-4 text-center bg-brand-500/[0.04] border-x border-brand-500/10">
-                  <span className="text-sm font-bold text-white">MailForm</span>
+                  <span className="text-sm font-bold text-white">MailerForm</span>
                   <span className="block text-[10px] text-brand-400 font-medium mt-0.5">All-in-one</span>
                 </th>
                 {(['SendGrid', 'Mailgun', 'Resend'] as const).map(p => (
@@ -127,7 +127,7 @@ export default function ComparisonSection() {
                   >
                     {row.label}
                   </th>
-                  <Cell value={row.mailform} highlight provider={PROVIDERS[0]} feature={row.label} />
+                  <Cell value={row.mailerform} highlight provider={PROVIDERS[0]} feature={row.label} />
                   <Cell value={row.sendgrid}         provider={PROVIDERS[1]} feature={row.label} />
                   <Cell value={row.mailgun}          provider={PROVIDERS[2]} feature={row.label} />
                   <Cell value={row.resend}           provider={PROVIDERS[3]} feature={row.label} />

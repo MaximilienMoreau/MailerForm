@@ -1,4 +1,4 @@
-import { Suspense, lazy, type ReactNode } from 'react'
+import { Suspense, lazy, useEffect, type ReactNode } from 'react'
 import Navbar from './Navbar'
 
 const Footer = lazy(() => import('./Footer'))
@@ -11,6 +11,12 @@ interface LegalLayoutProps {
 }
 
 export default function LegalLayout({ title, subtitle, lastUpdated, children }: LegalLayoutProps) {
+  useEffect(() => {
+    const prev = document.title
+    document.title = `${title} — MailerForm`
+    return () => { document.title = prev }
+  }, [title])
+
   return (
     <div className="min-h-screen">
       <Navbar />

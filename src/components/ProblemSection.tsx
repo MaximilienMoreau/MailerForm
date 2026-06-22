@@ -50,7 +50,7 @@ export default function ProblemSection() {
           className="text-gray-400 text-center text-lg max-w-2xl mx-auto mb-16"
         >
           SendGrid, Mailgun, and every other ESP tell you what happened.{' '}
-          <span className="text-gray-200 font-medium">MailForm tells you what will happen.</span>
+          <span className="text-gray-200 font-medium">MailerForm tells you what will happen.</span>
         </motion.p>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
@@ -61,7 +61,7 @@ export default function ProblemSection() {
           >
             <div className="flex items-center gap-2 mb-5">
               <XCircle size={16} className="text-red-400" aria-hidden />
-              <span className="text-sm font-semibold text-red-400">Without MailForm</span>
+              <span className="text-sm font-semibold text-red-400">Without MailerForm</span>
             </div>
             <ol className="space-y-3">
               {before.map((step, i) => (
@@ -82,7 +82,7 @@ export default function ProblemSection() {
           >
             <div className="flex items-center gap-2 mb-5">
               <CheckCircle2 size={16} className="text-emerald-400" aria-hidden />
-              <span className="text-sm font-semibold text-emerald-400">With MailForm</span>
+              <span className="text-sm font-semibold text-emerald-400">With MailerForm</span>
             </div>
             <ol className="space-y-3">
               {after.map((step, i) => (
@@ -102,7 +102,7 @@ export default function ProblemSection() {
           transition={{ duration: 0.5, delay: 0.45, ease: EASE }}
           className="text-center text-sm text-gray-500 mt-10 max-w-lg mx-auto"
         >
-          Just like SEO tools shifted from measuring rankings to predicting them — MailForm shifts email from reactive sending to{' '}
+          Just like SEO tools shifted from measuring rankings to predicting them — MailerForm shifts email from reactive sending to{' '}
           <span className="text-gray-300 font-medium">proactive deliverability.</span>
         </motion.p>
       </div>
