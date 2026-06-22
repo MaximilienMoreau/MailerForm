@@ -218,7 +218,7 @@ export default function PricingSection() {
             <p className="text-white font-semibold">Need custom volume or white-label?</p>
             <p className="text-sm text-gray-400 mt-0.5">Enterprise plans with dedicated infrastructure, custom contracts, and SLA.</p>
           </div>
-          <a href="mailto:sales@mailform.io" className="btn-secondary text-sm flex-shrink-0">
+          <a href="mailto:sales@mailerform.io" className="btn-secondary text-sm flex-shrink-0">
             Talk to sales
             <ArrowRight size={14} aria-hidden />
           </a>

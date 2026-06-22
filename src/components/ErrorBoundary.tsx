@@ -39,7 +39,7 @@ export default class ErrorBoundary extends Component<Props, State> {
             <h1 className="text-2xl font-bold text-white mb-3">Something went wrong</h1>
             <p className="text-gray-400 text-sm leading-relaxed mb-8">
               An unexpected error occurred. If this keeps happening, please{' '}
-              <a href="mailto:hello@mailform.io" className="text-brand-400 hover:text-brand-300 transition-colors">
+              <a href="mailto:hello@mailerform.io" className="text-brand-400 hover:text-brand-300 transition-colors">
                 contact support
               </a>
               .

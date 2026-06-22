@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react'
+import { Suspense, lazy, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Zap, Star, Bug, Wrench } from 'lucide-react'
 import Navbar from '@/components/Navbar'
@@ -84,7 +84,7 @@ const releases: Release[] = [
     badge: 'Minor',
     summary: 'White-label option and custom domain tracking.',
     changes: [
-      { type: 'new',      text: 'White-label mode: remove all MailForm branding from email headers and dashboard' },
+      { type: 'new',      text: 'White-label mode: remove all MailerForm branding from email headers and dashboard' },
       { type: 'new',      text: 'Custom click-tracking domains: bring your own subdomain (e.g. click.yourdomain.com)' },
       { type: 'new',      text: 'Open-tracking pixel can now be disabled per sending domain' },
       { type: 'improved', text: 'API keys now support fine-grained scopes (read, send, admin)' },
@@ -102,7 +102,7 @@ const releases: Release[] = [
       { type: 'new',      text: 'Scale plan: 2M emails/month, unlimited domains, dedicated IPs, SLA' },
       { type: 'new',      text: 'CRM module: contacts, tags, segments, and engagement scoring' },
       { type: 'new',      text: 'Node.js, Python, Ruby, Go, and PHP SDKs (v1) released' },
-      { type: 'new',      text: 'OpenAPI 3.1 specification published at docs.mailform.io/openapi' },
+      { type: 'new',      text: 'OpenAPI 3.1 specification published at docs.mailerform.io/openapi' },
       { type: 'improved', text: 'Pre-send analysis expanded to 40 checks (was 18 in private beta)' },
     ],
   },
@@ -134,6 +134,12 @@ const badgeColors: Record<NonNullable<Release['badge']>, string> = {
 }
 
 export default function ChangelogPage() {
+  useEffect(() => {
+    const prev = document.title
+    document.title = 'Changelog — MailerForm'
+    return () => { document.title = prev }
+  }, [])
+
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -166,7 +172,7 @@ export default function ChangelogPage() {
               transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
               className="text-gray-400 text-lg"
             >
-              Everything new, improved, and fixed in MailForm.
+              Everything new, improved, and fixed in MailerForm.
             </motion.p>
           </div>
         </div>

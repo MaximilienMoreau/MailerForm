@@ -11,11 +11,11 @@ interface FaqItem {
 const faqs: FaqItem[] = [
   {
     question: 'How does pre-send analysis work?',
-    answer:   'Before you send, MailForm runs your email through a 40-point check covering spam phrase detection, domain & IP reputation, SPF/DKIM/DMARC authentication, link safety, HTML structure, image-to-text ratio, and engagement-history signals. You receive a 0–100 score and specific fix suggestions in under 2 seconds — all via API or dashboard.',
+    answer:   'Before you send, MailerForm runs your email through a 40-point check covering spam phrase detection, domain & IP reputation, SPF/DKIM/DMARC authentication, link safety, HTML structure, image-to-text ratio, and engagement-history signals. You receive a 0–100 score and specific fix suggestions in under 2 seconds — all via API or dashboard.',
   },
   {
     question: 'Can I migrate from SendGrid or Mailgun without downtime?',
-    answer:   'Yes. MailForm supports drop-in domain and SMTP credential migration. Most teams are fully migrated within a day. We provide a dedicated migration guide and our support team will handle the DKIM/DMARC re-configuration for you at no extra cost.',
+    answer:   'Yes. MailerForm supports drop-in domain and SMTP credential migration. Most teams are fully migrated within a day. We provide a dedicated migration guide and our support team will handle the DKIM/DMARC re-configuration for you at no extra cost.',
   },
   {
     question: 'What exactly is stream separation?',
@@ -97,7 +97,7 @@ export default function FaqSection() {
           </h2>
           <p className="text-gray-400">
             Everything you need to know before switching. If something&apos;s missing,{' '}
-            <a href="mailto:hello@mailform.io" className="text-brand-400 hover:text-brand-300 transition-colors font-medium focus-ring rounded">
+            <a href="mailto:hello@mailerform.io" className="text-brand-400 hover:text-brand-300 transition-colors font-medium focus-ring rounded">
               reach out
             </a>.
           </p>

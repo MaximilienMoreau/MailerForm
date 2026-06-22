@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mailform.io/sitemap.xml
+Sitemap: https://mailerform.io/sitemap.xml

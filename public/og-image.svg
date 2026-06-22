@@ -21,7 +21,7 @@
     opacity="0.95"
   />
 
-  <!-- MailForm wordmark -->
+  <!-- MailerForm wordmark -->
   <text
     x="600" y="322"
     text-anchor="middle"
@@ -30,7 +30,7 @@
     font-size="74"
     font-weight="800"
     letter-spacing="-2"
-  >MailForm</text>
+  >MailerForm</text>
 
   <!-- Tagline -->
   <text

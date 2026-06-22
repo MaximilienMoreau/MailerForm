@@ -71,7 +71,7 @@ export default function DeliverabilitySection() {
               transition={{ duration: 0.5, delay: 0.15, ease: EASE }}
               className="text-gray-400 leading-relaxed mb-8"
             >
-              Before any send, MailForm runs a 40-point analysis across content, authentication, infrastructure, and engagement history.
+              Before any send, MailerForm runs a 40-point analysis across content, authentication, infrastructure, and engagement history.
               You get a detailed report — with specific fixes — in under 2 seconds.
             </motion.p>
 

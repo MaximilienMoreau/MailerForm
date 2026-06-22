@@ -12,10 +12,10 @@ const nav: Record<string, NavItem[]> = {
     { label: 'Changelog',         href: '/changelog' },
   ],
   Developers: [
-    { label: 'API Reference',   href: 'https://docs.mailform.io/api',     external: true },
-    { label: 'SDKs',            href: 'https://docs.mailform.io/sdks',    external: true },
-    { label: 'OpenAPI Spec',    href: 'https://docs.mailform.io/openapi', external: true },
-    { label: 'Status page',     href: 'https://status.mailform.io',       external: true },
+    { label: 'API Reference',   href: 'https://docs.mailerform.io/api',     external: true },
+    { label: 'SDKs',            href: 'https://docs.mailerform.io/sdks',    external: true },
+    { label: 'OpenAPI Spec',    href: 'https://docs.mailerform.io/openapi', external: true },
+    { label: 'Status page',     href: 'https://status.mailerform.io',       external: true },
     { label: 'GitHub',          href: 'https://github.com/MaximilienMoreau/MailerForm', external: true },
   ],
   Company: [
@@ -23,7 +23,7 @@ const nav: Record<string, NavItem[]> = {
     { label: 'Blog',     href: '/blog' },
     { label: 'Careers',  href: '/careers' },
     { label: 'Press',    href: '/press' },
-    { label: 'Contact',  href: 'mailto:hello@mailform.io', external: true },
+    { label: 'Contact',  href: 'mailto:hello@mailerform.io', external: true },
   ],
   Legal: [
     { label: 'Privacy Policy',    href: '/privacy' },
@@ -57,7 +57,7 @@ export default function Footer() {
               <div className="w-8 h-8 bg-brand-500 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-brand-500/40 transition-shadow">
                 <Zap size={14} className="text-white" fill="white" aria-hidden />
               </div>
-              <span className="font-bold text-white">MailForm</span>
+              <span className="font-bold text-white">MailerForm</span>
             </Link>
             <p className="text-sm text-gray-500 leading-relaxed max-w-[200px] mb-6">
               Email infrastructure platform built for modern SaaS teams.
@@ -111,7 +111,7 @@ export default function Footer() {
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-white/[0.06]">
           <p className="text-xs text-gray-600">
-            © {new Date().getFullYear()} MailForm, Inc. All rights reserved.
+            © {new Date().getFullYear()} MailerForm, Inc. All rights reserved.
           </p>
           <div className="flex items-center gap-5">
             <Link to="/privacy" className="text-xs text-gray-600 hover:text-gray-400 transition-colors focus-ring rounded">
@@ -120,10 +120,15 @@ export default function Footer() {
             <Link to="/terms" className="text-xs text-gray-600 hover:text-gray-400 transition-colors focus-ring rounded">
               Terms
             </Link>
-            <span className="flex items-center gap-1.5 text-xs text-gray-600">
+            <a
+              href="https://status.mailerform.io"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-1.5 text-xs text-gray-600 hover:text-gray-400 transition-colors focus-ring rounded"
+            >
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden />
               All systems operational
-            </span>
+            </a>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Code2, Copy, CheckCheck } from 'lucide-react'
 import { renderTokens } from '@/lib/tokenize'
@@ -7,11 +7,17 @@ import { EASE, VP } from '@/lib/motion'
 
 export default function ApiSection() {
   const [copied, setCopied] = useState(false)
+  const copyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    return () => { if (copyTimerRef.current) clearTimeout(copyTimerRef.current) }
+  }, [])
 
   function handleCopy() {
     navigator.clipboard.writeText(codeExample).then(() => {
       setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+      if (copyTimerRef.current) clearTimeout(copyTimerRef.current)
+      copyTimerRef.current = setTimeout(() => setCopied(false), 2000)
     }).catch(() => {
       console.warn('Copy to clipboard failed')
     })
@@ -54,7 +60,7 @@ export default function ApiSection() {
               </div>
 
               {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- scrollable code block needs keyboard focus */}
-              <div className="p-5 overflow-x-auto" tabIndex={0} aria-label="Code example: sending an email with MailForm SDK">
+              <div className="p-5 overflow-x-auto" tabIndex={0} aria-label="Code example: sending an email with MailerForm SDK">
                 <pre className="text-sm font-mono leading-relaxed">
                   <code>
                     {codeExample.split('\n').map((line, i) => renderTokens(line, i))}
@@ -102,7 +108,7 @@ export default function ApiSection() {
                 {sdks.map(sdk => (
                   <li key={sdk.lang}>
                     <a
-                      href="https://docs.mailform.io/sdks"
+                      href={sdk.href}
                       target="_blank"
                       rel="noreferrer"
                       aria-label={`${sdk.lang} SDK documentation`}

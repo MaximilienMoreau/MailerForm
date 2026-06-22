@@ -37,7 +37,7 @@ export default function GdprPage() {
   return (
     <LegalLayout
       title="GDPR Compliance"
-      subtitle="How MailForm meets its obligations under the General Data Protection Regulation."
+      subtitle="How MailerForm meets its obligations under the General Data Protection Regulation."
       lastUpdated="June 1, 2025"
     >
       {/* Highlight cards */}
@@ -62,26 +62,26 @@ export default function GdprPage() {
       <p>
         The General Data Protection Regulation (GDPR) — Regulation (EU) 2016/679 — applies to any
         organization that processes personal data of people in the European Economic Area. As an
-        email infrastructure platform, MailForm operates both as a <strong>data controller</strong>{' '}
+        email infrastructure platform, MailerForm operates both as a <strong>data controller</strong>{' '}
         (for data about our own customers) and as a <strong>data processor</strong> (for personal
         data you send us to process on your behalf, such as recipient email addresses).
       </p>
 
       <h2>1. Controller vs. Processor</h2>
 
-      <h3>When MailForm is a data controller</h3>
+      <h3>When MailerForm is a data controller</h3>
       <p>
         For data about you and your team — your account information, billing details, support
-        communications, and platform usage analytics — MailForm acts as a data controller. Our{' '}
+        communications, and platform usage analytics — MailerForm acts as a data controller. Our{' '}
         <Link to="/privacy">Privacy Policy</Link> explains how we process this data and your rights
         under GDPR Articles 13–22.
       </p>
 
-      <h3>When MailForm is a data processor</h3>
+      <h3>When MailerForm is a data processor</h3>
       <p>
-        When you send emails through MailForm&apos;s platform, we process recipient addresses, message
+        When you send emails through MailerForm&apos;s platform, we process recipient addresses, message
         content, and delivery events on your behalf. In this context, <strong>you are the data
-        controller</strong> and MailForm acts as your data processor under GDPR Article 28. We
+        controller</strong> and MailerForm acts as your data processor under GDPR Article 28. We
         process this data only on your documented instructions and do not use it for our own
         purposes.
       </p>
@@ -89,7 +89,7 @@ export default function GdprPage() {
       <h2>2. Data Processing Agreement (DPA)</h2>
       <p>
         GDPR Article 28 requires that controllers and processors have a written contract in place.
-        MailForm provides a standard DPA that:
+        MailerForm provides a standard DPA that:
       </p>
       <ul>
         <li>Defines the subject matter, duration, and nature of processing</li>
@@ -100,13 +100,13 @@ export default function GdprPage() {
       </ul>
       <p>
         To request a signed DPA, email{' '}
-        <a href="mailto:privacy@mailform.io">privacy@mailform.io</a>. Growth and Scale customers
+        <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a>. Growth and Scale customers
         can also download an unsigned copy from the dashboard under Settings → Compliance.
       </p>
 
       <h2>3. Legal Bases for Processing</h2>
       <p>
-        MailForm relies on the following legal bases when processing personal data as a controller:
+        MailerForm relies on the following legal bases when processing personal data as a controller:
       </p>
       <ul>
         <li>
@@ -129,7 +129,7 @@ export default function GdprPage() {
 
       <h2>4. International Data Transfers</h2>
       <p>
-        MailForm&apos;s primary infrastructure is hosted on AWS US-East. Transfers of EU personal data
+        MailerForm&apos;s primary infrastructure is hosted on AWS US-East. Transfers of EU personal data
         to the USA are covered by <strong>Standard Contractual Clauses (SCCs)</strong> as adopted
         by the European Commission (Decision 2021/914), supplemented by our transfer impact
         assessment.
@@ -179,7 +179,7 @@ export default function GdprPage() {
       <h2>6. Your Rights as a Data Subject</h2>
       <p>
         Under GDPR Chapter III, individuals in the EEA have the following rights. To exercise
-        any of them, contact <a href="mailto:privacy@mailform.io">privacy@mailform.io</a>. We will
+        any of them, contact <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a>. We will
         respond within 30 days (extendable by 60 days for complex requests).
       </p>
       <ul>
@@ -194,7 +194,7 @@ export default function GdprPage() {
 
       <h2>7. Security Measures</h2>
       <p>
-        As required by GDPR Article 32, MailForm implements appropriate technical and organisational
+        As required by GDPR Article 32, MailerForm implements appropriate technical and organisational
         measures to protect personal data:
       </p>
       <ul>
@@ -235,7 +235,7 @@ export default function GdprPage() {
       <h2>11. Contact & DPO</h2>
       <p>
         For GDPR-related enquiries, please contact our Privacy team at{' '}
-        <a href="mailto:privacy@mailform.io">privacy@mailform.io</a>. For EU representative
+        <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a>. For EU representative
         or DPO enquiries, use the same address with subject line &ldquo;GDPR &mdash; DPO Enquiry&rdquo;.
       </p>
     </LegalLayout>

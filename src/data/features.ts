@@ -22,7 +22,7 @@ export const features: Feature[] = [
     tagColor: 'bg-violet-500/10 text-violet-400 border-violet-500/20',
     title: 'Deliverability Intelligence',
     description:
-      'Analyze every email before sending. MailForm scans for spam triggers, phishing patterns, domain reputation, and link safety — then gives you a predictive inbox score so you can fix issues before they cost you.',
+      'Analyze every email before sending. MailerForm scans for spam triggers, phishing patterns, domain reputation, and link safety — then gives you a predictive inbox score so you can fix issues before they cost you.',
     items: ['Spam word detector', 'Domain health scoring', 'Link risk analysis', 'Predictive inbox/spam ratio'],
   },
   {

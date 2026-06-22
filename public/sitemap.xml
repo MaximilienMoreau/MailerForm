@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://mailform.io/</loc>
+    <loc>https://mailerform.io/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://mailform.io/about</loc>
+    <loc>https://mailerform.io/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://mailform.io/changelog</loc>
+    <loc>https://mailerform.io/changelog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://mailform.io/privacy</loc>
+    <loc>https://mailerform.io/privacy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://mailform.io/terms</loc>
+    <loc>https://mailerform.io/terms</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://mailform.io/cookies</loc>
+    <loc>https://mailerform.io/cookies</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://mailform.io/gdpr</loc>
+    <loc>https://mailerform.io/gdpr</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>

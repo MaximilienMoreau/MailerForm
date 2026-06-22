@@ -5,7 +5,7 @@ import { MotionConfig } from 'framer-motion'
 import { BrowserRouter } from 'react-router-dom'
 import CookieBanner from '@/components/CookieBanner'
 
-const STORAGE_KEY = 'mailform_cookie_consent'
+const STORAGE_KEY = 'mailerform_cookie_consent'
 
 function renderBanner() {
   return render(

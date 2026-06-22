@@ -22,3 +22,22 @@ export const staggerItem: Variants = {
     transition: { duration: 0.5, ease: EASE },
   },
 }
+
+/** Mount-based fade-up (for page headers that animate on entry). */
+export function fadeUp(delay = 0) {
+  return {
+    initial: { opacity: 0, y: 24 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.55, delay, ease: EASE },
+  }
+}
+
+/** Scroll-triggered fade-up (for sections below the fold). */
+export function fadeUpView(delay = 0) {
+  return {
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: VP,
+    transition: { duration: 0.5, delay, ease: EASE },
+  }
+}
