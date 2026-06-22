@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { MotionConfig } from 'framer-motion'
 import ErrorBoundary from '@/components/ErrorBoundary'
 import SkipLink from '@/components/SkipLink'
+import ScrollToTop from '@/components/ScrollToTop'
 import CookieBanner from '@/components/CookieBanner'
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
@@ -73,6 +74,7 @@ export default function App() {
     <ErrorBoundary>
       <MotionConfig reducedMotion="user">
         <BrowserRouter>
+          <ScrollToTop />
           <SkipLink />
           <Routes>
             <Route path="/" element={<LandingPage />} />

@@ -126,7 +126,7 @@ export default function Footer() {
               rel="noreferrer"
               className="flex items-center gap-1.5 text-xs text-gray-600 hover:text-gray-400 transition-colors focus-ring rounded"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" aria-hidden />
               All systems operational
             </a>
           </div>

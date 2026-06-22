@@ -1,5 +1,6 @@
-import { Suspense, lazy, useEffect, type ReactNode } from 'react'
+import { Suspense, lazy, type ReactNode } from 'react'
 import Navbar from './Navbar'
+import { useMeta } from '@/hooks/useMeta'
 
 const Footer = lazy(() => import('./Footer'))
 
@@ -11,11 +12,7 @@ interface LegalLayoutProps {
 }
 
 export default function LegalLayout({ title, subtitle, lastUpdated, children }: LegalLayoutProps) {
-  useEffect(() => {
-    const prev = document.title
-    document.title = `${title} — MailerForm`
-    return () => { document.title = prev }
-  }, [title])
+  useMeta({ title: `${title} — MailerForm`, description: subtitle })
 
   return (
     <div className="min-h-screen">
