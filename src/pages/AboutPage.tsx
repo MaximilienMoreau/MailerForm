@@ -1,8 +1,9 @@
-import { Suspense, lazy, useEffect } from 'react'
+import { Suspense, lazy } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, Zap, Target, Users, Globe } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import { EASE, VP, fadeUpView, staggerContainer, staggerItem } from '@/lib/motion'
+import { useMeta } from '@/hooks/useMeta'
 
 const Footer = lazy(() => import('@/components/Footer'))
 
@@ -54,11 +55,10 @@ const timeline = [
 ]
 
 export default function AboutPage() {
-  useEffect(() => {
-    const prev = document.title
-    document.title = 'About — MailerForm'
-    return () => { document.title = prev }
-  }, [])
+  useMeta({
+    title: 'About — MailerForm',
+    description: 'Learn how MailerForm was built and what we believe in. Our mission: make inbox placement predictable, not a guessing game.',
+  })
   return (
     <div className="min-h-screen">
       <Navbar />

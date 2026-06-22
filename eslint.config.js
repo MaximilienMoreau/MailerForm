@@ -14,7 +14,7 @@ export default [
     languageOptions: {
       parser: tsParser,
       parserOptions: { ecmaVersion: 'latest', sourceType: 'module', ecmaFeatures: { jsx: true } },
-      globals: { window: 'readonly', document: 'readonly', navigator: 'readonly', console: 'readonly', setTimeout: 'readonly', clearTimeout: 'readonly', requestAnimationFrame: 'readonly', cancelAnimationFrame: 'readonly', performance: 'readonly', localStorage: 'readonly', process: 'readonly', fetch: 'readonly', HTMLInputElement: 'readonly', MouseEvent: 'readonly', KeyboardEvent: 'readonly', HTMLDivElement: 'readonly', HTMLButtonElement: 'readonly', HTMLElement: 'readonly', Node: 'readonly', MutationObserver: 'readonly', Element: 'readonly' },
+      globals: { window: 'readonly', document: 'readonly', navigator: 'readonly', console: 'readonly', setTimeout: 'readonly', clearTimeout: 'readonly', requestAnimationFrame: 'readonly', cancelAnimationFrame: 'readonly', performance: 'readonly', localStorage: 'readonly', process: 'readonly', fetch: 'readonly', HTMLInputElement: 'readonly', HTMLMetaElement: 'readonly', MouseEvent: 'readonly', KeyboardEvent: 'readonly', HTMLDivElement: 'readonly', HTMLButtonElement: 'readonly', HTMLElement: 'readonly', Node: 'readonly', MutationObserver: 'readonly', Element: 'readonly' },
     },
     plugins: {
       '@typescript-eslint': tsPlugin,

@@ -1,8 +1,9 @@
-import { Suspense, lazy, useEffect } from 'react'
+import { Suspense, lazy } from 'react'
 import { motion } from 'framer-motion'
 import { Zap, Star, Bug, Wrench } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import { EASE, VP, staggerContainer, staggerItem } from '@/lib/motion'
+import { useMeta } from '@/hooks/useMeta'
 
 const Footer = lazy(() => import('@/components/Footer'))
 
@@ -134,11 +135,10 @@ const badgeColors: Record<NonNullable<Release['badge']>, string> = {
 }
 
 export default function ChangelogPage() {
-  useEffect(() => {
-    const prev = document.title
-    document.title = 'Changelog — MailerForm'
-    return () => { document.title = prev }
-  }, [])
+  useMeta({
+    title: 'Changelog — MailerForm',
+    description: 'All new features, improvements, and bug fixes in MailerForm — organized by release.',
+  })
 
   return (
     <div className="min-h-screen">

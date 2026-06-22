@@ -22,10 +22,13 @@ export default function StreamSection() {
             <GitBranch size={12} aria-hidden />
             Stream Separation
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight max-w-3xl mx-auto">
+          <h2
+            className="text-3xl sm:text-4xl font-extrabold text-white leading-tight max-w-3xl mx-auto"
+            aria-label="Your marketing campaigns will never hurt your critical emails"
+          >
             Your marketing campaigns will{' '}
             <span className="text-sky-400">never</span>{' '}
-            <span className="text-red-400 line-through decoration-red-400/60">again</span>{' '}
+            <span className="text-red-400 line-through decoration-red-400/60" aria-hidden>again</span>{' '}
             hurt your critical emails
           </h2>
           <p className="mt-5 text-gray-400 max-w-2xl mx-auto">

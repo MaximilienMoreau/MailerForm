@@ -16,6 +16,7 @@ function isValidEmail(value: string): boolean {
 export default function CtaSection() {
   const inputRef = useRef<HTMLInputElement>(null)
   const [email, setEmail]       = useState('')
+  const [honeypot, setHoneypot] = useState('')
   const [state, setState]       = useState<FormState>('idle')
   const [errorMsg, setErrorMsg] = useState('')
 
@@ -28,6 +29,12 @@ export default function CtaSection() {
       setState('error')
       setErrorMsg('Please enter a valid email address.')
       inputRef.current?.focus()
+      return
+    }
+
+    // Bot filled the hidden honeypot field — silently succeed
+    if (honeypot) {
+      setState('success')
       return
     }
 
@@ -127,6 +134,17 @@ export default function CtaSection() {
                 aria-label="Sign up for MailerForm"
                 noValidate
               >
+                {/* Honeypot — hidden from users, catches bots that auto-fill all fields */}
+                <input
+                  type="text"
+                  name="_gotcha"
+                  tabIndex={-1}
+                  aria-hidden="true"
+                  autoComplete="off"
+                  value={honeypot}
+                  onChange={e => setHoneypot(e.target.value)}
+                  style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none', width: 0, height: 0 }}
+                />
                 <div className="flex-1 relative">
                   <label htmlFor="cta-email" className="sr-only">
                     Email address

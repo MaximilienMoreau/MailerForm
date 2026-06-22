@@ -15,7 +15,7 @@ const highlights = [
     color: 'text-sky-400',
     bg: 'bg-sky-500/10 border-sky-500/20',
     title: 'EU data residency option',
-    body: 'Scale plan customers can keep all data inside the EU — no transatlantic transfers.',
+    body: 'Scale plan customers can keep all data inside the EU. No transatlantic transfers.',
   },
   {
     icon: FileText,
@@ -60,7 +60,7 @@ export default function GdprPage() {
 
       <h2>Overview</h2>
       <p>
-        The General Data Protection Regulation (GDPR) — Regulation (EU) 2016/679 — applies to any
+        The General Data Protection Regulation (GDPR) Regulation (EU) 2016/679 applies to any
         organization that processes personal data of people in the European Economic Area. As an
         email infrastructure platform, MailerForm operates both as a <strong>data controller</strong>{' '}
         (for data about our own customers) and as a <strong>data processor</strong> (for personal
@@ -72,7 +72,7 @@ export default function GdprPage() {
       <h3>When MailerForm is a data controller</h3>
       <p>
         For data about you and your team — your account information, billing details, support
-        communications, and platform usage analytics — MailerForm acts as a data controller. Our{' '}
+        communications, and platform usage analytics MailerForm acts as a data controller. Our{' '}
         <Link to="/privacy">Privacy Policy</Link> explains how we process this data and your rights
         under GDPR Articles 13–22.
       </p>
