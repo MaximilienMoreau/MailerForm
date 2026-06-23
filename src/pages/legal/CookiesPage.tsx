@@ -3,12 +3,10 @@ import LegalLayout from '@/components/LegalLayout'
 import { COOKIE_CONSENT_KEY, type Consent } from '@/lib/consent'
 
 function ConsentManager() {
-  const [consent, setConsent] = useState<Consent | null>(null)
+  const [consent, setConsent] = useState<Consent | null>(
+    () => localStorage.getItem(COOKIE_CONSENT_KEY) as Consent | null
+  )
   const [reset, setReset] = useState(false)
-
-  useEffect(() => {
-    setConsent(localStorage.getItem(COOKIE_CONSENT_KEY) as Consent | null)
-  }, [])
 
   useEffect(() => {
     if (!reset) return
