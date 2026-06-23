@@ -1,4 +1,57 @@
+import { useState, useEffect } from 'react'
 import LegalLayout from '@/components/LegalLayout'
+import { COOKIE_CONSENT_KEY, type Consent } from '@/lib/consent'
+
+function ConsentManager() {
+  const [consent, setConsent] = useState<Consent | null>(null)
+  const [reset, setReset] = useState(false)
+
+  useEffect(() => {
+    setConsent(localStorage.getItem(COOKIE_CONSENT_KEY) as Consent | null)
+  }, [])
+
+  useEffect(() => {
+    if (!reset) return
+    const t = setTimeout(() => setReset(false), 3000)
+    return () => clearTimeout(t)
+  }, [reset])
+
+  function handleReset() {
+    localStorage.removeItem(COOKIE_CONSENT_KEY)
+    setConsent(null)
+    setReset(true)
+  }
+
+  const statusLabel =
+    consent === 'accepted' ? 'Accepted'
+    : consent === 'declined' ? 'Declined'
+    : 'Not set'
+
+  const statusColor =
+    consent === 'accepted' ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20'
+    : consent === 'declined' ? 'text-red-400 bg-red-500/10 border-red-500/20'
+    : 'text-gray-400 bg-white/5 border-white/10'
+
+  return (
+    <div className="flex flex-wrap items-center gap-3 mt-2">
+      <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border ${statusColor}`}>
+        {statusLabel}
+      </span>
+      {consent !== null && (
+        <button
+          type="button"
+          onClick={handleReset}
+          className="text-xs font-semibold py-1.5 px-3 rounded-lg bg-white/5 hover:bg-white/10 text-gray-300 border border-white/10 transition-all"
+        >
+          Reset my preference
+        </button>
+      )}
+      {reset && consent === null && (
+        <span className="text-xs text-emerald-400">Done — the banner will reappear on your next visit.</span>
+      )}
+    </div>
+  )
+}
 
 interface CookieRow {
   name: string
@@ -107,6 +160,10 @@ export default function CookiesPage() {
       <p>
         You can control cookies through several mechanisms:
       </p>
+      <div className="section-box mb-4">
+        <p className="text-sm text-gray-400 mb-1">Your current preference on this browser:</p>
+        <ConsentManager />
+      </div>
       <ul>
         <li>
           <strong>Cookie banner</strong> — when you first visit mailerform.io we ask for your
