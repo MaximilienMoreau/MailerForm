@@ -3,15 +3,12 @@ import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Cookie, X } from 'lucide-react'
 import { EASE } from '@/lib/motion'
-
-const STORAGE_KEY = 'mailerform_cookie_consent'
-
-type Consent = 'accepted' | 'declined'
+import { COOKIE_CONSENT_KEY, type Consent } from '@/lib/consent'
 
 export default function CookieBanner() {
   // Read localStorage once on mount — avoids calling setState synchronously in an effect
   const [consent, setConsent] = useState<Consent | null>(
-    () => localStorage.getItem(STORAGE_KEY) as Consent | null
+    () => localStorage.getItem(COOKIE_CONSENT_KEY) as Consent | null
   )
   const [visible, setVisible] = useState(false)
 
@@ -23,13 +20,13 @@ export default function CookieBanner() {
   }, [consent])
 
   function handleAccept() {
-    localStorage.setItem(STORAGE_KEY, 'accepted')
+    localStorage.setItem(COOKIE_CONSENT_KEY, 'accepted')
     setConsent('accepted')
     setVisible(false)
   }
 
   function handleDecline() {
-    localStorage.setItem(STORAGE_KEY, 'declined')
+    localStorage.setItem(COOKIE_CONSENT_KEY, 'declined')
     setConsent('declined')
     setVisible(false)
   }
