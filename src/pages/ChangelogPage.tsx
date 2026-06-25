@@ -63,7 +63,7 @@ const releases: Release[] = [
       { type: 'new',      text: 'GDPR bulk-export: download all contact data as JSON or CSV from settings' },
       { type: 'new',      text: 'Contact suppression list API: POST /v1/suppressions with reason field' },
       { type: 'improved', text: 'Segment builder now supports nested AND/OR conditions' },
-      { type: 'fixed',    text: 'Tag filter in contact list was case-sensitive — now case-insensitive' },
+      { type: 'fixed',    text: 'Tag filter in contact list was case-sensitive, now case-insensitive' },
     ],
   },
   {
@@ -97,7 +97,7 @@ const releases: Release[] = [
     date: 'March 28, 2026',
     isoDate: '2026-03-28',
     badge: 'Minor',
-    summary: 'Public launch — Growth and Scale plans, full CRM.',
+    summary: 'Public launch: Growth and Scale plans, full CRM.',
     changes: [
       { type: 'new',      text: 'Growth plan: 200k emails/month, 5 domains, CRM up to 25k contacts' },
       { type: 'new',      text: 'Scale plan: 2M emails/month, unlimited domains, dedicated IPs, SLA' },
@@ -112,7 +112,7 @@ const releases: Release[] = [
     date: 'March 5, 2026',
     isoDate: '2026-03-05',
     badge: 'Major',
-    summary: 'Private beta — transactional stream and deliverability analysis.',
+    summary: 'Private beta: transactional stream and deliverability analysis.',
     changes: [
       { type: 'new', text: 'Transactional email sending with stream separation' },
       { type: 'new', text: 'Pre-send deliverability analysis with spam score, link risk, and domain health' },
@@ -291,3 +291,45 @@ export default function ChangelogPage() {
     </div>
   )
 }
+
+/*
+  PSEUDO-CODE — Forme originale FeaturesSection (grille 3×2)
+  ============================================================
+
+  <section id="features">
+    <Header>
+      <Tag> Everything you need </Tag>
+      <H2> SendGrid + Postmark + Customer.io in a single platform </H2>
+      <P> Stop stitching together 4 tools... </P>
+    </Header>
+
+    <Grid cols=3 gap=5>
+      {features.map(feature => (
+        <Card>
+          <Row>
+            <Icon size=10 color=feature.color bg=feature.bg />
+            <Tag color=feature.tagColor> {feature.tag} </Tag>
+          </Row>
+          <H3> {feature.title} </H3>
+          <P> {feature.description} </P>
+          <List>
+            {feature.items.map(item => (
+              <Item>
+                <Dot color=feature.color />
+                {item}
+              </Item>
+            ))}
+          </List>
+        </Card>
+      ))}
+    </Grid>
+  </section>
+
+  Features (6 cards) :
+  - Deliverability Intelligence  [violet]  Core differentiator
+  - Stream Separation            [sky]     Smart infrastructure
+  - CRM + Automation             [emerald] Email-first CRM
+  - 260+ API Endpoints           [brand]   API-first
+  - Real-time Analytics          [amber]   Observability
+  - Security & Compliance        [rose]    Compliance
+*/

@@ -1,9 +1,37 @@
-import { memo } from 'react'
-import { motion } from 'framer-motion'
-import { features, type Feature } from '@/data/features'
-import { EASE, VP, staggerContainer, staggerItem } from '@/lib/motion'
+import { useState, useCallback } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { features } from '@/data/features'
+import { EASE, VP } from '@/lib/motion'
+
+const slideVariants = {
+  enter: (dir: number) => ({ x: dir > 0 ? 60 : -60, opacity: 0 }),
+  center: { x: 0, opacity: 1 },
+  exit:  (dir: number) => ({ x: dir > 0 ? -60 : 60, opacity: 0 }),
+}
 
 export default function FeaturesSection() {
+  const [index, setIndex]         = useState(0)
+  const [direction, setDirection] = useState(1)
+
+  const prev = useCallback(() => {
+    setDirection(-1)
+    setIndex(i => (i - 1 + features.length) % features.length)
+  }, [])
+
+  const next = useCallback(() => {
+    setDirection(1)
+    setIndex(i => (i + 1) % features.length)
+  }, [])
+
+  const goTo = useCallback((i: number) => {
+    setDirection(i > index ? 1 : -1)
+    setIndex(i)
+  }, [index])
+
+  const feature = features[index]
+  const Icon = feature.icon
+
   return (
     <section id="features" className="py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -29,44 +57,87 @@ export default function FeaturesSection() {
         </motion.div>
 
         <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={VP}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-5"
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
+          transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
         >
-          {features.map(f => (
-            <FeatureCard key={f.title} feature={f} />
-          ))}
+          {/* Slider */}
+          <div className="flex items-center gap-4">
+
+            {/* Left arrow */}
+            <button
+              onClick={prev}
+              aria-label="Feature précédente"
+              className="flex-shrink-0 w-10 h-10 rounded-full border border-white/[0.10] bg-white/[0.03] flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/[0.07] transition-all focus-ring"
+            >
+              <ChevronLeft size={18} aria-hidden />
+            </button>
+
+            {/* Card */}
+            <div className="flex-1 overflow-hidden">
+              <AnimatePresence custom={direction} mode="wait">
+                <motion.div
+                  key={index}
+                  custom={direction}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.25, ease: EASE }}
+                  className="card py-10 px-8"
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <div className={`w-9 h-9 rounded-lg ${feature.bg} border ${feature.border} flex items-center justify-center`}>
+                      <Icon size={16} className={feature.color} aria-hidden />
+                    </div>
+                    <span className={`tag text-[10px] border ${feature.tagColor}`}>{feature.tag}</span>
+                  </div>
+                  <h3 className="text-5xl sm:text-6xl font-extrabold text-white leading-tight tracking-tight mb-6 text-center">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-400 leading-relaxed text-lg mb-6">
+                    {feature.description}
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    {feature.items.join(' · ')}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Right arrow */}
+            <button
+              onClick={next}
+              aria-label="Feature suivante"
+              className="flex-shrink-0 w-10 h-10 rounded-full border border-white/[0.10] bg-white/[0.03] flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/[0.07] transition-all focus-ring"
+            >
+              <ChevronRight size={18} aria-hidden />
+            </button>
+          </div>
+
+          {/* Dots + counter */}
+          <div className="flex items-center justify-center gap-4 mt-6">
+            <div className="flex items-center gap-1.5" role="tablist" aria-label="Features">
+              {features.map((f, i) => (
+                <button
+                  key={f.title}
+                  role="tab"
+                  aria-selected={i === index}
+                  aria-label={f.title}
+                  onClick={() => goTo(i)}
+                  className={`h-1.5 rounded-full transition-all duration-300 focus-ring ${
+                    i === index
+                      ? `w-6 ${feature.bg.replace('/10', '')} opacity-80`
+                      : 'w-1.5 bg-white/20 hover:bg-white/40'
+                  }`}
+                />
+              ))}
+            </div>
+            <span className="text-xs text-gray-600 tabular-nums" aria-live="polite">
+              {String(index + 1).padStart(2, '0')} / {String(features.length).padStart(2, '0')}
+            </span>
+          </div>
         </motion.div>
       </div>
     </section>
   )
 }
-
-const FeatureCard = memo(function FeatureCard({ feature }: { feature: Feature }) {
-  const Icon = feature.icon
-
-  return (
-    <motion.div variants={staggerItem} className="card group">
-      <div className="flex items-start justify-between mb-4">
-        <div className={`w-10 h-10 rounded-xl ${feature.bg} border ${feature.border} flex items-center justify-center`}>
-          <Icon size={18} className={feature.color} aria-hidden />
-        </div>
-        <span className={`tag text-[10px] border ${feature.tagColor}`}>{feature.tag}</span>
-      </div>
-
-      <h3 className="text-base font-bold text-white mb-2">{feature.title}</h3>
-      <p className="text-sm text-gray-400 leading-relaxed mb-4">{feature.description}</p>
-
-      <ul className="space-y-1.5" aria-label={`${feature.title} capabilities`}>
-        {feature.items.map(item => (
-          <li key={item} className="flex items-center gap-2 text-xs text-gray-500">
-            <span className={`w-1 h-1 rounded-full ${feature.bg} border ${feature.border} inline-block flex-shrink-0`} aria-hidden />
-            {item}
-          </li>
-        ))}
-      </ul>
-    </motion.div>
-  )
-})

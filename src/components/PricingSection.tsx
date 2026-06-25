@@ -86,7 +86,7 @@ export default function PricingSection() {
     const next = !yearly
     setYearly(next)
     setBillingAnnouncement(
-      next ? 'Yearly billing selected — 20% off applied' : 'Monthly billing selected'
+      next ? 'Yearly billing selected, 20% off applied' : 'Monthly billing selected'
     )
   }
 
@@ -109,7 +109,7 @@ export default function PricingSection() {
             Start free, scale when ready
           </h2>
           <p className="text-gray-400 max-w-lg mx-auto">
-            No per-email charge surprises. Flat monthly plans with generous limits — upgrade only when you need to.
+            No per-email charge surprises. Flat monthly plans with generous limits. Upgrade only when you need to.
           </p>
         </motion.div>
 

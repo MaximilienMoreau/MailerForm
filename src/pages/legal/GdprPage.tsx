@@ -71,8 +71,8 @@ export default function GdprPage() {
 
       <h3>When MailerForm is a data controller</h3>
       <p>
-        For data about you and your team — your account information, billing details, support
-        communications, and platform usage analytics MailerForm acts as a data controller. Our{' '}
+        For data about you and your team (your account information, billing details, support
+        communications, and platform usage analytics) MailerForm acts as a data controller. Our{' '}
         <Link to="/privacy">Privacy Policy</Link> explains how we process this data and your rights
         under GDPR Articles 13–22.
       </p>
@@ -110,19 +110,19 @@ export default function GdprPage() {
       </p>
       <ul>
         <li>
-          <strong>Art. 6(1)(b) — Contract</strong>: Processing your account data to provide the
+          <strong>Art. 6(1)(b): Contract</strong>: Processing your account data to provide the
           service you signed up for.
         </li>
         <li>
-          <strong>Art. 6(1)(c) — Legal obligation</strong>: Retaining billing records and
+          <strong>Art. 6(1)(c): Legal obligation</strong>: Retaining billing records and
           responding to lawful requests from authorities.
         </li>
         <li>
-          <strong>Art. 6(1)(f) — Legitimate interests</strong>: Security monitoring, fraud
+          <strong>Art. 6(1)(f): Legitimate interests</strong>: Security monitoring, fraud
           prevention, and aggregated product analytics.
         </li>
         <li>
-          <strong>Art. 6(1)(a) — Consent</strong>: Sending marketing communications. You can
+          <strong>Art. 6(1)(a): Consent</strong>: Sending marketing communications. You can
           withdraw consent at any time by clicking &ldquo;Unsubscribe&rdquo; or emailing us.
         </li>
       </ul>
@@ -137,7 +137,7 @@ export default function GdprPage() {
       <p>
         Customers on the <strong>Scale plan</strong> can enable <strong>EU data residency</strong>,
         which routes and stores all data (including email logs, contact data, and analytics) within
-        AWS eu-west-1 (Ireland) — no data leaves the EEA.
+        AWS eu-west-1 (Ireland). No data leaves the EEA.
       </p>
 
       <h2>5. Sub-Processors</h2>
@@ -183,13 +183,13 @@ export default function GdprPage() {
         respond within 30 days (extendable by 60 days for complex requests).
       </p>
       <ul>
-        <li><strong>Right of access (Art. 15)</strong> — obtain a copy of your personal data and information about how it&apos;s processed</li>
-        <li><strong>Right to rectification (Art. 16)</strong> — correct inaccurate or incomplete data</li>
-        <li><strong>Right to erasure (Art. 17)</strong> — request deletion where data is no longer necessary or consent is withdrawn</li>
-        <li><strong>Right to restriction (Art. 18)</strong> — limit processing while a dispute is pending</li>
-        <li><strong>Right to data portability (Art. 20)</strong> — receive your data in a structured, machine-readable format (JSON / CSV)</li>
-        <li><strong>Right to object (Art. 21)</strong> — object to processing based on legitimate interests, including profiling</li>
-        <li><strong>Rights related to automated decisions (Art. 22)</strong> — we do not make fully automated decisions with significant effects on individuals</li>
+        <li><strong>Right of access (Art. 15)</strong>:obtain a copy of your personal data and information about how it&apos;s processed</li>
+        <li><strong>Right to rectification (Art. 16)</strong>:correct inaccurate or incomplete data</li>
+        <li><strong>Right to erasure (Art. 17)</strong>:request deletion where data is no longer necessary or consent is withdrawn</li>
+        <li><strong>Right to restriction (Art. 18)</strong>:limit processing while a dispute is pending</li>
+        <li><strong>Right to data portability (Art. 20)</strong>:receive your data in a structured, machine-readable format (JSON / CSV)</li>
+        <li><strong>Right to object (Art. 21)</strong>:object to processing based on legitimate interests, including profiling</li>
+        <li><strong>Rights related to automated decisions (Art. 22)</strong>:we do not make fully automated decisions with significant effects on individuals</li>
       </ul>
 
       <h2>7. Security Measures</h2>
@@ -236,7 +236,7 @@ export default function GdprPage() {
       <p>
         For GDPR-related enquiries, please contact our Privacy team at{' '}
         <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a>. For EU representative
-        or DPO enquiries, use the same address with subject line &ldquo;GDPR &mdash; DPO Enquiry&rdquo;.
+        or DPO enquiries, use the same address with subject line &ldquo;GDPR: DPO Enquiry&rdquo;.
       </p>
     </LegalLayout>
   )

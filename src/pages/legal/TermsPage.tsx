@@ -100,7 +100,7 @@ export default function TermsPage() {
       </p>
       <p>
         We may use aggregated, anonymized data derived from platform usage for product improvement
-        and benchmarking — this data cannot identify you or your recipients.
+        and benchmarking. This data cannot identify you or your recipients.
       </p>
 
       <h2>7. Intellectual Property</h2>
