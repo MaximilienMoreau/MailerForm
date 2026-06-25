@@ -40,7 +40,7 @@ export default function ComingSoon() {
 
         <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">{label}</h1>
         <p className="text-gray-400 max-w-sm mx-auto mb-10 leading-relaxed">
-          This page is being built. Check back soon — or head back to the homepage to learn more about MailerForm.
+          This page is being built. Check back soon or head back to the homepage to learn more about MailerForm.
         </p>
 
         <Link

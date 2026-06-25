@@ -12,9 +12,9 @@ interface Integration {
 
 const integrations: Integration[] = [
   { name: 'Node.js',   category: 'SDK',       abbr: 'JS',  color: 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20',  description: 'Official npm package' },
-  { name: 'Python',    category: 'SDK',       abbr: 'PY',  color: 'text-sky-400 bg-sky-500/10 border-sky-500/20',            description: 'PyPI — mailerform-python' },
+  { name: 'Python',    category: 'SDK',       abbr: 'PY',  color: 'text-sky-400 bg-sky-500/10 border-sky-500/20',            description: 'PyPI: mailerform-python' },
   { name: 'Go',        category: 'SDK',       abbr: 'GO',  color: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',         description: 'go get mailerform.io/go' },
-  { name: 'Ruby',      category: 'SDK',       abbr: 'RB',  color: 'text-rose-400 bg-rose-500/10 border-rose-500/20',         description: 'RubyGems — mailerform' },
+  { name: 'Ruby',      category: 'SDK',       abbr: 'RB',  color: 'text-rose-400 bg-rose-500/10 border-rose-500/20',         description: 'RubyGems: mailerform' },
   { name: 'PHP',       category: 'SDK',       abbr: 'PHP', color: 'text-violet-400 bg-violet-500/10 border-violet-500/20',   description: 'Composer package' },
   { name: 'Zapier',    category: 'No-code',   abbr: 'ZP',  color: 'text-orange-400 bg-orange-500/10 border-orange-500/20',  description: '500+ trigger/action pairs' },
   { name: 'Make',      category: 'No-code',   abbr: 'MK',  color: 'text-violet-400 bg-violet-500/10 border-violet-500/20',  description: 'Former Integromat' },

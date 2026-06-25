@@ -22,7 +22,7 @@ export const features: Feature[] = [
     tagColor: 'bg-violet-500/10 text-violet-400 border-violet-500/20',
     title: 'Deliverability Intelligence',
     description:
-      'Analyze every email before sending. MailerForm scans for spam triggers, phishing patterns, domain reputation, and link safety — then gives you a predictive inbox score so you can fix issues before they cost you.',
+      'Analyze every email before sending. MailerForm scans for spam triggers, phishing patterns, domain reputation, and link safety. It then gives you a predictive inbox score so you can fix issues before they cost you.',
     items: ['Spam word detector', 'Domain health scoring', 'Link risk analysis', 'Predictive inbox/spam ratio'],
   },
   {
@@ -46,7 +46,7 @@ export const features: Feature[] = [
     tagColor: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
     title: 'CRM + Automation',
     description:
-      'Manage contacts, tags, and segments natively. Build lifecycle automation workflows powered by engagement data — open rates, clicks, and deliverability signals — all in one place.',
+      'Manage contacts, tags, and segments natively. Build lifecycle automation workflows powered by engagement data: open rates, clicks, and deliverability signals, all in one place.',
     items: ['Contact segmentation', 'Lifecycle automation', 'Engagement scoring', 'GDPR & CAN-SPAM tools'],
   },
   {
@@ -70,7 +70,7 @@ export const features: Feature[] = [
     tagColor: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
     title: 'Real-time Analytics',
     description:
-      'Track every event — opens, clicks, bounces, complaints, unsubscribes — with sub-second latency. Drill down by stream, domain, campaign, or recipient segment.',
+      'Track every event (opens, clicks, bounces, complaints, unsubscribes) with sub-second latency. Drill down by stream, domain, campaign, or recipient segment.',
     items: ['Event-level tracking', 'Bounce classification', 'Complaint monitoring', 'Cohort analytics'],
   },
   {

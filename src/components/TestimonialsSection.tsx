@@ -72,7 +72,7 @@ export default function TestimonialsSection() {
             Trusted by engineering teams
           </h2>
           <p className="text-gray-400 max-w-lg mx-auto">
-            From seed-stage startups to Series B SaaS — teams that care about deliverability choose MailerForm.
+            From seed-stage startups to Series B SaaS. Teams that care about deliverability choose MailerForm.
           </p>
         </motion.div>
 

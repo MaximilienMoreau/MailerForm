@@ -102,7 +102,7 @@ export default function ProblemSection() {
           transition={{ duration: 0.5, delay: 0.45, ease: EASE }}
           className="text-center text-sm text-gray-500 mt-10 max-w-lg mx-auto"
         >
-          Just like SEO tools shifted from measuring rankings to predicting them — MailerForm shifts email from reactive sending to{' '}
+          Just like SEO tools shifted from measuring rankings to predicting them, MailerForm shifts email from reactive sending to{' '}
           <span className="text-gray-300 font-medium">proactive deliverability.</span>
         </motion.p>
       </div>

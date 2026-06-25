@@ -13,7 +13,7 @@ const values = [
     color: 'text-brand-400',
     bg: 'bg-brand-500/10 border-brand-500/20',
     title: 'Deliverability first',
-    body: 'Every product decision starts with one question: does this help email land in inbox? We build tools we would want ourselves — ones that tell you what will happen, not what already did.',
+    body: 'Every product decision starts with one question: does this help email land in inbox? We build tools we would want ourselves, ones that tell you what will happen, not what already did.',
   },
   {
     icon: Users,
@@ -27,7 +27,7 @@ const values = [
     color: 'text-sky-400',
     bg: 'bg-sky-500/10 border-sky-500/20',
     title: 'Privacy by default',
-    body: 'We use as little data as we need, store it as briefly as we can, and never sell it. GDPR compliance isn\'t a checkbox for us — it\'s the baseline we start from.',
+    body: 'We use as little data as we need, store it as briefly as we can, and never sell it. GDPR compliance is not a checkbox for us, it\'s the baseline we start from.',
   },
 ]
 
@@ -35,7 +35,7 @@ const timeline = [
   {
     year: '2022',
     title: 'The frustration',
-    body: 'Our founding team was running a SaaS that relied on transactional email. A marketing campaign tanked our OTP delivery overnight. We looked for a tool that could have caught it — and found nothing that combined analysis, separation, and sending in one place.',
+    body: 'Our founding team was running a SaaS that relied on transactional email. A marketing campaign tanked our OTP delivery overnight. We looked for a tool that could have caught it and found nothing that combined analysis, separation, and sending in one place.',
   },
   {
     year: '2023',
@@ -50,7 +50,7 @@ const timeline = [
   {
     year: '2025',
     title: 'Public launch',
-    body: 'MailerForm is now available to everyone. We\'re a small, focused team — still fully bootstrapped — obsessed with making email infrastructure something developers actually enjoy working with.',
+    body: 'MailerForm is now available to everyone. We\'re a small, focused team, still fully bootstrapped, obsessed with making email infrastructure something developers actually enjoy working with.',
   },
 ]
 
@@ -109,13 +109,13 @@ export default function AboutPage() {
             <motion.div {...fadeUpView()} className="bg-white/[0.03] border border-white/[0.07] rounded-2xl p-8 sm:p-10">
               <p className="text-xs text-brand-400 font-semibold uppercase tracking-widest mb-4">Our mission</p>
               <p className="text-2xl sm:text-3xl font-bold text-white leading-snug">
-                Make inbox placement predictable — not a guessing game.
+                Make inbox placement predictable, not a guessing game.
               </p>
               <p className="mt-5 text-gray-400 leading-relaxed">
                 Every SaaS team deserves to know, before pressing Send, whether their emails will
                 reach their recipients. We combine sending infrastructure, deliverability
                 intelligence, and CRM into a single platform so that email becomes a lever for
-                growth — not a source of anxiety.
+                growth, not a source of anxiety.
               </p>
             </motion.div>
           </div>

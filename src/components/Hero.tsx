@@ -117,7 +117,7 @@ export default function Hero() {
         <motion.p {...fadeUp(0.2)} className="mt-6 text-lg sm:text-xl text-gray-400 max-w-2xl leading-relaxed">
           MailerForm combines transactional delivery, marketing automation, and{' '}
           <strong className="text-gray-200 font-semibold">deliverability intelligence</strong>{' '}
-          in one API-first platform. Analyze, predict, and fix inbox placement — before a single send.
+          in one API-first platform. Analyze, predict, and fix inbox placement before a single send.
         </motion.p>
 
         <motion.div {...fadeUp(0.3)} className="mt-6 flex flex-wrap items-center justify-center gap-3">

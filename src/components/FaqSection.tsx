@@ -11,7 +11,7 @@ interface FaqItem {
 const faqs: FaqItem[] = [
   {
     question: 'How does pre-send analysis work?',
-    answer:   'Before you send, MailerForm runs your email through a 40-point check covering spam phrase detection, domain & IP reputation, SPF/DKIM/DMARC authentication, link safety, HTML structure, image-to-text ratio, and engagement-history signals. You receive a 0–100 score and specific fix suggestions in under 2 seconds — all via API or dashboard.',
+    answer:   'Before you send, MailerForm runs your email through a 40-point check covering spam phrase detection, domain & IP reputation, SPF/DKIM/DMARC authentication, link safety, HTML structure, image-to-text ratio, and engagement-history signals. You receive a 0–100 score and specific fix suggestions in under 2 seconds, via API or dashboard.',
   },
   {
     question: 'Can I migrate from SendGrid or Mailgun without downtime?',
@@ -27,11 +27,11 @@ const faqs: FaqItem[] = [
   },
   {
     question: 'How does the free plan work?',
-    answer:   '10,000 emails per month, forever free — no credit card required. You get a single sending domain, transactional stream, 10 pre-send analyses per month, and basic analytics. Upgrade only when your volume or feature needs grow.',
+    answer:   '10,000 emails per month, forever free, no credit card required. You get a single sending domain, transactional stream, 10 pre-send analyses per month, and basic analytics. Upgrade only when your volume or feature needs grow.',
   },
   {
     question: 'Where is my data stored? Do you offer EU residency?',
-    answer:   'By default, data is stored in US-East (AWS). EU data residency is available on the Scale plan and above — your email data, contact records, and logs never leave the EU region. We are GDPR-compliant and SOC 2 Type II certified.',
+    answer:   'By default, data is stored in US-East (AWS). EU data residency is available on the Scale plan and above. Your email data, contact records, and logs never leave the EU region. We are GDPR-compliant and SOC 2 Type II certified.',
   },
 ]
 

@@ -27,7 +27,7 @@ export default function PrivacyPage() {
       <h3>1.1 Account & billing data</h3>
       <p>
         When you create an account we collect your name, email address, company name, and billing
-        information (processed securely through Stripe — we never store raw card numbers).
+        information (processed securely through Stripe:we never store raw card numbers).
       </p>
 
       <h3>1.2 Platform usage data</h3>
@@ -63,7 +63,7 @@ export default function PrivacyPage() {
         <li>To provision, operate, and maintain the MailerForm platform</li>
         <li>To process payments and manage your subscription</li>
         <li>To send you transactional emails (account alerts, invoices, security notices)</li>
-        <li>To send product updates and newsletters — you can opt out at any time</li>
+        <li>To send product updates and newsletters:you can opt out at any time</li>
         <li>To detect and prevent fraud, abuse, and security incidents</li>
         <li>To comply with legal obligations</li>
         <li>To analyze aggregate usage and improve platform features</li>
@@ -74,10 +74,10 @@ export default function PrivacyPage() {
         For users in the European Economic Area, we rely on the following legal bases:
       </p>
       <ul>
-        <li><strong>Contract</strong> — processing necessary to provide the service you&apos;ve signed up for</li>
-        <li><strong>Legitimate interests</strong> — security monitoring, fraud prevention, and product improvement</li>
-        <li><strong>Legal obligation</strong> — compliance with applicable laws</li>
-        <li><strong>Consent</strong> — marketing emails (you can withdraw consent at any time)</li>
+        <li><strong>Contract</strong>:processing necessary to provide the service you&apos;ve signed up for</li>
+        <li><strong>Legitimate interests</strong>:security monitoring, fraud prevention, and product improvement</li>
+        <li><strong>Legal obligation</strong>:compliance with applicable laws</li>
+        <li><strong>Consent</strong>:marketing emails (you can withdraw consent at any time)</li>
       </ul>
 
       <h2>4. Data Sharing</h2>
@@ -86,16 +86,16 @@ export default function PrivacyPage() {
       </p>
       <ul>
         <li>
-          <strong>Sub-processors</strong> — infrastructure providers (AWS, Cloudflare), payment
-          processor (Stripe), analytics (Plausible — privacy-first, no cookies), and customer
+          <strong>Sub-processors</strong>:infrastructure providers (AWS, Cloudflare), payment
+          processor (Stripe), analytics (Plausible:privacy-first, no cookies), and customer
           support tools. A full list of sub-processors is available on request.
         </li>
         <li>
-          <strong>Legal authorities</strong> — when required by law, court order, or to protect
+          <strong>Legal authorities</strong>:when required by law, court order, or to protect
           the safety of MailerForm users.
         </li>
         <li>
-          <strong>Business transfers</strong> — in the event of a merger or acquisition, your data
+          <strong>Business transfers</strong>:in the event of a merger or acquisition, your data
           may transfer to the acquiring entity under the same protections.
         </li>
       </ul>
@@ -131,13 +131,13 @@ export default function PrivacyPage() {
         Depending on your location you may have the following rights regarding your personal data:
       </p>
       <ul>
-        <li><strong>Access</strong> — request a copy of the data we hold about you</li>
-        <li><strong>Rectification</strong> — correct inaccurate data</li>
-        <li><strong>Erasure</strong> — request deletion of your personal data</li>
-        <li><strong>Restriction</strong> — limit how we process your data</li>
-        <li><strong>Portability</strong> — receive your data in a machine-readable format</li>
-        <li><strong>Objection</strong> — object to processing based on legitimate interests</li>
-        <li><strong>Withdraw consent</strong> — for any consent-based processing at any time</li>
+        <li><strong>Access</strong>:request a copy of the data we hold about you</li>
+        <li><strong>Rectification</strong>:correct inaccurate data</li>
+        <li><strong>Erasure</strong>:request deletion of your personal data</li>
+        <li><strong>Restriction</strong>:limit how we process your data</li>
+        <li><strong>Portability</strong>:receive your data in a machine-readable format</li>
+        <li><strong>Objection</strong>:object to processing based on legitimate interests</li>
+        <li><strong>Withdraw consent</strong>:for any consent-based processing at any time</li>
       </ul>
       <p>
         To exercise any of these rights, email us at{' '}

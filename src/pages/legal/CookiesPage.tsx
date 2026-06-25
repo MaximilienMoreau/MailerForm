@@ -45,7 +45,7 @@ function ConsentManager() {
         </button>
       )}
       {reset && consent === null && (
-        <span className="text-xs text-emerald-400">Done — the banner will reappear on your next visit.</span>
+        <span className="text-xs text-emerald-400">Done:the banner will reappear on your next visit.</span>
       )}
     </div>
   )
@@ -164,18 +164,18 @@ export default function CookiesPage() {
       </div>
       <ul>
         <li>
-          <strong>Cookie banner</strong> — when you first visit mailerform.io we ask for your
+          <strong>Cookie banner</strong>:when you first visit mailerform.io we ask for your
           preference. You can reset it at any time by clearing the{' '}
           <code className="text-xs font-mono text-gray-300 bg-white/5 px-1.5 py-0.5 rounded">mailerform_cookie_consent</code>{' '}
           key from your browser&apos;s local storage.
         </li>
         <li>
-          <strong>Browser settings</strong> — all modern browsers allow you to view, block, or
+          <strong>Browser settings</strong>:all modern browsers allow you to view, block, or
           delete cookies. Note that blocking essential cookies will prevent you from logging in.
           See your browser&apos;s documentation for instructions.
         </li>
         <li>
-          <strong>Opt-out of analytics</strong> — Plausible respects the{' '}
+          <strong>Opt-out of analytics</strong>:Plausible respects the{' '}
           <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/DNT" target="_blank" rel="noreferrer">
             Do Not Track
           </a>{' '}

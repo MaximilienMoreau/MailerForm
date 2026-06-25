@@ -16,8 +16,8 @@ const checks: Check[] = [
   { label: 'Sender domain SPF',    status: 'ok',   detail: 'Valid ✓' },
   { label: 'DKIM signature',       status: 'ok',   detail: 'Signed & aligned' },
   { label: 'DMARC policy',         status: 'ok',   detail: 'p=quarantine' },
-  { label: 'Link reputation',      status: 'ok',   detail: '5 links — all clean' },
-  { label: 'Image-to-text ratio',  status: 'warn', detail: '78% images — consider more text' },
+  { label: 'Link reputation',      status: 'ok',   detail: '5 links, all clean' },
+  { label: 'Image-to-text ratio',  status: 'warn', detail: '78% images, consider more text' },
   { label: 'Unsubscribe header',   status: 'ok',   detail: 'List-Unsubscribe present' },
   { label: 'HTML/Text multipart',  status: 'ok',   detail: 'Both parts included' },
 ]
@@ -72,7 +72,7 @@ export default function DeliverabilitySection() {
               className="text-gray-400 leading-relaxed mb-8"
             >
               Before any send, MailerForm runs a 40-point analysis across content, authentication, infrastructure, and engagement history.
-              You get a detailed report — with specific fixes — in under 2 seconds.
+              You get a detailed report with specific fixes in under 2 seconds.
             </motion.p>
 
             <motion.ul

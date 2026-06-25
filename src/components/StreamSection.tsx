@@ -50,7 +50,7 @@ export default function StreamSection() {
             </div>
             <h3 className="font-bold text-white mb-2">Transactional</h3>
             <p className="text-sm text-gray-400 mb-4">
-              OTPs, password resets, receipts, and system notifications. Protected by dedicated IP ranges — always delivered.
+              OTPs, password resets, receipts, and system notifications. Protected by dedicated IP ranges, always delivered.
             </p>
             <ul className="space-y-2" aria-label="Transactional email types">
               {transactionalItems.map(item => (
@@ -95,7 +95,7 @@ export default function StreamSection() {
             </div>
             <h3 className="font-bold text-white mb-2">Marketing</h3>
             <p className="text-sm text-gray-400 mb-4">
-              Newsletters, campaigns, and lifecycle emails. High-volume sending with full deliverability intelligence — zero risk to transactional.
+              Newsletters, campaigns, and lifecycle emails. High-volume sending with full deliverability intelligence, zero risk to transactional.
             </p>
             <ul className="space-y-2" aria-label="Marketing email types">
               {marketingItems.map(item => (
