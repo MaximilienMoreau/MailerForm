@@ -26,8 +26,8 @@ interface Release {
 const releases: Release[] = [
   {
     version: '1.4.0',
-    date: 'June 5, 2025',
-    isoDate: '2025-06-05',
+    date: 'June 30, 2026',
+    isoDate: '2026-06-30',
     badge: 'Major',
     summary: 'Stream-level analytics dashboard and dedicated IP warm-up tooling.',
     changes: [
@@ -41,8 +41,8 @@ const releases: Release[] = [
   },
   {
     version: '1.3.2',
-    date: 'May 19, 2025',
-    isoDate: '2025-05-19',
+    date: 'June 4, 2026',
+    isoDate: '2026-06-04',
     summary: 'Reliability and performance patch.',
     changes: [
       { type: 'fixed',    text: 'Webhook retries were not honouring the backoff schedule on 5xx responses' },
@@ -53,8 +53,8 @@ const releases: Release[] = [
   },
   {
     version: '1.3.0',
-    date: 'April 28, 2025',
-    isoDate: '2025-04-28',
+    date: 'May 21, 2026',
+    isoDate: '2026-05-21',
     badge: 'Minor',
     summary: 'CRM automation workflows and GDPR bulk-export.',
     changes: [
@@ -68,8 +68,8 @@ const releases: Release[] = [
   },
   {
     version: '1.2.1',
-    date: 'March 14, 2025',
-    isoDate: '2025-03-14',
+    date: 'May 7, 2026',
+    isoDate: '2026-05-07',
     summary: 'Security patch and SPF/DKIM validation improvements.',
     changes: [
       { type: 'fixed',    text: 'Resolved SSRF vulnerability in the link-safety scanner (reported via responsible disclosure)' },
@@ -80,8 +80,8 @@ const releases: Release[] = [
   },
   {
     version: '1.2.0',
-    date: 'February 10, 2025',
-    isoDate: '2025-02-10',
+    date: 'April 14, 2026',
+    isoDate: '2026-04-14',
     badge: 'Minor',
     summary: 'White-label option and custom domain tracking.',
     changes: [
@@ -94,8 +94,8 @@ const releases: Release[] = [
   },
   {
     version: '1.1.0',
-    date: 'November 22, 2024',
-    isoDate: '2024-11-22',
+    date: 'March 28, 2026',
+    isoDate: '2026-03-28',
     badge: 'Minor',
     summary: 'Public launch — Growth and Scale plans, full CRM.',
     changes: [
@@ -109,8 +109,8 @@ const releases: Release[] = [
   },
   {
     version: '1.0.0',
-    date: 'August 5, 2024',
-    isoDate: '2024-08-05',
+    date: 'March 5, 2026',
+    isoDate: '2026-03-05',
     badge: 'Major',
     summary: 'Private beta — transactional stream and deliverability analysis.',
     changes: [
