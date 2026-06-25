@@ -3,8 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Loader2, Zap } from 'lucide-react'
 import { EASE, VP_LG } from '@/lib/motion'
 
-const FORM_ID = import.meta.env.VITE_FORMSPREE_ID as string | undefined
-
 type FormState = 'idle' | 'loading' | 'success' | 'error'
 
 function isValidEmail(value: string): boolean {
@@ -16,6 +14,7 @@ function isValidEmail(value: string): boolean {
 }
 
 export default function CtaSection() {
+  const FORM_ID = import.meta.env.VITE_FORMSPREE_ID as string | undefined
   const inputRef = useRef<HTMLInputElement>(null)
   const [email, setEmail]       = useState('')
   const [honeypot, setHoneypot] = useState('')
