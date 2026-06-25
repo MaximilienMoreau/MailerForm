@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Loader2, Zap } from 'lucide-react'
 import { EASE, VP_LG } from '@/lib/motion'
 
+const FORM_ID = import.meta.env.VITE_FORMSPREE_ID as string | undefined
+
 type FormState = 'idle' | 'loading' | 'success' | 'error'
 
 function isValidEmail(value: string): boolean {
@@ -42,10 +44,9 @@ export default function CtaSection() {
     setErrorMsg('')
 
     try {
-      const formId = import.meta.env.VITE_FORMSPREE_ID
-      if (!formId) throw new Error('no_form_id')
+      if (!FORM_ID) throw new Error('no_form_id')
 
-      const res = await fetch(`https://formspree.io/f/${formId}`, {
+      const res = await fetch(`https://formspree.io/f/${FORM_ID}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({ email: value }),
@@ -107,86 +108,98 @@ export default function CtaSection() {
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP_LG}
           transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
         >
-          <AnimatePresence mode="wait">
-            {state === 'success' ? (
-              <motion.div
-                key="success"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, ease: EASE }}
-                className="flex flex-col items-center gap-3"
-                role="status"
-                aria-live="polite"
-              >
-                <div className="w-12 h-12 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center">
-                  <CheckCircle2 size={22} className="text-emerald-400" />
-                </div>
-                <p className="text-white font-semibold text-lg">You&apos;re on the list!</p>
-                <p className="text-sm text-gray-400">Check your inbox for your free account details.</p>
-              </motion.div>
-            ) : (
-              <motion.form
-                key="form"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                onSubmit={handleSubmit}
-                className="flex flex-col sm:flex-row items-stretch gap-3 max-w-md mx-auto"
-                aria-label="Sign up for MailerForm"
-                noValidate
-              >
-                {/* Honeypot — hidden from users, catches bots that auto-fill all fields */}
-                <input
-                  type="text"
-                  name="_gotcha"
-                  tabIndex={-1}
-                  aria-hidden="true"
-                  autoComplete="off"
-                  value={honeypot}
-                  onChange={e => setHoneypot(e.target.value)}
-                  style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none', width: 0, height: 0 }}
-                />
-                <div className="flex-1 relative">
-                  <label htmlFor="cta-email" className="sr-only">
-                    Email address
-                  </label>
-                  <input
-                    ref={inputRef}
-                    id="cta-email"
-                    type="email"
-                    value={email}
-                    onChange={handleChange}
-                    placeholder="you@company.com"
-                    required
-                    autoComplete="email"
-                    aria-invalid={state === 'error'}
-                    aria-describedby={state === 'error' ? 'cta-email-error' : undefined}
-                    className="w-full h-full bg-white/[0.06] border border-white/[0.12] rounded-xl px-4 py-3.5 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-brand-500/60 focus:bg-white/[0.08] transition-all aria-[invalid=true]:border-red-500/50"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  disabled={state === 'loading'}
-                  className="btn-primary text-sm px-6 py-3.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0 whitespace-nowrap"
-                >
-                  {state === 'loading'
-                    ? <Loader2 size={15} className="animate-spin" aria-label="Loading…" />
-                    : <>Start for free <ArrowRight size={15} aria-hidden /></>
-                  }
-                </button>
-              </motion.form>
-            )}
-          </AnimatePresence>
+          {!FORM_ID ? (
+            <a
+              href="mailto:hello@mailerform.io"
+              className="btn-primary text-base px-8 py-3.5 mx-auto"
+            >
+              Get in touch
+              <ArrowRight size={16} aria-hidden />
+            </a>
+          ) : (
+            <>
+              <AnimatePresence mode="wait">
+                {state === 'success' ? (
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, ease: EASE }}
+                    className="flex flex-col items-center gap-3"
+                    role="status"
+                    aria-live="polite"
+                  >
+                    <div className="w-12 h-12 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center">
+                      <CheckCircle2 size={22} className="text-emerald-400" />
+                    </div>
+                    <p className="text-white font-semibold text-lg">You&apos;re on the list!</p>
+                    <p className="text-sm text-gray-400">Check your inbox for your free account details.</p>
+                  </motion.div>
+                ) : (
+                  <motion.form
+                    key="form"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    onSubmit={handleSubmit}
+                    className="flex flex-col sm:flex-row items-stretch gap-3 max-w-md mx-auto"
+                    aria-label="Sign up for MailerForm"
+                    noValidate
+                  >
+                    {/* Honeypot — hidden from users, catches bots that auto-fill all fields */}
+                    <input
+                      type="text"
+                      name="_gotcha"
+                      tabIndex={-1}
+                      aria-hidden="true"
+                      autoComplete="off"
+                      value={honeypot}
+                      onChange={e => setHoneypot(e.target.value)}
+                      style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none', width: 0, height: 0 }}
+                    />
+                    <div className="flex-1 relative">
+                      <label htmlFor="cta-email" className="sr-only">
+                        Email address
+                      </label>
+                      <input
+                        ref={inputRef}
+                        id="cta-email"
+                        type="email"
+                        value={email}
+                        onChange={handleChange}
+                        placeholder="you@company.com"
+                        required
+                        autoComplete="email"
+                        aria-invalid={state === 'error'}
+                        aria-describedby={state === 'error' ? 'cta-email-error' : undefined}
+                        className="w-full h-full bg-white/[0.06] border border-white/[0.12] rounded-xl px-4 py-3.5 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-brand-500/60 focus:bg-white/[0.08] transition-all aria-[invalid=true]:border-red-500/50"
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={state === 'loading'}
+                      className="btn-primary text-sm px-6 py-3.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0 whitespace-nowrap"
+                    >
+                      {state === 'loading'
+                        ? <Loader2 size={15} className="animate-spin" aria-label="Loading…" />
+                        : <>Start for free <ArrowRight size={15} aria-hidden /></>
+                      }
+                    </button>
+                  </motion.form>
+                )}
+              </AnimatePresence>
 
-          {state === 'error' && (
-            <p id="cta-email-error" role="alert" className="mt-2 text-xs text-red-400">
-              {errorMsg}
-            </p>
-          )}
+              {state === 'error' && (
+                <p id="cta-email-error" role="alert" className="mt-2 text-xs text-red-400">
+                  {errorMsg}
+                </p>
+              )}
 
-          {state !== 'success' && (
-            <p className="mt-4 text-xs text-gray-600">
-              No credit card · 10k emails free · Cancel anytime
-            </p>
+              {state !== 'success' && (
+                <p className="mt-4 text-xs text-gray-600">
+                  No credit card · 10k emails free · Cancel anytime
+                </p>
+              )}
+            </>
           )}
         </motion.div>
 
