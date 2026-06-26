@@ -19,7 +19,7 @@ export default function ApiSection() {
       if (copyTimerRef.current) clearTimeout(copyTimerRef.current)
       copyTimerRef.current = setTimeout(() => setCopied(false), 2000)
     }).catch(() => {
-      // clipboard unavailable — button stays in default state
+      // clipboard unavailable, button stays in default state
     })
   }
 

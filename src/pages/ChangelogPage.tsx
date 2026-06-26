@@ -136,8 +136,8 @@ const badgeColors: Record<NonNullable<Release['badge']>, string> = {
 
 export default function ChangelogPage() {
   useMeta({
-    title: 'Changelog — MailerForm',
-    description: 'All new features, improvements, and bug fixes in MailerForm — organized by release.',
+    title: 'Changelog',
+    description: 'All new features, improvements, and bug fixes in MailerForm, organized by release.',
   })
 
   return (
@@ -293,7 +293,7 @@ export default function ChangelogPage() {
 }
 
 /*
-  PSEUDO-CODE — Forme originale FeaturesSection (grille 3×2)
+  PSEUDO-CODE: Forme originale FeaturesSection (grille 3×2)
   ============================================================
 
   <section id="features">
@@ -326,10 +326,10 @@ export default function ChangelogPage() {
   </section>
 
   Features (6 cards) :
-  - Deliverability Intelligence  [violet]  Core differentiator
-  - Stream Separation            [sky]     Smart infrastructure
-  - CRM + Automation             [emerald] Email-first CRM
-  - 260+ API Endpoints           [brand]   API-first
-  - Real-time Analytics          [amber]   Observability
-  - Security & Compliance        [rose]    Compliance
+  Deliverability Intelligence  [violet]  Core differentiator
+  Stream Separation            [sky]     Smart infrastructure
+  CRM + Automation             [emerald] Email-first CRM
+  260+ API Endpoints           [brand]   API-first
+  Real-time Analytics          [amber]   Observability
+  Security & Compliance        [rose]    Compliance
 */

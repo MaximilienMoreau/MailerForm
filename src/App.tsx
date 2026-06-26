@@ -14,7 +14,7 @@ import StreamSection from '@/components/StreamSection'
 import ApiSection from '@/components/ApiSection'
 import NotFound from '@/pages/NotFound'
 
-// Sections below the fold — lazy loaded after the critical path renders
+// Sections below the fold, lazy loaded after the critical path renders
 const IntegrationsSection = lazy(() => import('@/components/IntegrationsSection'))
 const ComparisonSection   = lazy(() => import('@/components/ComparisonSection'))
 const TestimonialsSection = lazy(() => import('@/components/TestimonialsSection'))

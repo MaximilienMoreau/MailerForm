@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { ArrowLeft, Hammer, Zap } from 'lucide-react'
+import { useMeta } from '@/hooks/useMeta'
 
 const PAGE_LABELS: Record<string, string> = {
   '/blog':    'Blog',
@@ -12,11 +12,7 @@ export default function ComingSoon() {
   const { pathname } = useLocation()
   const label = PAGE_LABELS[pathname] ?? 'This page'
 
-  useEffect(() => {
-    const prev = document.title
-    document.title = `${label} — MailerForm`
-    return () => { document.title = prev }
-  }, [label])
+  useMeta({ title: `${label}` })
 
   return (
     <div className="min-h-screen bg-gray-950 flex flex-col items-center justify-center px-4 text-center">

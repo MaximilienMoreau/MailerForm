@@ -15,9 +15,6 @@ function isValidEmail(value: string): boolean {
 
 export default function CtaSection() {
   const FORM_ID = import.meta.env.VITE_FORMSPREE_ID as string | undefined
-  if (import.meta.env.DEV && !FORM_ID) {
-    console.warn('[CtaSection] VITE_FORMSPREE_ID is not set — form submissions will fail silently.')
-  }
   const inputRef = useRef<HTMLInputElement>(null)
   const [email, setEmail]       = useState('')
   const [honeypot, setHoneypot] = useState('')
@@ -36,7 +33,7 @@ export default function CtaSection() {
       return
     }
 
-    // Bot filled the hidden honeypot field — silently succeed
+    // Bot filled the hidden honeypot field, silently succeed
     if (honeypot) {
       setState('success')
       return
@@ -147,7 +144,7 @@ export default function CtaSection() {
                     aria-label="Sign up for MailerForm"
                     noValidate
                   >
-                    {/* Honeypot — hidden from users, catches bots that auto-fill all fields */}
+                    {/* Honeypot, hidden from users, catches bots that auto-fill all fields */}
                     <input
                       type="text"
                       name="_gotcha"

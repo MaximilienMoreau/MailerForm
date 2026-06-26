@@ -88,7 +88,7 @@ describe('CtaSection', () => {
 
     await user.click(screen.getByRole('button', { name: /start for free/i }))
 
-    // Form stays in idle state — no alert, no success
+    // Form stays in idle state, no alert, no success
     expect(screen.queryByRole('alert')).not.toBeInTheDocument()
     expect(screen.queryByRole('status')).not.toBeInTheDocument()
   })

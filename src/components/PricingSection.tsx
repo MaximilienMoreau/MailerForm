@@ -145,7 +145,7 @@ export default function PricingSection() {
             </span>
           </span>
         </motion.div>
-        {/* Single live region — announces billing change once per toggle */}
+        {/* Single live region, announces billing change once per toggle */}
         <span className="sr-only" aria-live="polite" aria-atomic="true">
           {billingAnnouncement}
         </span>

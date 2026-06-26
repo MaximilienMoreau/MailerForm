@@ -65,7 +65,7 @@ export function tokenizeLine(line: string): Token[] {
     }
     if (matched) continue
 
-    // Numbers — allow at most one dot (e.g. 99.2) but not 1.2.3
+    // Numbers, allow at most one dot (e.g. 99.2) but not 1.2.3
     if (/\d/.test(line[i])) {
       let j = i
       let seenDot = false

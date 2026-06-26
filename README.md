@@ -55,7 +55,7 @@ cp .env.example .env
 | [Vitest](https://vitest.dev) | 4 | Unit & component tests |
 | [Testing Library](https://testing-library.com) | 16 | DOM testing utilities |
 
-**Fonts:** Inter (body) · JetBrains Mono (code blocks) — loaded from Google Fonts with `display=swap`.
+**Fonts:** Inter (body) · JetBrains Mono (code blocks), loaded from Google Fonts with `display=swap`.
 
 ---
 
@@ -89,7 +89,8 @@ src/
 │
 ├── data/
 │   ├── features.ts               # Feature card definitions
-│   └── api.ts                    # Code example, SDK list, API stats
+│   ├── api.ts                    # Code example, SDK list, API stats
+│   └── stats.ts                  # Shared platform statistics (hero + about page)
 │
 ├── hooks/
 │   └── useMeta.ts                # Updates title + OG/Twitter meta tags per page
@@ -139,7 +140,7 @@ import { useMeta } from '@/hooks/useMeta'
 | `npm test` | Run tests in watch mode |
 | `npm run test:run` | Run tests once (CI mode) |
 | `npm run test:coverage` | Run tests with v8 coverage report |
-| `npm run lint` | ESLint — zero warnings allowed |
+| `npm run lint` | ESLint, zero warnings allowed |
 | `npm run format` | Prettier formatting |
 
 ---
@@ -148,7 +149,7 @@ import { useMeta } from '@/hooks/useMeta'
 
 | Variable | Required | Description |
 |---|:-:|---|
-| `VITE_FORMSPREE_ID` | Production | Formspree form ID for the CTA email capture. Get one at [formspree.io](https://formspree.io). Without it the form falls back gracefully to an error state. |
+| `VITE_FORMSPREE_ID` | Production | Formspree form ID for the CTA email capture. Get one at [formspree.io](https://formspree.io). Without it the form falls back to a mailto contact link. |
 
 ---
 
@@ -205,9 +206,9 @@ All Framer Motion components share constants from [`src/lib/motion.ts`](src/lib/
 
 | Export | Purpose |
 |---|---|
-| `EASE` | Cubic-bezier `[0.22, 1, 0.36, 1]` — used everywhere |
+| `EASE` | Cubic-bezier `[0.22, 1, 0.36, 1]`, used everywhere |
 | `VP` / `VP_SM` / `VP_MD` / `VP_LG` | Viewport configs with different trigger thresholds |
-| `staggerContainer` / `staggerItem` | Consistent list animations — 80 ms stagger |
+| `staggerContainer` / `staggerItem` | Consistent list animations, 80 ms stagger |
 | `fadeUp(delay)` | Mount-based fade-up for page entry animations |
 | `fadeUpView(delay)` | Scroll-triggered fade-up for sections below the fold |
 
@@ -221,7 +222,7 @@ A single `<MotionConfig reducedMotion="user">` at the root automatically respect
 - **`role="dialog"` / `aria-modal`** on the mobile nav and cookie banner
 - **`aria-live="polite"`** on stable values only — never on animated counter frames to avoid screen-reader spam
 - **`aria-label`** on the stream-separation heading to expose the intended meaning (not the visual strikethrough)
-- **Semantic HTML** throughout — `nav`, `main`, `section`, `article`, `figure`, `blockquote`, `time`
+- **Semantic HTML** throughout: `nav`, `main`, `section`, `article`, `figure`, `blockquote`, `time`
 
 ---
 
@@ -270,7 +271,7 @@ npm run test:coverage  # with v8 coverage report
 | `ErrorBoundary` | Error catch, reset button |
 | `tokenize` | Syntax tokeniser edge cases |
 
-The `CtaSection` tests mock `fetch` via `vi.stubGlobal` and `VITE_FORMSPREE_ID` via `vi.stubEnv` — no real network requests.
+The `CtaSection` tests mock `fetch` via `vi.stubGlobal` and `VITE_FORMSPREE_ID` via `vi.stubEnv`, no real network requests.
 
 ---
 

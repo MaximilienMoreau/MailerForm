@@ -6,7 +6,7 @@ import { EASE } from '@/lib/motion'
 import { COOKIE_CONSENT_KEY, type Consent } from '@/lib/consent'
 
 export default function CookieBanner() {
-  // Read localStorage once on mount — avoids calling setState synchronously in an effect
+  // Read localStorage once on mount, avoids calling setState synchronously in an effect
   const [consent, setConsent] = useState<Consent | null>(
     () => localStorage.getItem(COOKIE_CONSENT_KEY) as Consent | null
   )
