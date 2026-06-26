@@ -4,6 +4,7 @@ import { ArrowRight, Zap, Target, Users, Globe } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import { EASE, VP, fadeUpView, staggerContainer, staggerItem } from '@/lib/motion'
 import { useMeta } from '@/hooks/useMeta'
+import { stats } from '@/data/stats'
 
 const Footer = lazy(() => import('@/components/Footer'))
 
@@ -56,7 +57,7 @@ const timeline = [
 
 export default function AboutPage() {
   useMeta({
-    title: 'About — MailerForm',
+    title: 'About',
     description: 'Learn how MailerForm was built and what we believe in. Our mission: make inbox placement predictable, not a guessing game.',
   })
   return (
@@ -192,14 +193,11 @@ export default function AboutPage() {
               viewport={VP}
               className="grid grid-cols-2 sm:grid-cols-4 gap-6"
             >
-              {[
-                { value: '10B+',  label: 'Emails analyzed' },
-                { value: '99.2%', label: 'Avg. inbox rate' },
-                { value: '<80ms', label: 'P99 delivery' },
-                { value: '260+',  label: 'API endpoints' },
-              ].map(s => (
+              {stats.map(s => (
                 <motion.div key={s.label} variants={staggerItem} className="text-center">
-                  <div className="text-3xl sm:text-4xl font-extrabold text-white mb-1 tabular-nums">{s.value}</div>
+                  <div className="text-3xl sm:text-4xl font-extrabold text-white mb-1 tabular-nums">
+                    {s.prefix}{s.decimals > 0 ? s.value.toFixed(s.decimals) : s.value}{s.suffix}
+                  </div>
                   <div className="text-sm text-gray-500">{s.label}</div>
                 </motion.div>
               ))}

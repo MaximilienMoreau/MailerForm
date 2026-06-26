@@ -3,23 +3,9 @@ import { motion, useInView } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Zap } from 'lucide-react'
 import DeliverabilityCard from './DeliverabilityCard'
 import { EASE, fadeUp, staggerContainer, staggerItem } from '@/lib/motion'
+import { stats, type Stat } from '@/data/stats'
 
 const EASE_OUT_QUART = (t: number) => 1 - Math.pow(1 - t, 4)
-
-interface Stat {
-  prefix: string
-  value: number
-  suffix: string
-  decimals: number
-  label: string
-}
-
-const stats: Stat[] = [
-  { prefix: '', value: 99.2, suffix: '%',  decimals: 1, label: 'Inbox placement rate' },
-  { prefix: '', value: 260,  suffix: '+',  decimals: 0, label: 'API endpoints' },
-  { prefix: '<', value: 80,  suffix: 'ms', decimals: 0, label: 'Delivery latency' },
-  { prefix: '', value: 10,   suffix: 'B+', decimals: 0, label: 'Emails analyzed' },
-]
 
 const trust = [
   'GDPR & CAN-SPAM compliant',

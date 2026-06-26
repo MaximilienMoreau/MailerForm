@@ -1,13 +1,9 @@
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowLeft, Zap } from 'lucide-react'
+import { useMeta } from '@/hooks/useMeta'
 
 export default function NotFound() {
-  useEffect(() => {
-    const prev = document.title
-    document.title = 'Page Not Found — MailerForm'
-    return () => { document.title = prev }
-  }, [])
+  useMeta({ title: 'Page Not Found' })
 
   return (
     <div className="min-h-screen bg-gray-950 flex flex-col items-center justify-center px-4 text-center">

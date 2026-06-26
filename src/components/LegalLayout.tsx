@@ -12,7 +12,7 @@ interface LegalLayoutProps {
 }
 
 export default function LegalLayout({ title, subtitle, lastUpdated, children }: LegalLayoutProps) {
-  useMeta({ title: `${title} — MailerForm`, description: subtitle })
+  useMeta({ title: `${title}`, description: subtitle })
 
   return (
     <div className="min-h-screen">
