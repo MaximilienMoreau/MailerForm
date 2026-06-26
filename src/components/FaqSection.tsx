@@ -84,7 +84,7 @@ function FaqRow({ item, defaultOpen = false }: { item: FaqItem; defaultOpen?: bo
 
 export default function FaqSection() {
   return (
-    <section id="faq" className="py-24 relative">
+    <section id="faq" className="py-16 relative">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <motion.div

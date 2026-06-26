@@ -43,26 +43,26 @@ function LandingPage() {
         <DeliverabilitySection />
         <StreamSection />
         <ApiSection />
-        <Suspense fallback={null}>
+        <Suspense fallback={<div className="py-16" />}>
           <IntegrationsSection />
         </Suspense>
-        <Suspense fallback={null}>
+        <Suspense fallback={<div className="py-16" />}>
           <ComparisonSection />
         </Suspense>
-        <Suspense fallback={null}>
+        <Suspense fallback={<div className="py-16" />}>
           <TestimonialsSection />
         </Suspense>
-        <Suspense fallback={null}>
+        <Suspense fallback={<div className="py-16" />}>
           <PricingSection />
         </Suspense>
-        <Suspense fallback={null}>
+        <Suspense fallback={<div className="py-16" />}>
           <FaqSection />
         </Suspense>
-        <Suspense fallback={null}>
+        <Suspense fallback={<div className="py-16" />}>
           <CtaSection />
         </Suspense>
       </main>
-      <Suspense fallback={null}>
+      <Suspense fallback={<div className="py-8" />}>
         <Footer />
       </Suspense>
     </div>

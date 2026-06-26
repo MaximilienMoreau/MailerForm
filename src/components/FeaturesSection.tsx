@@ -33,7 +33,7 @@ export default function FeaturesSection() {
   const Icon = feature.icon
 
   return (
-    <section id="features" className="py-24">
+    <section id="features" className="pt-8 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <motion.div
@@ -66,7 +66,7 @@ export default function FeaturesSection() {
             {/* Left arrow */}
             <button
               onClick={prev}
-              aria-label="Feature précédente"
+              aria-label="Previous feature"
               className="flex-shrink-0 w-10 h-10 rounded-full border border-white/[0.10] bg-white/[0.03] flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/[0.07] transition-all focus-ring"
             >
               <ChevronLeft size={18} aria-hidden />
@@ -83,18 +83,28 @@ export default function FeaturesSection() {
                   animate="center"
                   exit="exit"
                   transition={{ duration: 0.25, ease: EASE }}
-                  className="card py-10 px-8"
+                  className="card py-6 px-4 sm:py-10 sm:px-8"
                 >
-                  <div className="flex items-center justify-between mb-2">
-                    <div className={`w-9 h-9 rounded-lg ${feature.bg} border ${feature.border} flex items-center justify-center`}>
-                      <Icon size={16} className={feature.color} aria-hidden />
+                  {/* Mobile: icon+badge row above title / Desktop: all on same row */}
+                  <div className="flex items-center justify-between gap-3 mb-3 sm:hidden">
+                    <div className={`flex-shrink-0 w-12 h-12 rounded-xl ${feature.bg} border ${feature.border} flex items-center justify-center`}>
+                      <Icon size={22} className={feature.color} aria-hidden />
                     </div>
-                    <span className={`tag text-[10px] border ${feature.tagColor}`}>{feature.tag}</span>
+                    <span className={`flex-shrink-0 tag text-xs border ${feature.tagColor}`}>{feature.tag}</span>
                   </div>
-                  <h3 className="text-5xl sm:text-6xl font-extrabold text-white leading-tight tracking-tight mb-6 text-center">
+                  <h3 className="text-2xl sm:hidden font-extrabold text-white leading-tight tracking-tight text-center mb-4">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-400 leading-relaxed text-lg mb-6">
+                  <div className="hidden sm:flex items-center gap-4 mb-6">
+                    <div className={`flex-shrink-0 w-16 h-16 rounded-xl ${feature.bg} border ${feature.border} flex items-center justify-center`}>
+                      <Icon size={30} className={feature.color} aria-hidden />
+                    </div>
+                    <h3 className="flex-1 text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight text-center">
+                      {feature.title}
+                    </h3>
+                    <span className={`flex-shrink-0 tag text-sm border ${feature.tagColor}`}>{feature.tag}</span>
+                  </div>
+                  <p className="text-gray-400 leading-relaxed text-base sm:text-lg mb-6">
                     {feature.description}
                   </p>
                   <p className="text-sm text-gray-600">
@@ -107,7 +117,7 @@ export default function FeaturesSection() {
             {/* Right arrow */}
             <button
               onClick={next}
-              aria-label="Feature suivante"
+              aria-label="Next feature"
               className="flex-shrink-0 w-10 h-10 rounded-full border border-white/[0.10] bg-white/[0.03] flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/[0.07] transition-all focus-ring"
             >
               <ChevronRight size={18} aria-hidden />

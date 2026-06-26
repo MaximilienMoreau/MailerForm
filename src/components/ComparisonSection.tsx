@@ -76,7 +76,7 @@ function Cell({ value, highlight, provider, feature }: {
 
 export default function ComparisonSection() {
   return (
-    <section id="comparison" className="py-24 relative">
+    <section id="comparison" className="py-16 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <motion.div

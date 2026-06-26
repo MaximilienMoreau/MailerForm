@@ -10,7 +10,7 @@ const MARKETING_RATE     = 96.1
 
 export default function StreamSection() {
   return (
-    <section id="streams" className="py-24 relative">
+    <section id="streams" className="py-16 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <motion.div
