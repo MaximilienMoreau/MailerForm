@@ -15,6 +15,9 @@ function isValidEmail(value: string): boolean {
 
 export default function CtaSection() {
   const FORM_ID = import.meta.env.VITE_FORMSPREE_ID as string | undefined
+  if (import.meta.env.DEV && !FORM_ID) {
+    console.warn('[CtaSection] VITE_FORMSPREE_ID is not set — form submissions will fail silently.')
+  }
   const inputRef = useRef<HTMLInputElement>(null)
   const [email, setEmail]       = useState('')
   const [honeypot, setHoneypot] = useState('')
@@ -69,7 +72,7 @@ export default function CtaSection() {
   }
 
   return (
-    <section id="cta" className="py-24 relative overflow-hidden">
+    <section id="cta" className="py-16 relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_50%,rgba(51,102,255,0.12),transparent)]" aria-hidden />
       <div className="absolute inset-0 bg-grid-white [mask-image:radial-gradient(ellipse_at_center,transparent_30%,black)]" aria-hidden />
 

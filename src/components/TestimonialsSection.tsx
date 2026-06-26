@@ -58,7 +58,7 @@ const logos: Logo[] = [
 
 export default function TestimonialsSection() {
   return (
-    <section id="testimonials" className="py-24 relative overflow-hidden">
+    <section id="testimonials" className="py-16 relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_40%_at_50%_0%,rgba(51,102,255,0.06),transparent)]" aria-hidden />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
