@@ -1,3 +1,5 @@
+<div align="center">
+
 # MailerForm: Landing Page
 
 ![React](https://img.shields.io/badge/React-18-61dafb?logo=react&logoColor=white&labelColor=20232a)
@@ -6,6 +8,8 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-06b6d4?logo=tailwindcss&logoColor=white&labelColor=20232a)
 ![Tests](https://img.shields.io/badge/tests-49%20passing-22c55e?labelColor=20232a)
 ![License](https://img.shields.io/badge/license-private-6b7280?labelColor=20232a)
+
+</div>
 
 Marketing and documentation landing page for **[MailerForm](https://mailerform.io)**, an email infrastructure platform for SaaS engineering teams. Covers the full user journey from awareness to sign-up with accessibility, performance, and SEO as first-class concerns.
 
@@ -83,7 +87,7 @@ src/
 │   ├── LegalLayout.tsx           # Shared layout for all legal pages
 │   ├── Footer.tsx                # Multi-column footer with social links
 │   ├── CookieBanner.tsx          # Cookie consent with localStorage persistence
-│   ├── ScrollToTop.tsx           # Resets scroll position on every route change
+│   ├── ScrollToTop.tsx           # Scrolls to top on route change; scrolls to hash target on cross-page anchor navigation
 │   ├── ErrorBoundary.tsx         # React error boundary with reset
 │   └── SkipLink.tsx              # Keyboard accessibility skip link
 │
@@ -168,7 +172,7 @@ React Router v7. All routes are declared in [`App.tsx`](src/App.tsx):
 | `/blog` · `/careers` · `/press` | `ComingSoon` | Placeholder |
 | `*` | `NotFound` | 404 catch-all |
 
-A `<ScrollToTop>` component resets `window.scrollTo(0, 0)` on every `pathname` change so secondary pages always open at the top.
+A `<ScrollToTop>` component handles scroll on every `pathname` change: scrolls to the hash target when the URL contains one (e.g. navigating from `/about` to `/#features`), otherwise resets to the top of the page.
 
 ### Code splitting
 
