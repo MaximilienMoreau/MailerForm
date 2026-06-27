@@ -5,10 +5,10 @@ type NavItem = { label: string; href: string; external?: boolean }
 
 const nav: Record<string, NavItem[]> = {
   Product: [
-    { label: 'Features',          href: '#features' },
-    { label: 'Deliverability',    href: '#deliverability' },
-    { label: 'Stream Separation', href: '#streams' },
-    { label: 'CRM & Automation',  href: '#features' },
+    { label: 'Features',          href: '/#features' },
+    { label: 'Deliverability',    href: '/#deliverability' },
+    { label: 'Stream Separation', href: '/#streams' },
+    { label: 'CRM & Automation',  href: '/#features' },
     { label: 'Changelog',         href: '/changelog' },
   ],
   Developers: [
