@@ -209,7 +209,7 @@ export default function CtaSection() {
         >
           {[
             'GDPR & CAN-SPAM compliant',
-            'SOC 2 Type II certified',
+            'SOC 2 Type I certified',
             '99.9%+ API uptime SLA',
           ].map(item => (
             <span key={item} className="flex items-center gap-1.5 text-xs text-gray-500">

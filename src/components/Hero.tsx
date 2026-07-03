@@ -9,7 +9,7 @@ const EASE_OUT_QUART = (t: number) => 1 - Math.pow(1 - t, 4)
 
 const trust = [
   'GDPR & CAN-SPAM compliant',
-  'SOC 2 Type II',
+  'SOC 2 Type I certified',
   'Free 10k emails/mo',
 ] as const
 

@@ -28,7 +28,7 @@ const releases: Release[] = [
     version: '1.4.0',
     date: 'June 30, 2026',
     isoDate: '2026-06-30',
-    badge: 'Major',
+    badge: 'Minor',
     summary: 'Stream-level analytics dashboard and dedicated IP warm-up tooling.',
     changes: [
       { type: 'new',      text: 'Per-stream analytics dashboard with hourly, daily, and 30-day views' },
