@@ -82,7 +82,7 @@ export const features: Feature[] = [
     tagColor: 'bg-rose-500/10 text-rose-400 border-rose-500/20',
     title: 'Security & Compliance',
     description:
-      'SOC 2 Type II certified, GDPR and CAN-SPAM compliant out of the box. Automatic unsubscribe handling, suppression lists, and data residency options for EU customers.',
-    items: ['SOC 2 Type II', 'Automatic unsubscribes', 'Suppression lists', 'EU data residency'],
+      'SOC 2 Type I certified (Type II audit underway), GDPR and CAN-SPAM compliant out of the box. Automatic unsubscribe handling, suppression lists, and data residency options for EU customers.',
+    items: ['SOC 2 Type I', 'Automatic unsubscribes', 'Suppression lists', 'EU data residency'],
   },
 ]

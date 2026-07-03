@@ -51,7 +51,7 @@ const timeline = [
   {
     year: 'Sep',
     title: 'General availability (planned)',
-    body: 'Automation workflows, GDPR bulk-export, white-label mode, and per-stream analytics ship through the summer. MailerForm is on track for general availability in September 2026, still a small, focused team, fully bootstrapped, obsessed with making email infrastructure something developers actually enjoy working with.',
+    body: 'Automation workflows, GDPR bulk-export, white-label mode, and per-stream analytics ship over the following months. MailerForm is on track for general availability in September 2026, still a small, focused team, fully bootstrapped, obsessed with making email infrastructure something developers actually enjoy working with.',
   },
 ]
 

@@ -7,8 +7,8 @@ const highlights = [
     icon: ShieldCheck,
     color: 'text-emerald-400',
     bg: 'bg-emerald-500/10 border-emerald-500/20',
-    title: 'SOC 2 Type II certified',
-    body: 'Annual third-party audit covering security, availability, and confidentiality.',
+    title: 'SOC 2 Type I certified',
+    body: 'Point-in-time audit of our security controls, with a Type II audit underway.',
   },
   {
     icon: Server,
@@ -38,7 +38,7 @@ export default function GdprPage() {
     <LegalLayout
       title="GDPR Compliance"
       subtitle="How MailerForm meets its obligations under the General Data Protection Regulation."
-      lastUpdated="June 1, 2025"
+      lastUpdated="March 28, 2026"
     >
       {/* Highlight cards */}
       <div className="grid sm:grid-cols-2 gap-4 mb-10">
@@ -201,8 +201,8 @@ export default function GdprPage() {
         <li>TLS 1.3 encryption for all data in transit</li>
         <li>AES-256 encryption for data at rest</li>
         <li>Role-based access control and principle of least privilege</li>
-        <li>Annual penetration tests by a third-party security firm</li>
-        <li>SOC 2 Type II audit covering security, availability, and confidentiality</li>
+        <li>Third-party penetration testing, with the first assessment completed before general availability</li>
+        <li>SOC 2 Type I audit covering security, availability, and confidentiality, with Type II underway</li>
         <li>Intrusion detection, log monitoring, and security incident response procedures</li>
       </ul>
 

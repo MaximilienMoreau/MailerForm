@@ -77,7 +77,7 @@ export default function CookiesPage() {
     <LegalLayout
       title="Cookie Policy"
       subtitle="What cookies MailerForm uses and why kept short and honest."
-      lastUpdated="June 30, 2026"
+      lastUpdated="March 28, 2026"
     >
       <div className="section-box">
         <p>

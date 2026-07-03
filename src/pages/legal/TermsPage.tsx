@@ -5,7 +5,7 @@ export default function TermsPage() {
     <LegalLayout
       title="Terms of Service"
       subtitle="The rules that govern your use of the MailerForm platform."
-      lastUpdated="June 1, 2025"
+      lastUpdated="March 28, 2026"
     >
       <div className="section-box">
         <p>
@@ -80,9 +80,10 @@ export default function TermsPage() {
 
       <h3>4.4 Taxes</h3>
       <p>
-        Prices are exclusive of taxes. Where applicable (e.g., EU VAT), taxes will be added to
-        your invoice. You are responsible for providing accurate billing information, including a
-        valid VAT number where applicable.
+        Prices are exclusive of taxes. As a French company, MailerForm applies VAT by default to
+        customers in France and the EU, and other local taxes where required elsewhere. You are
+        responsible for providing accurate billing information, including a valid VAT number for
+        reverse-charge purposes where applicable.
       </p>
 
       <h2>5. Free Plan</h2>
