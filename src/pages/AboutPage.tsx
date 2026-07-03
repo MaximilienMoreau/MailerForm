@@ -34,24 +34,24 @@ const values = [
 
 const timeline = [
   {
-    year: '2022',
+    year: 'Jan',
     title: 'The frustration',
-    body: 'Our founding team was running a SaaS that relied on transactional email. A marketing campaign tanked our OTP delivery overnight. We looked for a tool that could have caught it and found nothing that combined analysis, separation, and sending in one place.',
+    body: 'In January 2026, MailerForm’s future founders were consulting for a SaaS team when a marketing campaign tanked the client’s OTP delivery overnight. They looked for a tool that could have caught it and found nothing that combined analysis, separation, and sending in one place.',
   },
   {
-    year: '2023',
-    title: 'First version',
-    body: 'We built MailerForm internally to scratch our own itch. The pre-send analysis engine went live in January, stream separation in March. By June we were sending 50M emails per month for our own products.',
+    year: 'Feb',
+    title: 'MailerForm is founded',
+    body: 'MailerForm is incorporated in Paris. The pre-send analysis engine and stream separation are built in a matter of weeks, drawing directly on lessons from that first incident.',
   },
   {
-    year: '2024',
-    title: 'Opening up',
-    body: 'We opened a private beta to 50 teams. The feedback was clear: the deliverability intelligence was unlike anything they\'d seen. We rewrote the CRM layer and launched the Growth plan in Q3.',
+    year: 'Mar',
+    title: 'Private beta, then open beta',
+    body: 'Private beta ships March 5 with transactional stream and deliverability analysis. Three weeks later, Growth and Scale plans and a full CRM open the beta to everyone.',
   },
   {
-    year: '2025',
-    title: 'Public launch',
-    body: 'MailerForm is now available to everyone. We\'re a small, focused team, still fully bootstrapped, obsessed with making email infrastructure something developers actually enjoy working with.',
+    year: 'Sep',
+    title: 'General availability (planned)',
+    body: 'Automation workflows, GDPR bulk-export, white-label mode, and per-stream analytics ship through the summer. MailerForm is on track for general availability in September 2026, still a small, focused team, fully bootstrapped, obsessed with making email infrastructure something developers actually enjoy working with.',
   },
 ]
 

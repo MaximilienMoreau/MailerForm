@@ -111,7 +111,7 @@ export default function Footer() {
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-white/[0.06]">
           <p className="text-xs text-gray-600">
-            © {new Date().getFullYear()} MailerForm, Inc. All rights reserved.
+            © {new Date().getFullYear()} MailerForm SAS. All rights reserved.
           </p>
           <div className="flex items-center gap-5">
             <Link to="/privacy" className="text-xs text-gray-600 hover:text-gray-400 transition-colors focus-ring rounded">

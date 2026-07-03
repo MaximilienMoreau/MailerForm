@@ -225,18 +225,18 @@ export default function GdprPage() {
       <h2>10. Supervisory Authority</h2>
       <p>
         If you believe we have not handled your data correctly, you have the right to lodge a
-        complaint with your national data protection authority. In Ireland (our EU representative
-        jurisdiction), this is the{' '}
-        <a href="https://www.dataprotection.ie" target="_blank" rel="noreferrer">
-          Data Protection Commission (DPC)
+        complaint with your national data protection authority. As MailerForm is established in
+        France, our lead supervisory authority is the{' '}
+        <a href="https://www.cnil.fr" target="_blank" rel="noreferrer">
+          Commission Nationale de l&apos;Informatique et des Libert&eacute;s (CNIL)
         </a>.
       </p>
 
       <h2>11. Contact & DPO</h2>
       <p>
         For GDPR-related enquiries, please contact our Privacy team at{' '}
-        <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a>. For EU representative
-        or DPO enquiries, use the same address with subject line &ldquo;GDPR: DPO Enquiry&rdquo;.
+        <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a>. For DPO enquiries, use
+        the same address with subject line &ldquo;GDPR: DPO Enquiry&rdquo;.
       </p>
     </LegalLayout>
   )

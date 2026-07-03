@@ -97,7 +97,7 @@ const releases: Release[] = [
     date: 'March 28, 2026',
     isoDate: '2026-03-28',
     badge: 'Minor',
-    summary: 'Public launch: Growth and Scale plans, full CRM.',
+    summary: 'Open beta expands: Growth and Scale plans, full CRM.',
     changes: [
       { type: 'new',      text: 'Growth plan: 200k emails/month, 5 domains, CRM up to 25k contacts' },
       { type: 'new',      text: 'Scale plan: 2M emails/month, unlimited domains, dedicated IPs, SLA' },
