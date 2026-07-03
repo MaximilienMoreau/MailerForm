@@ -10,7 +10,7 @@ export default function PrivacyPage() {
     >
       <div className="section-box">
         <p>
-          MailerForm, Inc. (&ldquo;MailerForm&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) operates the website{' '}
+          MailerForm SAS (&ldquo;MailerForm&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) operates the website{' '}
           <a href="https://mailerform.io">mailerform.io</a> and the email infrastructure platform
           accessible at <a href="https://app.mailerform.io">app.mailerform.io</a>. This Privacy Policy
           explains what personal data we collect, why we collect it, how we use it, and your rights
@@ -173,7 +173,7 @@ export default function PrivacyPage() {
       </p>
       <ul>
         <li>Email: <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a></li>
-        <li>Postal: MailerForm, Inc., 340 Pine Street, Suite 800, San Francisco, CA 94104, USA</li>
+        <li>Postal: MailerForm SAS, 48 rue de la Victoire, 75009 Paris, France</li>
       </ul>
     </LegalLayout>
   )

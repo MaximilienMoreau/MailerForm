@@ -24,9 +24,11 @@ const CtaSection          = lazy(() => import('@/components/CtaSection'))
 const Footer              = lazy(() => import('@/components/Footer'))
 
 // Secondary pages
-const ComingSoon    = lazy(() => import('@/pages/ComingSoon'))
 const AboutPage     = lazy(() => import('@/pages/AboutPage'))
 const ChangelogPage = lazy(() => import('@/pages/ChangelogPage'))
+const BlogPage      = lazy(() => import('@/pages/BlogPage'))
+const CareersPage   = lazy(() => import('@/pages/CareersPage'))
+const PressPage     = lazy(() => import('@/pages/PressPage'))
 const PrivacyPage   = lazy(() => import('@/pages/legal/PrivacyPage'))
 const TermsPage     = lazy(() => import('@/pages/legal/TermsPage'))
 const CookiesPage   = lazy(() => import('@/pages/legal/CookiesPage'))
@@ -84,9 +86,9 @@ export default function App() {
             <Route path="/terms"     element={<Suspense fallback={null}><TermsPage /></Suspense>} />
             <Route path="/cookies"   element={<Suspense fallback={null}><CookiesPage /></Suspense>} />
             <Route path="/gdpr"      element={<Suspense fallback={null}><GdprPage /></Suspense>} />
-            <Route path="/blog"      element={<Suspense fallback={null}><ComingSoon /></Suspense>} />
-            <Route path="/careers"   element={<Suspense fallback={null}><ComingSoon /></Suspense>} />
-            <Route path="/press"     element={<Suspense fallback={null}><ComingSoon /></Suspense>} />
+            <Route path="/blog"      element={<Suspense fallback={null}><BlogPage /></Suspense>} />
+            <Route path="/careers"   element={<Suspense fallback={null}><CareersPage /></Suspense>} />
+            <Route path="/press"     element={<Suspense fallback={null}><PressPage /></Suspense>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <CookieBanner />

@@ -10,7 +10,7 @@ export default function TermsPage() {
       <div className="section-box">
         <p>
           These Terms of Service (&ldquo;Terms&rdquo;) form a legally binding agreement between you (or the
-          entity you represent) and <strong>MailerForm, Inc.</strong> (&ldquo;MailerForm&rdquo;). By creating an
+          entity you represent) and <strong>MailerForm SAS</strong> (&ldquo;MailerForm&rdquo;). By creating an
           account or using the platform you agree to these Terms. If you are accepting on behalf
           of a company, you represent that you have the authority to bind that company.
         </p>
@@ -165,10 +165,10 @@ export default function TermsPage() {
 
       <h2>14. Governing Law & Disputes</h2>
       <p>
-        These Terms are governed by the laws of the State of California, USA, without regard to
-        conflict of law provisions. Any dispute shall be resolved by binding arbitration in San
-        Francisco, California under the AAA Commercial Arbitration Rules, except that either party
-        may seek injunctive relief in any court of competent jurisdiction.
+        These Terms are governed by French law, without regard to conflict of law provisions. Any
+        dispute shall be submitted to the exclusive jurisdiction of the Paris Commercial Court
+        (Tribunal de commerce de Paris), except that either party may seek injunctive relief in any
+        court of competent jurisdiction.
       </p>
 
       <h2>15. Changes to These Terms</h2>
