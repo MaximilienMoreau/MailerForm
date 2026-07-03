@@ -111,8 +111,10 @@ src/
 │   │   └── GdprPage.tsx
 │   ├── AboutPage.tsx             # Company story, values, timeline
 │   ├── ChangelogPage.tsx         # Versioned release history
-│   ├── NotFound.tsx              # 404 catch-all
-│   └── ComingSoon.tsx            # Placeholder for /blog, /careers, /press
+│   ├── BlogPage.tsx              # Deliverability & engineering blog posts
+│   ├── CareersPage.tsx           # Open positions, benefits, how-we-work
+│   ├── PressPage.tsx             # Company facts, brand assets, media contact
+│   └── NotFound.tsx              # 404 catch-all
 │
 ├── test/
 │   └── setup.ts                  # Testing Library setup (@testing-library/jest-dom)
@@ -168,8 +170,10 @@ React Router v7. All routes are declared in [`App.tsx`](src/App.tsx):
 | `/` | `LandingPage` | Full single-page landing |
 | `/about` | `AboutPage` | Company story & values |
 | `/changelog` | `ChangelogPage` | Versioned release history |
+| `/blog` | `BlogPage` | Deliverability & engineering blog posts |
+| `/careers` | `CareersPage` | Open positions, benefits, how-we-work |
+| `/press` | `PressPage` | Company facts, brand assets, media contact |
 | `/privacy` · `/terms` · `/cookies` · `/gdpr` | Legal pages | Shared `LegalLayout` |
-| `/blog` · `/careers` · `/press` | `ComingSoon` | Placeholder |
 | `*` | `NotFound` | 404 catch-all |
 
 A `<ScrollToTop>` component handles scroll on every `pathname` change: scrolls to the hash target when the URL contains one (e.g. navigating from `/about` to `/#features`), otherwise resets to the top of the page.
@@ -181,21 +185,23 @@ Sections below the fold and all secondary pages are lazy-loaded via `React.lazy`
 **Latest production build:**
 
 ```
-index.js                   354 kB │ gzip: 111 kB   ← critical path
-GdprPage.js                 12 kB │ gzip:   4 kB
-ChangelogPage.js            10 kB │ gzip:   4 kB
-AboutPage.js                 9 kB │ gzip:   3 kB
-TermsPage.js                 9 kB │ gzip:   3 kB
-PrivacyPage.js               8 kB │ gzip:   3 kB
-CookiesPage.js               6 kB │ gzip:   2 kB
-PricingSection.js            6 kB │ gzip:   2 kB
-ComparisonSection.js         6 kB │ gzip:   2 kB
-CtaSection.js                6 kB │ gzip:   2 kB
-IntegrationsSection.js       5 kB │ gzip:   2 kB
-Footer.js                    5 kB │ gzip:   2 kB
-FaqSection.js                4 kB │ gzip:   2 kB
-TestimonialsSection.js       4 kB │ gzip:   2 kB
-ComingSoon.js                2 kB │ gzip:   1 kB
+index.js                   358 kB │ gzip: 112 kB   ← critical path
+GdprPage.js                  12 kB │ gzip:   4 kB
+ChangelogPage.js             10 kB │ gzip:   4 kB
+AboutPage.js                  9 kB │ gzip:   3 kB
+CareersPage.js                9 kB │ gzip:   3 kB
+TermsPage.js                  9 kB │ gzip:   3 kB
+CookiesPage.js                8 kB │ gzip:   3 kB
+PrivacyPage.js                8 kB │ gzip:   3 kB
+BlogPage.js                   7 kB │ gzip:   3 kB
+PressPage.js                  7 kB │ gzip:   2 kB
+PricingSection.js             6 kB │ gzip:   2 kB
+ComparisonSection.js          6 kB │ gzip:   2 kB
+CtaSection.js                 6 kB │ gzip:   2 kB
+IntegrationsSection.js        5 kB │ gzip:   2 kB
+Footer.js                     5 kB │ gzip:   2 kB
+FaqSection.js                 4 kB │ gzip:   2 kB
+TestimonialsSection.js        4 kB │ gzip:   2 kB
 ```
 
 ### SEO & meta tags
