@@ -31,7 +31,7 @@ const faqs: FaqItem[] = [
   },
   {
     question: 'Where is my data stored? Do you offer EU residency?',
-    answer:   'By default, data is stored in US-East (AWS). EU data residency is available on the Scale plan and above. Your email data, contact records, and logs never leave the EU region. We are GDPR-compliant and SOC 2 Type I certified, with our Type II audit underway.',
+    answer:   'By default, data is stored in US-East (AWS). EU data residency is available on the Scale plan and above; on that plan, your email data, contact records, and logs never leave the EU region. We are GDPR-compliant and SOC 2 Type I certified, with our Type II audit underway.',
   },
 ]
 

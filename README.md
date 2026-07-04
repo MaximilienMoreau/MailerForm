@@ -8,6 +8,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-06b6d4?logo=tailwindcss&logoColor=white&labelColor=20232a)
 ![Tests](https://img.shields.io/badge/tests-49%20passing-22c55e?labelColor=20232a)
 ![License](https://img.shields.io/badge/license-private-6b7280?labelColor=20232a)
+[![CI](https://github.com/MaximilienMoreau/MailerForm/actions/workflows/ci.yml/badge.svg)](https://github.com/MaximilienMoreau/MailerForm/actions/workflows/ci.yml)
 
 </div>
 
@@ -26,10 +27,13 @@ Marketing and documentation landing page for **[MailerForm](https://mailerform.i
 - [Design tokens](#design-tokens)
 - [Testing](#testing)
 - [CI](#ci)
+- [Deployment](#deployment)
 
 ---
 
 ## Quick start
+
+Requires **Node 20+** (matches the version used in CI).
 
 ```bash
 npm install
@@ -295,3 +299,22 @@ GitHub Actions runs on every push to `main` and on all pull requests:
 3. vitest run                tests
 4. vite build                production build
 ```
+
+---
+
+## Deployment
+
+The app is a static SPA (client-side routing via React Router) deployed to **Vercel**.
+
+| Setting | Value |
+|---|---|
+| Framework preset | Vite |
+| Build command | `npm run build` |
+| Output directory | `dist` |
+| Install command | `npm install` |
+
+[`vercel.json`](vercel.json) adds a rewrite so that deep links (e.g. `/about`, `/blog`) and page
+refreshes resolve to `index.html` instead of 404ing, letting React Router take over client-side.
+
+Set `VITE_FORMSPREE_ID` as an environment variable in the Vercel project settings (Production and
+Preview); see [Environment variables](#environment-variables) above.
