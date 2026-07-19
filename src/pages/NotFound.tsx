@@ -6,7 +6,7 @@ export default function NotFound() {
   useMeta({ title: 'Page Not Found' })
 
   return (
-    <div className="min-h-screen bg-gray-950 flex flex-col items-center justify-center px-4 text-center">
+    <div className="relative min-h-screen bg-gray-950 flex flex-col items-center justify-center px-4 text-center">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_40%,rgba(51,102,255,0.08),transparent)]" aria-hidden />
 
       <div className="relative">

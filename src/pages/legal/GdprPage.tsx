@@ -183,13 +183,13 @@ export default function GdprPage() {
         respond within 30 days (extendable by 60 days for complex requests).
       </p>
       <ul>
-        <li><strong>Right of access (Art. 15)</strong>:obtain a copy of your personal data and information about how it&apos;s processed</li>
-        <li><strong>Right to rectification (Art. 16)</strong>:correct inaccurate or incomplete data</li>
-        <li><strong>Right to erasure (Art. 17)</strong>:request deletion where data is no longer necessary or consent is withdrawn</li>
-        <li><strong>Right to restriction (Art. 18)</strong>:limit processing while a dispute is pending</li>
-        <li><strong>Right to data portability (Art. 20)</strong>:receive your data in a structured, machine-readable format (JSON / CSV)</li>
-        <li><strong>Right to object (Art. 21)</strong>:object to processing based on legitimate interests, including profiling</li>
-        <li><strong>Rights related to automated decisions (Art. 22)</strong>:we do not make fully automated decisions with significant effects on individuals</li>
+        <li><strong>Right of access (Art. 15)</strong>: obtain a copy of your personal data and information about how it&apos;s processed</li>
+        <li><strong>Right to rectification (Art. 16)</strong>: correct inaccurate or incomplete data</li>
+        <li><strong>Right to erasure (Art. 17)</strong>: request deletion where data is no longer necessary or consent is withdrawn</li>
+        <li><strong>Right to restriction (Art. 18)</strong>: limit processing while a dispute is pending</li>
+        <li><strong>Right to data portability (Art. 20)</strong>: receive your data in a structured, machine-readable format (JSON / CSV)</li>
+        <li><strong>Right to object (Art. 21)</strong>: object to processing based on legitimate interests, including profiling</li>
+        <li><strong>Rights related to automated decisions (Art. 22)</strong>: we do not make fully automated decisions with significant effects on individuals</li>
       </ul>
 
       <h2>7. Security Measures</h2>
