@@ -55,20 +55,18 @@ interface CookieRow {
   name: string
   purpose: string
   duration: string
-  type: 'Essential' | 'Analytics' | 'Preference'
+  type: 'Essential' | 'Preference'
+  scope: string
 }
 
 const cookies: CookieRow[] = [
-  { name: 'mf_session',    purpose: 'Authenticates your dashboard session',         duration: '7 days',   type: 'Essential'  },
-  { name: 'mf_csrf',       purpose: 'Prevents cross-site request forgery attacks',  duration: 'Session',  type: 'Essential'  },
-  { name: 'mailerform_cookie_consent', purpose: 'Remembers your cookie banner preference', duration: '1 year',   type: 'Preference' },
-  { name: 'mf_billing',    purpose: 'Keeps billing country / VAT preference',       duration: '90 days',  type: 'Preference' },
-  { name: '_plausible',    purpose: 'Privacy-first page-view analytics (no PII)',   duration: 'Session',  type: 'Analytics'  },
+  { name: 'mf_session', purpose: 'Authenticates your dashboard session',        duration: '7 days',  type: 'Essential',  scope: 'app.mailerform.io' },
+  { name: 'mf_csrf',    purpose: 'Prevents cross-site request forgery attacks', duration: 'Session', type: 'Essential',  scope: 'app.mailerform.io' },
+  { name: 'mf_billing', purpose: 'Keeps billing country / VAT preference',     duration: '90 days', type: 'Preference', scope: 'app.mailerform.io' },
 ]
 
 const typeColors: Record<CookieRow['type'], string> = {
   Essential:  'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
-  Analytics:  'text-sky-400 bg-sky-500/10 border-sky-500/20',
   Preference: 'text-amber-400 bg-amber-500/10 border-amber-500/20',
 }
 
@@ -83,7 +81,8 @@ export default function CookiesPage() {
         <p>
           We keep our cookie footprint as small as possible. MailerForm uses{' '}
           <strong>no third-party advertising cookies</strong> and <strong>no cross-site tracking</strong>.
-          This page explains every cookie we set, why we set it, and how you can control it.
+          This page explains every cookie set across mailerform.io and the dashboard, why it&apos;s set,
+          and how you can control it.
         </p>
       </div>
 
@@ -100,19 +99,28 @@ export default function CookiesPage() {
 
       <h2>2. Cookies We Use</h2>
       <p>
-        The table below lists every cookie placed by MailerForm. We do not use any cookies from
-        advertising networks, social media platforms, or data brokers.
+        The marketing site at <strong>mailerform.io</strong> (the one you&apos;re on now) does not set
+        any HTTP cookies at all. The only preference it remembers, your cookie banner choice, is
+        stored in your browser&apos;s <strong>local storage</strong> under the key{' '}
+        <code className="text-xs font-mono text-gray-300 bg-white/5 px-1.5 py-0.5 rounded">mailerform_cookie_consent</code>,
+        not as a cookie, and it never leaves your device.
+      </p>
+      <p>
+        The table below lists the cookies set once you sign in and use the dashboard at{' '}
+        <strong>app.mailerform.io</strong>. We do not use any cookies from advertising networks,
+        social media platforms, or data brokers, on either domain.
       </p>
 
       {/* Cookie table */}
       <div className="overflow-x-auto rounded-xl border border-white/[0.07] mb-6">
-        <table className="w-full min-w-[540px] text-sm" aria-label="List of cookies used by MailerForm">
+        <table className="w-full min-w-[600px] text-sm" aria-label="List of cookies used by MailerForm">
           <thead>
             <tr className="border-b border-white/[0.07]">
               <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Name</th>
               <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Purpose</th>
               <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Duration</th>
               <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Type</th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Set on</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-white/[0.05]">
@@ -126,6 +134,7 @@ export default function CookiesPage() {
                     {c.type}
                   </span>
                 </td>
+                <td className="px-4 py-3 text-gray-500 font-mono text-xs">{c.scope}</td>
               </tr>
             ))}
           </tbody>
@@ -142,16 +151,15 @@ export default function CookiesPage() {
 
       <h3>Preference cookies</h3>
       <p>
-        Remember your choices (cookie banner decision, billing region) so you don&apos;t have to repeat
-        them on every visit. These are optional and can be cleared via your browser.
+        Remember your choices (billing region, etc.) so you don&apos;t have to repeat them on every
+        visit. These are optional and can be cleared via your browser.
       </p>
 
-      <h3>Analytics cookies</h3>
+      <h3>Analytics</h3>
       <p>
-        We use <a href="https://plausible.io" target="_blank" rel="noreferrer">Plausible Analytics</a>,
-        a privacy-first, GDPR-compliant tool that collects no personal data and stores no cross-site
-        identifiers. The session cookie it sets is anonymous and cannot track you across websites.
-        We do not use Google Analytics.
+        We do not currently run any analytics or tracking script on this marketing site. If that
+        changes, this page will be updated before the change takes effect, and, where required,
+        a fresh cookie consent banner will be shown.
       </p>
 
       <h2>4. Managing Cookies</h2>
@@ -174,24 +182,17 @@ export default function CookiesPage() {
           delete cookies. Note that blocking essential cookies will prevent you from logging in.
           See your browser&apos;s documentation for instructions.
         </li>
-        <li>
-          <strong>Opt-out of analytics</strong>: Plausible respects the{' '}
-          <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/DNT" target="_blank" rel="noreferrer">
-            Do Not Track
-          </a>{' '}
-          header. You can also install the{' '}
-          <a href="https://plausible.io/docs/excluding" target="_blank" rel="noreferrer">
-            Plausible exclusion script
-          </a>{' '}
-          in your browser.
-        </li>
       </ul>
 
       <h2>5. Third-Party Embeds</h2>
       <p>
         Our marketing website does not embed any third-party scripts (no YouTube, no social widgets,
-        no Intercom, no Hotjar). The only external script loaded is the Plausible analytics snippet,
-        served from <code className="text-xs font-mono text-gray-300 bg-white/5 px-1.5 py-0.5 rounded">plausible.io</code>.
+        no Intercom, no Hotjar, no analytics). The only third-party request it makes is for web
+        fonts, served from{' '}
+        <code className="text-xs font-mono text-gray-300 bg-white/5 px-1.5 py-0.5 rounded">fonts.googleapis.com</code>{' '}
+        and{' '}
+        <code className="text-xs font-mono text-gray-300 bg-white/5 px-1.5 py-0.5 rounded">fonts.gstatic.com</code>,
+        which does not set any cookie.
       </p>
 
       <h2>6. Changes to This Policy</h2>

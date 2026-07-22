@@ -132,7 +132,7 @@ export default function CtaSection() {
                       <CheckCircle2 size={22} className="text-emerald-400" />
                     </div>
                     <p className="text-white font-semibold text-lg">You&apos;re on the list!</p>
-                    <p className="text-sm text-gray-400">Check your inbox for your free account details.</p>
+                    <p className="text-sm text-gray-400">We&apos;ll reach out at that address to get you set up.</p>
                   </motion.div>
                 ) : (
                   <motion.form

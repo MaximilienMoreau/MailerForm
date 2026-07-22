@@ -84,7 +84,6 @@ src/
 │   ├── ApiSection.tsx            # Syntax-highlighted code block + copy button
 │   ├── IntegrationsSection.tsx   # SDK & no-code integration grid
 │   ├── ComparisonSection.tsx     # Feature matrix vs SendGrid / Mailgun / Resend
-│   ├── TestimonialsSection.tsx   # Customer quotes + logo strip
 │   ├── PricingSection.tsx        # 3-tier pricing with monthly / yearly toggle
 │   ├── FaqSection.tsx            # Accessible accordion (aria-controls + AnimatePresence)
 │   ├── CtaSection.tsx            # Email sign-up form → Formspree (+ honeypot)
@@ -101,7 +100,7 @@ src/
 │   └── stats.ts                  # Shared platform statistics (hero + about page)
 │
 ├── hooks/
-│   └── useMeta.ts                # Updates title + OG/Twitter meta tags per page
+│   └── useMeta.ts                # Updates title, canonical link, and OG/Twitter meta tags per page
 │
 ├── lib/
 │   ├── motion.ts                 # Shared Framer Motion constants (EASE, VP*, stagger, fadeUp)
@@ -205,12 +204,11 @@ CtaSection.js                 6 kB │ gzip:   2 kB
 IntegrationsSection.js        5 kB │ gzip:   2 kB
 Footer.js                     5 kB │ gzip:   2 kB
 FaqSection.js                 4 kB │ gzip:   2 kB
-TestimonialsSection.js        4 kB │ gzip:   2 kB
 ```
 
 ### SEO & meta tags
 
-`index.html` carries the static Open Graph, Twitter Card, and canonical URL for the landing page. Secondary pages (About, Changelog, legal) call the `useMeta` hook to update `document.title`, `<meta name="description">`, and the OG/Twitter tags dynamically. All values are restored on unmount.
+`index.html` carries the static Open Graph, Twitter Card, and canonical URL for the landing page. Secondary pages (About, Changelog, legal) call the `useMeta` hook to update `document.title`, `<meta name="description">`, the OG/Twitter tags, the canonical `<link>`, and `og:url` (derived from the current path) dynamically. All values are restored on unmount.
 
 > **Note:** `og:image` is currently an SVG (`public/og-image.svg`). For full social-preview support on Twitter, LinkedIn, and Slack, replace it with a PNG (1200 × 630 px).
 
