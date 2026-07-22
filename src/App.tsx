@@ -17,7 +17,6 @@ import NotFound from '@/pages/NotFound'
 // Sections below the fold, lazy loaded after the critical path renders
 const IntegrationsSection = lazy(() => import('@/components/IntegrationsSection'))
 const ComparisonSection   = lazy(() => import('@/components/ComparisonSection'))
-const TestimonialsSection = lazy(() => import('@/components/TestimonialsSection'))
 const PricingSection      = lazy(() => import('@/components/PricingSection'))
 const FaqSection          = lazy(() => import('@/components/FaqSection'))
 const CtaSection          = lazy(() => import('@/components/CtaSection'))
@@ -50,9 +49,6 @@ function LandingPage() {
         </Suspense>
         <Suspense fallback={<div className="py-16" />}>
           <ComparisonSection />
-        </Suspense>
-        <Suspense fallback={<div className="py-16" />}>
-          <TestimonialsSection />
         </Suspense>
         <Suspense fallback={<div className="py-16" />}>
           <PricingSection />

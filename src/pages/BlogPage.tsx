@@ -94,8 +94,8 @@ const posts: Post[] = [
   },
   {
     category:      'Case study',
-    title:         'From 94% to 99.1% inbox rate: a Payhawk case study',
-    excerpt:       'How Payhawk’s engineering team migrated off SendGrid and used pre-send analysis to catch deliverability issues before every campaign, not after.',
+    title:         'From 94% to 99.1% inbox rate: a fintech SaaS case study',
+    excerpt:       'How one fintech engineering team migrated off SendGrid and used pre-send analysis to catch deliverability issues before every campaign, not after.',
     date:          'April 24, 2026',
     isoDate:       '2026-04-24',
     readTime:      '6 min read',

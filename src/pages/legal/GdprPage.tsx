@@ -159,7 +159,7 @@ export default function GdprPage() {
               { name: 'Amazon Web Services', purpose: 'Cloud infrastructure & hosting', location: 'USA / EU (opt-in)' },
               { name: 'Cloudflare',          purpose: 'DDoS protection, CDN',           location: 'Global' },
               { name: 'Stripe',              purpose: 'Payment processing',              location: 'USA / EU' },
-              { name: 'Plausible Analytics', purpose: 'Privacy-first website analytics', location: 'EU (Germany)' },
+              { name: 'Google Fonts',        purpose: 'Web font delivery',               location: 'Global' },
               { name: 'Postmark (Wildbit)',  purpose: 'Transactional system emails',     location: 'USA' },
             ].map(r => (
               <tr key={r.name} className="hover:bg-white/[0.02] transition-colors">
