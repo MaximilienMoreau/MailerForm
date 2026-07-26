@@ -136,7 +136,7 @@ export default function FeaturesSection() {
                   onClick={() => goTo(i)}
                   className={`h-1.5 rounded-full transition-all duration-300 focus-ring ${
                     i === index
-                      ? `w-6 ${feature.bg.replace('/10', '')} opacity-80`
+                      ? `w-6 ${feature.dot} opacity-80`
                       : 'w-1.5 bg-white/20 hover:bg-white/40'
                   }`}
                 />

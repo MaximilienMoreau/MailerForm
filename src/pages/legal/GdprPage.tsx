@@ -160,7 +160,6 @@ export default function GdprPage() {
               { name: 'Cloudflare',          purpose: 'DDoS protection, CDN',           location: 'Global' },
               { name: 'Stripe',              purpose: 'Payment processing',              location: 'USA / EU' },
               { name: 'Google Fonts',        purpose: 'Web font delivery',               location: 'Global' },
-              { name: 'Postmark (Wildbit)',  purpose: 'Transactional system emails',     location: 'USA' },
             ].map(r => (
               <tr key={r.name} className="hover:bg-white/[0.02] transition-colors">
                 <td className="px-4 py-3 text-gray-300 font-medium">{r.name}</td>

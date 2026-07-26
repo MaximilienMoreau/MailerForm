@@ -104,7 +104,8 @@ src/
 │
 ├── lib/
 │   ├── motion.ts                 # Shared Framer Motion constants (EASE, VP*, stagger, fadeUp)
-│   └── tokenize.tsx              # Lightweight syntax highlighter (zero external dependency)
+│   ├── tokenize.tsx              # Lightweight syntax highlighter (zero external dependency)
+│   └── consent.ts                # Cookie consent key & type shared by CookieBanner and CookiesPage
 │
 ├── pages/
 │   ├── legal/

@@ -14,7 +14,7 @@ function isValidEmail(value: string): boolean {
 }
 
 export default function CtaSection() {
-  const FORM_ID = import.meta.env.VITE_FORMSPREE_ID as string | undefined
+  const FORM_ID = import.meta.env.VITE_FORMSPREE_ID
   const inputRef = useRef<HTMLInputElement>(null)
   const [email, setEmail]       = useState('')
   const [honeypot, setHoneypot] = useState('')
