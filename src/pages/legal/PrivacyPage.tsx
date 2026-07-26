@@ -87,8 +87,8 @@ export default function PrivacyPage() {
       <ul>
         <li>
           <strong>Sub-processors</strong>: infrastructure providers (AWS, Cloudflare), payment
-          processor (Stripe), font delivery (Google Fonts), and customer support tools. A full
-          list of sub-processors is available on request.
+          processor (Stripe), and font delivery (Google Fonts). See our{' '}
+          <Link to="/gdpr">GDPR page</Link> for the full sub-processor list.
         </li>
         <li>
           <strong>Legal authorities</strong>: when required by law, court order, or to protect
