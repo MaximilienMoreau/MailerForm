@@ -3,13 +3,10 @@ import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Cookie, X } from 'lucide-react'
 import { EASE } from '@/lib/motion'
-import { COOKIE_CONSENT_KEY, type Consent } from '@/lib/consent'
+import { useConsent } from '@/lib/consent'
 
 export default function CookieBanner() {
-  // Read localStorage once on mount, avoids calling setState synchronously in an effect
-  const [consent, setConsent] = useState<Consent | null>(
-    () => localStorage.getItem(COOKIE_CONSENT_KEY) as Consent | null
-  )
+  const [consent, setConsent] = useConsent()
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
@@ -20,13 +17,11 @@ export default function CookieBanner() {
   }, [consent])
 
   function handleAccept() {
-    localStorage.setItem(COOKIE_CONSENT_KEY, 'accepted')
     setConsent('accepted')
     setVisible(false)
   }
 
   function handleDecline() {
-    localStorage.setItem(COOKIE_CONSENT_KEY, 'declined')
     setConsent('declined')
     setVisible(false)
   }
@@ -61,7 +56,10 @@ export default function CookieBanner() {
 
             <p className="text-xs text-gray-400 leading-relaxed mb-4">
               We use essential cookies for site functionality. We do not sell your data.{' '}
-              <Link to="/cookies" className="text-brand-400 hover:text-brand-300 transition-colors underline-offset-2 hover:underline">
+              <Link
+                to="/cookies"
+                className="text-brand-400 hover:text-brand-300 transition-colors underline-offset-2 hover:underline"
+              >
                 Cookie policy
               </Link>
             </p>

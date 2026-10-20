@@ -1,4 +1,3 @@
-import { lazy, Suspense } from 'react'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
@@ -74,18 +73,19 @@ describe('ErrorBoundary', () => {
   })
 })
 
-it('retries a failed lazy import by reloading the same URL and provides a home link', async () => {
+it('reloads a rejected lazy import at the same URL and offers a home link', async () => {
   vi.spyOn(console, 'error').mockImplementation(() => {})
   const reload = vi.spyOn(window.location, 'reload').mockImplementation(() => {})
   window.history.replaceState({}, '', '/?plan=growth&billing=yearly#cta')
-  const FailedImport = lazy(() =>
+  const { lazy, Suspense } = await import('react')
+  const Failed = lazy(() =>
     Promise.reject(new TypeError('Failed to fetch dynamically imported module: /assets/page.js'))
   )
   try {
     render(
       <ErrorBoundary pagePath="/">
         <Suspense fallback={<p>Loading…</p>}>
-          <FailedImport />
+          <Failed />
         </Suspense>
       </ErrorBoundary>
     )

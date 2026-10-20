@@ -14,7 +14,7 @@ export default [
     languageOptions: {
       parser: tsParser,
       parserOptions: { ecmaVersion: 'latest', sourceType: 'module', ecmaFeatures: { jsx: true } },
-      globals: { URLSearchParams: 'readonly', FormData: 'readonly', HTMLFormElement: 'readonly', window: 'readonly', document: 'readonly', navigator: 'readonly', console: 'readonly', setTimeout: 'readonly', clearTimeout: 'readonly', requestAnimationFrame: 'readonly', cancelAnimationFrame: 'readonly', performance: 'readonly', localStorage: 'readonly', process: 'readonly', fetch: 'readonly', HTMLInputElement: 'readonly', HTMLMetaElement: 'readonly', HTMLLinkElement: 'readonly', MouseEvent: 'readonly', KeyboardEvent: 'readonly', HTMLDivElement: 'readonly', HTMLButtonElement: 'readonly', HTMLElement: 'readonly', Node: 'readonly', MutationObserver: 'readonly', Element: 'readonly' },
+      globals: { Event: 'readonly', CustomEvent: 'readonly', StorageEvent: 'readonly', URLSearchParams: 'readonly', FormData: 'readonly', HTMLFormElement: 'readonly', window: 'readonly', document: 'readonly', navigator: 'readonly', console: 'readonly', setTimeout: 'readonly', clearTimeout: 'readonly', requestAnimationFrame: 'readonly', cancelAnimationFrame: 'readonly', performance: 'readonly', localStorage: 'readonly', process: 'readonly', fetch: 'readonly', HTMLInputElement: 'readonly', HTMLMetaElement: 'readonly', HTMLLinkElement: 'readonly', MouseEvent: 'readonly', KeyboardEvent: 'readonly', HTMLDivElement: 'readonly', HTMLButtonElement: 'readonly', HTMLElement: 'readonly', Node: 'readonly', MutationObserver: 'readonly', Element: 'readonly' },
     },
     plugins: {
       '@typescript-eslint': tsPlugin,

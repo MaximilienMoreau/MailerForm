@@ -1,7 +1,10 @@
+import { useFormRequest, FormTimeoutError } from '@/hooks/useFormRequest'
 import { useId, useState, type FormEvent } from 'react'
 
 export default function NewsletterForm() {
   const id = useId()
+  const { send, isMounted } = useFormRequest()
+  const [error, setError] = useState('')
   const [state, setState] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const formId = import.meta.env.VITE_FORMSPREE_ID
   async function subscribe(event: FormEvent<HTMLFormElement>) {
@@ -9,20 +12,24 @@ export default function NewsletterForm() {
     if (state === 'sending') return
     const data = new FormData(event.currentTarget)
     setState('sending')
+    setError('')
     try {
-      const response = await fetch(`https://formspree.io/f/${formId}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          email: data.get('email'),
-          purpose: 'newsletter',
-          consent: true,
-          _gotcha: data.get('_gotcha'),
-        }),
+      const response = await send(`https://formspree.io/f/${formId}`, {
+        email: data.get('email'),
+        purpose: 'newsletter',
+        consent: true,
+        _gotcha: data.get('_gotcha'),
       })
+      if (!isMounted()) return
       if (!response.ok) throw new Error('Subscription failed')
       setState('success')
-    } catch {
+    } catch (error) {
+      if (!isMounted()) return
+      setError(
+        error instanceof FormTimeoutError
+          ? error.message
+          : 'Could not subscribe. Please try again or email hello@mailerform.io.'
+      )
       setState('error')
     }
   }
@@ -82,7 +89,7 @@ export default function NewsletterForm() {
           </button>
           {state === 'error' && (
             <p role="alert" className="text-sm text-red-400">
-              Could not subscribe. Please try again or email hello@mailerform.io.
+              {error}
             </p>
           )}
         </form>

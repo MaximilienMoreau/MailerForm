@@ -79,6 +79,7 @@ function PageRoutes() {
   const { pathname } = useLocation()
   return (
     <ErrorBoundary key={pathname} pagePath={pathname}>
+      {' '}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route

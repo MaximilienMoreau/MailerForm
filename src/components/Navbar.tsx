@@ -5,10 +5,10 @@ import { Menu, X, Zap } from 'lucide-react'
 import { EASE } from '@/lib/motion'
 
 const links = [
-  { label: 'Features',       href: '#features' },
+  { label: 'Features', href: '#features' },
   { label: 'Deliverability', href: '#deliverability' },
-  { label: 'Pricing',        href: '#pricing' },
-  { label: 'Docs',           href: 'https://docs.mailerform.io', external: true },
+  { label: 'Pricing', href: '#pricing' },
+  { label: 'Docs', href: 'https://docs.mailerform.io', external: true },
 ] as const
 
 const sectionIds = ['features', 'deliverability', 'pricing']
@@ -23,11 +23,11 @@ const FOCUSABLE = [
 ].join(', ')
 
 export default function Navbar() {
-  const [scrolled, setScrolled]           = useState(false)
-  const [open, setOpen]                   = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [open, setOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
-  const menuRef                           = useRef<HTMLDivElement>(null)
-  const toggleRef                         = useRef<HTMLButtonElement>(null)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const toggleRef = useRef<HTMLButtonElement>(null)
 
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > 20)
@@ -44,13 +44,25 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
 
+  // Release the mobile dialog and scroll lock when the desktop navigation takes over.
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 768px)')
+    const handleChange = () => {
+      if (desktop.matches) setOpen(false)
+    }
+    desktop.addEventListener('change', handleChange)
+    return () => desktop.removeEventListener('change', handleChange)
+  }, [])
+
   // Close on outside click
   useEffect(() => {
     if (!open) return
     function handleClickOutside(e: MouseEvent) {
       if (
-        menuRef.current   && !menuRef.current.contains(e.target as Node) &&
-        toggleRef.current && !toggleRef.current.contains(e.target as Node)
+        menuRef.current &&
+        !menuRef.current.contains(e.target as Node) &&
+        toggleRef.current &&
+        !toggleRef.current.contains(e.target as Node)
       ) {
         setOpen(false)
       }
@@ -105,8 +117,12 @@ export default function Navbar() {
 
   // Lock body scroll when menu is open on mobile
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
+    if (!open) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
   }, [open])
 
   return (
@@ -115,12 +131,13 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: EASE }}
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-gray-950/85 backdrop-blur-xl border-b border-white/[0.06] shadow-lg shadow-black/20' : ''
+        scrolled
+          ? 'bg-gray-950/85 backdrop-blur-xl border-b border-white/[0.06] shadow-lg shadow-black/20'
+          : ''
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-
           <Link to="/" className="flex items-center gap-2.5 group focus-ring rounded-lg px-1 -ml-1">
             <div className="w-8 h-8 bg-brand-500 rounded-lg flex items-center justify-center shadow-lg shadow-brand-500/30 group-hover:shadow-brand-500/50 transition-shadow">
               <Zap size={16} className="text-white" fill="white" aria-hidden />
@@ -129,13 +146,18 @@ export default function Navbar() {
           </Link>
 
           <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
-            {links.map(l => {
-              const isActive = 'external' in l && l.external ? false : activeSection === l.href.slice(1)
+            {links.map((l) => {
+              const isActive =
+                'external' in l && l.external ? false : activeSection === l.href.slice(1)
               const isExternal = 'external' in l && l.external
               return (
                 <a
                   key={l.label}
-                  href={l.href.startsWith('#') && window.location.pathname !== '/' ? `/${l.href}` : l.href}
+                  href={
+                    l.href.startsWith('#') && window.location.pathname !== '/'
+                      ? `/${l.href}`
+                      : l.href
+                  }
                   {...(isExternal ? { target: '_blank', rel: 'noreferrer' } : {})}
                   className={`text-sm px-3 py-2 rounded-lg transition-all focus-ring ${
                     isActive
@@ -159,7 +181,10 @@ export default function Navbar() {
             >
               Sign in
             </a>
-            <a href={window.location.pathname === '/' ? '#cta' : '/#cta'} className="btn-primary text-sm py-2 px-4">
+            <a
+              href={window.location.pathname === '/' ? '#cta' : '/#cta'}
+              className="btn-primary text-sm py-2 px-4"
+            >
               Request early access
             </a>
           </div>
@@ -167,7 +192,7 @@ export default function Navbar() {
           <button
             ref={toggleRef}
             className="md:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-all focus-ring"
-            onClick={() => setOpen(prev => !prev)}
+            onClick={() => setOpen((prev) => !prev)}
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
             aria-controls="mobile-menu"
@@ -192,12 +217,16 @@ export default function Navbar() {
             className="md:hidden border-t border-white/[0.06] bg-gray-950/95 backdrop-blur-xl overflow-hidden"
           >
             <nav className="px-4 py-4 flex flex-col gap-1" aria-label="Mobile navigation links">
-              {links.map(l => {
+              {links.map((l) => {
                 const isExternal = 'external' in l && l.external
                 return (
                   <a
                     key={l.label}
-                    href={l.href.startsWith('#') && window.location.pathname !== '/' ? `/${l.href}` : l.href}
+                    href={
+                      l.href.startsWith('#') && window.location.pathname !== '/'
+                        ? `/${l.href}`
+                        : l.href
+                    }
                     {...(isExternal ? { target: '_blank', rel: 'noreferrer' } : {})}
                     onClick={() => !isExternal && setOpen(false)}
                     className="text-sm text-gray-400 hover:text-white px-3 py-2.5 rounded-lg hover:bg-white/5 transition-all focus-ring"
@@ -216,7 +245,11 @@ export default function Navbar() {
                 >
                   Sign in
                 </a>
-                <a href={window.location.pathname === '/' ? '#cta' : '/#cta'} onClick={() => setOpen(false)} className="btn-primary text-sm py-2.5 justify-center">
+                <a
+                  href={window.location.pathname === '/' ? '#cta' : '/#cta'}
+                  onClick={() => setOpen(false)}
+                  className="btn-primary text-sm py-2.5 justify-center"
+                >
                   Request early access
                 </a>
               </div>

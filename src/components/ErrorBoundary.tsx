@@ -26,8 +26,6 @@ export default class ErrorBoundary extends Component<Props, State> {
   }
 
   handleReset = () => {
-    // React.lazy remembers rejected imports. Reload the current URL to retry
-    // the document and its assets, retaining the query string and anchor.
     if (this.isLoadError()) {
       window.location.reload()
       return
@@ -59,8 +57,8 @@ export default class ErrorBoundary extends Component<Props, State> {
             )}
             {this.isLoadError() && (
               <p className="text-gray-300 text-sm mb-4">
-                Check your connection, then try again. We will reopen this page with the same plan
-                and navigation details.
+                Check your connection, then try again. We will reopen this page with the same URL
+                and selected plan.
               </p>
             )}
             <p className="text-gray-400 text-sm leading-relaxed mb-8">
@@ -81,7 +79,7 @@ export default class ErrorBoundary extends Component<Props, State> {
               <RefreshCw size={16} aria-hidden />
               Try again
             </button>
-            <a href="/" className="btn-secondary justify-center mt-4 mx-auto focus-ring">
+            <a href="/" className="btn-secondary justify-center mt-4 mx-auto">
               Back to homepage
             </a>
           </div>

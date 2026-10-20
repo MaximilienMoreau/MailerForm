@@ -6,7 +6,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript&logoColor=white&labelColor=20232a)
 ![Vite](https://img.shields.io/badge/Vite-5-646cff?logo=vite&logoColor=white&labelColor=20232a)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-06b6d4?logo=tailwindcss&logoColor=white&labelColor=20232a)
-![Tests](https://img.shields.io/badge/tests-64%20passing-22c55e?labelColor=20232a)
+![Tests](https://img.shields.io/badge/tests-71%20passing-22c55e?labelColor=20232a)
 ![License](https://img.shields.io/badge/license-private-6b7280?labelColor=20232a)
 [![CI](https://github.com/MaximilienMoreau/MailerForm/actions/workflows/ci.yml/badge.svg)](https://github.com/MaximilienMoreau/MailerForm/actions/workflows/ci.yml)
 
@@ -287,7 +287,7 @@ npm run test:run       # run once
 npm run test:coverage  # with v8 coverage report
 ```
 
-**64 tests** across 17 suites:
+**71 tests** across 20 suites:
 
 | Suite | What it covers |
 |---|---|
@@ -369,11 +369,21 @@ submitted plan, billing choice, email, and next step without starting a trial.
 The feature carousel supports Left/Right, Home, and End keys with a single tab
 stop in the tab list, labeled panels, and an announcement of the selected feature.
 
-Plan selection uses React Router navigation: changing the plan updates the request
-without reloading the landing page or clearing the email field. Browser history
-also restores the selected billing interval.
+## Request and preference recovery
 
-A route error boundary keeps the failed page URL intact and offers retry and a
-homepage link. Rejected lazy imports require a reload of the current URL because
-React caches import failures; other rendering errors retry in place. Navigating
-to another route resets that route's error state.
+Pricing uses internal navigation so changing a plan retains the email already
+entered. Billing follows selection history. Failed page imports offer a reload
+of the current URL and a homepage link; other rendering errors retry in place.
+
+Cookie preferences synchronize between the banner and policy page, including
+resets, and respond to storage changes from other tabs. Blocked browser storage
+falls back to an in-memory choice for the current page session. Switching from
+mobile navigation to desktop closes the menu and restores the prior body overflow.
+
+Both Formspree forms stop waiting after 15 seconds, keep the email available for
+retry, and cancel pending client requests when unmounted. Cookies, privacy, and
+subprocessor documentation describe Formspree and distinguish early-access data
+from newsletter consent.
+
+Regression coverage includes `PlanSelection`, `ConsentSync`, `FormTimeouts`, and
+`useFormRequest`, plus menu resizing and rejected lazy imports.
