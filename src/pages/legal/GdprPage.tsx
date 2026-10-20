@@ -46,7 +46,7 @@ export default function GdprPage() {
           const Icon = h.icon
           return (
             <div key={h.title} className={`flex gap-4 p-5 rounded-xl border ${h.bg}`}>
-              <div className={`flex-shrink-0 mt-0.5 ${h.color}`}>
+              <div className={`shrink-0 mt-0.5 ${h.color}`}>
                 <Icon size={20} />
               </div>
               <div>

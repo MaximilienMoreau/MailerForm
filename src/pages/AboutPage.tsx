@@ -67,10 +67,10 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.1, ease: EASE }}
-              className="text-4xl sm:text-5xl font-extrabold text-white leading-tight mb-6"
+              className="text-4xl sm:text-5xl font-extrabold text-white leading-tight mb-6 sm:leading-none"
             >
               We are building email infrastructure{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-sky-400">
+              <span className="text-transparent bg-clip-text bg-linear-to-r/srgb from-brand-400 to-sky-400">
                 with SaaS teams
               </span>
             </motion.h1>
@@ -98,7 +98,7 @@ export default function AboutPage() {
               <p className="text-xs text-brand-400 font-semibold uppercase tracking-widest mb-4">
                 Our mission
               </p>
-              <p className="text-2xl sm:text-3xl font-bold text-white leading-snug">
+              <p className="text-2xl sm:text-3xl font-bold text-white leading-snug sm:leading-9">
                 Make inbox placement predictable, not a guessing game.
               </p>
               <p className="mt-5 text-gray-400 leading-relaxed">
@@ -175,7 +175,7 @@ export default function AboutPage() {
               >
                 {productStages.map((item) => (
                   <motion.li key={item.label} variants={staggerItem} className="flex gap-6">
-                    <div className="flex-shrink-0 w-16 h-10 rounded-full bg-brand-500/10 border border-brand-500/30 flex items-center justify-center z-10">
+                    <div className="shrink-0 w-16 h-10 rounded-full bg-brand-500/10 border border-brand-500/30 flex items-center justify-center z-10">
                       <span className="text-[10px] font-black text-brand-400 tabular-nums">
                         {item.label}
                       </span>

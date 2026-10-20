@@ -42,6 +42,12 @@ export const staticPages: StaticPage[] = [
   })),
 ]
 
+/** Only published, indexable documents belong in the sitemap. */
+export function renderSitemap(pages: readonly StaticPage[] = staticPages): string {
+  const urls = [...new Set(pages.filter((item) => !item.noindex).map((item) => siteUrl(item.path)))]
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((url) => `  <url><loc>${escape(url)}</loc></url>`).join('\n')}\n</urlset>\n`
+}
+
 export function renderStaticPage(template: string, item: StaticPage): string {
   // Keep Vite's asset links, charset, viewport, favicon, and font hints intact.
   const head = [
@@ -92,6 +98,7 @@ export function staticPagesPlugin(): Plugin {
       const index = bundle['index.html']
       if (!index || index.type !== 'asset') throw new Error('Missing Vite HTML entry')
       const template = String(index.source)
+      this.emitFile({ type: 'asset', fileName: 'sitemap.xml', source: renderSitemap() })
       this.emitFile({ type: 'asset', fileName: '404.html', source: renderNotFoundPage(template) })
       for (const item of staticPages) {
         const html = renderStaticPage(template, item)

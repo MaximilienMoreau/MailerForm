@@ -208,7 +208,7 @@ export default function CareersPage() {
                   </div>
                   <a
                     href={jobMailto(job.title)}
-                    className="btn-secondary text-xs py-2 px-4 flex-shrink-0 self-start sm:self-auto"
+                    className="btn-secondary text-xs py-2 px-4 shrink-0 self-start sm:self-auto"
                   >
                     Apply
                     <ArrowRight size={13} aria-hidden />
@@ -245,7 +245,7 @@ export default function CareersPage() {
                   variants={staggerItem}
                   className="flex items-center gap-3 text-sm text-gray-300 bg-white/[0.02] border border-white/[0.07] rounded-xl px-4 py-3"
                 >
-                  <Heart size={14} className="text-rose-400 flex-shrink-0" aria-hidden />
+                  <Heart size={14} className="text-rose-400 shrink-0" aria-hidden />
                   {b}
                 </motion.li>
               ))}

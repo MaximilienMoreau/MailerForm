@@ -3,3 +3,7 @@ dist/
 coverage/
 package-lock.json
 public/
+
+dist-e2e/
+playwright-report/
+test-results/

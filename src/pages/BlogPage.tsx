@@ -76,7 +76,7 @@ export default function BlogPage() {
                 <h2 className="text-lg font-bold text-white leading-snug">
                   <Link
                     to={`/blog/${post.slug}`}
-                    className="hover:text-brand-300 focus-ring rounded"
+                    className="hover:text-brand-300 focus-ring rounded-sm"
                   >
                     {post.title}
                   </Link>
@@ -88,7 +88,7 @@ export default function BlogPage() {
                   </p>
                   <Link
                     to={`/blog/${post.slug}`}
-                    className="inline-block mt-3 text-brand-300 underline focus-ring rounded"
+                    className="inline-block mt-3 text-brand-300 underline focus-ring rounded-sm"
                   >
                     Read guide
                   </Link>

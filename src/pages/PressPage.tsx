@@ -152,7 +152,7 @@ export default function PressPage() {
                     </div>
                     <Download
                       size={16}
-                      className="text-gray-500 group-hover:text-brand-400 transition-colors flex-shrink-0"
+                      className="text-gray-500 group-hover:text-brand-400 transition-colors shrink-0"
                       aria-hidden
                     />
                   </a>
@@ -166,9 +166,9 @@ export default function PressPage() {
               transition={{ duration: 0.4, delay: 0.1, ease: EASE }}
               className="mt-5 flex items-center gap-3 text-xs text-gray-500"
             >
-              <span className="w-4 h-4 rounded-full bg-brand-500 flex-shrink-0" aria-hidden />
+              <span className="w-4 h-4 rounded-full bg-brand-500 shrink-0" aria-hidden />
               Brand color:{' '}
-              <code className="font-mono text-gray-300 bg-white/5 px-1.5 py-0.5 rounded">
+              <code className="font-mono text-gray-300 bg-white/5 px-1.5 py-0.5 rounded-sm">
                 #3366ff
               </code>
             </motion.div>

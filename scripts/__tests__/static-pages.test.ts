@@ -1,9 +1,28 @@
 import { expect, it } from 'vitest'
 import { readFileSync } from 'node:fs'
-import { renderStaticPage, staticPages } from '../static-pages'
+import { renderStaticPage, renderSitemap, staticPages } from '../static-pages'
 import { posts } from '../../src/data/posts'
 
 const template = readFileSync('index.html', 'utf8')
+
+it('lists every indexable generated page exactly once in the sitemap', () => {
+  const document = new DOMParser().parseFromString(renderSitemap(), 'application/xml')
+  const urls = Array.from(document.querySelectorAll('loc'), (node) => node.textContent)
+  expect(urls).toEqual(staticPages.map((page) => `https://mailerform.io${page.path}`))
+  expect(new Set(urls).size).toBe(urls.length)
+  expect(urls).not.toContain('https://mailerform.io/404')
+})
+
+it('excludes non-indexable pages, deduplicates URLs and escapes XML', () => {
+  const page = { ...staticPages[0], path: '/test?first=1&second=2' }
+  const xml = renderSitemap([page, page, { ...page, path: '/private', noindex: true }])
+  expect(xml).toContain('first=1&amp;second=2')
+  const document = new DOMParser().parseFromString(xml, 'application/xml')
+  expect(document.querySelectorAll('loc')).toHaveLength(1)
+  expect(document.querySelector('loc')?.textContent).toBe(
+    'https://mailerform.io/test?first=1&second=2'
+  )
+})
 
 it('provides distinct canonical and social metadata for every page', () => {
   for (const page of staticPages) {

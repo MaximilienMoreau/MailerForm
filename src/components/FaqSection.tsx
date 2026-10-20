@@ -61,7 +61,7 @@ function FaqRow({ item, defaultOpen = false }: { item: FaqItem; defaultOpen?: bo
         <ChevronDown
           size={16}
           aria-hidden
-          className={`text-gray-500 flex-shrink-0 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
+          className={`text-gray-500 shrink-0 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
         />
       </button>
 
@@ -104,7 +104,7 @@ export default function FaqSection() {
             Everything you need to know before switching. If something&apos;s missing,{' '}
             <a
               href="mailto:hello@mailerform.io"
-              className="text-brand-400 hover:text-brand-300 transition-colors font-medium focus-ring rounded"
+              className="text-brand-400 hover:text-brand-300 transition-colors font-medium focus-ring rounded-sm"
             >
               reach out
             </a>

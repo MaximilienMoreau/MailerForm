@@ -185,7 +185,7 @@ export default function IntegrationsSection() {
             >
               <div className="flex items-start justify-between mb-3">
                 <div
-                  className={`w-10 h-10 rounded-xl border flex items-center justify-center text-[11px] font-black flex-shrink-0 ${intg.color}`}
+                  className={`w-10 h-10 rounded-xl border flex items-center justify-center text-[11px] font-black shrink-0 ${intg.color}`}
                 >
                   {intg.abbr}
                 </div>
@@ -211,7 +211,7 @@ export default function IntegrationsSection() {
                     ? 'View Node.js code example'
                     : `Discuss ${intg.name} availability`
                 }
-                className="mt-4 inline-flex items-center gap-1 text-xs text-brand-300 underline focus-ring rounded py-2"
+                className="mt-4 inline-flex items-center gap-1 text-xs text-brand-300 underline focus-ring rounded-sm py-2"
               >
                 {intg.status === 'example' ? 'View code example' : 'Discuss availability'}
                 <ArrowRight size={12} aria-hidden />
@@ -237,7 +237,7 @@ export default function IntegrationsSection() {
           </div>
           <a
             href="mailto:hello@mailerform.io?subject=Integration%20requirements"
-            className="btn-secondary text-sm flex-shrink-0"
+            className="btn-secondary text-sm shrink-0"
           >
             Discuss your stack
             <ArrowRight size={14} aria-hidden />

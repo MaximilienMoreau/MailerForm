@@ -41,14 +41,14 @@ export default function CookieBanner() {
           <div className="bg-gray-900 border border-white/10 rounded-2xl p-5 shadow-2xl shadow-black/60 backdrop-blur-xl">
             <div className="flex items-start justify-between gap-3 mb-3">
               <div className="flex items-center gap-2">
-                <Cookie size={16} className="text-brand-400 flex-shrink-0" aria-hidden />
+                <Cookie size={16} className="text-brand-400 shrink-0" aria-hidden />
                 <span className="text-sm font-semibold text-white">Cookies &amp; Privacy</span>
               </div>
               <button
                 type="button"
                 onClick={handleDecline}
                 aria-label="Decline and close"
-                className="text-gray-500 hover:text-gray-300 transition-colors focus-ring rounded p-0.5"
+                className="text-gray-500 hover:text-gray-300 transition-colors focus-ring rounded-sm p-0.5"
               >
                 <X size={15} aria-hidden />
               </button>

@@ -93,7 +93,7 @@ export default function ChangelogPage() {
               </ul>
               <Link
                 to={update.href}
-                className="inline-block mt-5 text-sm text-brand-300 underline focus-ring rounded"
+                className="inline-block mt-5 text-sm text-brand-300 underline focus-ring rounded-sm"
               >
                 {update.action}
               </Link>
@@ -102,7 +102,7 @@ export default function ChangelogPage() {
         </motion.div>
         <p className="mt-10 text-sm text-gray-400">
           Want product updates?{' '}
-          <Link to="/blog#newsletter" className="text-brand-300 underline focus-ring rounded">
+          <Link to="/blog#newsletter" className="text-brand-300 underline focus-ring rounded-sm">
             Request the newsletter
           </Link>
           . Newsletter requests are separate from early-access invitations.

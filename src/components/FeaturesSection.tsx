@@ -77,10 +77,10 @@ export default function FeaturesSection() {
           <span className="tag bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-4 inline-flex">
             Everything you need
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight max-w-3xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight max-w-3xl mx-auto sm:leading-10 lg:leading-none">
             SendGrid + Postmark + Customer.io
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-sky-400">
+            <span className="text-transparent bg-clip-text bg-linear-to-r/srgb from-brand-400 to-sky-400">
               in a single platform
             </span>
           </h2>
@@ -102,7 +102,7 @@ export default function FeaturesSection() {
             <button
               onClick={prev}
               aria-label="Previous feature"
-              className="flex-shrink-0 w-10 h-10 rounded-full border border-white/[0.10] bg-white/[0.03] flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/[0.07] transition-all focus-ring"
+              className="shrink-0 w-10 h-10 rounded-full border border-white/[0.10] bg-white/[0.03] flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/[0.07] transition-all focus-ring"
             >
               <ChevronLeft size={18} aria-hidden />
             </button>
@@ -128,11 +128,11 @@ export default function FeaturesSection() {
                   {/* Mobile: icon+badge row above title / Desktop: all on same row */}
                   <div className="flex items-center justify-between gap-3 mb-3 sm:hidden">
                     <div
-                      className={`flex-shrink-0 w-12 h-12 rounded-xl ${feature.bg} border ${feature.border} flex items-center justify-center`}
+                      className={`shrink-0 w-12 h-12 rounded-xl ${feature.bg} border ${feature.border} flex items-center justify-center`}
                     >
                       <Icon size={22} className={feature.color} aria-hidden />
                     </div>
-                    <span className={`flex-shrink-0 tag text-xs border ${feature.tagColor}`}>
+                    <span className={`shrink-0 tag text-xs border ${feature.tagColor}`}>
                       {feature.tag}
                     </span>
                   </div>
@@ -141,18 +141,18 @@ export default function FeaturesSection() {
                   </h3>
                   <div className="hidden sm:flex items-center gap-4 mb-6">
                     <div
-                      className={`flex-shrink-0 w-16 h-16 rounded-xl ${feature.bg} border ${feature.border} flex items-center justify-center`}
+                      className={`shrink-0 w-16 h-16 rounded-xl ${feature.bg} border ${feature.border} flex items-center justify-center`}
                     >
                       <Icon size={30} className={feature.color} aria-hidden />
                     </div>
-                    <h3 className="flex-1 text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight text-center">
+                    <h3 className="flex-1 text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight text-center lg:leading-none">
                       {feature.title}
                     </h3>
-                    <span className={`flex-shrink-0 tag text-sm border ${feature.tagColor}`}>
+                    <span className={`shrink-0 tag text-sm border ${feature.tagColor}`}>
                       {feature.tag}
                     </span>
                   </div>
-                  <p className="text-gray-400 leading-relaxed text-base sm:text-lg mb-6">
+                  <p className="text-gray-400 leading-relaxed text-base sm:text-lg mb-6 sm:leading-7">
                     {feature.description}
                   </p>
                   <p className="text-sm text-gray-600">{feature.items.join(' · ')}</p>
@@ -164,7 +164,7 @@ export default function FeaturesSection() {
             <button
               onClick={next}
               aria-label="Next feature"
-              className="flex-shrink-0 w-10 h-10 rounded-full border border-white/[0.10] bg-white/[0.03] flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/[0.07] transition-all focus-ring"
+              className="shrink-0 w-10 h-10 rounded-full border border-white/[0.10] bg-white/[0.03] flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/[0.07] transition-all focus-ring"
             >
               <ChevronRight size={18} aria-hidden />
             </button>

@@ -119,7 +119,7 @@ export default function CookiesPage() {
         The marketing site at <strong>mailerform.io</strong> (the one you&apos;re on now) does not
         set any HTTP cookies at all. The only preference it remembers, your cookie banner choice, is
         stored in your browser&apos;s <strong>local storage</strong> under the key{' '}
-        <code className="text-xs font-mono text-gray-300 bg-white/5 px-1.5 py-0.5 rounded">
+        <code className="text-xs font-mono text-gray-300 bg-white/5 px-1.5 py-0.5 rounded-sm">
           mailerform_cookie_consent
         </code>
         , not as a cookie, and it never leaves your device.
@@ -206,7 +206,7 @@ export default function CookiesPage() {
         <li>
           <strong>Cookie banner</strong>: when you first visit mailerform.io we ask for your
           preference. You can reset it at any time by clearing the{' '}
-          <code className="text-xs font-mono text-gray-300 bg-white/5 px-1.5 py-0.5 rounded">
+          <code className="text-xs font-mono text-gray-300 bg-white/5 px-1.5 py-0.5 rounded-sm">
             mailerform_cookie_consent
           </code>{' '}
           key from your browser&apos;s local storage.
@@ -222,11 +222,11 @@ export default function CookiesPage() {
       <p>
         Our marketing website does not embed any third-party scripts (no YouTube, no social widgets,
         no Intercom, no Hotjar, no analytics). Web fonts are served from{' '}
-        <code className="text-xs font-mono text-gray-300 bg-white/5 px-1.5 py-0.5 rounded">
+        <code className="text-xs font-mono text-gray-300 bg-white/5 px-1.5 py-0.5 rounded-sm">
           fonts.googleapis.com
         </code>{' '}
         and{' '}
-        <code className="text-xs font-mono text-gray-300 bg-white/5 px-1.5 py-0.5 rounded">
+        <code className="text-xs font-mono text-gray-300 bg-white/5 px-1.5 py-0.5 rounded-sm">
           fonts.gstatic.com
         </code>
         , which does not set any cookie. When you submit an early-access or newsletter form, we also

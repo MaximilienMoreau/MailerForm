@@ -8,7 +8,16 @@ import jsxA11yPlugin from 'eslint-plugin-jsx-a11y'
 import prettierConfig from 'eslint-config-prettier'
 
 export default [
-  { ignores: ['dist/**', 'node_modules/**', 'coverage/**'] },
+  {
+    ignores: [
+      'dist/**',
+      'node_modules/**',
+      'coverage/**',
+      'playwright-report/**',
+      'test-results/**',
+      'dist-e2e/**',
+    ],
+  },
   js.configs.recommended,
   {
     files: ['**/*.{js,cjs}', '*config.ts', 'scripts/**/*.ts'],

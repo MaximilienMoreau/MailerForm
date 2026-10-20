@@ -34,7 +34,7 @@ export default function StreamSection() {
             Stream Separation
           </span>
           <h2
-            className="text-3xl sm:text-4xl font-extrabold text-white leading-tight max-w-3xl mx-auto"
+            className="text-3xl sm:text-4xl font-extrabold text-white leading-tight max-w-3xl mx-auto sm:leading-10"
             aria-label="Separate critical notifications from bulk campaigns"
           >
             Separate critical notifications from bulk campaigns
@@ -65,7 +65,7 @@ export default function StreamSection() {
             <ul className="space-y-2" aria-label="Transactional email types">
               {transactionalItems.map((item) => (
                 <li key={item} className="flex items-center gap-2 text-xs text-gray-500">
-                  <Mail size={11} className="text-sky-400 flex-shrink-0" aria-hidden />
+                  <Mail size={11} className="text-sky-400 shrink-0" aria-hidden />
                   {item}
                 </li>
               ))}
@@ -99,9 +99,9 @@ export default function StreamSection() {
             className="flex flex-col items-center justify-center py-8 lg:py-0"
             aria-hidden
           >
-            <div className="w-px h-16 bg-gradient-to-b from-transparent via-white/10 to-transparent lg:hidden" />
+            <div className="w-px h-16 bg-linear-to-b/srgb from-transparent via-white/10 to-transparent lg:hidden" />
             <div className="hidden lg:flex flex-col items-center gap-3 w-full">
-              <div className="h-px w-full bg-gradient-to-r from-sky-500/20 via-white/10 to-orange-500/20" />
+              <div className="h-px w-full bg-linear-to-r/srgb from-sky-500/20 via-white/10 to-orange-500/20" />
               <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
                 <GitBranch size={16} className="text-gray-400" />
               </div>
@@ -110,7 +110,7 @@ export default function StreamSection() {
                 <br />
                 independent reputation
               </p>
-              <div className="h-px w-full bg-gradient-to-r from-sky-500/20 via-white/10 to-orange-500/20" />
+              <div className="h-px w-full bg-linear-to-r/srgb from-sky-500/20 via-white/10 to-orange-500/20" />
             </div>
           </motion.div>
 
@@ -130,7 +130,7 @@ export default function StreamSection() {
             <ul className="space-y-2" aria-label="Marketing email types">
               {marketingItems.map((item) => (
                 <li key={item} className="flex items-center gap-2 text-xs text-gray-500">
-                  <Megaphone size={11} className="text-orange-400 flex-shrink-0" aria-hidden />
+                  <Megaphone size={11} className="text-orange-400 shrink-0" aria-hidden />
                   {item}
                 </li>
               ))}
@@ -167,7 +167,7 @@ export default function StreamSection() {
           className="mt-12 flex justify-center"
         >
           <div className="flex items-center gap-3 bg-white/[0.03] border border-white/[0.07] rounded-full px-6 py-3">
-            <TrendingUp size={15} className="text-emerald-400 flex-shrink-0" aria-hidden />
+            <TrendingUp size={15} className="text-emerald-400 shrink-0" aria-hidden />
             <p className="text-sm text-gray-400">
               Monitor both streams independently and confirm production isolation during onboarding.
             </p>

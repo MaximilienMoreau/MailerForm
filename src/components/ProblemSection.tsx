@@ -43,7 +43,7 @@ export default function ProblemSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VP_MD}
           transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
-          className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white text-center max-w-3xl mx-auto leading-tight mb-6"
+          className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white text-center max-w-3xl mx-auto leading-tight mb-6 sm:leading-10 lg:leading-none"
         >
           You find out about spam problems <span className="text-orange-400">after</span> the damage
           is done
@@ -75,7 +75,7 @@ export default function ProblemSection() {
               {before.map((step, i) => (
                 <li key={step} className="flex items-start gap-3 text-sm text-gray-400">
                   <span
-                    className="w-5 h-5 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs flex items-center justify-center flex-shrink-0 mt-0.5 font-mono font-bold tabular-nums"
+                    className="w-5 h-5 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs flex items-center justify-center shrink-0 mt-0.5 font-mono font-bold tabular-nums"
                     aria-hidden
                   >
                     {i + 1}
@@ -101,7 +101,7 @@ export default function ProblemSection() {
               {after.map((step, i) => (
                 <li key={step} className="flex items-start gap-3 text-sm text-gray-300">
                   <span
-                    className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs flex items-center justify-center flex-shrink-0 mt-0.5 font-mono font-bold tabular-nums"
+                    className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs flex items-center justify-center shrink-0 mt-0.5 font-mono font-bold tabular-nums"
                     aria-hidden
                   >
                     {i + 1}
