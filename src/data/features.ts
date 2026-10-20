@@ -24,7 +24,7 @@ export const features: Feature[] = [
     tagColor: 'bg-violet-500/10 text-violet-400 border-violet-500/20',
     title: 'Deliverability Intelligence',
     description:
-      'Analyze every email before sending. MailerForm scans for spam triggers, phishing patterns, domain reputation, and link safety. It then gives you a predictive inbox score so you can fix issues before they cost you.',
+      'Identify authentication, content, and link issues before sending. Turn the report into a practical correction checklist.',
     items: ['Spam word detector', 'Domain health scoring', 'Link risk analysis', 'Predictive inbox/spam ratio'],
   },
   {
@@ -37,7 +37,7 @@ export const features: Feature[] = [
     tagColor: 'bg-sky-500/10 text-sky-400 border-sky-500/20',
     title: 'Stream Separation',
     description:
-      'Transactional and marketing emails run on fully isolated IP pools with independent reputations. A bad promo campaign will never affect your OTPs, password resets, or critical notifications.',
+      'Route critical notifications and bulk campaigns through separate streams. Track their performance independently.',
     items: ['Isolated IP pools', 'Separate reputation tracking', 'Per-stream analytics', 'Automatic failover'],
   },
   {
@@ -50,7 +50,7 @@ export const features: Feature[] = [
     tagColor: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
     title: 'CRM + Automation',
     description:
-      'Manage contacts, tags, and segments natively. Build lifecycle automation workflows powered by engagement data: open rates, clicks, and deliverability signals, all in one place.',
+      'Organize contacts and trigger lifecycle messages from engagement events.',
     items: ['Contact segmentation', 'Lifecycle automation', 'Engagement scoring', 'GDPR & CAN-SPAM tools'],
   },
   {
@@ -61,10 +61,10 @@ export const features: Feature[] = [
     border: 'border-brand-500/20',
     tag: 'API-first',
     tagColor: 'bg-brand-500/10 text-brand-400 border-brand-500/20',
-    title: '260+ API Endpoints',
+    title: 'API & Webhooks',
     description:
-      'Built by developers, for developers. Every feature is accessible via RESTful API with clear OpenAPI documentation, real-time webhooks, and SDKs for Node, Python, Ruby, Go, and PHP.',
-    items: ['RESTful + webhooks', 'Official SDKs × 5', 'White-label ready', 'Sub-80ms delivery'],
+      'Integrate analysis and sending into your application, then consume delivery events through webhooks.',
+    items: ['RESTful + webhooks', 'Official SDKs × 5', 'White-label ready', 'Delivery events'],
   },
   {
     icon: BarChart3,
@@ -76,7 +76,7 @@ export const features: Feature[] = [
     tagColor: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
     title: 'Real-time Analytics',
     description:
-      'Track every event (opens, clicks, bounces, complaints, unsubscribes) with sub-second latency. Drill down by stream, domain, campaign, or recipient segment.',
+      'Investigate bounces, complaints, and engagement by stream, domain, or campaign.',
     items: ['Event-level tracking', 'Bounce classification', 'Complaint monitoring', 'Cohort analytics'],
   },
   {
@@ -89,7 +89,7 @@ export const features: Feature[] = [
     tagColor: 'bg-rose-500/10 text-rose-400 border-rose-500/20',
     title: 'Security & Compliance',
     description:
-      'SOC 2 Type I certified (Type II audit underway), GDPR and CAN-SPAM compliant out of the box. Automatic unsubscribe handling, suppression lists, and data residency options for EU customers.',
-    items: ['SOC 2 Type I', 'Automatic unsubscribes', 'Suppression lists', 'EU data residency'],
+      'Review unsubscribe handling, suppression lists, and residency requirements during onboarding. Request evidence for any security or certification requirement.',
+    items: ['Security review', 'Automatic unsubscribes', 'Suppression lists', 'EU data residency'],
   },
 ]

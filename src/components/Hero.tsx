@@ -8,9 +8,9 @@ import { stats, type Stat } from '@/data/stats'
 const EASE_OUT_QUART = (t: number) => 1 - Math.pow(1 - t, 4)
 
 const trust = [
-  'GDPR & CAN-SPAM compliant',
-  'SOC 2 Type I certified',
-  'Free 10k emails/mo',
+  'Authentication checks',
+  'Preview before sending',
+  'No payment to request access',
 ] as const
 
 function useCountUp(target: number, decimals: number, duration = 1.8) {
@@ -101,9 +101,8 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p {...fadeUp(0.2)} className="mt-6 text-lg sm:text-xl text-gray-400 max-w-2xl leading-relaxed">
-          MailerForm combines transactional delivery, marketing automation, and{' '}
-          <strong className="text-gray-200 font-semibold">deliverability intelligence</strong>{' '}
-          in one API-first platform. Analyze, predict, and fix inbox placement before a single send.
+          Analyze your email, fix delivery risks, then send through one API.{' '}
+          Built for SaaS teams managing transactional and marketing traffic.
         </motion.p>
 
         <motion.div {...fadeUp(0.3)} className="mt-6 flex flex-wrap items-center justify-center gap-3">
@@ -117,19 +116,20 @@ export default function Hero() {
 
         <motion.div {...fadeUp(0.38)} className="mt-10 flex flex-col sm:flex-row items-center gap-4">
           <a href="#cta" className="btn-primary text-base px-8 py-3.5">
-            Start for free
+            Request early access
             <ArrowRight size={16} aria-hidden />
           </a>
-          <a href="#features" className="btn-secondary text-base px-8 py-3.5">
+          <a href="#deliverability" className="btn-secondary text-base px-8 py-3.5">
             See how it works
           </a>
         </motion.div>
 
+        <p className="mt-10 text-xs text-gray-400">Explore the workflow before requesting access</p>
         <motion.dl
           variants={staggerContainer}
           initial="hidden"
           animate="visible"
-          className="mt-20 grid grid-cols-2 sm:grid-cols-4 gap-8 w-full max-w-3xl"
+          className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-8 w-full max-w-3xl"
         >
           {stats.map(s => (
             <StatItem key={s.label} stat={s} />

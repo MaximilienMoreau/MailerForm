@@ -135,7 +135,7 @@ export default function Navbar() {
               return (
                 <a
                   key={l.label}
-                  href={l.href}
+                  href={l.href.startsWith('#') && window.location.pathname !== '/' ? `/${l.href}` : l.href}
                   {...(isExternal ? { target: '_blank', rel: 'noreferrer' } : {})}
                   className={`text-sm px-3 py-2 rounded-lg transition-all focus-ring ${
                     isActive
@@ -159,8 +159,8 @@ export default function Navbar() {
             >
               Sign in
             </a>
-            <a href="#pricing" className="btn-primary text-sm py-2 px-4">
-              Start free
+            <a href={window.location.pathname === '/' ? '#cta' : '/#cta'} className="btn-primary text-sm py-2 px-4">
+              Request early access
             </a>
           </div>
 
@@ -197,7 +197,7 @@ export default function Navbar() {
                 return (
                   <a
                     key={l.label}
-                    href={l.href}
+                    href={l.href.startsWith('#') && window.location.pathname !== '/' ? `/${l.href}` : l.href}
                     {...(isExternal ? { target: '_blank', rel: 'noreferrer' } : {})}
                     onClick={() => !isExternal && setOpen(false)}
                     className="text-sm text-gray-400 hover:text-white px-3 py-2.5 rounded-lg hover:bg-white/5 transition-all focus-ring"
@@ -216,8 +216,8 @@ export default function Navbar() {
                 >
                   Sign in
                 </a>
-                <a href="#pricing" onClick={() => setOpen(false)} className="btn-primary text-sm py-2.5 justify-center">
-                  Start free
+                <a href={window.location.pathname === '/' ? '#cta' : '/#cta'} onClick={() => setOpen(false)} className="btn-primary text-sm py-2.5 justify-center">
+                  Request early access
                 </a>
               </div>
             </nav>

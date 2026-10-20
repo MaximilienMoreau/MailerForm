@@ -25,6 +25,7 @@ const Footer              = lazy(() => import('@/components/Footer'))
 // Secondary pages
 const AboutPage     = lazy(() => import('@/pages/AboutPage'))
 const ChangelogPage = lazy(() => import('@/pages/ChangelogPage'))
+const BlogPostPage = lazy(() => import('@/pages/BlogPostPage'))
 const BlogPage      = lazy(() => import('@/pages/BlogPage'))
 const CareersPage   = lazy(() => import('@/pages/CareersPage'))
 const PressPage     = lazy(() => import('@/pages/PressPage'))
@@ -83,6 +84,7 @@ export default function App() {
             <Route path="/cookies"   element={<Suspense fallback={null}><CookiesPage /></Suspense>} />
             <Route path="/gdpr"      element={<Suspense fallback={null}><GdprPage /></Suspense>} />
             <Route path="/blog"      element={<Suspense fallback={null}><BlogPage /></Suspense>} />
+            <Route path="/blog/:slug" element={<Suspense fallback={<div className="pt-32 text-center text-gray-400" role="status">Loading guide…</div>}><BlogPostPage /></Suspense>} />
             <Route path="/careers"   element={<Suspense fallback={null}><CareersPage /></Suspense>} />
             <Route path="/press"     element={<Suspense fallback={null}><PressPage /></Suspense>} />
             <Route path="*" element={<NotFound />} />

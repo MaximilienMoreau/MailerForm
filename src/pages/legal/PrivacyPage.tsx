@@ -113,7 +113,7 @@ export default function PrivacyPage() {
 
       <h2>6. Data Security</h2>
       <p>
-        MailerForm is SOC 2 Type I certified, with our Type II audit underway. We use TLS 1.3 for
+        Certification evidence is not published on this site. Contact us for security documentation. We use TLS 1.3 for
         data in transit, AES-256 encryption at rest, role-based access controls, and third-party
         penetration testing, with our first assessment completed before general availability.
         In the event of a data breach affecting your personal data, we will notify you within 72

@@ -61,3 +61,11 @@ describe('PricingSection', () => {
     expect(toggle).toHaveAttribute('aria-labelledby', 'billing-monthly billing-yearly')
   })
 })
+
+it('shows annual totals and carries the chosen plan and billing to the request', async () => {
+  renderPricing()
+  await userEvent.click(screen.getByRole('switch'))
+  expect(screen.getByText('$276 total / year')).toBeInTheDocument()
+  expect(screen.getByText('$1428 total / year')).toBeInTheDocument()
+  expect(screen.getAllByRole('link', { name: /request early access/i })[1]).toHaveAttribute('href', '?plan=growth&billing=yearly#cta')
+})

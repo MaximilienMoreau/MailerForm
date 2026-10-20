@@ -3,19 +3,19 @@ import { AlertTriangle, CheckCircle2, XCircle } from 'lucide-react'
 import { EASE, VP_MD } from '@/lib/motion'
 
 const before = [
-  'Send campaign to 50k contacts',
-  'Wait 24–48h for delivery data',
-  'Discover 23% went to spam',
-  'Domain reputation already damaged',
+  'Send without inspecting the message',
+  'Wait for delivery events',
+  'Discover a delivery issue',
+  'Investigate content and authentication',
   'Scramble to figure out why',
 ] as const
 
 const after = [
   'Draft your campaign',
-  'Run pre-send analysis (< 2s)',
-  'Fix 3 flagged issues immediately',
-  'Send with 94/100 deliverability score',
-  'Track inbox placement in real-time',
+  'Run pre-send analysis',
+  'Review and correct flagged issues',
+  'Send through the appropriate stream',
+  'Monitor delivery events',
 ] as const
 
 export default function ProblemSection() {
@@ -31,7 +31,7 @@ export default function ProblemSection() {
         >
           <span className="tag bg-orange-500/10 text-orange-400 border border-orange-500/20">
             <AlertTriangle size={12} aria-hidden />
-            The problem with traditional ESPs
+            A proactive email workflow
           </span>
         </motion.div>
 
@@ -49,8 +49,7 @@ export default function ProblemSection() {
           transition={{ duration: 0.5, delay: 0.15, ease: EASE }}
           className="text-gray-400 text-center text-lg max-w-2xl mx-auto mb-16"
         >
-          SendGrid, Mailgun, and every other ESP tell you what happened.{' '}
-          <span className="text-gray-200 font-medium">MailerForm tells you what will happen.</span>
+          Check for risks before sending, then use delivery events to understand the outcome.
         </motion.p>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
@@ -61,7 +60,7 @@ export default function ProblemSection() {
           >
             <div className="flex items-center gap-2 mb-5">
               <XCircle size={16} className="text-red-400" aria-hidden />
-              <span className="text-sm font-semibold text-red-400">Without MailerForm</span>
+              <span className="text-sm font-semibold text-red-400">React after sending</span>
             </div>
             <ol className="space-y-3">
               {before.map((step, i) => (
@@ -82,7 +81,7 @@ export default function ProblemSection() {
           >
             <div className="flex items-center gap-2 mb-5">
               <CheckCircle2 size={16} className="text-emerald-400" aria-hidden />
-              <span className="text-sm font-semibold text-emerald-400">With MailerForm</span>
+              <span className="text-sm font-semibold text-emerald-400">Check before sending</span>
             </div>
             <ol className="space-y-3">
               {after.map((step, i) => (

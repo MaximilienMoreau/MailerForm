@@ -86,8 +86,8 @@ export default function ApiSection() {
               transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
               className="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-5"
             >
-              From zero to first send{' '}
-              <span className="text-brand-400">in 5 minutes</span>
+              Analyze, correct, send{' '}
+              <span className="text-brand-400">in your workflow</span>
             </motion.h2>
 
             <motion.p
@@ -95,7 +95,7 @@ export default function ApiSection() {
               transition={{ duration: 0.5, delay: 0.15, ease: EASE }}
               className="text-gray-400 leading-relaxed mb-8"
             >
-              260+ RESTful endpoints. Webhooks for every event. Clear OpenAPI docs. Built for developers who need reliability, not just documentation.
+              Use the analysis result to decide whether to send or fix the message. This illustrative SDK example shows the intended workflow.
             </motion.p>
 
             <motion.div
@@ -103,8 +103,8 @@ export default function ApiSection() {
               transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
               className="mb-8"
             >
-              <p className="text-xs text-gray-500 mb-3 font-semibold uppercase tracking-wider">Official SDKs</p>
-              <ul className="flex flex-wrap gap-2 list-none p-0 m-0" aria-label="Official SDKs">
+              <p className="text-xs text-gray-500 mb-3 font-semibold uppercase tracking-wider">SDK documentation</p>
+              <ul className="flex flex-wrap gap-2 list-none p-0 m-0" aria-label="SDK documentation">
                 {sdks.map(sdk => (
                   <li key={sdk.lang}>
                     <a
@@ -124,8 +124,9 @@ export default function ApiSection() {
             <motion.div
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
               transition={{ duration: 0.5, delay: 0.25, ease: EASE }}
-              className="grid grid-cols-3 gap-4"
+              className="grid grid-cols-3 gap-4" aria-label="Analysis and sending workflow"
             >
+
               {apiStats.map(stat => (
                 <div key={stat.label} className="bg-white/[0.03] border border-white/[0.07] rounded-xl p-4 text-center">
                   <p className="text-xl font-extrabold text-white tabular-nums">{stat.value}</p>
