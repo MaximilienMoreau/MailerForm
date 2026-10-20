@@ -11,9 +11,9 @@
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
     "lint": "eslint . --max-warnings 0",
-    "format": "prettier --write src scripts e2e *.{js,cjs,ts,json} .github/workflows/*.yml",
+    "format": "prettier --write src scripts e2e *.{js,cjs,ts,json} .github/*.yml .github/workflows/*.yml",
     "typecheck": "tsc --noEmit && tsc -p tsconfig.tools.json --noEmit",
-    "format:check": "prettier --check src scripts e2e *.{js,cjs,ts,json} .github/workflows/*.yml",
+    "format:check": "prettier --check src scripts e2e *.{js,cjs,ts,json} .github/*.yml .github/workflows/*.yml",
     "check": "npm run typecheck && npm run lint && npm run format:check && npm run test:run",
     "test:e2e": "playwright test"
   },
