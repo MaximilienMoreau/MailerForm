@@ -84,3 +84,19 @@ it('ships a 1200 by 630 PNG social preview', () => {
   expect(png.readUInt32BE(16)).toBe(1200)
   expect(png.readUInt32BE(20)).toBe(630)
 })
+
+it('renders a standalone non-indexable 404 without a canonical URL', async () => {
+  const { renderNotFoundPage } = await import('../static-pages')
+  const document = new DOMParser().parseFromString(renderNotFoundPage(template), 'text/html')
+  expect(document.querySelector('h1')).toHaveTextContent('Page not found')
+  expect(document.querySelector('meta[name="robots"]')).toHaveAttribute(
+    'content',
+    'noindex, follow'
+  )
+  expect(document.querySelector('link[rel="canonical"]')).toBeNull()
+  expect(document.querySelector('a[href="/"]')).toHaveTextContent('Back to homepage')
+  const deployment = JSON.parse(readFileSync('vercel.json', 'utf8'))
+  expect(
+    deployment.rewrites.every((route: { source: string }) => !route.source.includes('*'))
+  ).toBe(true)
+})

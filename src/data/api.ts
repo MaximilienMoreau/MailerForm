@@ -1,9 +1,9 @@
 export const sdks = [
   { lang: 'Node.js', color: 'text-emerald-400', href: 'https://docs.mailerform.io/sdks/nodejs' },
-  { lang: 'Python',  color: 'text-sky-400',     href: 'https://docs.mailerform.io/sdks/python' },
-  { lang: 'Ruby',    color: 'text-red-400',     href: 'https://docs.mailerform.io/sdks/ruby' },
-  { lang: 'Go',      color: 'text-cyan-400',    href: 'https://docs.mailerform.io/sdks/go' },
-  { lang: 'PHP',     color: 'text-violet-400',  href: 'https://docs.mailerform.io/sdks/php' },
+  { lang: 'Python', color: 'text-sky-400', href: 'https://docs.mailerform.io/sdks/python' },
+  { lang: 'Ruby', color: 'text-red-400', href: 'https://docs.mailerform.io/sdks/ruby' },
+  { lang: 'Go', color: 'text-cyan-400', href: 'https://docs.mailerform.io/sdks/go' },
+  { lang: 'PHP', color: 'text-violet-400', href: 'https://docs.mailerform.io/sdks/php' },
 ]
 
 export const apiStats = [
@@ -12,29 +12,35 @@ export const apiStats = [
   { value: 'Send', label: 'Choose a stream' },
 ]
 
-export const codeExample = `import MailerForm from '@mailerform/sdk'
+export const codeExample = `// Illustrative SDK workflow: install the SDK and set MAILERFORM_KEY.
+// Replace the sender with a verified domain and use a test recipient.
+import MailerForm from '@mailerform/sdk'
 
-const client = new MailerForm({
-  apiKey: process.env.MAILERFORM_KEY,
-})
+const apiKey = process.env.MAILERFORM_KEY
+if (!apiKey) throw new Error('Set MAILERFORM_KEY before running this example.')
 
-// Analyze before sending
-const analysis = await client.analyze({
-  subject: 'Your order is confirmed!',
-  html: emailHtml,
+const client = new MailerForm({ apiKey })
+const email = {
   from: 'orders@acme.com',
-})
-
-if (analysis.score >= 80) {
-  // Safe to send
-  await client.send({
-    stream: 'transactional',
-    to: 'customer@example.com',
-    subject: 'Your order is confirmed!',
-    html: emailHtml,
-  })
+  subject: 'Your order is confirmed!',
+  html: '<p>Thank you. Your order has been confirmed.</p>',
 }
 
-// analysis.score    → 94
-// analysis.inboxRate → 97.3%
-// analysis.warnings  → ['image-ratio']`
+try {
+  const analysis = await client.analyze(email)
+
+  // Review warnings as well as the score. Neither guarantees inbox placement.
+  if (analysis.score < 80 || analysis.warnings.length > 0) {
+    console.warn('Review the findings, correct the message or authentication, then analyze again.', analysis.warnings)
+    process.exitCode = 1
+  } else {
+    await client.send({
+      ...email,
+      stream: 'transactional',
+      to: 'customer@example.com',
+    })
+  }
+} catch (error) {
+  console.error('Analysis or sending failed. Review the error before retrying.', error)
+  process.exitCode = 1
+}`

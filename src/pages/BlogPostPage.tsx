@@ -2,19 +2,18 @@ import { Link, useParams } from 'react-router-dom'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import NewsletterForm from '@/components/NewsletterForm'
-import { posts, categoryColors } from '@/data/posts'
+import { posts, categoryColors, type Post } from '@/data/posts'
 import { useMeta } from '@/hooks/useMeta'
 import NotFound from '@/pages/NotFound'
 
 export default function BlogPostPage() {
   const { slug } = useParams()
   const post = posts.find((item) => item.slug === slug)
-  useMeta({
-    title: post ? `${post.title} | MailerForm` : 'Article not found',
-    description: post?.excerpt,
-    article: post,
-  })
-  if (!post) return <NotFound />
+  return post ? <BlogArticle post={post} /> : <NotFound />
+}
+
+function BlogArticle({ post }: { post: Post }) {
+  useMeta({ title: `${post.title} | MailerForm`, description: post.excerpt, article: post })
   return (
     <div className="min-h-screen">
       <Navbar />
