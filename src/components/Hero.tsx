@@ -107,15 +107,15 @@ export default function Hero() {
 
         <motion.h1
           {...fadeUp(0.1)}
-          className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.05] max-w-4xl"
+          className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.05] max-w-4xl sm:leading-none lg:leading-none"
         >
           Stop{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-sky-400">
+          <span className="text-transparent bg-clip-text bg-linear-to-r/srgb from-brand-400 to-sky-400">
             hoping
           </span>{' '}
           emails land in inbox.
           <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-sky-400">
+          <span className="text-transparent bg-clip-text bg-linear-to-r/srgb from-brand-400 to-sky-400">
             Know
           </span>{' '}
           before you send.
@@ -123,7 +123,7 @@ export default function Hero() {
 
         <motion.p
           {...fadeUp(0.2)}
-          className="mt-6 text-lg sm:text-xl text-gray-400 max-w-2xl leading-relaxed"
+          className="mt-6 text-lg sm:text-xl text-gray-400 max-w-2xl leading-relaxed sm:leading-7"
         >
           Analyze your email, fix delivery risks, then send through one API. Built for SaaS teams
           managing transactional and marketing traffic.

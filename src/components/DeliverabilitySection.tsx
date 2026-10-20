@@ -32,10 +32,10 @@ export default function DeliverabilitySection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VP_SM}
               transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
-              className="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-6"
+              className="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-6 sm:leading-10"
             >
               Find risks, apply fixes,{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-brand-400">
+              <span className="text-transparent bg-clip-text bg-linear-to-r/srgb from-violet-400 to-brand-400">
                 then send
               </span>
             </motion.h2>
@@ -65,7 +65,7 @@ export default function DeliverabilitySection() {
                 'Send: keep transactional and marketing traffic separate',
               ].map((item) => (
                 <li key={item} className="flex items-center gap-3 text-sm text-gray-300">
-                  <CheckCircle2 size={15} className="text-emerald-400 flex-shrink-0" aria-hidden />
+                  <CheckCircle2 size={15} className="text-emerald-400 shrink-0" aria-hidden />
                   {item}
                 </li>
               ))}

@@ -31,10 +31,8 @@ npm run format        # Apply the shared formatting rules
 CI runs the same type checks, lint, formatting checks, tests, and production build.
 `package-lock.json` is committed; use `npm ci` to reproduce the dependency tree.
 
-The current production dependency audit passes (`npm audit --omit=dev`). The
-full audit still reports seven development dependency findings in the Tailwind 3
-toolchain. Its suggested fix requires Tailwind 4; handle that as a separate CSS
-migration with visual regression checks rather than applying `npm audit fix --force`.
+Tailwind 4 uses its dedicated Vite plugin; PostCSS and Autoprefixer do not need
+separate configuration. Run `npm audit` to check the full dependency tree.
 
 ## Structure and conventions
 
@@ -59,8 +57,9 @@ in plain data/functions rather than JSX. Internal `SiteLink` links use React
 Router, retain local query parameters for anchors, and leave external links and
 new-tab/download links to the browser. Do not recreate lazy components in render.
 
-Styles use Tailwind and shared classes in `src/index.css`; brand tokens are in
-`tailwind.config.cjs`. Motion presets live in `src/lib/motion.ts`. Reduced-motion
+Styles use Tailwind 4 and shared classes in `src/index.css`; the CSS `@theme`
+block holds the fonts and preserved brand/UI color tokens. Explicit `@source`
+paths cover the app and generated HTML. Motion presets live in `src/lib/motion.ts`. Reduced-motion
 preferences apply to CSS scrolling and custom counters as well as Framer Motion.
 
 ## Forms and preferences
@@ -95,8 +94,9 @@ to [Vercel's static 404 behavior](https://vercel.com/kb/guide/custom-404-page).
 There is no homepage catch-all rewrite. Client navigation also handles unknown
 pages and restores indexable metadata when returning to a valid page.
 
-When adding a public page or guide, update its route/metadata, Vercel mapping, and
-`public/sitemap.xml` together. Tests check deployment mappings against generated
+When adding a public page or guide, update its route/metadata and Vercel
+deployment mappings together. The build generates `dist/sitemap.xml` from the
+indexable pages and guides, so there is no separate URL list to maintain. Tests check deployment mappings against generated
 pages. Vite's local development/preview fallback is not a verification of the
 production HTTP 404 status; check that on a Vercel preview deployment.
 
@@ -119,3 +119,29 @@ TypeScript checks both application code (`tsconfig.json`) and build scripts,
 configuration, and Node-based tests (`tsconfig.tools.json`). ESLint covers the
 whole repository, and Prettier formatting is enforced in CI. Add regression tests
 for behavior changes; keep visual-only changes lightweight.
+
+## Browser journeys
+
+Install Chromium once with `npx playwright install chromium`, then run
+`npm run test:e2e`. On Linux, `npx playwright install --with-deps chromium`
+also installs required system libraries. CI runs these journeys automatically.
+
+The Playwright suite tests the production build in Chromium with desktop and
+Pixel 7 viewport/touch settings. It covers keyboard navigation, mobile dialog
+focus and dismissal, yearly plan persistence, form validation, failed requests
+and retry, and newsletter consent. Animations run normally. Mobile emulation is
+not a physical-device test or coverage of Safari/Firefox.
+
+Tests build into `dist-e2e/` with a dummy Formspree ID. All Formspree traffic is
+blocked unless a test supplies a simulated response; no live request is sent.
+The normal `dist/` build is unaffected. Failures retain screenshots and traces
+in `test-results/`; view the report with `npx playwright show-report`.
+The server lifecycle and device projects follow the
+[Playwright configuration](https://playwright.dev/docs/test-webserver).
+
+Tailwind 4 requires modern browsers: Safari 16.4+, Chrome 111+, and Firefox 128+.
+See the [official migration guide](https://tailwindcss.com/docs/upgrade-guide).
+The migration preserves the existing palette, gradients, focus outlines, button
+cursors and responsive line heights. Its visual comparison covered the homepage,
+About, blog and privacy pages at desktop and mobile widths; browser journeys also
+exercise the mobile menu and forms with normal animations.

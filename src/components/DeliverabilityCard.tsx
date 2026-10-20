@@ -19,7 +19,7 @@ const scores: Score[] = [
 
 export default function DeliverabilityCard() {
   return (
-    <div className="bg-gray-900/80 border border-white/10 rounded-2xl p-6 text-left shadow-2xl shadow-black/50 backdrop-blur-sm">
+    <div className="bg-gray-900/80 border border-white/10 rounded-2xl p-6 text-left shadow-2xl shadow-black/50 backdrop-blur-xs">
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2">
           <Shield size={16} className="text-brand-400" />
@@ -76,7 +76,7 @@ export default function DeliverabilityCard() {
         <span className="text-xs text-gray-500">2 warnings · 0 blockers</span>
         <SiteLink
           href="#deliverability"
-          className="text-xs text-brand-400 hover:text-brand-300 font-medium transition-colors flex items-center gap-1 focus-ring rounded"
+          className="text-xs text-brand-400 hover:text-brand-300 font-medium transition-colors flex items-center gap-1 focus-ring rounded-sm"
           aria-label="View full deliverability report"
         >
           View full report <ArrowRight size={11} aria-hidden />

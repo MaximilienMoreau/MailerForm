@@ -69,7 +69,7 @@ export default function ApiSection() {
             transition={{ duration: 0.65, delay: 0.1, ease: EASE }}
             className="order-2 lg:order-1"
           >
-            <div className="bg-gray-900/80 border border-white/10 rounded-2xl overflow-hidden shadow-2xl shadow-black/50 backdrop-blur-sm">
+            <div className="bg-gray-900/80 border border-white/10 rounded-2xl overflow-hidden shadow-2xl shadow-black/50 backdrop-blur-xs">
               <div className="flex items-center justify-between px-5 py-3 border-b border-white/[0.06]">
                 <div className="flex items-center gap-2">
                   <div className="flex gap-1.5" aria-hidden>
@@ -83,7 +83,7 @@ export default function ApiSection() {
                   type="button"
                   onClick={handleCopy}
                   aria-label={copied ? 'Copied to clipboard' : 'Copy code to clipboard'}
-                  className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-300 transition-colors focus-ring rounded px-1.5 py-0.5"
+                  className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-300 transition-colors focus-ring rounded-sm px-1.5 py-0.5"
                 >
                   {copied ? (
                     <>
@@ -146,7 +146,7 @@ export default function ApiSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VP}
               transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
-              className="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-5"
+              className="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-5 sm:leading-10"
             >
               Analyze, correct, send <span className="text-brand-400">in your workflow</span>
             </motion.h2>

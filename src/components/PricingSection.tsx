@@ -191,7 +191,7 @@ export default function PricingSection() {
                     <li key={f} className="flex items-start gap-2.5 text-sm text-gray-300">
                       <CheckCircle2
                         size={14}
-                        className="text-emerald-400 flex-shrink-0 mt-0.5"
+                        className="text-emerald-400 shrink-0 mt-0.5"
                         aria-hidden
                       />
                       {f}
@@ -222,7 +222,7 @@ export default function PricingSection() {
               Enterprise plans with dedicated infrastructure, custom contracts, and SLA.
             </p>
           </div>
-          <a href="mailto:sales@mailerform.io" className="btn-secondary text-sm flex-shrink-0">
+          <a href="mailto:sales@mailerform.io" className="btn-secondary text-sm shrink-0">
             Talk to sales
             <ArrowRight size={14} aria-hidden />
           </a>

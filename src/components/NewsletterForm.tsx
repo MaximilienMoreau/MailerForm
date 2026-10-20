@@ -80,7 +80,7 @@ export default function NewsletterForm() {
               href="/privacy"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline focus-ring rounded"
+              className="underline focus-ring rounded-sm"
             >
               privacy policy (opens in a new tab)
             </a>

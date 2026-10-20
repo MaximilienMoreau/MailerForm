@@ -33,7 +33,7 @@ export default function LegalLayout({ title, subtitle, lastUpdated, children }: 
             <p className="text-xs text-brand-400 font-semibold uppercase tracking-widest mb-4">
               Last updated: {lastUpdated}
             </p>
-            <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-4 leading-tight">
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-4 leading-tight sm:leading-none">
               {title}
             </h1>
             {subtitle && <p className="text-lg text-gray-400 max-w-xl mx-auto">{subtitle}</p>}

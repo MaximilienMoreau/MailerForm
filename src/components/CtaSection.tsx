@@ -113,10 +113,10 @@ export default function CtaSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VP_LG}
           transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
-          className="text-4xl sm:text-5xl font-extrabold text-white leading-tight mb-6"
+          className="text-4xl sm:text-5xl font-extrabold text-white leading-tight mb-6 sm:leading-none"
         >
           Build a more reliable email workflow.{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-sky-400">
+          <span className="text-transparent bg-clip-text bg-linear-to-r/srgb from-brand-400 to-sky-400">
             Get early access.
           </span>
         </motion.h2>
@@ -141,7 +141,7 @@ export default function CtaSection() {
           {plan && state !== 'success' && (
             <p className="mb-4 text-sm text-brand-300">
               Selected plan: <strong className="capitalize">{plan}</strong> · {billing} billing{' '}
-              <SiteLink href="#pricing" className="underline ml-2 focus-ring rounded">
+              <SiteLink href="#pricing" className="underline ml-2 focus-ring rounded-sm">
                 Change plan
               </SiteLink>
             </p>
@@ -213,7 +213,7 @@ export default function CtaSection() {
                         autoComplete="email"
                         aria-invalid={emailInvalid}
                         aria-describedby={state === 'error' ? 'cta-email-error' : undefined}
-                        className="w-full h-full bg-white/[0.06] border border-white/[0.12] rounded-xl px-4 py-3.5 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-brand-500/60 focus:bg-white/[0.08] transition-all aria-[invalid=true]:border-red-500/50"
+                        className="w-full h-full bg-white/[0.06] border border-white/[0.12] rounded-xl px-4 py-3.5 text-sm text-white placeholder:text-gray-500 focus:outline-hidden focus:border-brand-500/60 focus:bg-white/[0.08] transition-all aria-[invalid=true]:border-red-500/50"
                       />
                     </div>
                     <button

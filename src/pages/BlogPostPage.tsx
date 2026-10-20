@@ -18,12 +18,12 @@ function BlogArticle({ post }: { post: Post }) {
     <div className="min-h-screen">
       <Navbar />
       <main id="main-content" className="max-w-3xl mx-auto px-4 sm:px-6 pt-32 pb-20">
-        <Link to="/blog" className="text-sm text-brand-300 underline focus-ring rounded">
+        <Link to="/blog" className="text-sm text-brand-300 underline focus-ring rounded-sm">
           ← All guides
         </Link>
         <article className="mt-8">
           <span className={`tag border ${categoryColors[post.category]}`}>{post.category}</span>
-          <h1 className="text-3xl sm:text-5xl leading-tight font-extrabold text-white mt-5">
+          <h1 className="text-3xl sm:text-5xl leading-tight font-extrabold text-white mt-5 sm:leading-none">
             {post.title}
           </h1>
           <p className="text-sm text-gray-400 mt-5">
@@ -38,11 +38,11 @@ function BlogArticle({ post }: { post: Post }) {
           ))}
           <aside className="mt-10 rounded-xl border border-brand-500/20 bg-brand-500/10 p-5 text-sm text-gray-300">
             Explore the workflow with{' '}
-            <Link to="/#deliverability" className="text-brand-300 underline focus-ring rounded">
+            <Link to="/#deliverability" className="text-brand-300 underline focus-ring rounded-sm">
               sample analysis reports
             </Link>
             , or{' '}
-            <Link to="/#cta" className="text-brand-300 underline focus-ring rounded">
+            <Link to="/#cta" className="text-brand-300 underline focus-ring rounded-sm">
               request early access
             </Link>
             .

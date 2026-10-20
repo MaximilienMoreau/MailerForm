@@ -93,14 +93,14 @@ export default function Footer() {
                         href={item.href}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-sm text-gray-500 hover:text-gray-200 transition-colors focus-ring rounded"
+                        className="text-sm text-gray-500 hover:text-gray-200 transition-colors focus-ring rounded-sm"
                       >
                         {item.label}
                       </a>
                     ) : (
                       <Link
                         to={item.href}
-                        className="text-sm text-gray-500 hover:text-gray-200 transition-colors focus-ring rounded"
+                        className="text-sm text-gray-500 hover:text-gray-200 transition-colors focus-ring rounded-sm"
                       >
                         {item.label}
                       </Link>
@@ -119,13 +119,13 @@ export default function Footer() {
           <div className="flex items-center gap-5">
             <Link
               to="/privacy"
-              className="text-xs text-gray-600 hover:text-gray-400 transition-colors focus-ring rounded"
+              className="text-xs text-gray-600 hover:text-gray-400 transition-colors focus-ring rounded-sm"
             >
               Privacy
             </Link>
             <Link
               to="/terms"
-              className="text-xs text-gray-600 hover:text-gray-400 transition-colors focus-ring rounded"
+              className="text-xs text-gray-600 hover:text-gray-400 transition-colors focus-ring rounded-sm"
             >
               Terms
             </Link>
@@ -133,7 +133,7 @@ export default function Footer() {
               href="https://status.mailerform.io"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-1.5 text-xs text-gray-600 hover:text-gray-400 transition-colors focus-ring rounded"
+              className="flex items-center gap-1.5 text-xs text-gray-600 hover:text-gray-400 transition-colors focus-ring rounded-sm"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" aria-hidden />
               All systems operational
