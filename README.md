@@ -145,3 +145,17 @@ The migration preserves the existing palette, gradients, focus outlines, button
 cursors and responsive line heights. Its visual comparison covered the homepage,
 About, blog and privacy pages at desktop and mobile widths; browser journeys also
 exercise the mobile menu and forms with normal animations.
+
+## Dependency maintenance
+
+[Dependabot configuration](.github/dependabot.yml) schedules npm and GitHub Actions
+version checks every Monday at 09:00 Europe/Paris. Minor and patch updates are
+grouped by ecosystem; major upgrades remain separate for review. Version-update
+PRs are limited to five for npm and two for Actions. Existing CI validates the
+proposals; this configuration does not enable automatic merging.
+
+GitHub reads this configuration from the repository's default branch, so it takes
+effect once the file is merged there. Dependabot security alerts/updates have
+separate repository settings and limits; the weekly version-update schedule does
+not enable or replace those settings. See the
+[GitHub configuration reference](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference).
