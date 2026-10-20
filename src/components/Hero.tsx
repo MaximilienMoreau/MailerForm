@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Zap } from 'lucide-react'
 import DeliverabilityCard from './DeliverabilityCard'
 import { EASE, fadeUp, staggerContainer, staggerItem } from '@/lib/motion'
+import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
 import { stats, type Stat } from '@/data/stats'
 
 const EASE_OUT_QUART = (t: number) => 1 - Math.pow(1 - t, 4)
@@ -16,15 +17,20 @@ const trust = [
 function useCountUp(target: number, decimals: number, duration = 1.8) {
   const [count, setCount] = useState(0)
   const [done, setDone] = useState(false)
+  const reducedMotion = usePrefersReducedMotion()
   const started = useRef(false)
   const frameRef = useRef(0)
 
   useEffect(() => {
-    return () => { cancelAnimationFrame(frameRef.current) }
-  }, [])
+    if (reducedMotion) cancelAnimationFrame(frameRef.current)
+    return () => {
+      cancelAnimationFrame(frameRef.current)
+      started.current = false
+    }
+  }, [reducedMotion])
 
   const start = useCallback(() => {
-    if (started.current) return
+    if (reducedMotion || started.current) return
     started.current = true
     const begin = performance.now()
     function tick(now: number) {
@@ -39,9 +45,9 @@ function useCountUp(target: number, decimals: number, duration = 1.8) {
       }
     }
     frameRef.current = requestAnimationFrame(tick)
-  }, [target, decimals, duration])
+  }, [target, decimals, duration, reducedMotion])
 
-  return { count, done, start }
+  return { count: reducedMotion ? target : count, done: reducedMotion || done, start }
 }
 
 function StatItem({ stat }: { stat: Stat }) {
@@ -53,21 +59,17 @@ function StatItem({ stat }: { stat: Stat }) {
     if (inView) start()
   }, [inView, start])
 
-  const display =
-    stat.decimals > 0
-      ? count.toFixed(stat.decimals)
-      : count.toFixed(0)
+  const display = stat.decimals > 0 ? count.toFixed(stat.decimals) : count.toFixed(0)
 
-  const finalDisplay =
-    stat.decimals > 0
-      ? stat.value.toFixed(stat.decimals)
-      : stat.value.toFixed(0)
+  const finalDisplay = stat.decimals > 0 ? stat.value.toFixed(stat.decimals) : stat.value.toFixed(0)
 
   return (
     <motion.div ref={ref} variants={staggerItem} className="flex flex-col-reverse items-center">
       <dt className="text-sm text-gray-500 mt-1 text-center">{stat.label}</dt>
       <dd className="text-3xl font-extrabold text-white tracking-tight tabular-nums" aria-hidden>
-        {stat.prefix}{display}{stat.suffix}
+        {stat.prefix}
+        {display}
+        {stat.suffix}
       </dd>
       {/* Announce only the final value to screen readers, not every animation frame */}
       <span className="sr-only" aria-live="polite" aria-atomic="true">
@@ -80,33 +82,57 @@ function StatItem({ stat }: { stat: Stat }) {
 export default function Hero() {
   return (
     <section className="relative flex flex-col items-center justify-center pt-16 overflow-hidden">
-      <div className="absolute inset-0 bg-grid-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" aria-hidden />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(51,102,255,0.15),transparent)]" aria-hidden />
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] lg:w-[800px] lg:h-[800px] bg-brand-500/5 rounded-full blur-3xl pointer-events-none" aria-hidden />
+      <div
+        className="absolute inset-0 bg-grid-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"
+        aria-hidden
+      />
+      <div
+        className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(51,102,255,0.15),transparent)]"
+        aria-hidden
+      />
+      <div
+        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] lg:w-[800px] lg:h-[800px] bg-brand-500/5 rounded-full blur-3xl pointer-events-none"
+        aria-hidden
+      />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12 flex flex-col items-center text-center">
-
-        <motion.div {...fadeUp(0)} className="inline-flex items-center gap-2 bg-brand-500/10 border border-brand-500/20 rounded-full px-4 py-1.5 text-sm text-brand-400 font-medium mb-8">
+        <motion.div
+          {...fadeUp(0)}
+          className="inline-flex items-center gap-2 bg-brand-500/10 border border-brand-500/20 rounded-full px-4 py-1.5 text-sm text-brand-400 font-medium mb-8"
+        >
           <Zap size={13} fill="currentColor" aria-hidden />
           Email Infrastructure Platform. Built for SaaS
         </motion.div>
 
-        <motion.h1 {...fadeUp(0.1)} className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.05] max-w-4xl">
+        <motion.h1
+          {...fadeUp(0.1)}
+          className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.05] max-w-4xl"
+        >
           Stop{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-sky-400">hoping</span>{' '}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-sky-400">
+            hoping
+          </span>{' '}
           emails land in inbox.
           <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-sky-400">Know</span>{' '}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-sky-400">
+            Know
+          </span>{' '}
           before you send.
         </motion.h1>
 
-        <motion.p {...fadeUp(0.2)} className="mt-6 text-lg sm:text-xl text-gray-400 max-w-2xl leading-relaxed">
-          Analyze your email, fix delivery risks, then send through one API.{' '}
-          Built for SaaS teams managing transactional and marketing traffic.
+        <motion.p
+          {...fadeUp(0.2)}
+          className="mt-6 text-lg sm:text-xl text-gray-400 max-w-2xl leading-relaxed"
+        >
+          Analyze your email, fix delivery risks, then send through one API. Built for SaaS teams
+          managing transactional and marketing traffic.
         </motion.p>
 
-        <motion.div {...fadeUp(0.3)} className="mt-6 flex flex-wrap items-center justify-center gap-3">
-          {trust.map(t => (
+        <motion.div
+          {...fadeUp(0.3)}
+          className="mt-6 flex flex-wrap items-center justify-center gap-3"
+        >
+          {trust.map((t) => (
             <span key={t} className="flex items-center gap-1.5 text-xs text-gray-500 font-medium">
               <CheckCircle2 size={13} className="text-emerald-500" aria-hidden />
               {t}
@@ -114,7 +140,10 @@ export default function Hero() {
           ))}
         </motion.div>
 
-        <motion.div {...fadeUp(0.38)} className="mt-10 flex flex-col sm:flex-row items-center gap-4">
+        <motion.div
+          {...fadeUp(0.38)}
+          className="mt-10 flex flex-col sm:flex-row items-center gap-4"
+        >
           <a href="#cta" className="btn-primary text-base px-8 py-3.5">
             Request early access
             <ArrowRight size={16} aria-hidden />
@@ -131,7 +160,7 @@ export default function Hero() {
           animate="visible"
           className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-8 w-full max-w-3xl"
         >
-          {stats.map(s => (
+          {stats.map((s) => (
             <StatItem key={s.label} stat={s} />
           ))}
         </motion.dl>
