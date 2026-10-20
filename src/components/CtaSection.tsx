@@ -15,17 +15,25 @@ function isValidEmail(value: string): boolean {
 
 export default function CtaSection() {
   const params = new URLSearchParams(window.location.search)
-  const plan = ['starter', 'growth', 'scale'].includes(params.get('plan') ?? '') ? params.get('plan') : null
+  const plan = ['starter', 'growth', 'scale'].includes(params.get('plan') ?? '')
+    ? params.get('plan')
+    : null
   const billing = params.get('billing') === 'yearly' ? 'yearly' : 'monthly'
   const FORM_ID = import.meta.env.VITE_FORMSPREE_ID
   const inputRef = useRef<HTMLInputElement>(null)
-  const [email, setEmail]       = useState('')
+  const [email, setEmail] = useState('')
   const [honeypot, setHoneypot] = useState('')
-  const [state, setState]       = useState<FormState>('idle')
+  const [state, setState] = useState<FormState>('idle')
   const [errorMsg, setErrorMsg] = useState('')
+  const [request, setRequest] = useState<{
+    email: string
+    plan: string | null
+    billing: string
+  } | null>(null)
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
+    if (state === 'loading') return
     const value = email.trim()
     if (!value) return
 
@@ -35,6 +43,8 @@ export default function CtaSection() {
       inputRef.current?.focus()
       return
     }
+
+    setRequest({ email: value, plan, billing })
 
     // Bot filled the hidden honeypot field, silently succeed
     if (honeypot) {
@@ -51,7 +61,12 @@ export default function CtaSection() {
       const res = await fetch(`https://formspree.io/f/${FORM_ID}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ email: value, purpose: 'early-access', plan, billing: plan ? billing : null }),
+        body: JSON.stringify({
+          email: value,
+          purpose: 'early-access',
+          plan,
+          billing: plan ? billing : null,
+        }),
       })
 
       if (!res.ok) throw new Error('submit_failed')
@@ -73,12 +88,20 @@ export default function CtaSection() {
 
   return (
     <section id="cta" className="py-16 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_50%,rgba(51,102,255,0.12),transparent)]" aria-hidden />
-      <div className="absolute inset-0 bg-grid-white [mask-image:radial-gradient(ellipse_at_center,transparent_30%,black)]" aria-hidden />
+      <div
+        className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_50%,rgba(51,102,255,0.12),transparent)]"
+        aria-hidden
+      />
+      <div
+        className="absolute inset-0 bg-grid-white [mask-image:radial-gradient(ellipse_at_center,transparent_30%,black)]"
+        aria-hidden
+      />
 
       <div className="relative max-w-3xl mx-auto px-4 sm:px-6 text-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={VP_LG}
+          initial={{ opacity: 0, scale: 0.85 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={VP_LG}
           transition={{ duration: 0.5, ease: EASE }}
           className="w-14 h-14 bg-brand-500 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-xl shadow-brand-500/30"
           aria-hidden
@@ -87,7 +110,9 @@ export default function CtaSection() {
         </motion.div>
 
         <motion.h2
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP_LG}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VP_LG}
           transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
           className="text-4xl sm:text-5xl font-extrabold text-white leading-tight mb-6"
         >
@@ -98,18 +123,30 @@ export default function CtaSection() {
         </motion.h2>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP_LG}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VP_LG}
           transition={{ duration: 0.5, delay: 0.15, ease: EASE }}
           className="text-lg text-gray-400 mb-10 max-w-xl mx-auto"
         >
-          Leave your email to request an invitation. We will contact you about availability and onboarding.
+          Leave your email to request an invitation. We will contact you about availability and
+          onboarding.
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP_LG}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VP_LG}
           transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
         >
-          {plan && <p className="mb-4 text-sm text-brand-300">Selected plan: <strong className="capitalize">{plan}</strong> · {billing} billing <a href="#pricing" className="underline ml-2 focus-ring rounded">Change plan</a></p>}
+          {plan && state !== 'success' && (
+            <p className="mb-4 text-sm text-brand-300">
+              Selected plan: <strong className="capitalize">{plan}</strong> · {billing} billing{' '}
+              <a href="#pricing" className="underline ml-2 focus-ring rounded">
+                Change plan
+              </a>
+            </p>
+          )}
           {!FORM_ID ? (
             <a
               href={`mailto:hello@mailerform.io?subject=${encodeURIComponent(`Early access${plan ? `: ${plan} / ${billing}` : ''}`)}`}
@@ -135,7 +172,21 @@ export default function CtaSection() {
                       <CheckCircle2 size={22} className="text-emerald-400" />
                     </div>
                     <p className="text-white font-semibold text-lg">You&apos;re on the list!</p>
-                    <p className="text-sm text-gray-400">We&apos;ll reach out at that address to get you set up.</p>
+                    {request?.plan && (
+                      <p className="text-sm text-brand-300">
+                        Access requested for{' '}
+                        <span className="capitalize font-semibold">{request.plan}</span> ·{' '}
+                        {request.billing === 'yearly' ? 'annual billing' : 'monthly billing'}.
+                      </p>
+                    )}
+                    <p className="text-sm text-gray-300">
+                      We will contact {request?.email} to confirm availability and discuss
+                      onboarding.
+                    </p>
+                    <p className="text-xs text-gray-400">
+                      Your plan and billing terms will be confirmed before activation. No trial has
+                      started and no payment has been taken.
+                    </p>
                   </motion.div>
                 ) : (
                   <motion.form
@@ -155,8 +206,15 @@ export default function CtaSection() {
                       aria-hidden="true"
                       autoComplete="off"
                       value={honeypot}
-                      onChange={e => setHoneypot(e.target.value)}
-                      style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none', width: 0, height: 0 }}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                      style={{
+                        position: 'absolute',
+                        left: '-9999px',
+                        opacity: 0,
+                        pointerEvents: 'none',
+                        width: 0,
+                        height: 0,
+                      }}
                     />
                     <div className="flex-1 relative">
                       <label htmlFor="cta-email" className="sr-only">
@@ -181,10 +239,13 @@ export default function CtaSection() {
                       disabled={state === 'loading'}
                       className="btn-primary text-sm px-6 py-3.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0 whitespace-nowrap"
                     >
-                      {state === 'loading'
-                        ? <Loader2 size={15} className="animate-spin" aria-label="Loading…" />
-                        : <>Request early access <ArrowRight size={15} aria-hidden /></>
-                      }
+                      {state === 'loading' ? (
+                        <Loader2 size={15} className="animate-spin" aria-label="Loading…" />
+                      ) : (
+                        <>
+                          Request early access <ArrowRight size={15} aria-hidden />
+                        </>
+                      )}
                     </button>
                   </motion.form>
                 )}
@@ -206,20 +267,20 @@ export default function CtaSection() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={VP_LG}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={VP_LG}
           transition={{ duration: 0.6, delay: 0.35, ease: EASE }}
           className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6"
         >
-          {[
-            'No payment required',
-            'Personal onboarding',
-            'Plan confirmed before activation',
-          ].map(item => (
-            <span key={item} className="flex items-center gap-1.5 text-xs text-gray-500">
-              <CheckCircle2 size={12} className="text-emerald-500" aria-hidden />
-              {item}
-            </span>
-          ))}
+          {['No payment required', 'Personal onboarding', 'Plan confirmed before activation'].map(
+            (item) => (
+              <span key={item} className="flex items-center gap-1.5 text-xs text-gray-500">
+                <CheckCircle2 size={12} className="text-emerald-500" aria-hidden />
+                {item}
+              </span>
+            )
+          )}
         </motion.div>
       </div>
     </section>

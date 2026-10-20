@@ -1,3 +1,4 @@
+import { useMeta } from '@/hooks/useMeta'
 import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { MotionConfig } from 'framer-motion'
@@ -12,29 +13,35 @@ import FeaturesSection from '@/components/FeaturesSection'
 import DeliverabilitySection from '@/components/DeliverabilitySection'
 import StreamSection from '@/components/StreamSection'
 import ApiSection from '@/components/ApiSection'
+import PageLoading from '@/components/PageLoading'
 import NotFound from '@/pages/NotFound'
 
 // Sections below the fold, lazy loaded after the critical path renders
 const IntegrationsSection = lazy(() => import('@/components/IntegrationsSection'))
-const ComparisonSection   = lazy(() => import('@/components/ComparisonSection'))
-const PricingSection      = lazy(() => import('@/components/PricingSection'))
-const FaqSection          = lazy(() => import('@/components/FaqSection'))
-const CtaSection          = lazy(() => import('@/components/CtaSection'))
-const Footer              = lazy(() => import('@/components/Footer'))
+const ComparisonSection = lazy(() => import('@/components/ComparisonSection'))
+const PricingSection = lazy(() => import('@/components/PricingSection'))
+const FaqSection = lazy(() => import('@/components/FaqSection'))
+const CtaSection = lazy(() => import('@/components/CtaSection'))
+const Footer = lazy(() => import('@/components/Footer'))
 
 // Secondary pages
-const AboutPage     = lazy(() => import('@/pages/AboutPage'))
+const AboutPage = lazy(() => import('@/pages/AboutPage'))
 const ChangelogPage = lazy(() => import('@/pages/ChangelogPage'))
 const BlogPostPage = lazy(() => import('@/pages/BlogPostPage'))
-const BlogPage      = lazy(() => import('@/pages/BlogPage'))
-const CareersPage   = lazy(() => import('@/pages/CareersPage'))
-const PressPage     = lazy(() => import('@/pages/PressPage'))
-const PrivacyPage   = lazy(() => import('@/pages/legal/PrivacyPage'))
-const TermsPage     = lazy(() => import('@/pages/legal/TermsPage'))
-const CookiesPage   = lazy(() => import('@/pages/legal/CookiesPage'))
-const GdprPage      = lazy(() => import('@/pages/legal/GdprPage'))
+const BlogPage = lazy(() => import('@/pages/BlogPage'))
+const CareersPage = lazy(() => import('@/pages/CareersPage'))
+const PressPage = lazy(() => import('@/pages/PressPage'))
+const PrivacyPage = lazy(() => import('@/pages/legal/PrivacyPage'))
+const TermsPage = lazy(() => import('@/pages/legal/TermsPage'))
+const CookiesPage = lazy(() => import('@/pages/legal/CookiesPage'))
+const GdprPage = lazy(() => import('@/pages/legal/GdprPage'))
 
 function LandingPage() {
+  useMeta({
+    title: 'MailerForm: Email Infrastructure Platform',
+    description:
+      'Analyze your email, correct delivery risks, and send through one API. Explore sample reports and request early access.',
+  })
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -77,16 +84,86 @@ export default function App() {
           <SkipLink />
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/about"     element={<Suspense fallback={null}><AboutPage /></Suspense>} />
-            <Route path="/changelog" element={<Suspense fallback={null}><ChangelogPage /></Suspense>} />
-            <Route path="/privacy"   element={<Suspense fallback={null}><PrivacyPage /></Suspense>} />
-            <Route path="/terms"     element={<Suspense fallback={null}><TermsPage /></Suspense>} />
-            <Route path="/cookies"   element={<Suspense fallback={null}><CookiesPage /></Suspense>} />
-            <Route path="/gdpr"      element={<Suspense fallback={null}><GdprPage /></Suspense>} />
-            <Route path="/blog"      element={<Suspense fallback={null}><BlogPage /></Suspense>} />
-            <Route path="/blog/:slug" element={<Suspense fallback={<div className="pt-32 text-center text-gray-400" role="status">Loading guide…</div>}><BlogPostPage /></Suspense>} />
-            <Route path="/careers"   element={<Suspense fallback={null}><CareersPage /></Suspense>} />
-            <Route path="/press"     element={<Suspense fallback={null}><PressPage /></Suspense>} />
+            <Route
+              path="/about"
+              element={
+                <Suspense fallback={<PageLoading />}>
+                  <AboutPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/changelog"
+              element={
+                <Suspense fallback={<PageLoading />}>
+                  <ChangelogPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/privacy"
+              element={
+                <Suspense fallback={<PageLoading />}>
+                  <PrivacyPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/terms"
+              element={
+                <Suspense fallback={<PageLoading />}>
+                  <TermsPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/cookies"
+              element={
+                <Suspense fallback={<PageLoading />}>
+                  <CookiesPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/gdpr"
+              element={
+                <Suspense fallback={<PageLoading />}>
+                  <GdprPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/blog"
+              element={
+                <Suspense fallback={<PageLoading />}>
+                  <BlogPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/blog/:slug"
+              element={
+                <Suspense fallback={<PageLoading />}>
+                  <BlogPostPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/careers"
+              element={
+                <Suspense fallback={<PageLoading />}>
+                  <CareersPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/press"
+              element={
+                <Suspense fallback={<PageLoading />}>
+                  <PressPage />
+                </Suspense>
+              }
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <CookieBanner />

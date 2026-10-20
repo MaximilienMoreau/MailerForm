@@ -1,5 +1,68 @@
 {
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/about",
+      "destination": "/about/index.html"
+    },
+    {
+      "source": "/changelog",
+      "destination": "/changelog/index.html"
+    },
+    {
+      "source": "/careers",
+      "destination": "/careers/index.html"
+    },
+    {
+      "source": "/press",
+      "destination": "/press/index.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy/index.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms/index.html"
+    },
+    {
+      "source": "/cookies",
+      "destination": "/cookies/index.html"
+    },
+    {
+      "source": "/gdpr",
+      "destination": "/gdpr/index.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog/index.html"
+    },
+    {
+      "source": "/blog/transactional-reputation",
+      "destination": "/blog/transactional-reputation/index.html"
+    },
+    {
+      "source": "/blog/authentication-alignment",
+      "destination": "/blog/authentication-alignment/index.html"
+    },
+    {
+      "source": "/blog/content-and-reputation",
+      "destination": "/blog/content-and-reputation/index.html"
+    },
+    {
+      "source": "/blog/stream-isolation",
+      "destination": "/blog/stream-isolation/index.html"
+    },
+    {
+      "source": "/blog/email-data-controls",
+      "destination": "/blog/email-data-controls/index.html"
+    },
+    {
+      "source": "/blog/migration-playbook",
+      "destination": "/blog/migration-playbook/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }

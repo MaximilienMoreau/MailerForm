@@ -52,7 +52,10 @@ describe('PricingSection', () => {
   it('renders the enterprise contact callout', () => {
     renderPricing()
     expect(screen.getByText(/custom volume or white-label/i)).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /talk to sales/i })).toHaveAttribute('href', 'mailto:sales@mailerform.io')
+    expect(screen.getByRole('link', { name: /talk to sales/i })).toHaveAttribute(
+      'href',
+      'mailto:sales@mailerform.io'
+    )
   })
 
   it('toggle has correct ARIA labelling', () => {
@@ -67,5 +70,22 @@ it('shows annual totals and carries the chosen plan and billing to the request',
   await userEvent.click(screen.getByRole('switch'))
   expect(screen.getByText('$276 total / year')).toBeInTheDocument()
   expect(screen.getByText('$1428 total / year')).toBeInTheDocument()
-  expect(screen.getAllByRole('link', { name: /request early access/i })[1]).toHaveAttribute('href', '?plan=growth&billing=yearly#cta')
+  expect(screen.getAllByRole('link', { name: /request early access/i })[1]).toHaveAttribute(
+    'href',
+    '?plan=growth&billing=yearly#cta'
+  )
+})
+
+it('keeps plan volume and differences visible while letting mobile visitors expand details', async () => {
+  renderPricing()
+  expect(screen.getByText('200,000')).toBeInTheDocument()
+  expect(screen.getByText(/Marketing \+ transactional, with CRM/i)).toBeInTheDocument()
+  const toggle = screen.getByRole('button', { name: 'All Growth features' })
+  expect(toggle).toHaveAttribute('aria-expanded', 'false')
+  const details = document.getElementById(toggle.getAttribute('aria-controls')!)!
+  expect(details).toHaveClass('hidden', 'md:block')
+  await userEvent.click(toggle)
+  expect(toggle).toHaveAttribute('aria-expanded', 'true')
+  expect(details).toHaveClass('block')
+  expect(details).not.toHaveClass('hidden')
 })
