@@ -76,7 +76,7 @@ export default class ErrorBoundary extends Component<Props, State> {
               onClick={this.handleReset}
               className="focus-ring inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-brand-500/25"
             >
-              <RefreshCw size={16} />
+              <RefreshCw size={16} aria-hidden />
               Try again
             </button>
             <a href="/" className="btn-secondary justify-center mt-4 mx-auto">
