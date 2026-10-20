@@ -59,10 +59,6 @@
     {
       "source": "/blog/migration-playbook",
       "destination": "/blog/migration-playbook/index.html"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
     }
   ]
 }

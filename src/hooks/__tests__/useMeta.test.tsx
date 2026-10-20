@@ -54,3 +54,29 @@ it('updates article metadata and clears article schema when navigating back to t
   )
   expect(document.getElementById('page-structured-data')).toBeNull()
 })
+
+it('clears a static 404 noindex directive and creates the home canonical after returning home', async () => {
+  const { default: NotFound } = await import('@/pages/NotFound')
+  document.head.innerHTML =
+    '<title>Page not found</title><meta name="robots" content="noindex, follow"><meta name="description" content="Missing page"><meta property="og:type" content="website">'
+  window.history.replaceState({}, '', '/missing')
+  render(
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+  )
+  expect(document.querySelector('meta[name="robots"]')).toHaveAttribute(
+    'content',
+    'noindex, follow'
+  )
+  expect(document.querySelector('link[rel="canonical"]')).toBeNull()
+  await userEvent.click(screen.getByRole('link', { name: /^Back to homepage$/i }))
+  expect(document.querySelector('meta[name="robots"]')).toBeNull()
+  expect(document.querySelector('link[rel="canonical"]')).toHaveAttribute(
+    'href',
+    'https://mailerform.io/'
+  )
+})

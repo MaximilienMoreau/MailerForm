@@ -143,6 +143,19 @@ export function renderStaticPage(template: string, item: StaticPage): string {
   return html
 }
 
+export function renderNotFoundPage(template: string) {
+  const html = renderStaticPage(template, {
+    path: '/404',
+    title: 'Page not found | MailerForm',
+    description: 'The requested page could not be found. Return to the MailerForm homepage.',
+    content:
+      '<main id="main-content" class="min-h-screen flex flex-col items-center justify-center px-6 text-center"><p class="text-brand-300">404</p><h1 class="mt-4 text-4xl font-bold text-white">Page not found</h1><p class="mt-6 text-gray-300">The requested page could not be found. Check the address or return to the homepage.</p><a href="/" class="btn-primary mt-8">Back to homepage</a></main>',
+  })
+  return html
+    .replace(/<link rel="canonical"[^>]*>/, '')
+    .replace('</head>', '<meta name="robots" content="noindex, follow" /></head>')
+}
+
 /** Emit metadata and readable article HTML without requiring a JavaScript crawler. */
 export function staticPagesPlugin(): Plugin {
   return {
@@ -153,6 +166,7 @@ export function staticPagesPlugin(): Plugin {
       const index = bundle['index.html']
       if (!index || index.type !== 'asset') throw new Error('Missing Vite HTML entry')
       const template = String(index.source)
+      this.emitFile({ type: 'asset', fileName: '404.html', source: renderNotFoundPage(template) })
       for (const item of staticPages) {
         const html = renderStaticPage(template, item)
         if (item.path === '/') index.source = html

@@ -26,4 +26,8 @@ it('renders a complete guide with navigation and a separate newsletter', () => {
 it('handles an unknown article', () => {
   renderPost('does-not-exist')
   expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/not found|lost|404/i)
+  expect(document.querySelector('meta[name="robots"]')).toHaveAttribute(
+    'content',
+    'noindex, follow'
+  )
 })

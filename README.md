@@ -6,7 +6,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript&logoColor=white&labelColor=20232a)
 ![Vite](https://img.shields.io/badge/Vite-5-646cff?logo=vite&logoColor=white&labelColor=20232a)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-06b6d4?logo=tailwindcss&logoColor=white&labelColor=20232a)
-![Tests](https://img.shields.io/badge/tests-80%20passing-22c55e?labelColor=20232a)
+![Tests](https://img.shields.io/badge/tests-86%20passing-22c55e?labelColor=20232a)
 ![License](https://img.shields.io/badge/license-private-6b7280?labelColor=20232a)
 [![CI](https://github.com/MaximilienMoreau/MailerForm/actions/workflows/ci.yml/badge.svg)](https://github.com/MaximilienMoreau/MailerForm/actions/workflows/ci.yml)
 
@@ -217,8 +217,7 @@ the complete article text plus `BlogPosting` structured data. Other routes inclu
 a readable introduction before React takes over. This is static HTML generation,
 not a runtime rendering server.
 
-[`vercel.json`](vercel.json) maps known routes to their generated documents before
-the SPA fallback. Tests keep these mappings aligned with the generated routes.
+[`vercel.json`](vercel.json) maps known routes to their generated documents while unmatched paths use the generated `404.html`. Tests keep these mappings aligned with the generated routes.
 When adding a page or article, update its rewrite and sitemap entry as well.
 
 The `useMeta` hook updates titles, canonical URLs, social metadata, and article
@@ -287,7 +286,7 @@ npm run test:run       # run once
 npm run test:coverage  # with v8 coverage report
 ```
 
-**80 tests** across 23 suites:
+**86 tests** across 24 suites:
 
 | Suite | What it covers |
 |---|---|
@@ -337,7 +336,7 @@ The app is a static SPA (client-side routing via React Router) deployed to **Ver
 | Install command | `npm install` |
 
 [`vercel.json`](vercel.json) maps public routes to their generated HTML documents.
-A final SPA fallback lets React Router handle unknown paths and display the 404 page.
+There is no catch-all rewrite to the homepage: Vercel serves the generated `404.html` for unmatched paths with its native not-found handling. React Router also displays the not-found page for unknown client-side routes.
 
 Set `VITE_FORMSPREE_ID` as an environment variable in the Vercel project settings (Production and
 Preview); see [Environment variables](#environment-variables) above.
@@ -394,3 +393,22 @@ smooth scrolling, including changes made while the page is open. Route navigatio
 focuses the new page heading after lazy content is ready; anchor navigation focuses
 the destination heading. Loading placeholders and hidden content are skipped.
 Initial page loads without a fragment leave focus in its normal browser position.
+
+## Preview content and not-found handling
+
+The copied SDK example defines its complete message, requires an environment API
+key, reports failures, and skips sending when the score is low or warnings remain.
+It is an illustrative SDK workflow; regression tests execute it against a mock SDK,
+without submitting messages. FAQ answers distinguish planned features from terms
+that must be confirmed during early-access onboarding.
+
+The build emits `dist/404.html` with readable error content, `noindex, follow`, and
+no canonical URL. Known pages keep their explicit rewrites; removing the homepage
+catch-all allows Vercel to serve its native HTTP 404 for unknown paths. This follows
+[Vercel's static 404 guidance](https://vercel.com/kb/guide/custom-404-page).
+Client-side unknown routes and missing articles also set `noindex`. Returning to a
+valid page removes that directive and restores a canonical URL.
+
+The local Vite development and preview servers use SPA fallback behavior and do
+not verify production HTTP status handling. Confirm the HTTP 404 status on a
+Vercel preview deployment after deployment; no deployment is performed by builds.

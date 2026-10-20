@@ -3,7 +3,11 @@ import { ArrowLeft, Zap } from 'lucide-react'
 import { useMeta } from '@/hooks/useMeta'
 
 export default function NotFound() {
-  useMeta({ title: 'Page Not Found' })
+  useMeta({
+    title: 'Page not found | MailerForm',
+    description: 'The requested page could not be found. Return to the MailerForm homepage.',
+    noindex: true,
+  })
 
   return (
     <main
@@ -36,7 +40,7 @@ export default function NotFound() {
 
         <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">Page not found</h1>
         <p className="text-gray-400 max-w-sm mx-auto mb-10 leading-relaxed">
-          The page you&apos;re looking for doesn&apos;t exist yet. We&apos;re working on it.
+          The requested page could not be found. Check the address or return to the homepage.
         </p>
 
         <Link
