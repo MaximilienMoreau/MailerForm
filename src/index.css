@@ -22,6 +22,9 @@
 
   /* Respect reduced-motion preference */
   @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
     *,
     *::before,
     *::after {
@@ -82,11 +85,16 @@
 .prose-legal p {
   @apply text-sm text-gray-400 leading-relaxed mb-4;
 }
-.prose-legal ul, .prose-legal ol {
+.prose-legal ul,
+.prose-legal ol {
   @apply text-sm text-gray-400 leading-relaxed mb-4 pl-5 space-y-1.5;
 }
-.prose-legal ul { @apply list-disc; }
-.prose-legal ol { @apply list-decimal; }
+.prose-legal ul {
+  @apply list-disc;
+}
+.prose-legal ol {
+  @apply list-decimal;
+}
 .prose-legal a {
   @apply text-brand-400 hover:text-brand-300 transition-colors underline underline-offset-2;
 }
@@ -98,8 +106,15 @@
 }
 
 /* Custom scrollbar */
-::-webkit-scrollbar         { width: 6px; }
-::-webkit-scrollbar-track   { background: transparent; }
-::-webkit-scrollbar-thumb   { @apply bg-white/10 rounded-full; }
-::-webkit-scrollbar-thumb:hover { @apply bg-white/20; }
-
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-white/10 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-white/20;
+}

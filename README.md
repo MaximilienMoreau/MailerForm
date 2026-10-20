@@ -6,7 +6,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript&logoColor=white&labelColor=20232a)
 ![Vite](https://img.shields.io/badge/Vite-5-646cff?logo=vite&logoColor=white&labelColor=20232a)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-06b6d4?logo=tailwindcss&logoColor=white&labelColor=20232a)
-![Tests](https://img.shields.io/badge/tests-71%20passing-22c55e?labelColor=20232a)
+![Tests](https://img.shields.io/badge/tests-80%20passing-22c55e?labelColor=20232a)
 ![License](https://img.shields.io/badge/license-private-6b7280?labelColor=20232a)
 [![CI](https://github.com/MaximilienMoreau/MailerForm/actions/workflows/ci.yml/badge.svg)](https://github.com/MaximilienMoreau/MailerForm/actions/workflows/ci.yml)
 
@@ -287,7 +287,7 @@ npm run test:run       # run once
 npm run test:coverage  # with v8 coverage report
 ```
 
-**71 tests** across 20 suites:
+**80 tests** across 23 suites:
 
 | Suite | What it covers |
 |---|---|
@@ -387,3 +387,10 @@ from newsletter consent.
 
 Regression coverage includes `PlanSelection`, `ConsentSync`, `FormTimeouts`, and
 `useFormRequest`, plus menu resizing and rejected lazy imports.
+
+Clipboard failures select the example code and announce manual copying instructions.
+Reduced-motion preferences show final counter values immediately and disable CSS
+smooth scrolling, including changes made while the page is open. Route navigation
+focuses the new page heading after lazy content is ready; anchor navigation focuses
+the destination heading. Loading placeholders and hidden content are skipped.
+Initial page loads without a fragment leave focus in its normal browser position.

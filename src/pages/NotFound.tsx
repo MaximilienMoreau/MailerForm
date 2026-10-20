@@ -6,8 +6,14 @@ export default function NotFound() {
   useMeta({ title: 'Page Not Found' })
 
   return (
-    <div className="relative min-h-screen bg-gray-950 flex flex-col items-center justify-center px-4 text-center">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_40%,rgba(51,102,255,0.08),transparent)]" aria-hidden />
+    <main
+      id="main-content"
+      className="relative min-h-screen bg-gray-950 flex flex-col items-center justify-center px-4 text-center"
+    >
+      <div
+        className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_40%,rgba(51,102,255,0.08),transparent)]"
+        aria-hidden
+      />
 
       <div className="relative">
         <Link
@@ -21,7 +27,10 @@ export default function NotFound() {
           <span className="font-bold text-white text-lg tracking-tight">MailerForm</span>
         </Link>
 
-        <p className="text-8xl font-black text-white tabular-nums mb-4 opacity-10 select-none" aria-hidden>
+        <p
+          className="text-8xl font-black text-white tabular-nums mb-4 opacity-10 select-none"
+          aria-hidden
+        >
           404
         </p>
 
@@ -38,6 +47,6 @@ export default function NotFound() {
           Back to homepage
         </Link>
       </div>
-    </div>
+    </main>
   )
 }
