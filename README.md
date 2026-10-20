@@ -6,7 +6,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript&logoColor=white&labelColor=20232a)
 ![Vite](https://img.shields.io/badge/Vite-5-646cff?logo=vite&logoColor=white&labelColor=20232a)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-06b6d4?logo=tailwindcss&logoColor=white&labelColor=20232a)
-![Tests](https://img.shields.io/badge/tests-52%20passing-22c55e?labelColor=20232a)
+![Tests](https://img.shields.io/badge/tests-62%20passing-22c55e?labelColor=20232a)
 ![License](https://img.shields.io/badge/license-private-6b7280?labelColor=20232a)
 [![CI](https://github.com/MaximilienMoreau/MailerForm/actions/workflows/ci.yml/badge.svg)](https://github.com/MaximilienMoreau/MailerForm/actions/workflows/ci.yml)
 
@@ -184,7 +184,7 @@ A `<ScrollToTop>` component handles scroll on every `pathname` change: scrolls t
 
 ### Code splitting
 
-Sections below the fold and all secondary pages are lazy-loaded via `React.lazy` + `<Suspense fallback={null}>`. Vite automatically splits them into separate chunks.
+Sections below the fold and all secondary pages are lazy-loaded via `React.lazy` and `Suspense`. Secondary routes use a shared `PageLoading` fallback with navigation, a live loading status, and a stable skeleton that respects reduced motion. Vite splits these pages into separate chunks.
 
 **Latest production build:**
 
@@ -209,9 +209,26 @@ FaqSection.js                 4 kB │ gzip:   2 kB
 
 ### SEO & meta tags
 
-`index.html` carries the static Open Graph, Twitter Card, and canonical URL for the landing page. Secondary pages (About, Changelog, legal) call the `useMeta` hook to update `document.title`, `<meta name="description">`, the OG/Twitter tags, the canonical `<link>`, and `og:url` (derived from the current path) dynamically. All values are restored on unmount.
+The Vite plugin in [`scripts/static-pages.ts`](scripts/static-pages.ts) generates a
+separate HTML document for every public route. Each document includes its title,
+description, canonical URL, and Open Graph/Twitter metadata before JavaScript runs.
+The blog index includes links to all guides, and every article document includes
+the complete article text plus `BlogPosting` structured data. Other routes include
+a readable introduction before React takes over. This is static HTML generation,
+not a runtime rendering server.
 
-> **Note:** `og:image` is currently an SVG (`public/og-image.svg`). For full social-preview support on Twitter, LinkedIn, and Slack, replace it with a PNG (1200 × 630 px).
+[`vercel.json`](vercel.json) maps known routes to their generated documents before
+the SPA fallback. Tests keep these mappings aligned with the generated routes.
+When adding a page or article, update its rewrite and sitemap entry as well.
+
+The `useMeta` hook updates titles, canonical URLs, social metadata, and article
+schema during client navigation. The landing page explicitly sets its own metadata
+so returning from a directly opened article clears the article context.
+
+Social previews use [`public/og-image.png`](public/og-image.png), a 1200 × 630 image
+rasterized from the existing SVG. To regenerate it on Linux with system librsvg
+and Cairo installed, run `python3 scripts/render-og.py`. The PNG is checked in;
+normal builds need no image tools or Python dependencies.
 
 ### Animations
 
@@ -270,7 +287,7 @@ npm run test:run       # run once
 npm run test:coverage  # with v8 coverage report
 ```
 
-**52 tests** across 12 suites:
+**62 tests** across 16 suites:
 
 | Suite | What it covers |
 |---|---|
@@ -286,6 +303,10 @@ npm run test:coverage  # with v8 coverage report
 | `AnalyzerDemo` | Scenario selection, sample corrections, and reset |
 | `NewsletterForm` | Consent payload, failure recovery, and unconfigured fallback |
 | `BlogPostPage` | Full guide rendering and missing-article handling |
+| `FeaturesSection` | Arrow keys, Home/End, wrapping focus, and tab/panel relationships |
+| `PageLoading` | Accessible fallback while a lazy route is pending |
+| `useMeta` | Article-to-home metadata and structured-data updates |
+| `static-pages` | Static metadata, article HTML, escaping, deployment mappings, and PNG dimensions |
 
 The `CtaSection` tests mock `fetch` via `vi.stubGlobal` and `VITE_FORMSPREE_ID` via `vi.stubEnv`, no real network requests.
 
@@ -315,8 +336,8 @@ The app is a static SPA (client-side routing via React Router) deployed to **Ver
 | Output directory | `dist` |
 | Install command | `npm install` |
 
-[`vercel.json`](vercel.json) adds a rewrite so that deep links (e.g. `/about`, `/blog`) and page
-refreshes resolve to `index.html` instead of 404ing, letting React Router take over client-side.
+[`vercel.json`](vercel.json) maps public routes to their generated HTML documents.
+A final SPA fallback lets React Router handle unknown paths and display the 404 page.
 
 Set `VITE_FORMSPREE_ID` as an environment variable in the Vercel project settings (Production and
 Preview); see [Environment variables](#environment-variables) above.
@@ -340,3 +361,10 @@ The blog newsletter form collects explicit consent and submits
 Configure downstream handling in Formspree to route these requests appropriately;
 this static site does not operate a newsletter sending service. Without the form
 ID, both journeys offer a contact email with the appropriate subject.
+
+Pricing cards put monthly volume and plan differences first. On mobile, visitors
+can expand each feature list; desktop keeps the lists visible. Billing initializes
+from the selected URL parameter. Successful early-access requests confirm the
+submitted plan, billing choice, email, and next step without starting a trial.
+The feature carousel supports Left/Right, Home, and End keys with a single tab
+stop in the tab list, labeled panels, and an announcement of the selected feature.

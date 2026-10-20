@@ -12,6 +12,7 @@ export default function BlogPostPage() {
   useMeta({
     title: post ? `${post.title} | MailerForm` : 'Article not found',
     description: post?.excerpt,
+    article: post,
   })
   if (!post) return <NotFound />
   return (

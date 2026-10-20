@@ -63,10 +63,13 @@ describe('CtaSection', () => {
     await user.type(screen.getByLabelText(/email address/i), 'hello@example.com')
     await user.click(screen.getByRole('button', { name: /request early access/i }))
 
-    await waitFor(() => {
-      expect(screen.getByRole('status')).toBeInTheDocument()
-      expect(screen.getByText(/you're on the list/i)).toBeInTheDocument()
-    }, { timeout: 3000 })
+    await waitFor(
+      () => {
+        expect(screen.getByRole('status')).toBeInTheDocument()
+        expect(screen.getByText(/you're on the list/i)).toBeInTheDocument()
+      },
+      { timeout: 3000 }
+    )
   })
 
   it('shows an error when the Formspree request fails', async () => {
@@ -105,7 +108,31 @@ it('includes the selected plan and billing in the early-access request', async (
     await userEvent.type(screen.getByLabelText(/email address/i), 'team@example.com')
     await userEvent.click(screen.getByRole('button', { name: /request early access/i }))
     await screen.findByRole('status')
-    expect(JSON.parse(submit.mock.calls[0][1].body)).toMatchObject({ purpose: 'early-access', plan: 'scale', billing: 'yearly' })
+    expect(JSON.parse(submit.mock.calls[0][1].body)).toMatchObject({
+      purpose: 'early-access',
+      plan: 'scale',
+      billing: 'yearly',
+    })
+  } finally {
+    window.history.replaceState({}, '', '/')
+    vi.unstubAllEnvs()
+    vi.unstubAllGlobals()
+  }
+})
+
+it('confirms the submitted plan, billing, email, and next step', async () => {
+  vi.stubEnv('VITE_FORMSPREE_ID', 'test_form_id')
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true }))
+  window.history.replaceState({}, '', '/?plan=growth&billing=yearly#cta')
+  try {
+    renderCta()
+    await userEvent.type(screen.getByLabelText(/email address/i), 'team@example.com')
+    await userEvent.click(screen.getByRole('button', { name: /request early access/i }))
+    const confirmation = await screen.findByRole('status')
+    expect(confirmation).toHaveTextContent(/Access requested for growth · annual billing/i)
+    expect(confirmation).toHaveTextContent('team@example.com')
+    expect(confirmation).toHaveTextContent(/confirm availability/i)
+    expect(confirmation).toHaveTextContent(/No trial has started/i)
   } finally {
     window.history.replaceState({}, '', '/')
     vi.unstubAllEnvs()
