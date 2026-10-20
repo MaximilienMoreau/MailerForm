@@ -50,4 +50,10 @@
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
+  <url><loc>https://mailerform.io/blog/transactional-reputation</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://mailerform.io/blog/authentication-alignment</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://mailerform.io/blog/content-and-reputation</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://mailerform.io/blog/stream-isolation</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://mailerform.io/blog/email-data-controls</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://mailerform.io/blog/migration-playbook</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
 </urlset>

@@ -7,8 +7,8 @@ const highlights = [
     icon: ShieldCheck,
     color: 'text-emerald-400',
     bg: 'bg-emerald-500/10 border-emerald-500/20',
-    title: 'SOC 2 Type I certified',
-    body: 'Point-in-time audit of our security controls, with a Type II audit underway.',
+    title: 'Security documentation',
+    body: 'Contact us for current security documentation and any available audit evidence.',
   },
   {
     icon: Server,
@@ -201,7 +201,7 @@ export default function GdprPage() {
         <li>AES-256 encryption for data at rest</li>
         <li>Role-based access control and principle of least privilege</li>
         <li>Third-party penetration testing, with the first assessment completed before general availability</li>
-        <li>SOC 2 Type I audit covering security, availability, and confidentiality, with Type II underway</li>
+        <li>Request current audit evidence covering security, availability, and confidentiality</li>
         <li>Intrusion detection, log monitoring, and security incident response procedures</li>
       </ul>
 

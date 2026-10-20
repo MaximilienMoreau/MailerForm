@@ -26,12 +26,12 @@ const faqs: FaqItem[] = [
     answer:   'No. API calls and webhook deliveries are unlimited on all plans. Rate limits apply per endpoint (documented in our OpenAPI spec) but are set high enough that you would need to contact us before hitting them in production.',
   },
   {
-    question: 'How does the free plan work?',
-    answer:   '10,000 emails per month, forever free, no credit card required. You get a single sending domain, transactional stream, 10 pre-send analyses per month, and basic analytics. Upgrade only when your volume or feature needs grow.',
+    question: 'What happens after I request early access?',
+    answer:   'We receive your email and selected plan, then contact you about availability and onboarding. No account is created and no trial starts when you submit. Pricing is a preview; trial duration, overage rates, and final terms will be confirmed before activation.',
   },
   {
     question: 'Where is my data stored? Do you offer EU residency?',
-    answer:   'By default, data is stored in US-East (AWS). EU data residency is available on the Scale plan and above; on that plan, your email data, contact records, and logs never leave the EU region. We are GDPR-compliant and SOC 2 Type I certified, with our Type II audit underway.',
+    answer:   'Tell us your hosting and retention requirements when requesting access. Confirm available regions and processing terms with our team before sending production data. No certification report is published on this site; request supporting documentation during your security review.',
   },
 ]
 

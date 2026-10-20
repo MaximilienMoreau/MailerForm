@@ -29,7 +29,7 @@ describe('CtaSection', () => {
   it('renders the email input and submit button', () => {
     renderCta()
     expect(screen.getByLabelText(/email address/i)).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /start for free/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /request early access/i })).toBeInTheDocument()
   })
 
   it('shows an error for a clearly invalid email', async () => {
@@ -37,7 +37,7 @@ describe('CtaSection', () => {
     renderCta()
 
     await user.type(screen.getByLabelText(/email address/i), 'notanemail')
-    await user.click(screen.getByRole('button', { name: /start for free/i }))
+    await user.click(screen.getByRole('button', { name: /request early access/i }))
 
     await waitFor(() => {
       expect(screen.getByRole('alert')).toBeInTheDocument()
@@ -49,7 +49,7 @@ describe('CtaSection', () => {
     renderCta()
 
     await user.type(screen.getByLabelText(/email address/i), '@')
-    await user.click(screen.getByRole('button', { name: /start for free/i }))
+    await user.click(screen.getByRole('button', { name: /request early access/i }))
 
     await waitFor(() => {
       expect(screen.getByRole('alert')).toBeInTheDocument()
@@ -61,7 +61,7 @@ describe('CtaSection', () => {
     renderCta()
 
     await user.type(screen.getByLabelText(/email address/i), 'hello@example.com')
-    await user.click(screen.getByRole('button', { name: /start for free/i }))
+    await user.click(screen.getByRole('button', { name: /request early access/i }))
 
     await waitFor(() => {
       expect(screen.getByRole('status')).toBeInTheDocument()
@@ -75,7 +75,7 @@ describe('CtaSection', () => {
     renderCta()
 
     await user.type(screen.getByLabelText(/email address/i), 'hello@example.com')
-    await user.click(screen.getByRole('button', { name: /start for free/i }))
+    await user.click(screen.getByRole('button', { name: /request early access/i }))
 
     await waitFor(() => {
       expect(screen.getByRole('alert')).toBeInTheDocument()
@@ -86,10 +86,29 @@ describe('CtaSection', () => {
     const user = userEvent.setup()
     renderCta()
 
-    await user.click(screen.getByRole('button', { name: /start for free/i }))
+    await user.click(screen.getByRole('button', { name: /request early access/i }))
 
     // Form stays in idle state, no alert, no success
     expect(screen.queryByRole('alert')).not.toBeInTheDocument()
     expect(screen.queryByRole('status')).not.toBeInTheDocument()
   })
+})
+
+it('includes the selected plan and billing in the early-access request', async () => {
+  vi.stubEnv('VITE_FORMSPREE_ID', 'test_form_id')
+  const submit = vi.fn().mockResolvedValue({ ok: true })
+  vi.stubGlobal('fetch', submit)
+  window.history.replaceState({}, '', '/?plan=scale&billing=yearly#cta')
+  try {
+    renderCta()
+    expect(screen.getByText('scale')).toBeInTheDocument()
+    await userEvent.type(screen.getByLabelText(/email address/i), 'team@example.com')
+    await userEvent.click(screen.getByRole('button', { name: /request early access/i }))
+    await screen.findByRole('status')
+    expect(JSON.parse(submit.mock.calls[0][1].body)).toMatchObject({ purpose: 'early-access', plan: 'scale', billing: 'yearly' })
+  } finally {
+    window.history.replaceState({}, '', '/')
+    vi.unstubAllEnvs()
+    vi.unstubAllGlobals()
+  }
 })

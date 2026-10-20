@@ -2,19 +2,20 @@ import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
 export default function ScrollToTop() {
-  const { pathname, hash } = useLocation()
-
+  const { pathname, search, hash } = useLocation()
   useEffect(() => {
-    if (hash) {
-      const el = document.getElementById(hash.slice(1))
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' })
-        return
-      }
+    if (!hash) { window.scrollTo(0, 0); return }
+    const scroll = () => {
+      const target = document.getElementById(hash.slice(1))
+      if (!target) return false
+      target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
+      return true
     }
-    window.scrollTo(0, 0)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]) // hash-only changes (same-page anchors) are handled natively by the browser
-
+    if (scroll()) return
+    // A route or section may still be loading when a deep link is opened.
+    const observer = new MutationObserver(() => { if (scroll()) observer.disconnect() })
+    observer.observe(document.body, { childList: true, subtree: true })
+    return () => observer.disconnect()
+  }, [pathname, search, hash])
   return null
 }

@@ -124,6 +124,7 @@ export default function AboutPage() {
 
         {/* Values */}
         <section className="py-16">
+          <p className="text-xs text-gray-400 text-center mb-6">Explore the workflow before requesting access</p>
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.h2 {...fadeUpView()} className="text-2xl sm:text-3xl font-extrabold text-white mb-10 text-center">
               What we believe
@@ -185,6 +186,7 @@ export default function AboutPage() {
 
         {/* Numbers */}
         <section className="py-16">
+          <p className="text-xs text-gray-400 text-center mb-6">Explore the workflow before requesting access</p>
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               variants={staggerContainer}
@@ -209,14 +211,13 @@ export default function AboutPage() {
         <section className="py-16 pb-28">
           <div className="max-w-xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div {...fadeUpView()} className="bg-brand-500/[0.07] border border-brand-500/20 rounded-2xl p-8 sm:p-10">
-              <h2 className="text-2xl font-extrabold text-white mb-3">Start for free today</h2>
+              <h2 className="text-2xl font-extrabold text-white mb-3">Request early access</h2>
               <p className="text-gray-400 mb-7 text-sm leading-relaxed">
-                10,000 emails per month, no credit card required. See for yourself how
-                deliverability intelligence changes the way you send email.
+                Explore the sample analysis, then request an invitation to discuss your email workflow. No payment is required to request access.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <a href="/#cta" className="btn-primary text-sm px-6 py-3">
-                  Get started free
+                  Request early access
                   <ArrowRight size={15} aria-hidden />
                 </a>
                 <a href="mailto:hello@mailerform.io" className="btn-secondary text-sm px-6 py-3">

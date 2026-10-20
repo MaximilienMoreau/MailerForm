@@ -6,7 +6,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript&logoColor=white&labelColor=20232a)
 ![Vite](https://img.shields.io/badge/Vite-5-646cff?logo=vite&logoColor=white&labelColor=20232a)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-06b6d4?logo=tailwindcss&logoColor=white&labelColor=20232a)
-![Tests](https://img.shields.io/badge/tests-49%20passing-22c55e?labelColor=20232a)
+![Tests](https://img.shields.io/badge/tests-52%20passing-22c55e?labelColor=20232a)
 ![License](https://img.shields.io/badge/license-private-6b7280?labelColor=20232a)
 [![CI](https://github.com/MaximilienMoreau/MailerForm/actions/workflows/ci.yml/badge.svg)](https://github.com/MaximilienMoreau/MailerForm/actions/workflows/ci.yml)
 
@@ -75,7 +75,7 @@ src/
 │   ├── __tests__/               # Component tests (Vitest + Testing Library)
 │   │
 │   ├── Navbar.tsx                # Sticky nav, active-section tracking, focus trap on mobile
-│   ├── Hero.tsx                  # Animated stat counters + deliverability card preview
+│   ├── Hero.tsx                  # Workflow facts + illustrative deliverability card
 │   ├── ProblemSection.tsx        # Before / after comparison
 │   ├── FeaturesSection.tsx       # 6-feature card grid
 │   ├── DeliverabilitySection.tsx # Left copy + right animated report card
@@ -83,10 +83,10 @@ src/
 │   ├── StreamSection.tsx         # Transactional vs marketing stream comparison
 │   ├── ApiSection.tsx            # Syntax-highlighted code block + copy button
 │   ├── IntegrationsSection.tsx   # SDK & no-code integration grid
-│   ├── ComparisonSection.tsx     # Feature matrix vs SendGrid / Mailgun / Resend
+│   ├── ComparisonSection.tsx     # Provider evaluation criteria
 │   ├── PricingSection.tsx        # 3-tier pricing with monthly / yearly toggle
 │   ├── FaqSection.tsx            # Accessible accordion (aria-controls + AnimatePresence)
-│   ├── CtaSection.tsx            # Email sign-up form → Formspree (+ honeypot)
+│   ├── CtaSection.tsx            # Early-access request → Formspree (+ plan, billing, honeypot)
 │   ├── LegalLayout.tsx           # Shared layout for all legal pages
 │   ├── Footer.tsx                # Multi-column footer with social links
 │   ├── CookieBanner.tsx          # Cookie consent with localStorage persistence
@@ -115,7 +115,7 @@ src/
 │   │   └── GdprPage.tsx
 │   ├── AboutPage.tsx             # Company story, values, timeline
 │   ├── ChangelogPage.tsx         # Versioned release history
-│   ├── BlogPage.tsx              # Deliverability & engineering blog posts
+│   ├── BlogPage.tsx              # Email engineering guide index
 │   ├── CareersPage.tsx           # Open positions, benefits, how-we-work
 │   ├── PressPage.tsx             # Company facts, brand assets, media contact
 │   └── NotFound.tsx              # 404 catch-all
@@ -174,7 +174,7 @@ React Router v7. All routes are declared in [`App.tsx`](src/App.tsx):
 | `/` | `LandingPage` | Full single-page landing |
 | `/about` | `AboutPage` | Company story & values |
 | `/changelog` | `ChangelogPage` | Versioned release history |
-| `/blog` | `BlogPage` | Deliverability & engineering blog posts |
+| `/blog` | `BlogPage` | Email engineering guide index |
 | `/careers` | `CareersPage` | Open positions, benefits, how-we-work |
 | `/press` | `PressPage` | Company facts, brand assets, media contact |
 | `/privacy` · `/terms` · `/cookies` · `/gdpr` | Legal pages | Shared `LegalLayout` |
@@ -270,7 +270,7 @@ npm run test:run       # run once
 npm run test:coverage  # with v8 coverage report
 ```
 
-**49 tests** across 9 suites:
+**52 tests** across 12 suites:
 
 | Suite | What it covers |
 |---|---|
@@ -278,11 +278,14 @@ npm run test:coverage  # with v8 coverage report
 | `Navbar` | Logo render, desktop links, mobile menu open/close, Escape key |
 | `FaqSection` | Accordion expand/collapse, keyboard accessibility |
 | `PricingSection` | Plan rendering, billing toggle, yearly discount badge |
-| `ComparisonSection` | Table structure, cell values, legend |
+| `ComparisonSection` | Evaluation criteria and linked product sections |
 | `CookieBanner` | Consent accept/decline, localStorage persistence |
 | `Hero` | Stat items, trust badges, CTA links |
 | `ErrorBoundary` | Error catch, reset button |
 | `tokenize` | Syntax tokeniser edge cases |
+| `AnalyzerDemo` | Scenario selection, sample corrections, and reset |
+| `NewsletterForm` | Consent payload, failure recovery, and unconfigured fallback |
+| `BlogPostPage` | Full guide rendering and missing-article handling |
 
 The `CtaSection` tests mock `fetch` via `vi.stubGlobal` and `VITE_FORMSPREE_ID` via `vi.stubEnv`, no real network requests.
 
@@ -317,3 +320,23 @@ refreshes resolve to `index.html` instead of 404ing, letting React Router take o
 
 Set `VITE_FORMSPREE_ID` as an environment variable in the Vercel project settings (Production and
 Preview); see [Environment variables](#environment-variables) above.
+
+## Early access and editorial journeys
+
+Product CTAs request early access; they do not create an account or start a trial.
+Pricing links preserve `plan` and `billing` in the query string. Requests submitted
+through Formspree include `purpose: "early-access"`, the selected plan, and billing.
+Annual preview totals are displayed before requesting access. Trial duration and
+overage rates remain unpublished and must be confirmed before activation.
+
+The pre-send demonstration uses three local presets with illustrative corrections;
+it does not analyze or send visitor emails. Headline facts describe the visible
+workflow rather than unsourced production performance. Competitor rankings were
+replaced by concrete evaluation criteria; certification claims require evidence.
+
+Six complete guides are available at `/blog/:slug`, with entries in the sitemap.
+The blog newsletter form collects explicit consent and submits
+`purpose: "newsletter"` separately from early access, using `VITE_FORMSPREE_ID`.
+Configure downstream handling in Formspree to route these requests appropriately;
+this static site does not operate a newsletter sending service. Without the form
+ID, both journeys offer a contact email with the appropriate subject.

@@ -14,6 +14,9 @@ function isValidEmail(value: string): boolean {
 }
 
 export default function CtaSection() {
+  const params = new URLSearchParams(window.location.search)
+  const plan = ['starter', 'growth', 'scale'].includes(params.get('plan') ?? '') ? params.get('plan') : null
+  const billing = params.get('billing') === 'yearly' ? 'yearly' : 'monthly'
   const FORM_ID = import.meta.env.VITE_FORMSPREE_ID
   const inputRef = useRef<HTMLInputElement>(null)
   const [email, setEmail]       = useState('')
@@ -48,7 +51,7 @@ export default function CtaSection() {
       const res = await fetch(`https://formspree.io/f/${FORM_ID}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ email: value }),
+        body: JSON.stringify({ email: value, purpose: 'early-access', plan, billing: plan ? billing : null }),
       })
 
       if (!res.ok) throw new Error('submit_failed')
@@ -88,9 +91,9 @@ export default function CtaSection() {
           transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
           className="text-4xl sm:text-5xl font-extrabold text-white leading-tight mb-6"
         >
-          Your emails deserve to land in inbox.{' '}
+          Build a more reliable email workflow.{' '}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-sky-400">
-            Every time.
+            Get early access.
           </span>
         </motion.h2>
 
@@ -99,20 +102,20 @@ export default function CtaSection() {
           transition={{ duration: 0.5, delay: 0.15, ease: EASE }}
           className="text-lg text-gray-400 mb-10 max-w-xl mx-auto"
         >
-          Join thousands of SaaS teams using MailerForm to analyze, send, and optimize their email infrastructure.
-          Free for up to 10,000 emails/month.
+          Leave your email to request an invitation. We will contact you about availability and onboarding.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP_LG}
           transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
         >
+          {plan && <p className="mb-4 text-sm text-brand-300">Selected plan: <strong className="capitalize">{plan}</strong> · {billing} billing <a href="#pricing" className="underline ml-2 focus-ring rounded">Change plan</a></p>}
           {!FORM_ID ? (
             <a
-              href="mailto:hello@mailerform.io"
+              href={`mailto:hello@mailerform.io?subject=${encodeURIComponent(`Early access${plan ? `: ${plan} / ${billing}` : ''}`)}`}
               className="btn-primary text-base px-8 py-3.5 mx-auto"
             >
-              Get in touch
+              Request early access
               <ArrowRight size={16} aria-hidden />
             </a>
           ) : (
@@ -141,7 +144,7 @@ export default function CtaSection() {
                     animate={{ opacity: 1 }}
                     onSubmit={handleSubmit}
                     className="flex flex-col sm:flex-row items-stretch gap-3 max-w-md mx-auto"
-                    aria-label="Sign up for MailerForm"
+                    aria-label="Request MailerForm early access"
                     noValidate
                   >
                     {/* Honeypot, hidden from users, catches bots that auto-fill all fields */}
@@ -180,7 +183,7 @@ export default function CtaSection() {
                     >
                       {state === 'loading'
                         ? <Loader2 size={15} className="animate-spin" aria-label="Loading…" />
-                        : <>Start for free <ArrowRight size={15} aria-hidden /></>
+                        : <>Request early access <ArrowRight size={15} aria-hidden /></>
                       }
                     </button>
                   </motion.form>
@@ -195,7 +198,7 @@ export default function CtaSection() {
 
               {state !== 'success' && (
                 <p className="mt-4 text-xs text-gray-600">
-                  No credit card · 10k emails free · Cancel anytime
+                  Invitation request only · No payment · No account created
                 </p>
               )}
             </>
@@ -208,9 +211,9 @@ export default function CtaSection() {
           className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6"
         >
           {[
-            'GDPR & CAN-SPAM compliant',
-            'SOC 2 Type I certified',
-            '99.9%+ API uptime SLA',
+            'No payment required',
+            'Personal onboarding',
+            'Plan confirmed before activation',
           ].map(item => (
             <span key={item} className="flex items-center gap-1.5 text-xs text-gray-500">
               <CheckCircle2 size={12} className="text-emerald-500" aria-hidden />

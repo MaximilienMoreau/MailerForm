@@ -7,9 +7,9 @@ export const sdks = [
 ]
 
 export const apiStats = [
-  { value: '260+', label: 'Endpoints' },
-  { value: '<80ms', label: 'P99 latency' },
-  { value: '99.9%+', label: 'API uptime' },
+  { value: 'Analyze', label: 'Before sending' },
+  { value: 'Correct', label: 'Review findings' },
+  { value: 'Send', label: 'Choose a stream' },
 ]
 
 export const codeExample = `import MailerForm from '@mailerform/sdk'

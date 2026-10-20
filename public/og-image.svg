@@ -56,15 +56,15 @@
   <!-- Bottom badges -->
   <g transform="translate(388, 490)">
     <rect width="132" height="34" rx="17" fill="#10B981" fill-opacity="0.1" stroke="#10B981" stroke-opacity="0.2" stroke-width="1"/>
-    <text x="66" y="22" text-anchor="middle" fill="#10B981" font-family="Inter, sans-serif" font-size="13" font-weight="600">GDPR compliant</text>
+    <text x="66" y="22" text-anchor="middle" fill="#10B981" font-family="Inter, sans-serif" font-size="13" font-weight="600">API-first</text>
   </g>
   <g transform="translate(538, 490)">
     <rect width="132" height="34" rx="17" fill="#10B981" fill-opacity="0.1" stroke="#10B981" stroke-opacity="0.2" stroke-width="1"/>
-    <text x="66" y="22" text-anchor="middle" fill="#10B981" font-family="Inter, sans-serif" font-size="13" font-weight="600">SOC 2 Type II</text>
+    <text x="66" y="22" text-anchor="middle" fill="#10B981" font-family="Inter, sans-serif" font-size="13" font-weight="600">Pre-send checks</text>
   </g>
   <g transform="translate(688, 490)">
     <rect width="132" height="34" rx="17" fill="#10B981" fill-opacity="0.1" stroke="#10B981" stroke-opacity="0.2" stroke-width="1"/>
-    <text x="66" y="22" text-anchor="middle" fill="#10B981" font-family="Inter, sans-serif" font-size="13" font-weight="600">10k emails free</text>
+    <text x="66" y="22" text-anchor="middle" fill="#10B981" font-family="Inter, sans-serif" font-size="13" font-weight="600">Early access</text>
   </g>
 
   <defs>

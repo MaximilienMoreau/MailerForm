@@ -24,7 +24,7 @@ const plans: Plan[] = [
     sub:         'No credit card',
     yearlySub:   'No credit card',
     description: 'Perfect for testing and small projects.',
-    cta:         'Get started',
+    cta:         'Request early access',
     ctaStyle:    'btn-secondary',
     features: [
       '10,000 emails / month',
@@ -41,9 +41,9 @@ const plans: Plan[] = [
     yearlyPrice: '$23',
     sub:         '/ month',
     yearlySub:   '/ mo, billed yearly',
-    badge:       'Most popular',
+    badge:       'Recommended',
     description: 'For growing SaaS and dev teams.',
-    cta:         'Start free trial',
+    cta:         'Request early access',
     ctaStyle:    'btn-primary',
     features: [
       '200,000 emails / month',
@@ -63,7 +63,7 @@ const plans: Plan[] = [
     sub:         '/ month',
     yearlySub:   '/ mo, billed yearly',
     description: 'For high-volume senders who need full control.',
-    cta:         'Start free trial',
+    cta:         'Request early access',
     ctaStyle:    'btn-secondary',
     features: [
       '2,000,000 emails / month',
@@ -86,7 +86,7 @@ export default function PricingSection() {
     const next = !yearly
     setYearly(next)
     setBillingAnnouncement(
-      next ? 'Yearly billing selected, 20% off applied' : 'Monthly billing selected'
+      next ? 'Yearly billing selected, annual prices displayed' : 'Monthly billing selected'
     )
   }
 
@@ -106,10 +106,10 @@ export default function PricingSection() {
             Simple pricing
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
-            Start free, scale when ready
+            Choose your early-access plan
           </h2>
           <p className="text-gray-400 max-w-lg mx-auto">
-            No per-email charge surprises. Flat monthly plans with generous limits. Upgrade only when you need to.
+            Preview pricing. Request access to discuss availability, volume, and billing before committing.
           </p>
         </motion.div>
 
@@ -141,7 +141,7 @@ export default function PricingSection() {
           <span id="billing-yearly" className={`text-sm font-medium transition-colors ${yearly ? 'text-white' : 'text-gray-500'}`}>
             Yearly
             <span className="ml-2 text-xs bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 rounded-full px-2 py-0.5 font-semibold">
-              Save 20%
+              Save up to 21%
             </span>
           </span>
         </motion.div>
@@ -188,10 +188,11 @@ export default function PricingSection() {
                   </motion.span>
                   <span className="text-gray-500 text-sm">{yearly ? plan.yearlySub : plan.sub}</span>
                 </div>
+                {yearly && plan.name !== 'Starter' && <p className="text-sm text-brand-300 mb-2">${Number(plan.yearlyPrice.slice(1)) * 12} total / year</p>}
                 <p className="text-sm text-gray-400">{plan.description}</p>
               </div>
 
-              <a href="#cta" className={`${plan.ctaStyle} text-sm mb-6 justify-center`}>
+              <a href={`?plan=${plan.name.toLowerCase()}&billing=${yearly ? 'yearly' : 'monthly'}#cta`} className={`${plan.ctaStyle} text-sm mb-6 justify-center`}>
                 {plan.cta}
                 <ArrowRight size={14} aria-hidden />
               </a>
@@ -208,6 +209,7 @@ export default function PricingSection() {
           ))}
         </motion.div>
 
+        <p className="mt-6 max-w-3xl mx-auto text-center text-sm text-gray-400">Access is by invitation; submitting a request starts no trial and creates no charge. Trial duration and overage rates are not published yet. We will confirm these terms with you before activation.</p>
         {/* Enterprise callout */}
         <motion.div
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}

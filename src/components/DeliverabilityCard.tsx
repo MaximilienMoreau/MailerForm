@@ -26,7 +26,7 @@ export default function DeliverabilityCard() {
         </div>
         <span className="tag bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" aria-hidden />
-          Inbox safe
+          Example report
         </span>
       </div>
 
@@ -34,7 +34,7 @@ export default function DeliverabilityCard() {
         <span className="text-6xl font-black text-white tabular-nums">94</span>
         <div className="pb-2">
           <span className="text-gray-400 text-sm">/100 Deliverability score</span>
-          <p className="text-xs text-emerald-400 mt-0.5 font-medium">+6 from last campaign</p>
+          <p className="text-xs text-emerald-400 mt-0.5 font-medium">Illustrative score · not an inbox guarantee</p>
         </div>
       </div>
 

@@ -7,8 +7,8 @@ export interface Stat {
 }
 
 export const stats: Stat[] = [
-  { prefix: '',  value: 99.2, suffix: '%',  decimals: 1, label: 'Inbox placement rate' },
-  { prefix: '',  value: 260,  suffix: '+',  decimals: 0, label: 'API endpoints' },
-  { prefix: '<', value: 80,   suffix: 'ms', decimals: 0, label: 'Delivery latency' },
-  { prefix: '',  value: 10,   suffix: 'B+', decimals: 0, label: 'Emails analyzed' },
+  { prefix: '', value: 3, suffix: '', decimals: 0, label: 'Interactive analysis examples' },
+  { prefix: '', value: 2, suffix: '', decimals: 0, label: 'Email stream types' },
+  { prefix: '', value: 1, suffix: '', decimals: 0, label: 'Analyze-to-send workflow' },
+  { prefix: '$', value: 0, suffix: '', decimals: 0, label: 'To request early access' },
 ]
