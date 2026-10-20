@@ -6,6 +6,8 @@ import { sdks, apiStats, codeExample } from '@/data/api'
 import { EASE, VP } from '@/lib/motion'
 
 export default function ApiSection() {
+  const mounted = useRef(false)
+  const copying = useRef(false)
   const [copyState, setCopyState] = useState<'idle' | 'copied' | 'manual'>('idle')
   const codeRef = useRef<HTMLElement>(null)
   const codeContainerRef = useRef<HTMLDivElement>(null)
@@ -13,7 +15,9 @@ export default function ApiSection() {
   const copyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
+    mounted.current = true
     return () => {
+      mounted.current = false
       if (copyTimerRef.current) clearTimeout(copyTimerRef.current)
     }
   }, [])
@@ -30,15 +34,21 @@ export default function ApiSection() {
   }
 
   async function handleCopy() {
+    if (copying.current) return
+    copying.current = true
     if (copyTimerRef.current) clearTimeout(copyTimerRef.current)
     try {
       if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable')
       await navigator.clipboard.writeText(codeExample)
+      if (!mounted.current) return
       setCopyState('copied')
       copyTimerRef.current = setTimeout(() => setCopyState('idle'), 2000)
     } catch {
+      if (!mounted.current) return
       setCopyState('manual')
       selectCode()
+    } finally {
+      copying.current = false
     }
   }
 
@@ -160,16 +170,19 @@ export default function ApiSection() {
               className="mb-8"
             >
               <p className="text-xs text-gray-500 mb-3 font-semibold uppercase tracking-wider">
-                SDK documentation
+                Planned SDKs
               </p>
-              <ul className="flex flex-wrap gap-2 list-none p-0 m-0" aria-label="SDK documentation">
+              <ul
+                className="flex flex-wrap gap-2 list-none p-0 m-0"
+                aria-label="Planned SDK availability requests"
+              >
                 {sdks.map((sdk) => (
                   <li key={sdk.lang}>
                     <a
                       href={sdk.href}
                       target="_blank"
                       rel="noreferrer"
-                      aria-label={`${sdk.lang} SDK documentation`}
+                      aria-label={`Discuss ${sdk.lang} SDK availability`}
                       className={`text-xs font-semibold font-mono px-3 py-1.5 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all focus-ring ${sdk.color}`}
                     >
                       {sdk.lang}

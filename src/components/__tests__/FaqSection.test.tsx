@@ -21,9 +21,9 @@ describe('FaqSection', () => {
   it('first question button is expanded by default', () => {
     renderFaq()
     // The first FAQ row is open (aria-expanded=true) by default
-    const firstButton = screen.getAllByRole('button').find(
-      btn => btn.getAttribute('aria-expanded') === 'true'
-    )
+    const firstButton = screen
+      .getAllByRole('button')
+      .find((btn) => btn.getAttribute('aria-expanded') === 'true')
     expect(firstButton).toBeDefined()
   })
 

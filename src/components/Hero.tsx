@@ -1,3 +1,4 @@
+import SiteLink from '@/components/SiteLink'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Zap } from 'lucide-react'
@@ -16,7 +17,6 @@ const trust = [
 
 function useCountUp(target: number, decimals: number, duration = 1.8) {
   const [count, setCount] = useState(0)
-  const [done, setDone] = useState(false)
   const reducedMotion = usePrefersReducedMotion()
   const started = useRef(false)
   const frameRef = useRef(0)
@@ -40,20 +40,18 @@ function useCountUp(target: number, decimals: number, duration = 1.8) {
       setCount(value)
       if (progress < 1) {
         frameRef.current = requestAnimationFrame(tick)
-      } else {
-        setDone(true)
       }
     }
     frameRef.current = requestAnimationFrame(tick)
   }, [target, decimals, duration, reducedMotion])
 
-  return { count: reducedMotion ? target : count, done: reducedMotion || done, start }
+  return { count: reducedMotion ? target : count, start }
 }
 
 function StatItem({ stat }: { stat: Stat }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, amount: 0.5 })
-  const { count, done, start } = useCountUp(stat.value, stat.decimals)
+  const { count, start } = useCountUp(stat.value, stat.decimals)
 
   useEffect(() => {
     if (inView) start()
@@ -66,15 +64,18 @@ function StatItem({ stat }: { stat: Stat }) {
   return (
     <motion.div ref={ref} variants={staggerItem} className="flex flex-col-reverse items-center">
       <dt className="text-sm text-gray-500 mt-1 text-center">{stat.label}</dt>
-      <dd className="text-3xl font-extrabold text-white tracking-tight tabular-nums" aria-hidden>
-        {stat.prefix}
-        {display}
-        {stat.suffix}
+      <dd className="text-3xl font-extrabold text-white tracking-tight tabular-nums">
+        <span aria-hidden>
+          {stat.prefix}
+          {display}
+          {stat.suffix}
+        </span>
+        <span className="sr-only">
+          {stat.prefix}
+          {finalDisplay}
+          {stat.suffix}
+        </span>
       </dd>
-      {/* Announce only the final value to screen readers, not every animation frame */}
-      <span className="sr-only" aria-live="polite" aria-atomic="true">
-        {done ? `${stat.prefix}${finalDisplay}${stat.suffix} ${stat.label}` : ''}
-      </span>
     </motion.div>
   )
 }
@@ -144,13 +145,13 @@ export default function Hero() {
           {...fadeUp(0.38)}
           className="mt-10 flex flex-col sm:flex-row items-center gap-4"
         >
-          <a href="#cta" className="btn-primary text-base px-8 py-3.5">
+          <SiteLink href="#cta" className="btn-primary text-base px-8 py-3.5">
             Request early access
             <ArrowRight size={16} aria-hidden />
-          </a>
-          <a href="#deliverability" className="btn-secondary text-base px-8 py-3.5">
+          </SiteLink>
+          <SiteLink href="#deliverability" className="btn-secondary text-base px-8 py-3.5">
             See how it works
-          </a>
+          </SiteLink>
         </motion.div>
 
         <p className="mt-10 text-xs text-gray-400">Explore the workflow before requesting access</p>

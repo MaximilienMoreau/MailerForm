@@ -40,6 +40,7 @@ it.each([
     })
     expect(screen.getByRole('alert')).toHaveTextContent(/timed out.*try again/i)
     expect(input).toHaveValue('team@example.com')
+    expect(input).not.toHaveAttribute('aria-invalid', 'true')
     expect(submit.mock.calls[0][1].signal.aborted).toBe(true)
     expect(
       screen.getByRole('button', { name: /request early access|subscribe to newsletter/i })

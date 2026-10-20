@@ -1,9 +1,29 @@
 export const sdks = [
-  { lang: 'Node.js', color: 'text-emerald-400', href: 'https://docs.mailerform.io/sdks/nodejs' },
-  { lang: 'Python', color: 'text-sky-400', href: 'https://docs.mailerform.io/sdks/python' },
-  { lang: 'Ruby', color: 'text-red-400', href: 'https://docs.mailerform.io/sdks/ruby' },
-  { lang: 'Go', color: 'text-cyan-400', href: 'https://docs.mailerform.io/sdks/go' },
-  { lang: 'PHP', color: 'text-violet-400', href: 'https://docs.mailerform.io/sdks/php' },
+  {
+    lang: 'Node.js',
+    color: 'text-emerald-400',
+    href: 'mailto:hello@mailerform.io?subject=Node.js%20SDK%20availability',
+  },
+  {
+    lang: 'Python',
+    color: 'text-sky-400',
+    href: 'mailto:hello@mailerform.io?subject=Python%20SDK%20availability',
+  },
+  {
+    lang: 'Ruby',
+    color: 'text-red-400',
+    href: 'mailto:hello@mailerform.io?subject=Ruby%20SDK%20availability',
+  },
+  {
+    lang: 'Go',
+    color: 'text-cyan-400',
+    href: 'mailto:hello@mailerform.io?subject=Go%20SDK%20availability',
+  },
+  {
+    lang: 'PHP',
+    color: 'text-violet-400',
+    href: 'mailto:hello@mailerform.io?subject=PHP%20SDK%20availability',
+  },
 ]
 
 export const apiStats = [
@@ -12,7 +32,8 @@ export const apiStats = [
   { value: 'Send', label: 'Choose a stream' },
 ]
 
-export const codeExample = `// Illustrative SDK workflow: install the SDK and set MAILERFORM_KEY.
+export const codeExample = `// Illustrative SDK workflow: confirm package availability before installing.
+// Set MAILERFORM_KEY when testing with the confirmed SDK.
 // Replace the sender with a verified domain and use a test recipient.
 import MailerForm from '@mailerform/sdk'
 

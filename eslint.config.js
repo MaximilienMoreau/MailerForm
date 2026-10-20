@@ -1,4 +1,5 @@
 import js from '@eslint/js'
+import globals from 'globals'
 import tsPlugin from '@typescript-eslint/eslint-plugin'
 import tsParser from '@typescript-eslint/parser'
 import reactPlugin from 'eslint-plugin-react'
@@ -10,11 +11,15 @@ export default [
   { ignores: ['dist/**', 'node_modules/**', 'coverage/**'] },
   js.configs.recommended,
   {
+    files: ['**/*.{js,cjs}', '*config.ts', 'scripts/**/*.ts'],
+    languageOptions: { globals: globals.node },
+  },
+  {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       parser: tsParser,
       parserOptions: { ecmaVersion: 'latest', sourceType: 'module', ecmaFeatures: { jsx: true } },
-      globals: { Event: 'readonly', CustomEvent: 'readonly', StorageEvent: 'readonly', URLSearchParams: 'readonly', FormData: 'readonly', HTMLFormElement: 'readonly', window: 'readonly', document: 'readonly', navigator: 'readonly', console: 'readonly', setTimeout: 'readonly', clearTimeout: 'readonly', requestAnimationFrame: 'readonly', cancelAnimationFrame: 'readonly', performance: 'readonly', localStorage: 'readonly', process: 'readonly', fetch: 'readonly', HTMLInputElement: 'readonly', HTMLMetaElement: 'readonly', HTMLLinkElement: 'readonly', MouseEvent: 'readonly', KeyboardEvent: 'readonly', HTMLDivElement: 'readonly', HTMLButtonElement: 'readonly', HTMLElement: 'readonly', Node: 'readonly', MutationObserver: 'readonly', Element: 'readonly' },
+      globals: globals.browser,
     },
     plugins: {
       '@typescript-eslint': tsPlugin,
@@ -28,29 +33,17 @@ export default [
       ...reactPlugin.configs.recommended.rules,
       ...reactHooksPlugin.configs.recommended.rules,
       ...jsxA11yPlugin.configs.recommended.rules,
+      // TypeScript checks names (including DOM types); the JS rule misreports type-only names.
+      'no-undef': 'off',
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
-      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
-      '@typescript-eslint/no-explicit-any': 'warn',
-      'jsx-a11y/anchor-is-valid': 'off',
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-explicit-any': 'error',
     },
   },
-  // Vitest globals for test files
   {
-    files: ['**/*.test.{ts,tsx}', '**/*.spec.{ts,tsx}', 'src/test/**'],
-    languageOptions: {
-      globals: {
-        vi: 'readonly',
-        describe: 'readonly',
-        it: 'readonly',
-        test: 'readonly',
-        expect: 'readonly',
-        beforeEach: 'readonly',
-        afterEach: 'readonly',
-        beforeAll: 'readonly',
-        afterAll: 'readonly',
-      },
-    },
+    files: ['**/*.test.{ts,tsx}', 'src/test/**'],
+    languageOptions: { globals: { ...globals.node, ...globals.browser } },
   },
   prettierConfig,
 ]

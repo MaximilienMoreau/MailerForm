@@ -22,12 +22,18 @@ describe('Hero', () => {
 
   it('primary CTA links to the sign-up form (#cta)', () => {
     renderHero()
-    expect(screen.getByRole('link', { name: /request early access/i })).toHaveAttribute('href', '#cta')
+    expect(screen.getByRole('link', { name: /request early access/i })).toHaveAttribute(
+      'href',
+      '/#cta'
+    )
   })
 
-  it('secondary CTA links to the features section', () => {
+  it('secondary CTA links to the deliverability section', () => {
     renderHero()
-    expect(screen.getByRole('link', { name: /see how it works/i })).toHaveAttribute('href', '#deliverability')
+    expect(screen.getByRole('link', { name: /see how it works/i })).toHaveAttribute(
+      'href',
+      '/#deliverability'
+    )
   })
 
   it('renders all four stat labels', () => {

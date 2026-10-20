@@ -1,3 +1,4 @@
+import SiteLink from '@/components/SiteLink'
 import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Cpu } from 'lucide-react'
 import AnalyzerDemo from '@/components/AnalyzerDemo'
@@ -77,9 +78,9 @@ export default function DeliverabilitySection() {
               transition={{ duration: 0.5, delay: 0.25, ease: EASE }}
               className="flex items-center gap-4"
             >
-              <a href="#analyzer-demo" className="btn-primary text-sm">
+              <SiteLink href="#analyzer-demo" className="btn-primary text-sm">
                 Explore sample reports <ArrowRight size={14} aria-hidden />
-              </a>
+              </SiteLink>
             </motion.div>
           </div>
 

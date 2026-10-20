@@ -114,3 +114,19 @@ it('disconnects a pending observer when navigation is abandoned', () => {
   act(() => unmount())
   expect(disconnect).toHaveBeenCalled()
 })
+
+it('stops waiting for an unknown fragment instead of observing forever', async () => {
+  vi.useFakeTimers()
+  const disconnect = vi.spyOn(window.MutationObserver.prototype, 'disconnect')
+  const view = render(
+    <MemoryRouter initialEntries={['/missing#unknown']}>
+      <ScrollToTop />
+    </MemoryRouter>
+  )
+  await act(async () => {
+    await vi.advanceTimersByTimeAsync(30_000)
+  })
+  expect(disconnect).toHaveBeenCalled()
+  view.unmount()
+  vi.useRealTimers()
+})

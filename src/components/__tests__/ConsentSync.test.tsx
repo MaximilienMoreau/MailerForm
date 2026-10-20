@@ -68,10 +68,30 @@ it('updates preferences when another tab clears storage', async () => {
     </BrowserRouter>
   )
   act(() => {
+    window.localStorage.removeItem(COOKIE_CONSENT_KEY)
     window.dispatchEvent(new StorageEvent('storage', { key: COOKIE_CONSENT_KEY, newValue: null }))
   })
   await act(async () => {
     vi.advanceTimersByTime(1600)
   })
   expect(screen.getByRole('dialog', { name: /cookie consent/i })).toBeInTheDocument()
+})
+
+it('ignores unrelated session-storage changes', () => {
+  saveConsent('accepted')
+  render(
+    <BrowserRouter>
+      <CookiesPage />
+    </BrowserRouter>
+  )
+  act(() => {
+    window.dispatchEvent(
+      new StorageEvent('storage', {
+        key: COOKIE_CONSENT_KEY,
+        newValue: 'declined',
+        storageArea: window.sessionStorage,
+      })
+    )
+  })
+  expect(screen.getByText('Accepted', { exact: true })).toBeInTheDocument()
 })

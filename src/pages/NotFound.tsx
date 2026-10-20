@@ -1,13 +1,10 @@
+import { notFoundMeta } from '@/data/site'
 import { Link } from 'react-router-dom'
 import { ArrowLeft, Zap } from 'lucide-react'
 import { useMeta } from '@/hooks/useMeta'
 
 export default function NotFound() {
-  useMeta({
-    title: 'Page not found | MailerForm',
-    description: 'The requested page could not be found. Return to the MailerForm homepage.',
-    noindex: true,
-  })
+  useMeta(notFoundMeta)
 
   return (
     <main

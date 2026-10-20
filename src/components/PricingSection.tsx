@@ -1,104 +1,21 @@
+import { plans, formatPrice } from '@/data/plans'
+import { parsePlanSelection, planRequestPath } from '@/lib/planSelection'
 import { Link, useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Zap } from 'lucide-react'
 import { EASE, VP, staggerContainer, staggerItem } from '@/lib/motion'
 
-interface Plan {
-  name: string
-  price: string
-  yearlyPrice: string
-  sub: string
-  yearlySub: string
-  summary: string
-  volume: string
-  description: string
-  cta: string
-  ctaStyle: 'btn-primary' | 'btn-secondary'
-  badge?: string
-  features: readonly string[]
-}
-
-const plans: Plan[] = [
-  {
-    name: 'Starter',
-    volume: '10,000',
-    summary: 'Transactional email for small projects',
-    price: 'Free',
-    yearlyPrice: 'Free',
-    sub: 'No credit card',
-    yearlySub: 'No credit card',
-    description: 'Perfect for testing and small projects.',
-    cta: 'Request early access',
-    ctaStyle: 'btn-secondary',
-    features: [
-      '10,000 emails / month',
-      '1 sending domain',
-      'Transactional stream',
-      'Pre-send analysis (10/mo)',
-      'Basic analytics',
-      'Email support',
-    ],
-  },
-  {
-    name: 'Growth',
-    volume: '200,000',
-    summary: 'Marketing + transactional, with CRM and automation',
-    price: '$29',
-    yearlyPrice: '$23',
-    sub: '/ month',
-    yearlySub: '/ mo, billed yearly',
-    badge: 'Recommended',
-    description: 'For growing SaaS and dev teams.',
-    cta: 'Request early access',
-    ctaStyle: 'btn-primary',
-    features: [
-      '200,000 emails / month',
-      '5 sending domains',
-      'Transactional + Marketing streams',
-      'Unlimited pre-send analysis',
-      'CRM (up to 25k contacts)',
-      'Automation workflows',
-      'Webhooks',
-      'Priority support',
-    ],
-  },
-  {
-    name: 'Scale',
-    volume: '2,000,000',
-    summary: 'Dedicated IPs, unlimited domains, and dedicated support',
-    price: '$149',
-    yearlyPrice: '$119',
-    sub: '/ month',
-    yearlySub: '/ mo, billed yearly',
-    description: 'For high-volume senders who need full control.',
-    cta: 'Request early access',
-    ctaStyle: 'btn-secondary',
-    features: [
-      '2,000,000 emails / month',
-      'Unlimited domains',
-      'Dedicated IPs',
-      'White-label option',
-      'Unlimited CRM contacts',
-      'Advanced automation',
-      'Custom webhooks & API rate limits',
-      'SLA + dedicated CSM',
-    ],
-  },
-]
-
 export default function PricingSection() {
   const { search } = useLocation()
-  const [yearly, setYearly] = useState(
-    () => new URLSearchParams(search).get('billing') === 'yearly'
-  )
+  const [yearly, setYearly] = useState(() => parsePlanSelection(search).billing === 'yearly')
   const [expanded, setExpanded] = useState<string[]>([])
   const [billingAnnouncement, setBillingAnnouncement] = useState('')
 
   const [previousSearch, setPreviousSearch] = useState(search)
   if (search !== previousSearch) {
     setPreviousSearch(search)
-    setYearly(new URLSearchParams(search).get('billing') === 'yearly')
+    setYearly(parsePlanSelection(search).billing === 'yearly')
   }
 
   function handleBillingToggle() {
@@ -191,7 +108,7 @@ export default function PricingSection() {
         >
           {plans.map((plan) => (
             <motion.article
-              key={plan.name}
+              key={plan.id}
               variants={staggerItem}
               className={`relative rounded-2xl p-6 flex flex-col ${
                 plan.badge
@@ -216,15 +133,17 @@ export default function PricingSection() {
                     transition={{ duration: 0.2, ease: EASE }}
                     className="text-4xl font-extrabold text-white tabular-nums"
                   >
-                    {yearly ? plan.yearlyPrice : plan.price}
+                    {plan.monthlyPrice === 0
+                      ? 'Free'
+                      : formatPrice(yearly ? plan.annualPrice / 12 : plan.monthlyPrice)}
                   </motion.span>
                   <span className="text-gray-500 text-sm">
                     {yearly ? plan.yearlySub : plan.sub}
                   </span>
                 </div>
-                {yearly && plan.name !== 'Starter' && (
+                {yearly && plan.annualPrice > 0 && (
                   <p className="text-sm text-brand-300 mb-2">
-                    ${Number(plan.yearlyPrice.slice(1)) * 12} total / year
+                    {formatPrice(plan.annualPrice)} total / year
                   </p>
                 )}
                 <p className="text-sm text-gray-400">{plan.description}</p>
@@ -240,7 +159,7 @@ export default function PricingSection() {
               </div>
 
               <Link
-                to={`?plan=${plan.name.toLowerCase()}&billing=${yearly ? 'yearly' : 'monthly'}#cta`}
+                to={planRequestPath(plan.id, yearly ? 'yearly' : 'monthly', search)}
                 className={`${plan.ctaStyle} text-sm mb-6 justify-center`}
               >
                 {plan.cta}
@@ -251,7 +170,7 @@ export default function PricingSection() {
                 <button
                   type="button"
                   aria-expanded={expanded.includes(plan.name)}
-                  aria-controls={`features-${plan.name.toLowerCase()}`}
+                  aria-controls={`features-${plan.id}`}
                   onClick={() =>
                     setExpanded((current) =>
                       current.includes(plan.name)
@@ -264,7 +183,7 @@ export default function PricingSection() {
                   {expanded.includes(plan.name) ? 'Hide' : 'All'} {plan.name} features
                 </button>
                 <ul
-                  id={`features-${plan.name.toLowerCase()}`}
+                  id={`features-${plan.id}`}
                   className={`${expanded.includes(plan.name) ? 'block' : 'hidden'} md:block space-y-2.5 p-3 md:p-0`}
                   aria-label={`${plan.name} features`}
                 >

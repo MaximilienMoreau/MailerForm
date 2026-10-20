@@ -21,3 +21,41 @@ it('aborts pending work and clears its deadline when the form unmounts', async (
   expect(result.current.isMounted()).toBe(false)
   expect(vi.getTimerCount()).toBe(0)
 })
+
+it('rejects concurrent submissions without sending a second request and permits retry after completion', async () => {
+  let complete: ((response: Response) => void) | undefined
+  const fetch = vi.fn(
+    () =>
+      new Promise<Response>((resolve) => {
+        complete = resolve
+      })
+  )
+  vi.stubGlobal('fetch', fetch)
+  const { result } = renderHook(useFormRequest)
+  const first = result.current.send('/form', { email: 'first@example.com' })
+  await expect(result.current.send('/form', { email: 'second@example.com' })).rejects.toThrow(
+    'already in progress'
+  )
+  expect(fetch).toHaveBeenCalledTimes(1)
+  expect(result.current.isPending()).toBe(true)
+  complete?.({ ok: true } as Response)
+  await first
+  expect(result.current.isPending()).toBe(false)
+  fetch.mockResolvedValueOnce({ ok: true } as Response)
+  await result.current.send('/form', { email: 'second@example.com' })
+  expect(fetch).toHaveBeenCalledTimes(2)
+})
+
+it('cleans up a synchronous transport failure without leaving the form locked', async () => {
+  vi.useFakeTimers()
+  vi.stubGlobal(
+    'fetch',
+    vi.fn(() => {
+      throw new Error('Transport unavailable')
+    })
+  )
+  const { result } = renderHook(useFormRequest)
+  await expect(result.current.send('/form', {})).rejects.toThrow('Transport unavailable')
+  expect(result.current.isPending()).toBe(false)
+  expect(vi.getTimerCount()).toBe(0)
+})

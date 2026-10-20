@@ -9,19 +9,19 @@ describe('tokenizeLine', () => {
 
   it('tokenizes single-quoted strings', () => {
     const tokens = tokenizeLine("const s = 'hello'")
-    const str = tokens.find(t => t.type === 'string')
+    const str = tokens.find((t) => t.type === 'string')
     expect(str?.value).toBe("'hello'")
   })
 
   it('tokenizes double-quoted strings', () => {
     const tokens = tokenizeLine('const s = "world"')
-    const str = tokens.find(t => t.type === 'string')
+    const str = tokens.find((t) => t.type === 'string')
     expect(str?.value).toBe('"world"')
   })
 
   it('tokenizes backtick strings', () => {
     const tokens = tokenizeLine('const s = `hello world`')
-    const str = tokens.find(t => t.type === 'string')
+    const str = tokens.find((t) => t.type === 'string')
     expect(str?.value).toBe('`hello world`')
   })
 
@@ -32,13 +32,13 @@ describe('tokenizeLine', () => {
 
   it('tokenizes numbers', () => {
     const tokens = tokenizeLine('const n = 42')
-    const num = tokens.find(t => t.type === 'number')
+    const num = tokens.find((t) => t.type === 'number')
     expect(num?.value).toBe('42')
   })
 
   it('handles escaped characters inside strings', () => {
     const tokens = tokenizeLine("const s = 'it\\'s alive'")
-    const str = tokens.find(t => t.type === 'string')
+    const str = tokens.find((t) => t.type === 'string')
     expect(str).toBeDefined()
   })
 
@@ -48,6 +48,12 @@ describe('tokenizeLine', () => {
 
   it('does not tokenize keyword inside a word', () => {
     const tokens = tokenizeLine('importer')
-    expect(tokens.every(t => t.type !== 'keyword')).toBe(true)
+    expect(tokens.every((t) => t.type !== 'keyword')).toBe(true)
   })
+})
+
+it('preserves identifiers that contain keyword or number fragments', () => {
+  for (const identifier of ['myconst', '$return', 'myclass', 'value123']) {
+    expect(tokenizeLine(identifier)).toEqual([{ type: 'plain', value: identifier }])
+  }
 })

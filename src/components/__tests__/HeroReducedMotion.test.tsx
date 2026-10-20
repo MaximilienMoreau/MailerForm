@@ -1,5 +1,6 @@
 import { afterEach, expect, it, vi } from 'vitest'
 import { act, render, screen } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
 import Hero from '@/components/Hero'
 import { stats } from '@/data/stats'
 
@@ -12,7 +13,11 @@ it('shows final values immediately with reduced motion and reacts to preference 
   const media = window.matchMedia('(prefers-reduced-motion: reduce)')
   Object.defineProperty(media, 'matches', { value: true, configurable: true })
   vi.spyOn(window, 'matchMedia').mockReturnValue(media)
-  render(<Hero />)
+  render(
+    <MemoryRouter>
+      <Hero />
+    </MemoryRouter>
+  )
   const values = screen.getAllByRole('definition', { hidden: true })
   stats.forEach((stat, index) => {
     expect(values[index]).toHaveTextContent(

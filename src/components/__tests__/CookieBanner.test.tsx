@@ -34,13 +34,17 @@ describe('CookieBanner', () => {
 
   it('shows after the delay', async () => {
     renderBanner()
-    await act(async () => { vi.advanceTimersByTime(1600) })
+    await act(async () => {
+      vi.advanceTimersByTime(1600)
+    })
     expect(screen.getByRole('dialog', { name: /cookie consent/i })).toBeInTheDocument()
   })
 
   it('persists acceptance to localStorage when accept is clicked', async () => {
     renderBanner()
-    await act(async () => { vi.advanceTimersByTime(1600) })
+    await act(async () => {
+      vi.advanceTimersByTime(1600)
+    })
     vi.useRealTimers()
 
     const user = userEvent.setup()
@@ -50,7 +54,9 @@ describe('CookieBanner', () => {
 
   it('persists decline to localStorage when decline is clicked', async () => {
     renderBanner()
-    await act(async () => { vi.advanceTimersByTime(1600) })
+    await act(async () => {
+      vi.advanceTimersByTime(1600)
+    })
     vi.useRealTimers()
 
     const user = userEvent.setup()
@@ -61,7 +67,9 @@ describe('CookieBanner', () => {
   it('does not show if consent already stored', async () => {
     localStorage.setItem(STORAGE_KEY, 'accepted')
     renderBanner()
-    await act(async () => { vi.advanceTimersByTime(1600) })
+    await act(async () => {
+      vi.advanceTimersByTime(1600)
+    })
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
   })
 })
