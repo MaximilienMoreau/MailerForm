@@ -6,19 +6,20 @@ export default function PrivacyPage() {
     <LegalLayout
       title="Privacy Policy"
       subtitle="How MailerForm collects, uses, and protects your personal data."
-      lastUpdated="March 28, 2026"
+      lastUpdated="October 20, 2026"
     >
       <div className="section-box">
         <p>
-          MailerForm SAS (&ldquo;MailerForm&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) operates the website{' '}
-          <a href="https://mailerform.io">mailerform.io</a> and the email infrastructure platform
-          accessible at <a href="https://app.mailerform.io">app.mailerform.io</a>. This Privacy Policy
-          explains what personal data we collect, why we collect it, how we use it, and your rights
-          regarding that data.
+          MailerForm SAS (&ldquo;MailerForm&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or
+          &ldquo;our&rdquo;) operates the website <a href="https://mailerform.io">mailerform.io</a>{' '}
+          and the email infrastructure platform accessible at{' '}
+          <a href="https://app.mailerform.io">app.mailerform.io</a>. This Privacy Policy explains
+          what personal data we collect, why we collect it, how we use it, and your rights regarding
+          that data.
         </p>
         <p>
-          By using MailerForm&apos;s services you agree to the practices described in this policy. If you
-          do not agree, please discontinue use of the platform.
+          By using MailerForm&apos;s services you agree to the practices described in this policy.
+          If you do not agree, please discontinue use of the platform.
         </p>
       </div>
 
@@ -39,9 +40,9 @@ export default function PrivacyPage() {
 
       <h3>1.3 Email content & recipient data</h3>
       <p>
-        To deliver emails on your behalf we process the content, headers, and recipient addresses
-        of messages you send. We act as a <strong>data processor</strong> for this information;
-        you remain the data controller responsible for obtaining appropriate consent from your
+        To deliver emails on your behalf we process the content, headers, and recipient addresses of
+        messages you send. We act as a <strong>data processor</strong> for this information; you
+        remain the data controller responsible for obtaining appropriate consent from your
         recipients.
       </p>
 
@@ -58,6 +59,14 @@ export default function PrivacyPage() {
         provide assistance and improve our service.
       </p>
 
+      <h3>1.6 Website forms</h3>
+      <p>
+        Early-access requests send your email and, when selected, your plan and billing interval to
+        Formspree for processing. Newsletter requests send your email, subscription purpose, and
+        consent choice. These are separate requests: asking for early access does not subscribe you
+        to the newsletter. Form data is transmitted when you submit the relevant form.
+      </p>
+
       <h2>2. How We Use Your Data</h2>
       <ul>
         <li>To provision, operate, and maintain the MailerForm platform</li>
@@ -70,29 +79,35 @@ export default function PrivacyPage() {
       </ul>
 
       <h2>3. Legal Basis for Processing (GDPR)</h2>
-      <p>
-        For users in the European Economic Area, we rely on the following legal bases:
-      </p>
+      <p>For users in the European Economic Area, we rely on the following legal bases:</p>
       <ul>
-        <li><strong>Contract</strong>: processing necessary to provide the service you&apos;ve signed up for</li>
-        <li><strong>Legitimate interests</strong>: security monitoring, fraud prevention, and product improvement</li>
-        <li><strong>Legal obligation</strong>: compliance with applicable laws</li>
-        <li><strong>Consent</strong>: marketing emails (you can withdraw consent at any time)</li>
+        <li>
+          <strong>Contract</strong>: processing necessary to provide the service you&apos;ve signed
+          up for
+        </li>
+        <li>
+          <strong>Legitimate interests</strong>: security monitoring, fraud prevention, and product
+          improvement
+        </li>
+        <li>
+          <strong>Legal obligation</strong>: compliance with applicable laws
+        </li>
+        <li>
+          <strong>Consent</strong>: marketing emails (you can withdraw consent at any time)
+        </li>
       </ul>
 
       <h2>4. Data Sharing</h2>
-      <p>
-        We do not sell your personal data. We share data only with:
-      </p>
+      <p>We do not sell your personal data. We share data only with:</p>
       <ul>
         <li>
           <strong>Sub-processors</strong>: infrastructure providers (AWS, Cloudflare), payment
-          processor (Stripe), and font delivery (Google Fonts). See our{' '}
+          processor (Stripe), font delivery (Google Fonts), and form handling (Formspree). See our{' '}
           <Link to="/gdpr">GDPR page</Link> for the full sub-processor list.
         </li>
         <li>
-          <strong>Legal authorities</strong>: when required by law, court order, or to protect
-          the safety of MailerForm users.
+          <strong>Legal authorities</strong>: when required by law, court order, or to protect the
+          safety of MailerForm users.
         </li>
         <li>
           <strong>Business transfers</strong>: in the event of a merger or acquisition, your data
@@ -102,29 +117,29 @@ export default function PrivacyPage() {
 
       <h2>5. Data Retention</h2>
       <p>
-        We retain your account data for as long as your account is active. After account deletion
-        we purge personal data within 30 days, except where retention is required by law (e.g.,
-        billing records for 7 years in some jurisdictions).
+        We retain your account data for as long as your account is active. After account deletion we
+        purge personal data within 30 days, except where retention is required by law (e.g., billing
+        records for 7 years in some jurisdictions).
       </p>
       <p>
-        Email delivery logs are retained for 90 days on the Starter plan, 12 months on Growth,
-        and 24 months on Scale. You can request earlier deletion at any time.
+        Email delivery logs are retained for 90 days on the Starter plan, 12 months on Growth, and
+        24 months on Scale. You can request earlier deletion at any time.
       </p>
 
       <h2>6. Data Security</h2>
       <p>
-        Certification evidence is not published on this site. Contact us for security documentation. We use TLS 1.3 for
-        data in transit, AES-256 encryption at rest, role-based access controls, and third-party
-        penetration testing, with our first assessment completed before general availability.
-        In the event of a data breach affecting your personal data, we will notify you within 72
-        hours in accordance with GDPR Article 33.
+        Certification evidence is not published on this site. Contact us for security documentation.
+        We use TLS 1.3 for data in transit, AES-256 encryption at rest, role-based access controls,
+        and third-party penetration testing, with our first assessment completed before general
+        availability. In the event of a data breach affecting your personal data, we will notify you
+        within 72 hours in accordance with GDPR Article 33.
       </p>
 
       <h2>7. International Transfers</h2>
       <p>
         Our primary infrastructure is in the United States. For EU customers on the Scale plan we
-        offer EU data residency (all data stays within the EU region). For other users, transfers
-        to the US are covered by Standard Contractual Clauses (SCCs) under GDPR Article 46.
+        offer EU data residency (all data stays within the EU region). For other users, transfers to
+        the US are covered by Standard Contractual Clauses (SCCs) under GDPR Article 46.
       </p>
 
       <h2>8. Your Rights</h2>
@@ -132,18 +147,32 @@ export default function PrivacyPage() {
         Depending on your location you may have the following rights regarding your personal data:
       </p>
       <ul>
-        <li><strong>Access</strong>: request a copy of the data we hold about you</li>
-        <li><strong>Rectification</strong>: correct inaccurate data</li>
-        <li><strong>Erasure</strong>: request deletion of your personal data</li>
-        <li><strong>Restriction</strong>: limit how we process your data</li>
-        <li><strong>Portability</strong>: receive your data in a machine-readable format</li>
-        <li><strong>Objection</strong>: object to processing based on legitimate interests</li>
-        <li><strong>Withdraw consent</strong>: for any consent-based processing at any time</li>
+        <li>
+          <strong>Access</strong>: request a copy of the data we hold about you
+        </li>
+        <li>
+          <strong>Rectification</strong>: correct inaccurate data
+        </li>
+        <li>
+          <strong>Erasure</strong>: request deletion of your personal data
+        </li>
+        <li>
+          <strong>Restriction</strong>: limit how we process your data
+        </li>
+        <li>
+          <strong>Portability</strong>: receive your data in a machine-readable format
+        </li>
+        <li>
+          <strong>Objection</strong>: object to processing based on legitimate interests
+        </li>
+        <li>
+          <strong>Withdraw consent</strong>: for any consent-based processing at any time
+        </li>
       </ul>
       <p>
         To exercise any of these rights, email us at{' '}
-        <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a>. We will respond within
-        30 days. You also have the right to lodge a complaint with your local data protection
+        <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a>. We will respond within 30
+        days. You also have the right to lodge a complaint with your local data protection
         authority.
       </p>
 
@@ -169,11 +198,11 @@ export default function PrivacyPage() {
       </p>
 
       <h2>12. Contact</h2>
-      <p>
-        For privacy-related questions or to exercise your rights:
-      </p>
+      <p>For privacy-related questions or to exercise your rights:</p>
       <ul>
-        <li>Email: <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a></li>
+        <li>
+          Email: <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a>
+        </li>
         <li>Postal: MailerForm SAS, 48 rue de la Victoire, 75009 Paris, France</li>
       </ul>
     </LegalLayout>

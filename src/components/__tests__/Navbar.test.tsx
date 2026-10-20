@@ -52,3 +52,33 @@ describe('Navbar', () => {
     expect(toggle).toHaveAttribute('aria-expanded', 'false')
   })
 })
+
+it('closes the mobile menu and restores scrolling when switching to desktop', async () => {
+  const { vi } = await import('vitest')
+  const { act } = await import('@testing-library/react')
+  const media = window.matchMedia('(min-width: 768px)')
+  const matchMedia = vi.spyOn(window, 'matchMedia').mockReturnValue(media)
+  document.body.style.overflow = 'auto'
+  try {
+    renderNavbar()
+    await userEvent.click(screen.getByRole('button', { name: /open menu/i }))
+    expect(document.body.style.overflow).toBe('hidden')
+    Object.defineProperty(media, 'matches', { value: true, configurable: true })
+    act(() => {
+      media.dispatchEvent(new Event('change'))
+    })
+    expect(screen.getByRole('button', { name: /open menu/i })).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    )
+    expect(document.body.style.overflow).toBe('auto')
+    await userEvent.tab()
+    expect(screen.getByRole('button', { name: /open menu/i })).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    )
+  } finally {
+    matchMedia.mockRestore()
+    document.body.style.overflow = ''
+  }
+})

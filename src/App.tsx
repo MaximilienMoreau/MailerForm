@@ -1,6 +1,6 @@
 import { useMeta } from '@/hooks/useMeta'
 import { lazy, Suspense } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { MotionConfig } from 'framer-motion'
 import ErrorBoundary from '@/components/ErrorBoundary'
 import SkipLink from '@/components/SkipLink'
@@ -75,6 +75,99 @@ function LandingPage() {
   )
 }
 
+function PageRoutes() {
+  const { pathname } = useLocation()
+  return (
+    <ErrorBoundary key={pathname} pagePath={pathname}>
+      {' '}
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route
+          path="/about"
+          element={
+            <Suspense fallback={<PageLoading />}>
+              <AboutPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/changelog"
+          element={
+            <Suspense fallback={<PageLoading />}>
+              <ChangelogPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/privacy"
+          element={
+            <Suspense fallback={<PageLoading />}>
+              <PrivacyPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/terms"
+          element={
+            <Suspense fallback={<PageLoading />}>
+              <TermsPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/cookies"
+          element={
+            <Suspense fallback={<PageLoading />}>
+              <CookiesPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/gdpr"
+          element={
+            <Suspense fallback={<PageLoading />}>
+              <GdprPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/blog"
+          element={
+            <Suspense fallback={<PageLoading />}>
+              <BlogPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/blog/:slug"
+          element={
+            <Suspense fallback={<PageLoading />}>
+              <BlogPostPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/careers"
+          element={
+            <Suspense fallback={<PageLoading />}>
+              <CareersPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/press"
+          element={
+            <Suspense fallback={<PageLoading />}>
+              <PressPage />
+            </Suspense>
+          }
+        />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </ErrorBoundary>
+  )
+}
+
 export default function App() {
   return (
     <ErrorBoundary>
@@ -82,90 +175,7 @@ export default function App() {
         <BrowserRouter>
           <ScrollToTop />
           <SkipLink />
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route
-              path="/about"
-              element={
-                <Suspense fallback={<PageLoading />}>
-                  <AboutPage />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/changelog"
-              element={
-                <Suspense fallback={<PageLoading />}>
-                  <ChangelogPage />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/privacy"
-              element={
-                <Suspense fallback={<PageLoading />}>
-                  <PrivacyPage />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/terms"
-              element={
-                <Suspense fallback={<PageLoading />}>
-                  <TermsPage />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/cookies"
-              element={
-                <Suspense fallback={<PageLoading />}>
-                  <CookiesPage />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/gdpr"
-              element={
-                <Suspense fallback={<PageLoading />}>
-                  <GdprPage />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/blog"
-              element={
-                <Suspense fallback={<PageLoading />}>
-                  <BlogPage />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/blog/:slug"
-              element={
-                <Suspense fallback={<PageLoading />}>
-                  <BlogPostPage />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/careers"
-              element={
-                <Suspense fallback={<PageLoading />}>
-                  <CareersPage />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/press"
-              element={
-                <Suspense fallback={<PageLoading />}>
-                  <PressPage />
-                </Suspense>
-              }
-            />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <PageRoutes />
           <CookieBanner />
         </BrowserRouter>
       </MotionConfig>

@@ -1,3 +1,5 @@
+import { useLocation } from 'react-router-dom'
+import { useFormRequest, FormTimeoutError } from '@/hooks/useFormRequest'
 import { useRef, useState, type ChangeEvent, type FormEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Loader2, Zap } from 'lucide-react'
@@ -14,7 +16,9 @@ function isValidEmail(value: string): boolean {
 }
 
 export default function CtaSection() {
-  const params = new URLSearchParams(window.location.search)
+  const { search } = useLocation()
+  const { send, isMounted } = useFormRequest()
+  const params = new URLSearchParams(search)
   const plan = ['starter', 'growth', 'scale'].includes(params.get('plan') ?? '')
     ? params.get('plan')
     : null
@@ -58,22 +62,24 @@ export default function CtaSection() {
     try {
       if (!FORM_ID) throw new Error('no_form_id')
 
-      const res = await fetch(`https://formspree.io/f/${FORM_ID}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          email: value,
-          purpose: 'early-access',
-          plan,
-          billing: plan ? billing : null,
-        }),
+      const res = await send(`https://formspree.io/f/${FORM_ID}`, {
+        email: value,
+        purpose: 'early-access',
+        plan,
+        billing: plan ? billing : null,
       })
+      if (!isMounted()) return
 
       if (!res.ok) throw new Error('submit_failed')
       setState('success')
-    } catch {
+    } catch (error) {
+      if (!isMounted()) return
       setState('error')
-      setErrorMsg('Something went wrong. Please try again or email us at hello@mailerform.io.')
+      setErrorMsg(
+        error instanceof FormTimeoutError
+          ? error.message
+          : 'Something went wrong. Please try again or email us at hello@mailerform.io.'
+      )
       inputRef.current?.focus()
     }
   }

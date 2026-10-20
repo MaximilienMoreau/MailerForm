@@ -1,3 +1,4 @@
+import { Link, useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Zap } from 'lucide-react'
@@ -87,11 +88,18 @@ const plans: Plan[] = [
 ]
 
 export default function PricingSection() {
+  const { search } = useLocation()
   const [yearly, setYearly] = useState(
-    () => new URLSearchParams(window.location.search).get('billing') === 'yearly'
+    () => new URLSearchParams(search).get('billing') === 'yearly'
   )
   const [expanded, setExpanded] = useState<string[]>([])
   const [billingAnnouncement, setBillingAnnouncement] = useState('')
+
+  const [previousSearch, setPreviousSearch] = useState(search)
+  if (search !== previousSearch) {
+    setPreviousSearch(search)
+    setYearly(new URLSearchParams(search).get('billing') === 'yearly')
+  }
 
   function handleBillingToggle() {
     const next = !yearly
@@ -231,13 +239,13 @@ export default function PricingSection() {
                 </div>
               </div>
 
-              <a
-                href={`?plan=${plan.name.toLowerCase()}&billing=${yearly ? 'yearly' : 'monthly'}#cta`}
+              <Link
+                to={`?plan=${plan.name.toLowerCase()}&billing=${yearly ? 'yearly' : 'monthly'}#cta`}
                 className={`${plan.ctaStyle} text-sm mb-6 justify-center`}
               >
                 {plan.cta}
                 <ArrowRight size={14} aria-hidden />
-              </a>
+              </Link>
 
               <div className="mt-auto rounded-lg border border-white/10 md:border-0">
                 <button

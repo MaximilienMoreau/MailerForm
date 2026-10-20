@@ -72,3 +72,31 @@ describe('ErrorBoundary', () => {
     expect(screen.queryByText('Something went wrong')).not.toBeInTheDocument()
   })
 })
+
+it('reloads a rejected lazy import at the same URL and offers a home link', async () => {
+  vi.spyOn(console, 'error').mockImplementation(() => {})
+  const reload = vi.spyOn(window.location, 'reload').mockImplementation(() => {})
+  window.history.replaceState({}, '', '/?plan=growth&billing=yearly#cta')
+  const { lazy, Suspense } = await import('react')
+  const Failed = lazy(() =>
+    Promise.reject(new TypeError('Failed to fetch dynamically imported module: /assets/page.js'))
+  )
+  try {
+    render(
+      <ErrorBoundary pagePath="/">
+        <Suspense fallback={<p>Loading…</p>}>
+          <Failed />
+        </Suspense>
+      </ErrorBoundary>
+    )
+    expect(await screen.findByRole('heading', { name: /page could not load/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /back to homepage/i })).toHaveAttribute('href', '/')
+    await userEvent.click(screen.getByRole('button', { name: /try again/i }))
+    expect(reload).toHaveBeenCalledOnce()
+    expect(window.location.search).toBe('?plan=growth&billing=yearly')
+    expect(window.location.hash).toBe('#cta')
+  } finally {
+    window.history.replaceState({}, '', '/')
+    vi.restoreAllMocks()
+  }
+})

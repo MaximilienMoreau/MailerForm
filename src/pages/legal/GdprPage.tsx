@@ -38,11 +38,11 @@ export default function GdprPage() {
     <LegalLayout
       title="GDPR Compliance"
       subtitle="How MailerForm meets its obligations under the General Data Protection Regulation."
-      lastUpdated="March 28, 2026"
+      lastUpdated="October 20, 2026"
     >
       {/* Highlight cards */}
       <div className="grid sm:grid-cols-2 gap-4 mb-10">
-        {highlights.map(h => {
+        {highlights.map((h) => {
           const Icon = h.icon
           return (
             <div key={h.title} className={`flex gap-4 p-5 rounded-xl border ${h.bg}`}>
@@ -62,9 +62,10 @@ export default function GdprPage() {
       <p>
         The General Data Protection Regulation (GDPR) Regulation (EU) 2016/679 applies to any
         organization that processes personal data of people in the European Economic Area. As an
-        email infrastructure platform, MailerForm operates both as a <strong>data controller</strong>{' '}
-        (for data about our own customers) and as a <strong>data processor</strong> (for personal
-        data you send us to process on your behalf, such as recipient email addresses).
+        email infrastructure platform, MailerForm operates both as a{' '}
+        <strong>data controller</strong> (for data about our own customers) and as a{' '}
+        <strong>data processor</strong> (for personal data you send us to process on your behalf,
+        such as recipient email addresses).
       </p>
 
       <h2>1. Controller vs. Processor</h2>
@@ -79,11 +80,11 @@ export default function GdprPage() {
 
       <h3>When MailerForm is a data processor</h3>
       <p>
-        When you send emails through MailerForm&apos;s platform, we process recipient addresses, message
-        content, and delivery events on your behalf. In this context, <strong>you are the data
-        controller</strong> and MailerForm acts as your data processor under GDPR Article 28. We
-        process this data only on your documented instructions and do not use it for our own
-        purposes.
+        When you send emails through MailerForm&apos;s platform, we process recipient addresses,
+        message content, and delivery events on your behalf. In this context,{' '}
+        <strong>you are the data controller</strong> and MailerForm acts as your data processor
+        under GDPR Article 28. We process this data only on your documented instructions and do not
+        use it for our own purposes.
       </p>
 
       <h2>2. Data Processing Agreement (DPA)</h2>
@@ -106,7 +107,8 @@ export default function GdprPage() {
 
       <h2>3. Legal Bases for Processing</h2>
       <p>
-        MailerForm relies on the following legal bases when processing personal data as a controller:
+        MailerForm relies on the following legal bases when processing personal data as a
+        controller:
       </p>
       <ul>
         <li>
@@ -114,24 +116,24 @@ export default function GdprPage() {
           service you signed up for.
         </li>
         <li>
-          <strong>Art. 6(1)(c): Legal obligation</strong>: Retaining billing records and
-          responding to lawful requests from authorities.
+          <strong>Art. 6(1)(c): Legal obligation</strong>: Retaining billing records and responding
+          to lawful requests from authorities.
         </li>
         <li>
           <strong>Art. 6(1)(f): Legitimate interests</strong>: Security monitoring, fraud
           prevention, and aggregated product analytics.
         </li>
         <li>
-          <strong>Art. 6(1)(a): Consent</strong>: Sending marketing communications. You can
-          withdraw consent at any time by clicking &ldquo;Unsubscribe&rdquo; or emailing us.
+          <strong>Art. 6(1)(a): Consent</strong>: Sending marketing communications. You can withdraw
+          consent at any time by clicking &ldquo;Unsubscribe&rdquo; or emailing us.
         </li>
       </ul>
 
       <h2>4. International Data Transfers</h2>
       <p>
-        MailerForm&apos;s primary infrastructure is hosted on AWS US-East. Transfers of EU personal data
-        to the USA are covered by <strong>Standard Contractual Clauses (SCCs)</strong> as adopted
-        by the European Commission (Decision 2021/914), supplemented by our transfer impact
+        MailerForm&apos;s primary infrastructure is hosted on AWS US-East. Transfers of EU personal
+        data to the USA are covered by <strong>Standard Contractual Clauses (SCCs)</strong> as
+        adopted by the European Commission (Decision 2021/914), supplemented by our transfer impact
         assessment.
       </p>
       <p>
@@ -149,18 +151,33 @@ export default function GdprPage() {
         <table className="w-full min-w-[480px] text-sm">
           <thead>
             <tr className="border-b border-white/[0.07]">
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Sub-processor</th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Purpose</th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Location</th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                Sub-processor
+              </th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                Purpose
+              </th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                Location
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-white/[0.05]">
             {[
-              { name: 'Amazon Web Services', purpose: 'Cloud infrastructure & hosting', location: 'USA / EU (opt-in)' },
-              { name: 'Cloudflare',          purpose: 'DDoS protection, CDN',           location: 'Global' },
-              { name: 'Stripe',              purpose: 'Payment processing',              location: 'USA / EU' },
-              { name: 'Google Fonts',        purpose: 'Web font delivery',               location: 'Global' },
-            ].map(r => (
+              {
+                name: 'Amazon Web Services',
+                purpose: 'Cloud infrastructure & hosting',
+                location: 'USA / EU (opt-in)',
+              },
+              { name: 'Cloudflare', purpose: 'DDoS protection, CDN', location: 'Global' },
+              { name: 'Stripe', purpose: 'Payment processing', location: 'USA / EU' },
+              {
+                name: 'Formspree',
+                purpose: 'Early-access and newsletter form submissions',
+                location: 'See provider documentation',
+              },
+              { name: 'Google Fonts', purpose: 'Web font delivery', location: 'Global' },
+            ].map((r) => (
               <tr key={r.name} className="hover:bg-white/[0.02] transition-colors">
                 <td className="px-4 py-3 text-gray-300 font-medium">{r.name}</td>
                 <td className="px-4 py-3 text-gray-400">{r.purpose}</td>
@@ -171,36 +188,59 @@ export default function GdprPage() {
         </table>
       </div>
       <p>
-        We will notify customers of any intended changes to sub-processors with at least 14 days&apos;
-        notice, giving you time to object before the change takes effect.
+        We will notify customers of any intended changes to sub-processors with at least 14
+        days&apos; notice, giving you time to object before the change takes effect.
       </p>
 
       <h2>6. Your Rights as a Data Subject</h2>
       <p>
-        Under GDPR Chapter III, individuals in the EEA have the following rights. To exercise
-        any of them, contact <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a>. We will
+        Under GDPR Chapter III, individuals in the EEA have the following rights. To exercise any of
+        them, contact <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a>. We will
         respond within 30 days (extendable by 60 days for complex requests).
       </p>
       <ul>
-        <li><strong>Right of access (Art. 15)</strong>: obtain a copy of your personal data and information about how it&apos;s processed</li>
-        <li><strong>Right to rectification (Art. 16)</strong>: correct inaccurate or incomplete data</li>
-        <li><strong>Right to erasure (Art. 17)</strong>: request deletion where data is no longer necessary or consent is withdrawn</li>
-        <li><strong>Right to restriction (Art. 18)</strong>: limit processing while a dispute is pending</li>
-        <li><strong>Right to data portability (Art. 20)</strong>: receive your data in a structured, machine-readable format (JSON / CSV)</li>
-        <li><strong>Right to object (Art. 21)</strong>: object to processing based on legitimate interests, including profiling</li>
-        <li><strong>Rights related to automated decisions (Art. 22)</strong>: we do not make fully automated decisions with significant effects on individuals</li>
+        <li>
+          <strong>Right of access (Art. 15)</strong>: obtain a copy of your personal data and
+          information about how it&apos;s processed
+        </li>
+        <li>
+          <strong>Right to rectification (Art. 16)</strong>: correct inaccurate or incomplete data
+        </li>
+        <li>
+          <strong>Right to erasure (Art. 17)</strong>: request deletion where data is no longer
+          necessary or consent is withdrawn
+        </li>
+        <li>
+          <strong>Right to restriction (Art. 18)</strong>: limit processing while a dispute is
+          pending
+        </li>
+        <li>
+          <strong>Right to data portability (Art. 20)</strong>: receive your data in a structured,
+          machine-readable format (JSON / CSV)
+        </li>
+        <li>
+          <strong>Right to object (Art. 21)</strong>: object to processing based on legitimate
+          interests, including profiling
+        </li>
+        <li>
+          <strong>Rights related to automated decisions (Art. 22)</strong>: we do not make fully
+          automated decisions with significant effects on individuals
+        </li>
       </ul>
 
       <h2>7. Security Measures</h2>
       <p>
-        As required by GDPR Article 32, MailerForm implements appropriate technical and organisational
-        measures to protect personal data:
+        As required by GDPR Article 32, MailerForm implements appropriate technical and
+        organisational measures to protect personal data:
       </p>
       <ul>
         <li>TLS 1.3 encryption for all data in transit</li>
         <li>AES-256 encryption for data at rest</li>
         <li>Role-based access control and principle of least privilege</li>
-        <li>Third-party penetration testing, with the first assessment completed before general availability</li>
+        <li>
+          Third-party penetration testing, with the first assessment completed before general
+          availability
+        </li>
         <li>Request current audit evidence covering security, availability, and confidentiality</li>
         <li>Intrusion detection, log monitoring, and security incident response procedures</li>
       </ul>
@@ -209,16 +249,16 @@ export default function GdprPage() {
       <p>
         In the event of a personal data breach that is likely to result in a risk to individual
         rights, we will notify the relevant supervisory authority within <strong>72 hours</strong>{' '}
-        of becoming aware of it (GDPR Art. 33). Where the breach is likely to result in a
-        high risk, we will also notify the affected individuals without undue delay (GDPR Art. 34).
+        of becoming aware of it (GDPR Art. 33). Where the breach is likely to result in a high risk,
+        we will also notify the affected individuals without undue delay (GDPR Art. 34).
       </p>
 
       <h2>9. Data Retention</h2>
       <p>
         We retain personal data only for as long as necessary for the purposes described in our
         Privacy Policy, and no longer than required by applicable law. Email logs are retained for
-        90 days (Starter), 12 months (Growth), or 24 months (Scale). Account data is deleted
-        within 30 days of account closure.
+        90 days (Starter), 12 months (Growth), or 24 months (Scale). Account data is deleted within
+        30 days of account closure.
       </p>
 
       <h2>10. Supervisory Authority</h2>
@@ -228,14 +268,15 @@ export default function GdprPage() {
         France, our lead supervisory authority is the{' '}
         <a href="https://www.cnil.fr" target="_blank" rel="noreferrer">
           Commission Nationale de l&apos;Informatique et des Libert&eacute;s (CNIL)
-        </a>.
+        </a>
+        .
       </p>
 
       <h2>11. Contact & DPO</h2>
       <p>
         For GDPR-related enquiries, please contact our Privacy team at{' '}
-        <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a>. For DPO enquiries, use
-        the same address with subject line &ldquo;GDPR: DPO Enquiry&rdquo;.
+        <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a>. For DPO enquiries, use the
+        same address with subject line &ldquo;GDPR: DPO Enquiry&rdquo;.
       </p>
     </LegalLayout>
   )
