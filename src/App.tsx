@@ -1,3 +1,4 @@
+import { sitePages } from '@/data/site'
 import { useMeta } from '@/hooks/useMeta'
 import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
@@ -37,11 +38,8 @@ const CookiesPage = lazy(() => import('@/pages/legal/CookiesPage'))
 const GdprPage = lazy(() => import('@/pages/legal/GdprPage'))
 
 function LandingPage() {
-  useMeta({
-    title: 'MailerForm: Email Infrastructure Platform',
-    description:
-      'Analyze your email, correct delivery risks, and send through one API. Explore sample reports and request early access.',
-  })
+  useMeta(sitePages.home)
+
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -75,95 +73,32 @@ function LandingPage() {
   )
 }
 
+const secondaryRoutes = [
+  { path: sitePages.about.path, Component: AboutPage },
+  { path: sitePages.changelog.path, Component: ChangelogPage },
+  { path: sitePages.privacy.path, Component: PrivacyPage },
+  { path: sitePages.terms.path, Component: TermsPage },
+  { path: sitePages.cookies.path, Component: CookiesPage },
+  { path: sitePages.gdpr.path, Component: GdprPage },
+  { path: sitePages.blog.path, Component: BlogPage },
+  { path: sitePages.careers.path, Component: CareersPage },
+  { path: sitePages.press.path, Component: PressPage },
+  { path: '/blog/:slug', Component: BlogPostPage },
+]
+
 function PageRoutes() {
   const { pathname } = useLocation()
   return (
     <ErrorBoundary key={pathname} pagePath={pathname}>
-      {' '}
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route
-          path="/about"
-          element={
-            <Suspense fallback={<PageLoading />}>
-              <AboutPage />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/changelog"
-          element={
-            <Suspense fallback={<PageLoading />}>
-              <ChangelogPage />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/privacy"
-          element={
-            <Suspense fallback={<PageLoading />}>
-              <PrivacyPage />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/terms"
-          element={
-            <Suspense fallback={<PageLoading />}>
-              <TermsPage />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/cookies"
-          element={
-            <Suspense fallback={<PageLoading />}>
-              <CookiesPage />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/gdpr"
-          element={
-            <Suspense fallback={<PageLoading />}>
-              <GdprPage />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/blog"
-          element={
-            <Suspense fallback={<PageLoading />}>
-              <BlogPage />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/blog/:slug"
-          element={
-            <Suspense fallback={<PageLoading />}>
-              <BlogPostPage />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/careers"
-          element={
-            <Suspense fallback={<PageLoading />}>
-              <CareersPage />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/press"
-          element={
-            <Suspense fallback={<PageLoading />}>
-              <PressPage />
-            </Suspense>
-          }
-        />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <Suspense fallback={<PageLoading />}>
+        <Routes>
+          <Route path={sitePages.home.path} element={<LandingPage />} />
+          {secondaryRoutes.map(({ path, Component }) => (
+            <Route key={path} path={path} element={<Component />} />
+          ))}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
     </ErrorBoundary>
   )
 }

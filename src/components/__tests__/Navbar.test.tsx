@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MotionConfig } from 'framer-motion'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, MemoryRouter } from 'react-router-dom'
 import Navbar from '@/components/Navbar'
 
 function renderNavbar() {
@@ -81,4 +81,17 @@ it('closes the mobile menu and restores scrolling when switching to desktop', as
     matchMedia.mockRestore()
     document.body.style.overflow = ''
   }
+})
+
+it('uses router location for section links on secondary pages', () => {
+  render(
+    <MemoryRouter initialEntries={['/about']}>
+      <Navbar />
+    </MemoryRouter>
+  )
+  expect(screen.getByRole('link', { name: /^features$/i })).toHaveAttribute('href', '/#features')
+  expect(screen.getByRole('link', { name: /request early access/i })).toHaveAttribute(
+    'href',
+    '/#cta'
+  )
 })

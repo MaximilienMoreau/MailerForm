@@ -1,3 +1,4 @@
+import { sitePages } from '@/data/site'
 import { Suspense, lazy } from 'react'
 import { motion } from 'framer-motion'
 import { Newspaper } from 'lucide-react'
@@ -12,11 +13,7 @@ const Footer = lazy(() => import('@/components/Footer'))
 import { posts, categoryColors } from '@/data/posts'
 
 export default function BlogPage() {
-  useMeta({
-    title: 'Blog',
-    description:
-      'Practical email engineering guides from the MailerForm team.',
-  })
+  useMeta(sitePages.blog)
 
   return (
     <div className="min-h-screen">

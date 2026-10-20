@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor, fireEvent, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MotionConfig } from 'framer-motion'
 import { BrowserRouter } from 'react-router-dom'
@@ -91,8 +91,8 @@ describe('CtaSection', () => {
 
     await user.click(screen.getByRole('button', { name: /request early access/i }))
 
-    // Form stays in idle state, no alert, no success
-    expect(screen.queryByRole('alert')).not.toBeInTheDocument()
+    expect(screen.getByRole('alert')).toHaveTextContent('Please enter your email address.')
+    expect(fetch).not.toHaveBeenCalled()
     expect(screen.queryByRole('status')).not.toBeInTheDocument()
   })
 })
@@ -138,4 +138,22 @@ it('confirms the submitted plan, billing, email, and next step', async () => {
     vi.unstubAllEnvs()
     vi.unstubAllGlobals()
   }
+})
+
+it('does not send twice when submit events arrive before the pending state renders', async () => {
+  vi.stubEnv('VITE_FORMSPREE_ID', 'test')
+  const submit = vi.fn(() => new Promise(() => {}))
+  vi.stubGlobal('fetch', submit)
+  const view = renderCta()
+  fireEvent.change(screen.getByRole('textbox'), { target: { value: 'team@example.com' } })
+  const form = screen.getByRole('form', { name: /early access/i })
+  act(() => {
+    fireEvent.submit(form)
+    fireEvent.submit(form)
+  })
+  expect(submit).toHaveBeenCalledTimes(1)
+  view.unmount()
+  await act(async () => {})
+  vi.unstubAllEnvs()
+  vi.unstubAllGlobals()
 })

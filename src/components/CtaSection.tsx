@@ -1,5 +1,9 @@
+import { formspreeEndpoint } from '@/lib/forms'
+import SiteLink from '@/components/SiteLink'
+import { parsePlanSelection, type PlanId, type BillingInterval } from '@/lib/planSelection'
 import { useLocation } from 'react-router-dom'
-import { useFormRequest, FormTimeoutError } from '@/hooks/useFormRequest'
+import { useFormRequest, FormTimeoutError, FormCancelledError } from '@/hooks/useFormRequest'
+import Honeypot from '@/components/Honeypot'
 import { useRef, useState, type ChangeEvent, type FormEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Loader2, Zap } from 'lucide-react'
@@ -7,51 +11,41 @@ import { EASE, VP_LG } from '@/lib/motion'
 
 type FormState = 'idle' | 'loading' | 'success' | 'error'
 
-function isValidEmail(value: string): boolean {
-  // Delegate to the browser's own RFC-compliant email validator
-  const input = document.createElement('input')
-  input.type = 'email'
-  input.value = value.trim()
-  return input.checkValidity()
-}
-
 export default function CtaSection() {
   const { search } = useLocation()
-  const { send, isMounted } = useFormRequest()
-  const params = new URLSearchParams(search)
-  const plan = ['starter', 'growth', 'scale'].includes(params.get('plan') ?? '')
-    ? params.get('plan')
-    : null
-  const billing = params.get('billing') === 'yearly' ? 'yearly' : 'monthly'
-  const FORM_ID = import.meta.env.VITE_FORMSPREE_ID
+  const { send, isMounted, isPending } = useFormRequest()
+  const { plan, billing } = parsePlanSelection(search)
+  const endpoint = formspreeEndpoint(import.meta.env.VITE_FORMSPREE_ID)
   const inputRef = useRef<HTMLInputElement>(null)
   const [email, setEmail] = useState('')
-  const [honeypot, setHoneypot] = useState('')
+  const [emailInvalid, setEmailInvalid] = useState(false)
   const [state, setState] = useState<FormState>('idle')
   const [errorMsg, setErrorMsg] = useState('')
   const [request, setRequest] = useState<{
     email: string
-    plan: string | null
-    billing: string
+    plan: PlanId | null
+    billing: BillingInterval
   } | null>(null)
 
-  async function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    if (state === 'loading') return
+    if (isPending() || !endpoint) return
     const value = email.trim()
-    if (!value) return
-
-    if (!isValidEmail(value)) {
+    if (!inputRef.current?.validity.valid) {
+      setEmailInvalid(true)
       setState('error')
-      setErrorMsg('Please enter a valid email address.')
+      setErrorMsg(
+        value ? 'Please enter a valid email address.' : 'Please enter your email address.'
+      )
       inputRef.current?.focus()
       return
     }
 
+    setEmailInvalid(false)
     setRequest({ email: value, plan, billing })
 
     // Bot filled the hidden honeypot field, silently succeed
-    if (honeypot) {
+    if (new FormData(e.currentTarget).get('_gotcha')) {
       setState('success')
       return
     }
@@ -60,9 +54,7 @@ export default function CtaSection() {
     setErrorMsg('')
 
     try {
-      if (!FORM_ID) throw new Error('no_form_id')
-
-      const res = await send(`https://formspree.io/f/${FORM_ID}`, {
+      const res = await send(endpoint, {
         email: value,
         purpose: 'early-access',
         plan,
@@ -73,7 +65,7 @@ export default function CtaSection() {
       if (!res.ok) throw new Error('submit_failed')
       setState('success')
     } catch (error) {
-      if (!isMounted()) return
+      if (!isMounted() || error instanceof FormCancelledError) return
       setState('error')
       setErrorMsg(
         error instanceof FormTimeoutError
@@ -86,6 +78,7 @@ export default function CtaSection() {
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     setEmail(e.target.value)
+    setEmailInvalid(false)
     if (state === 'error') {
       setState('idle')
       setErrorMsg('')
@@ -148,12 +141,12 @@ export default function CtaSection() {
           {plan && state !== 'success' && (
             <p className="mb-4 text-sm text-brand-300">
               Selected plan: <strong className="capitalize">{plan}</strong> · {billing} billing{' '}
-              <a href="#pricing" className="underline ml-2 focus-ring rounded">
+              <SiteLink href="#pricing" className="underline ml-2 focus-ring rounded">
                 Change plan
-              </a>
+              </SiteLink>
             </p>
           )}
-          {!FORM_ID ? (
+          {!endpoint ? (
             <a
               href={`mailto:hello@mailerform.io?subject=${encodeURIComponent(`Early access${plan ? `: ${plan} / ${billing}` : ''}`)}`}
               className="btn-primary text-base px-8 py-3.5 mx-auto"
@@ -204,24 +197,7 @@ export default function CtaSection() {
                     aria-label="Request MailerForm early access"
                     noValidate
                   >
-                    {/* Honeypot, hidden from users, catches bots that auto-fill all fields */}
-                    <input
-                      type="text"
-                      name="_gotcha"
-                      tabIndex={-1}
-                      aria-hidden="true"
-                      autoComplete="off"
-                      value={honeypot}
-                      onChange={(e) => setHoneypot(e.target.value)}
-                      style={{
-                        position: 'absolute',
-                        left: '-9999px',
-                        opacity: 0,
-                        pointerEvents: 'none',
-                        width: 0,
-                        height: 0,
-                      }}
-                    />
+                    <Honeypot />
                     <div className="flex-1 relative">
                       <label htmlFor="cta-email" className="sr-only">
                         Email address
@@ -235,7 +211,7 @@ export default function CtaSection() {
                         placeholder="you@company.com"
                         required
                         autoComplete="email"
-                        aria-invalid={state === 'error'}
+                        aria-invalid={emailInvalid}
                         aria-describedby={state === 'error' ? 'cta-email-error' : undefined}
                         className="w-full h-full bg-white/[0.06] border border-white/[0.12] rounded-xl px-4 py-3.5 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-brand-500/60 focus:bg-white/[0.08] transition-all aria-[invalid=true]:border-red-500/50"
                       />

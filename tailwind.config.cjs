@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}', './scripts/static-pages.ts'],
   theme: {
     extend: {
       fontFamily: {
@@ -9,7 +9,7 @@ module.exports = {
       },
       colors: {
         brand: {
-          50:  '#eef5ff',
+          50: '#eef5ff',
           100: '#d9e8ff',
           200: '#bcd5ff',
           300: '#8eb9ff',
@@ -23,7 +23,8 @@ module.exports = {
         },
       },
       backgroundImage: {
-        'grid-white': "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.04)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e\")",
+        'grid-white':
+          "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.04)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e\")",
       },
     },
   },

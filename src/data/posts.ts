@@ -1,10 +1,5 @@
 type Category =
-  | 'Deliverability'
-  | 'Authentication'
-  | 'Data'
-  | 'Infrastructure'
-  | 'Compliance'
-  | 'Migration'
+  'Deliverability' | 'Authentication' | 'Data' | 'Infrastructure' | 'Compliance' | 'Migration'
 
 export interface Post {
   slug: string

@@ -1,5 +1,6 @@
+import SiteLink from '@/components/SiteLink'
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Zap } from 'lucide-react'
 import { EASE } from '@/lib/motion'
@@ -23,6 +24,8 @@ const FOCUSABLE = [
 ].join(', ')
 
 export default function Navbar() {
+  const { pathname } = useLocation()
+  const brandRef = useRef<HTMLAnchorElement>(null)
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
@@ -40,15 +43,22 @@ export default function Navbar() {
   }, [])
 
   useEffect(() => {
+    const initialFrame = requestAnimationFrame(handleScroll)
     window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => {
+      cancelAnimationFrame(initialFrame)
+      window.removeEventListener('scroll', handleScroll)
+    }
   }, [handleScroll])
 
   // Release the mobile dialog and scroll lock when the desktop navigation takes over.
   useEffect(() => {
     const desktop = window.matchMedia('(min-width: 768px)')
     const handleChange = () => {
-      if (desktop.matches) setOpen(false)
+      if (desktop.matches) {
+        if (menuRef.current?.contains(document.activeElement)) brandRef.current?.focus()
+        setOpen(false)
+      }
     }
     desktop.addEventListener('change', handleChange)
     return () => desktop.removeEventListener('change', handleChange)
@@ -138,7 +148,12 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center gap-2.5 group focus-ring rounded-lg px-1 -ml-1">
+          <Link
+            ref={brandRef}
+            to="/"
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-2.5 group focus-ring rounded-lg px-1 -ml-1"
+          >
             <div className="w-8 h-8 bg-brand-500 rounded-lg flex items-center justify-center shadow-lg shadow-brand-500/30 group-hover:shadow-brand-500/50 transition-shadow">
               <Zap size={16} className="text-white" fill="white" aria-hidden />
             </div>
@@ -151,13 +166,9 @@ export default function Navbar() {
                 'external' in l && l.external ? false : activeSection === l.href.slice(1)
               const isExternal = 'external' in l && l.external
               return (
-                <a
+                <SiteLink
                   key={l.label}
-                  href={
-                    l.href.startsWith('#') && window.location.pathname !== '/'
-                      ? `/${l.href}`
-                      : l.href
-                  }
+                  href={l.href.startsWith('#') && pathname !== '/' ? `/${l.href}` : l.href}
                   {...(isExternal ? { target: '_blank', rel: 'noreferrer' } : {})}
                   className={`text-sm px-3 py-2 rounded-lg transition-all focus-ring ${
                     isActive
@@ -167,26 +178,26 @@ export default function Navbar() {
                   aria-current={isActive ? 'location' : undefined}
                 >
                   {l.label}
-                </a>
+                </SiteLink>
               )
             })}
           </nav>
 
           <div className="hidden md:flex items-center gap-3">
-            <a
+            <SiteLink
               href="https://app.mailerform.io/login"
               target="_blank"
               rel="noreferrer"
               className="text-sm text-gray-400 hover:text-white transition-colors font-medium focus-ring rounded-lg px-2 py-1"
             >
               Sign in
-            </a>
-            <a
-              href={window.location.pathname === '/' ? '#cta' : '/#cta'}
+            </SiteLink>
+            <SiteLink
+              href={pathname === '/' ? '#cta' : '/#cta'}
               className="btn-primary text-sm py-2 px-4"
             >
               Request early access
-            </a>
+            </SiteLink>
           </div>
 
           <button
@@ -216,27 +227,33 @@ export default function Navbar() {
             transition={{ duration: 0.25, ease: EASE }}
             className="md:hidden border-t border-white/[0.06] bg-gray-950/95 backdrop-blur-xl overflow-hidden"
           >
+            <button
+              type="button"
+              onClick={() => {
+                setOpen(false)
+                toggleRef.current?.focus()
+              }}
+              className="focus-ring mx-4 mt-4 min-h-11 px-3 text-sm text-gray-300 rounded-lg"
+            >
+              Close navigation
+            </button>
             <nav className="px-4 py-4 flex flex-col gap-1" aria-label="Mobile navigation links">
               {links.map((l) => {
                 const isExternal = 'external' in l && l.external
                 return (
-                  <a
+                  <SiteLink
                     key={l.label}
-                    href={
-                      l.href.startsWith('#') && window.location.pathname !== '/'
-                        ? `/${l.href}`
-                        : l.href
-                    }
+                    href={l.href.startsWith('#') && pathname !== '/' ? `/${l.href}` : l.href}
                     {...(isExternal ? { target: '_blank', rel: 'noreferrer' } : {})}
                     onClick={() => !isExternal && setOpen(false)}
                     className="text-sm text-gray-400 hover:text-white px-3 py-2.5 rounded-lg hover:bg-white/5 transition-all focus-ring"
                   >
                     {l.label}
-                  </a>
+                  </SiteLink>
                 )
               })}
               <div className="pt-3 border-t border-white/[0.06] mt-2 flex flex-col gap-2">
-                <a
+                <SiteLink
                   href="https://app.mailerform.io/login"
                   target="_blank"
                   rel="noreferrer"
@@ -244,14 +261,14 @@ export default function Navbar() {
                   className="btn-secondary text-sm py-2.5 justify-center"
                 >
                   Sign in
-                </a>
-                <a
-                  href={window.location.pathname === '/' ? '#cta' : '/#cta'}
+                </SiteLink>
+                <SiteLink
+                  href={pathname === '/' ? '#cta' : '/#cta'}
                   onClick={() => setOpen(false)}
                   className="btn-primary text-sm py-2.5 justify-center"
                 >
                   Request early access
-                </a>
+                </SiteLink>
               </div>
             </nav>
           </motion.div>

@@ -1,414 +1,121 @@
-<div align="center">
+# MailerForm
 
-# MailerForm: Landing Page
+A React and TypeScript website presenting the MailerForm early-access product.
+It includes preset analysis demonstrations, an illustrative SDK example, plan
+comparisons, editorial guides, and separate invitation and newsletter requests.
+It does not implement an email delivery backend or operate a newsletter service.
 
-![React](https://img.shields.io/badge/React-18-61dafb?logo=react&logoColor=white&labelColor=20232a)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript&logoColor=white&labelColor=20232a)
-![Vite](https://img.shields.io/badge/Vite-5-646cff?logo=vite&logoColor=white&labelColor=20232a)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-06b6d4?logo=tailwindcss&logoColor=white&labelColor=20232a)
-![Tests](https://img.shields.io/badge/tests-86%20passing-22c55e?labelColor=20232a)
-![License](https://img.shields.io/badge/license-private-6b7280?labelColor=20232a)
-[![CI](https://github.com/MaximilienMoreau/MailerForm/actions/workflows/ci.yml/badge.svg)](https://github.com/MaximilienMoreau/MailerForm/actions/workflows/ci.yml)
+## Development
 
-</div>
+Use **Node 20.19+** (`.nvmrc` selects the Node 20 release line).
 
-Marketing and documentation landing page for **[MailerForm](https://mailerform.io)**, an email infrastructure platform for SaaS engineering teams. Covers the full user journey from awareness to sign-up with accessibility, performance, and SEO as first-class concerns.
-
----
-
-## Table of contents
-
-- [Quick start](#quick-start)
-- [Stack](#stack)
-- [Project structure](#project-structure)
-- [Scripts](#scripts)
-- [Environment variables](#environment-variables)
-- [Architecture](#architecture)
-- [Design tokens](#design-tokens)
-- [Testing](#testing)
-- [CI](#ci)
-- [Deployment](#deployment)
-
----
-
-## Quick start
-
-Requires **Node 20+** (matches the version used in CI).
-
-```bash
-npm install
-npm run dev        # → http://localhost:5173
-```
-
-Copy the environment file and set your Formspree form ID (required by the CTA sign-up form in production):
-
-```bash
+```sh
+npm ci
 cp .env.example .env
-# then edit .env and fill in VITE_FORMSPREE_ID
+npm run dev
 ```
 
----
+Set `VITE_FORMSPREE_ID` to a Formspree form ID to enable request submission.
+An absent, invalid, or unchanged example ID leaves an explicit email contact link.
+Vite exposes `VITE_*` variables to the browser: do not put secrets in them.
 
-## Stack
-
-| Tool | Version | Role |
-|---|:-:|---|
-| [React](https://react.dev) | 18 | UI framework |
-| [TypeScript](https://www.typescriptlang.org) | 5 | Type safety — strict mode |
-| [Vite](https://vitejs.dev) | 5 | Dev server & bundler |
-| [Tailwind CSS](https://tailwindcss.com) | 3 | Utility-first styling |
-| [Framer Motion](https://www.framer.com/motion/) | 11 | Animations |
-| [React Router](https://reactrouter.com) | 7 | Client-side routing |
-| [Lucide React](https://lucide.dev) | 0.378 | Icon library |
-| [Vitest](https://vitest.dev) | 4 | Unit & component tests |
-| [Testing Library](https://testing-library.com) | 16 | DOM testing utilities |
-
-**Fonts:** Inter (body) · JetBrains Mono (code blocks), loaded from Google Fonts with `display=swap`.
-
----
-
-## Project structure
-
-```
-src/
-├── components/
-│   ├── __tests__/               # Component tests (Vitest + Testing Library)
-│   │
-│   ├── Navbar.tsx                # Sticky nav, active-section tracking, focus trap on mobile
-│   ├── Hero.tsx                  # Workflow facts + illustrative deliverability card
-│   ├── ProblemSection.tsx        # Before / after comparison
-│   ├── FeaturesSection.tsx       # 6-feature card grid
-│   ├── DeliverabilitySection.tsx # Left copy + right animated report card
-│   ├── DeliverabilityCard.tsx    # Reusable deliverability score card
-│   ├── StreamSection.tsx         # Transactional vs marketing stream comparison
-│   ├── ApiSection.tsx            # Syntax-highlighted code block + copy button
-│   ├── IntegrationsSection.tsx   # SDK & no-code integration grid
-│   ├── ComparisonSection.tsx     # Provider evaluation criteria
-│   ├── PricingSection.tsx        # 3-tier pricing with monthly / yearly toggle
-│   ├── FaqSection.tsx            # Accessible accordion (aria-controls + AnimatePresence)
-│   ├── CtaSection.tsx            # Early-access request → Formspree (+ plan, billing, honeypot)
-│   ├── LegalLayout.tsx           # Shared layout for all legal pages
-│   ├── Footer.tsx                # Multi-column footer with social links
-│   ├── CookieBanner.tsx          # Cookie consent with localStorage persistence
-│   ├── ScrollToTop.tsx           # Scrolls to top on route change; scrolls to hash target on cross-page anchor navigation
-│   ├── ErrorBoundary.tsx         # React error boundary with reset
-│   └── SkipLink.tsx              # Keyboard accessibility skip link
-│
-├── data/
-│   ├── features.ts               # Feature card definitions
-│   ├── api.ts                    # Code example, SDK list, API stats
-│   └── stats.ts                  # Shared platform statistics (hero + about page)
-│
-├── hooks/
-│   └── useMeta.ts                # Updates title, canonical link, and OG/Twitter meta tags per page
-│
-├── lib/
-│   ├── motion.ts                 # Shared Framer Motion constants (EASE, VP*, stagger, fadeUp)
-│   ├── tokenize.tsx              # Lightweight syntax highlighter (zero external dependency)
-│   └── consent.ts                # Cookie consent key & type shared by CookieBanner and CookiesPage
-│
-├── pages/
-│   ├── legal/
-│   │   ├── PrivacyPage.tsx
-│   │   ├── TermsPage.tsx
-│   │   ├── CookiesPage.tsx
-│   │   └── GdprPage.tsx
-│   ├── AboutPage.tsx             # Company story, values, timeline
-│   ├── ChangelogPage.tsx         # Versioned release history
-│   ├── BlogPage.tsx              # Email engineering guide index
-│   ├── CareersPage.tsx           # Open positions, benefits, how-we-work
-│   ├── PressPage.tsx             # Company facts, brand assets, media contact
-│   └── NotFound.tsx              # 404 catch-all
-│
-├── test/
-│   └── setup.ts                  # Testing Library setup (@testing-library/jest-dom)
-│
-├── App.tsx                       # Router, ErrorBoundary, MotionConfig, lazy sections
-├── main.tsx                      # React 18 entry point (StrictMode)
-├── vite-env.d.ts                 # import.meta.env type declarations
-└── index.css                     # Tailwind layers + shared component classes
+```sh
+npm run check         # TypeScript, ESLint, formatting, and tests
+npm run build         # Type-check app and build tools, then produce dist/
+npm run preview       # Preview the built website
+npm test              # Watch tests
+npm run test:coverage # Coverage report
+npm run format        # Apply the shared formatting rules
 ```
 
-### Path alias
-
-`@/` resolves to `src/` — configured in both Vite and TypeScript:
-
-```ts
-import { EASE } from '@/lib/motion'
-import { useMeta } from '@/hooks/useMeta'
-```
-
----
-
-## Scripts
-
-| Command | Description |
-|---|---|
-| `npm run dev` | Start the Vite dev server on port 5173 |
-| `npm run build` | Type-check then production build |
-| `npm run preview` | Preview the production build locally |
-| `npm test` | Run tests in watch mode |
-| `npm run test:run` | Run tests once (CI mode) |
-| `npm run test:coverage` | Run tests with v8 coverage report |
-| `npm run lint` | ESLint, zero warnings allowed |
-| `npm run format` | Prettier formatting |
-
----
-
-## Environment variables
-
-| Variable | Required | Description |
-|---|:-:|---|
-| `VITE_FORMSPREE_ID` | Production | Formspree form ID for the CTA email capture. Get one at [formspree.io](https://formspree.io). Without it the form falls back to a mailto contact link. |
-
----
-
-## Architecture
-
-### Routing
-
-React Router v7. All routes are declared in [`App.tsx`](src/App.tsx):
-
-| Path | Component | Notes |
-|---|---|---|
-| `/` | `LandingPage` | Full single-page landing |
-| `/about` | `AboutPage` | Company story & values |
-| `/changelog` | `ChangelogPage` | Versioned release history |
-| `/blog` | `BlogPage` | Email engineering guide index |
-| `/careers` | `CareersPage` | Open positions, benefits, how-we-work |
-| `/press` | `PressPage` | Company facts, brand assets, media contact |
-| `/privacy` · `/terms` · `/cookies` · `/gdpr` | Legal pages | Shared `LegalLayout` |
-| `*` | `NotFound` | 404 catch-all |
-
-A `<ScrollToTop>` component handles scroll on every `pathname` change: scrolls to the hash target when the URL contains one (e.g. navigating from `/about` to `/#features`), otherwise resets to the top of the page.
-
-### Code splitting
-
-Sections below the fold and all secondary pages are lazy-loaded via `React.lazy` and `Suspense`. Secondary routes use a shared `PageLoading` fallback with navigation, a live loading status, and a stable skeleton that respects reduced motion. Vite splits these pages into separate chunks.
-
-**Latest production build:**
-
-```
-index.js                   358 kB │ gzip: 112 kB   ← critical path
-GdprPage.js                  12 kB │ gzip:   4 kB
-ChangelogPage.js             10 kB │ gzip:   4 kB
-AboutPage.js                  9 kB │ gzip:   3 kB
-CareersPage.js                9 kB │ gzip:   3 kB
-TermsPage.js                  9 kB │ gzip:   3 kB
-CookiesPage.js                8 kB │ gzip:   3 kB
-PrivacyPage.js                8 kB │ gzip:   3 kB
-BlogPage.js                   7 kB │ gzip:   3 kB
-PressPage.js                  7 kB │ gzip:   2 kB
-PricingSection.js             6 kB │ gzip:   2 kB
-ComparisonSection.js          6 kB │ gzip:   2 kB
-CtaSection.js                 6 kB │ gzip:   2 kB
-IntegrationsSection.js        5 kB │ gzip:   2 kB
-Footer.js                     5 kB │ gzip:   2 kB
-FaqSection.js                 4 kB │ gzip:   2 kB
-```
-
-### SEO & meta tags
-
-The Vite plugin in [`scripts/static-pages.ts`](scripts/static-pages.ts) generates a
-separate HTML document for every public route. Each document includes its title,
-description, canonical URL, and Open Graph/Twitter metadata before JavaScript runs.
-The blog index includes links to all guides, and every article document includes
-the complete article text plus `BlogPosting` structured data. Other routes include
-a readable introduction before React takes over. This is static HTML generation,
-not a runtime rendering server.
-
-[`vercel.json`](vercel.json) maps known routes to their generated documents while unmatched paths use the generated `404.html`. Tests keep these mappings aligned with the generated routes.
-When adding a page or article, update its rewrite and sitemap entry as well.
-
-The `useMeta` hook updates titles, canonical URLs, social metadata, and article
-schema during client navigation. The landing page explicitly sets its own metadata
-so returning from a directly opened article clears the article context.
-
-Social previews use [`public/og-image.png`](public/og-image.png), a 1200 × 630 image
-rasterized from the existing SVG. To regenerate it on Linux with system librsvg
-and Cairo installed, run `python3 scripts/render-og.py`. The PNG is checked in;
-normal builds need no image tools or Python dependencies.
-
-### Animations
-
-All Framer Motion components share constants from [`src/lib/motion.ts`](src/lib/motion.ts):
-
-| Export | Purpose |
-|---|---|
-| `EASE` | Cubic-bezier `[0.22, 1, 0.36, 1]`, used everywhere |
-| `VP` / `VP_SM` / `VP_MD` / `VP_LG` | Viewport configs with different trigger thresholds |
-| `staggerContainer` / `staggerItem` | Consistent list animations, 80 ms stagger |
-| `fadeUp(delay)` | Mount-based fade-up for page entry animations |
-| `fadeUpView(delay)` | Scroll-triggered fade-up for sections below the fold |
-
-A single `<MotionConfig reducedMotion="user">` at the root automatically respects `prefers-reduced-motion`.
-
-### Accessibility
-
-- **Skip link** (`SkipLink`) jumps keyboard focus directly to `#main-content`
-- **Focus trap** in the mobile menu with Escape-to-close and focus restoration to the toggle button
-- **`aria-controls` / `aria-expanded`** on all accordion and menu toggle buttons
-- **`role="dialog"` / `aria-modal`** on the mobile nav and cookie banner
-- **`aria-live="polite"`** on stable values only — never on animated counter frames to avoid screen-reader spam
-- **`aria-label`** on the stream-separation heading to expose the intended meaning (not the visual strikethrough)
-- **Semantic HTML** throughout: `nav`, `main`, `section`, `article`, `figure`, `blockquote`, `time`
-
----
-
-## Design tokens
-
-Brand palette and custom utilities are defined in [`tailwind.config.cjs`](tailwind.config.cjs):
-
-- `brand-{50…950}` : primary blue (`#3366ff` base)
-- `bg-grid-white` : subtle dot-grid background pattern
-- `font-sans` → Inter · `font-mono` → JetBrains Mono
-
-Shared component classes live in [`src/index.css`](src/index.css):
-
-| Class | Usage |
-|---|---|
-| `.btn-primary` | Filled brand button with hover lift |
-| `.btn-secondary` | Ghost button with border |
-| `.card` | Dark glass card with hover state |
-| `.tag` | Small pill label |
-| `.score-bar` | Progress bar track |
-| `.focus-ring` | Consistent keyboard focus outline |
-| `.prose-legal` | Typography styles for legal page content |
-
----
-
-## Testing
-
-Tests use [Vitest](https://vitest.dev/) + [Testing Library](https://testing-library.com/) in a `happy-dom` environment.
-
-```bash
-npm run test:run       # run once
-npm run test:coverage  # with v8 coverage report
-```
-
-**86 tests** across 24 suites:
-
-| Suite | What it covers |
-|---|---|
-| `CtaSection` | Email validation, Formspree submission, error & success states, empty-field guard |
-| `Navbar` | Logo render, desktop links, mobile menu open/close, Escape key |
-| `FaqSection` | Accordion expand/collapse, keyboard accessibility |
-| `PricingSection` | Plan rendering, billing toggle, yearly discount badge |
-| `ComparisonSection` | Evaluation criteria and linked product sections |
-| `CookieBanner` | Consent accept/decline, localStorage persistence |
-| `Hero` | Stat items, trust badges, CTA links |
-| `ErrorBoundary` | Error catch, reset button |
-| `tokenize` | Syntax tokeniser edge cases |
-| `AnalyzerDemo` | Scenario selection, sample corrections, and reset |
-| `NewsletterForm` | Consent payload, failure recovery, and unconfigured fallback |
-| `BlogPostPage` | Full guide rendering and missing-article handling |
-| `FeaturesSection` | Arrow keys, Home/End, wrapping focus, and tab/panel relationships |
-| `PageLoading` | Accessible fallback while a lazy route is pending |
-| `useMeta` | Article-to-home metadata and structured-data updates |
-| `static-pages` | Static metadata, article HTML, escaping, deployment mappings, and PNG dimensions |
-
-The `CtaSection` tests mock `fetch` via `vi.stubGlobal` and `VITE_FORMSPREE_ID` via `vi.stubEnv`, no real network requests.
-
----
-
-## CI
-
-GitHub Actions runs on every push to `main` and on all pull requests:
-
-```
-1. tsc --noEmit              type-check
-2. eslint --max-warnings 0   lint
-3. vitest run                tests
-4. vite build                production build
-```
-
----
-
-## Deployment
-
-The app is a static SPA (client-side routing via React Router) deployed to **Vercel**.
-
-| Setting | Value |
-|---|---|
-| Framework preset | Vite |
-| Build command | `npm run build` |
-| Output directory | `dist` |
-| Install command | `npm install` |
-
-[`vercel.json`](vercel.json) maps public routes to their generated HTML documents.
-There is no catch-all rewrite to the homepage: Vercel serves the generated `404.html` for unmatched paths with its native not-found handling. React Router also displays the not-found page for unknown client-side routes.
-
-Set `VITE_FORMSPREE_ID` as an environment variable in the Vercel project settings (Production and
-Preview); see [Environment variables](#environment-variables) above.
-
-## Early access and editorial journeys
-
-Product CTAs request early access; they do not create an account or start a trial.
-Pricing links preserve `plan` and `billing` in the query string. Requests submitted
-through Formspree include `purpose: "early-access"`, the selected plan, and billing.
-Annual preview totals are displayed before requesting access. Trial duration and
-overage rates remain unpublished and must be confirmed before activation.
-
-The pre-send demonstration uses three local presets with illustrative corrections;
-it does not analyze or send visitor emails. Headline facts describe the visible
-workflow rather than unsourced production performance. Competitor rankings were
-replaced by concrete evaluation criteria; certification claims require evidence.
-
-Six complete guides are available at `/blog/:slug`, with entries in the sitemap.
-The blog newsletter form collects explicit consent and submits
-`purpose: "newsletter"` separately from early access, using `VITE_FORMSPREE_ID`.
-Configure downstream handling in Formspree to route these requests appropriately;
-this static site does not operate a newsletter sending service. Without the form
-ID, both journeys offer a contact email with the appropriate subject.
-
-Pricing cards put monthly volume and plan differences first. On mobile, visitors
-can expand each feature list; desktop keeps the lists visible. Billing initializes
-from the selected URL parameter. Successful early-access requests confirm the
-submitted plan, billing choice, email, and next step without starting a trial.
-The feature carousel supports Left/Right, Home, and End keys with a single tab
-stop in the tab list, labeled panels, and an announcement of the selected feature.
-
-## Request and preference recovery
-
-Pricing uses internal navigation so changing a plan retains the email already
-entered. Billing follows selection history. Failed page imports offer a reload
-of the current URL and a homepage link; other rendering errors retry in place.
-
-Cookie preferences synchronize between the banner and policy page, including
-resets, and respond to storage changes from other tabs. Blocked browser storage
-falls back to an in-memory choice for the current page session. Switching from
-mobile navigation to desktop closes the menu and restores the prior body overflow.
-
-Both Formspree forms stop waiting after 15 seconds, keep the email available for
-retry, and cancel pending client requests when unmounted. Cookies, privacy, and
-subprocessor documentation describe Formspree and distinguish early-access data
-from newsletter consent.
-
-Regression coverage includes `PlanSelection`, `ConsentSync`, `FormTimeouts`, and
-`useFormRequest`, plus menu resizing and rejected lazy imports.
-
-Clipboard failures select the example code and announce manual copying instructions.
-Reduced-motion preferences show final counter values immediately and disable CSS
-smooth scrolling, including changes made while the page is open. Route navigation
-focuses the new page heading after lazy content is ready; anchor navigation focuses
-the destination heading. Loading placeholders and hidden content are skipped.
-Initial page loads without a fragment leave focus in its normal browser position.
-
-## Preview content and not-found handling
-
-The copied SDK example defines its complete message, requires an environment API
-key, reports failures, and skips sending when the score is low or warnings remain.
-It is an illustrative SDK workflow; regression tests execute it against a mock SDK,
-without submitting messages. FAQ answers distinguish planned features from terms
-that must be confirmed during early-access onboarding.
-
-The build emits `dist/404.html` with readable error content, `noindex, follow`, and
-no canonical URL. Known pages keep their explicit rewrites; removing the homepage
-catch-all allows Vercel to serve its native HTTP 404 for unknown paths. This follows
-[Vercel's static 404 guidance](https://vercel.com/kb/guide/custom-404-page).
-Client-side unknown routes and missing articles also set `noindex`. Returning to a
-valid page removes that directive and restores a canonical URL.
-
-The local Vite development and preview servers use SPA fallback behavior and do
-not verify production HTTP status handling. Confirm the HTTP 404 status on a
-Vercel preview deployment after deployment; no deployment is performed by builds.
+CI runs the same type checks, lint, formatting checks, tests, and production build.
+`package-lock.json` is committed; use `npm ci` to reproduce the dependency tree.
+
+The current production dependency audit passes (`npm audit --omit=dev`). The
+full audit still reports seven development dependency findings in the Tailwind 3
+toolchain. Its suggested fix requires Tailwind 4; handle that as a separate CSS
+migration with visual regression checks rather than applying `npm audit fix --force`.
+
+## Structure and conventions
+
+| Location | Responsibility |
+| --- | --- |
+| `src/App.tsx` | Routes, page boundaries, and lazy section loading |
+| `src/pages/` | Routed pages and editorial/legal content |
+| `src/components/` | UI sections and small shared UI components |
+| `src/data/site.ts` | Public paths, page metadata, canonical origin, and social assets |
+| `src/data/plans.ts` | Plan definitions and numeric prices in USD |
+| `src/lib/planSelection.ts` | Validated query parameters and plan request links |
+| `src/data/product.ts` | Shared early-access positioning and stages |
+| `src/data/posts.ts` | Guide metadata and complete guide text |
+| `src/lib/seo.ts` | Metadata and article schema shared by build and browser |
+| `src/hooks/useMeta.ts` | Route metadata ownership, creation, and cleanup |
+| `src/hooks/useFormRequest.ts` | One active request per form, deadline, cancellation, and cleanup |
+| `src/lib/consent.ts` | Shared preference store with guarded storage access |
+| `scripts/static-pages.ts` | Static HTML documents and a standalone not-found page |
+
+The `@/` alias resolves to `src/`. Components use typed props; domain rules belong
+in plain data/functions rather than JSX. Internal `SiteLink` links use React
+Router, retain local query parameters for anchors, and leave external links and
+new-tab/download links to the browser. Do not recreate lazy components in render.
+
+Styles use Tailwind and shared classes in `src/index.css`; brand tokens are in
+`tailwind.config.cjs`. Motion presets live in `src/lib/motion.ts`. Reduced-motion
+preferences apply to CSS scrolling and custom counters as well as Framer Motion.
+
+## Forms and preferences
+
+Invitation requests include `purpose: "early-access"`, the trimmed email, and the
+validated plan and billing interval. Newsletter requests include
+`purpose: "newsletter"` and explicit consent. Configure downstream Formspree
+handling for those distinct purposes; accepting a request does not itself create
+an account or send a newsletter.
+
+Forms validate before sending, ignore a filled honeypot, prevent concurrent
+submissions, stop waiting after 15 seconds, and cancel work when unmounted.
+A request failure does not label a valid email as invalid. Entered values remain
+available for retry. The newsletter privacy link announces its new tab so reading
+the policy does not discard the original form.
+
+Cookie preferences synchronize within the page and across tabs using a small
+external store. Storage failures keep the choice in memory for the current
+session. Preferences are not newsletter consent and are never submitted as such.
+
+## Routing, metadata, and deployment
+
+The production build emits an HTML document for every known public route. Page
+metadata and article schema come from the same definitions used at runtime.
+Guide documents contain the full readable article, and the blog index links to
+all guides; other pages include a readable introduction before React renders.
+This is static generation, not a runtime rendering server or React hydration.
+
+Known routes in `vercel.json` map to their generated documents. Unmatched paths
+use the generated `404.html`, with `noindex, follow` and no canonical URL, according
+to [Vercel's static 404 behavior](https://vercel.com/kb/guide/custom-404-page).
+There is no homepage catch-all rewrite. Client navigation also handles unknown
+pages and restores indexable metadata when returning to a valid page.
+
+When adding a public page or guide, update its route/metadata, Vercel mapping, and
+`public/sitemap.xml` together. Tests check deployment mappings against generated
+pages. Vite's local development/preview fallback is not a verification of the
+production HTTP 404 status; check that on a Vercel preview deployment.
+
+Set the Vercel output directory to `dist` and the build command to `npm run build`.
+Provide `VITE_FORMSPREE_ID` in the appropriate deployment environments.
+
+Social previews use the committed `public/og-image.png` (1200 × 630). To regenerate
+it from the SVG on Linux with system librsvg and Cairo installed, run
+`python3 scripts/render-og.py`. Normal builds require no image tools.
+
+## Verification
+
+Vitest and Testing Library cover real request outcomes, timeouts, cancellation,
+concurrent submission, plan selection/history, preference synchronization,
+keyboard navigation, route focus, reduced motion, metadata transitions, generated
+HTML escaping, and the copied SDK example against a mock provider. Tests do not
+submit real forms or send emails.
+
+TypeScript checks both application code (`tsconfig.json`) and build scripts,
+configuration, and Node-based tests (`tsconfig.tools.json`). ESLint covers the
+whole repository, and Prettier formatting is enforced in CI. Add regression tests
+for behavior changes; keep visual-only changes lightweight.

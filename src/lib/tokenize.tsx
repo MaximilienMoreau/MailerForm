@@ -6,12 +6,31 @@ interface Token {
 }
 
 const KEYWORDS = [
-  'import', 'export', 'from',
-  'const', 'let', 'var',
-  'function', 'class', 'type', 'interface',
-  'return', 'async', 'await',
-  'if', 'else', 'for', 'while',
-  'new', 'null', 'undefined', 'true', 'false',
+  'import',
+  'export',
+  'from',
+  'const',
+  'let',
+  'var',
+  'function',
+  'class',
+  'type',
+  'interface',
+  'return',
+  'async',
+  'await',
+  'try',
+  'catch',
+  'throw',
+  'if',
+  'else',
+  'for',
+  'while',
+  'new',
+  'null',
+  'undefined',
+  'true',
+  'false',
 ]
 const QUOTES = ["'", '`', '"'] as const
 
@@ -41,8 +60,14 @@ export function tokenizeLine(line: string): Token[] {
       let j = i + 1
       // Walk forward, respecting backslash escapes
       while (j < line.length) {
-        if (line[j] === '\\') { j += 2; continue }
-        if (line[j] === quote) { j++; break }
+        if (line[j] === '\\') {
+          j += 2
+          continue
+        }
+        if (line[j] === quote) {
+          j++
+          break
+        }
         j++
       }
       tokens.push({ type: 'string', value: line.slice(i, j) })
@@ -53,6 +78,7 @@ export function tokenizeLine(line: string): Token[] {
     // Keywords (only when followed by a non-word character)
     let matched = false
     for (const kw of KEYWORDS) {
+      if (i > 0 && /[\w$]/.test(line[i - 1])) continue
       if (line.startsWith(kw, i)) {
         const after = line[i + kw.length]
         if (!after || /\W/.test(after)) {
@@ -66,7 +92,7 @@ export function tokenizeLine(line: string): Token[] {
     if (matched) continue
 
     // Numbers, allow at most one dot (e.g. 99.2) but not 1.2.3
-    if (/\d/.test(line[i])) {
+    if (/\d/.test(line[i]) && (i === 0 || !/[\w$]/.test(line[i - 1]))) {
       let j = i
       let seenDot = false
       while (j < line.length) {
@@ -93,10 +119,10 @@ export function tokenizeLine(line: string): Token[] {
 
 const TOKEN_CLASS: Record<TokenType, string> = {
   keyword: 'text-pink-400',
-  string:  'text-emerald-400',
+  string: 'text-emerald-400',
   comment: 'text-gray-500',
-  number:  'text-orange-400',
-  plain:   'text-gray-300',
+  number: 'text-orange-400',
+  plain: 'text-gray-300',
 }
 
 export function renderTokens(line: string, lineIndex: number) {

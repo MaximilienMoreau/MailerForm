@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useSyncExternalStore } from 'react'
 
 export const COOKIE_CONSENT_KEY = 'mailerform_cookie_consent'
 export type Consent = 'accepted' | 'declined'
@@ -13,10 +13,11 @@ function parseConsent(value: unknown): Consent | null {
 export function readConsent(): Consent | null {
   if (sessionOnly) return sessionConsent
   try {
-    return parseConsent(window.localStorage.getItem(COOKIE_CONSENT_KEY))
+    sessionConsent = parseConsent(window.localStorage.getItem(COOKIE_CONSENT_KEY))
   } catch {
-    return sessionConsent
+    /* Storage may be blocked; retain the current session's choice. */
   }
+  return sessionConsent
 }
 
 export function saveConsent(value: Consent | null) {
@@ -26,28 +27,31 @@ export function saveConsent(value: Consent | null) {
     else window.localStorage.setItem(COOKIE_CONSENT_KEY, value)
     sessionOnly = false
   } catch {
-    sessionOnly = true /* Keep the choice in memory when browser storage is unavailable. */
+    sessionOnly = true
   }
-  window.dispatchEvent(new window.CustomEvent(CHANGE_EVENT, { detail: value }))
+  window.dispatchEvent(new Event(CHANGE_EVENT))
+}
+
+function subscribe(onChange: () => void) {
+  const onStorage = (event: StorageEvent) => {
+    if (event.key !== COOKIE_CONSENT_KEY && event.key !== null) return
+    try {
+      if (event.storageArea && event.storageArea !== window.localStorage) return
+    } catch {
+      return
+    }
+    sessionOnly = false
+    onChange()
+  }
+  window.addEventListener(CHANGE_EVENT, onChange)
+  window.addEventListener('storage', onStorage)
+  return () => {
+    window.removeEventListener(CHANGE_EVENT, onChange)
+    window.removeEventListener('storage', onStorage)
+  }
 }
 
 export function useConsent() {
-  const [consent, setConsent] = useState(readConsent)
-  useEffect(() => {
-    const onChange = (event: Event) => setConsent(parseConsent((event as CustomEvent).detail))
-    const onStorage = (event: StorageEvent) => {
-      if (event.key === COOKIE_CONSENT_KEY || event.key === null) {
-        sessionOnly = false
-        sessionConsent = parseConsent(event.newValue)
-        setConsent(sessionConsent)
-      }
-    }
-    window.addEventListener(CHANGE_EVENT, onChange)
-    window.addEventListener('storage', onStorage)
-    return () => {
-      window.removeEventListener(CHANGE_EVENT, onChange)
-      window.removeEventListener('storage', onStorage)
-    }
-  }, [])
+  const consent = useSyncExternalStore(subscribe, readConsent, () => null)
   return [consent, saveConsent] as const
 }

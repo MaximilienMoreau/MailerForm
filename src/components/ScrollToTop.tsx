@@ -66,15 +66,23 @@ export default function ScrollToTop() {
     if (move()) return
     // Wait for lazy pages/sections instead of focusing their loading placeholder.
     const observer = new MutationObserver(() => {
-      if (move()) observer.disconnect()
+      if (move()) {
+        clearTimeout(deadline)
+        observer.disconnect()
+      }
     })
+    // Invalid fragments must not leave an observer running for the page's lifetime.
+    const deadline = setTimeout(() => observer.disconnect(), 30_000)
     observer.observe(document.body, {
       childList: true,
       subtree: true,
       attributes: true,
-      attributeFilter: ['aria-busy', 'style', 'hidden', 'inert'],
+      attributeFilter: ['aria-busy', 'hidden', 'inert'],
     })
-    return () => observer.disconnect()
+    return () => {
+      clearTimeout(deadline)
+      observer.disconnect()
+    }
   }, [pathname, search, hash])
   return null
 }

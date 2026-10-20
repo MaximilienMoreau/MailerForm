@@ -1,19 +1,20 @@
+import SiteLink from '@/components/SiteLink'
 import { motion } from 'framer-motion'
 import { ArrowRight, Shield } from 'lucide-react'
 import { EASE } from '@/lib/motion'
 
 interface Score {
-  label:   string
-  value:   number
-  color:   string
+  label: string
+  value: number
+  color: string
   invert?: boolean
 }
 
 const scores: Score[] = [
-  { label: 'Content health',    value: 91,  color: 'bg-emerald-500' },
-  { label: 'Domain reputation', value: 88,  color: 'bg-emerald-500' },
-  { label: 'Link safety',       value: 100, color: 'bg-emerald-500' },
-  { label: 'Spam risk',         value: 4,   color: 'bg-red-400', invert: true },
+  { label: 'Content health', value: 91, color: 'bg-emerald-500' },
+  { label: 'Domain reputation', value: 88, color: 'bg-emerald-500' },
+  { label: 'Link safety', value: 100, color: 'bg-emerald-500' },
+  { label: 'Spam risk', value: 4, color: 'bg-red-400', invert: true },
 ]
 
 export default function DeliverabilityCard() {
@@ -34,7 +35,9 @@ export default function DeliverabilityCard() {
         <span className="text-6xl font-black text-white tabular-nums">94</span>
         <div className="pb-2">
           <span className="text-gray-400 text-sm">/100 Deliverability score</span>
-          <p className="text-xs text-emerald-400 mt-0.5 font-medium">Illustrative score · not an inbox guarantee</p>
+          <p className="text-xs text-emerald-400 mt-0.5 font-medium">
+            Illustrative score · not an inbox guarantee
+          </p>
         </div>
       </div>
 
@@ -43,11 +46,20 @@ export default function DeliverabilityCard() {
           <div key={s.label}>
             <div className="flex justify-between text-xs mb-1.5">
               <span className="text-gray-400">{s.label}</span>
-              <span className={`font-semibold tabular-nums ${s.invert ? 'text-red-400' : 'text-white'}`}>
+              <span
+                className={`font-semibold tabular-nums ${s.invert ? 'text-red-400' : 'text-white'}`}
+              >
                 {s.invert ? `${s.value}% risk` : `${s.value}%`}
               </span>
             </div>
-            <div className="score-bar" role="progressbar" aria-valuenow={s.value} aria-valuemin={0} aria-valuemax={100} aria-label={s.label}>
+            <div
+              className="score-bar"
+              role="progressbar"
+              aria-valuenow={s.value}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-label={s.label}
+            >
               <motion.div
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: s.value / 100 }}
@@ -62,13 +74,13 @@ export default function DeliverabilityCard() {
 
       <div className="mt-5 pt-5 border-t border-white/[0.06] flex items-center justify-between">
         <span className="text-xs text-gray-500">2 warnings · 0 blockers</span>
-        <a
+        <SiteLink
           href="#deliverability"
           className="text-xs text-brand-400 hover:text-brand-300 font-medium transition-colors flex items-center gap-1 focus-ring rounded"
           aria-label="View full deliverability report"
         >
           View full report <ArrowRight size={11} aria-hidden />
-        </a>
+        </SiteLink>
       </div>
     </div>
   )

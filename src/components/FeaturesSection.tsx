@@ -7,7 +7,6 @@ import { EASE, VP } from '@/lib/motion'
 const slideVariants = {
   enter: (dir: number) => ({ x: dir > 0 ? 60 : -60, opacity: 0 }),
   center: { x: 0, opacity: 1 },
-  exit: (dir: number) => ({ x: dir > 0 ? -60 : 60, opacity: 0 }),
 }
 
 export default function FeaturesSection() {

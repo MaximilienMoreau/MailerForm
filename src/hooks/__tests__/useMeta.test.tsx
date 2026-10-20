@@ -1,7 +1,7 @@
 import { afterEach, expect, it } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, MemoryRouter, Link, Route, Routes } from 'react-router-dom'
 import { useMeta } from '@/hooks/useMeta'
 
 const initialHead = document.head.innerHTML
@@ -79,4 +79,28 @@ it('clears a static 404 noindex directive and creates the home canonical after r
     'href',
     'https://mailerform.io/'
   )
+})
+
+it('creates missing tags and derives canonical URLs from router state', () => {
+  document.head.innerHTML = '<title>Original</title>'
+  const view = render(
+    <MemoryRouter initialEntries={['/preview/']}>
+      <Home />
+    </MemoryRouter>
+  )
+  expect(document.querySelector('meta[name="description"]')).toHaveAttribute(
+    'content',
+    'Explore the email workflow.'
+  )
+  expect(document.querySelector('meta[property="og:url"]')).toHaveAttribute(
+    'content',
+    'https://mailerform.io/preview'
+  )
+  expect(document.querySelector('link[rel="canonical"]')).toHaveAttribute(
+    'href',
+    'https://mailerform.io/preview'
+  )
+  view.unmount()
+  expect(document.title).toBe('Original')
+  expect(document.querySelector('meta[name="description"]')).toBeNull()
 })
