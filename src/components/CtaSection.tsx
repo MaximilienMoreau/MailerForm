@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom'
 import { useRef, useState, type ChangeEvent, type FormEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Loader2, Zap } from 'lucide-react'
@@ -14,7 +15,8 @@ function isValidEmail(value: string): boolean {
 }
 
 export default function CtaSection() {
-  const params = new URLSearchParams(window.location.search)
+  const { search } = useLocation()
+  const params = new URLSearchParams(search)
   const plan = ['starter', 'growth', 'scale'].includes(params.get('plan') ?? '')
     ? params.get('plan')
     : null
