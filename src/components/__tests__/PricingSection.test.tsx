@@ -2,12 +2,15 @@ import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MotionConfig } from 'framer-motion'
+import { BrowserRouter } from 'react-router-dom'
 import PricingSection from '@/components/PricingSection'
 
 function renderPricing() {
   return render(
     <MotionConfig reducedMotion="always">
-      <PricingSection />
+      <BrowserRouter>
+        <PricingSection />
+      </BrowserRouter>
     </MotionConfig>
   )
 }
@@ -72,7 +75,7 @@ it('shows annual totals and carries the chosen plan and billing to the request',
   expect(screen.getByText('$1428 total / year')).toBeInTheDocument()
   expect(screen.getAllByRole('link', { name: /request early access/i })[1]).toHaveAttribute(
     'href',
-    '?plan=growth&billing=yearly#cta'
+    '/?plan=growth&billing=yearly#cta'
   )
 })
 
