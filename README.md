@@ -51,6 +51,7 @@ separate configuration. Run `npm audit` to check the full dependency tree.
 | `src/hooks/useFormRequest.ts` | One active request per form, deadline, cancellation, and cleanup |
 | `scripts/static-pages.ts` | Metadata, sitemap, complete static documents, and standalone 404 |
 | `scripts/render-pages.tsx` | Build-time React rendering of every public route |
+| `scripts/render-document.ts` | Complete stream rendering, deadlines, and cleanup on failure |
 
 The `@/` alias resolves to `src/`. Components use typed props; domain rules belong
 in plain data/functions rather than JSX. Internal `SiteLink` links use React
@@ -85,6 +86,10 @@ Newsletter consent is collected separately by its form.
 
 The production build emits an HTML document for every known public route. Page
 metadata and article schema come from the same definitions used at runtime.
+The renderer uses the build root, mode, environment directory, and environment prefix.
+A render error or timeout aborts the stream and fails the build rather than publishing
+a partial page.
+
 Every public document contains the complete page content rendered from the same
 React components as the browser app, including lazy sections, legal policies, and
 guides. Entrance-animation styles are made visible in static HTML so the content
