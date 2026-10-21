@@ -122,6 +122,7 @@ test('newsletter requires consent and sends a separate request', async ({ page }
 test('billing changes update an existing request and repeated anchors scroll again', async ({
   page,
 }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.goto('/?plan=growth&billing=monthly#pricing')
   await page.getByRole('switch').click()
   await expect(page).toHaveURL(/billing=yearly/)
