@@ -45,12 +45,13 @@ export const sitePages = {
   terms: {
     path: '/terms',
     title: 'Terms of Service | MailerForm',
-    description: 'Terms for using MailerForm services, plans, and infrastructure.',
+    description: 'Terms for using the MailerForm website preview and requesting early access.',
   },
   cookies: {
     path: '/cookies',
     title: 'Cookie Policy | MailerForm',
-    description: 'Information about cookies, local storage, and consent preferences on MailerForm.',
+    description:
+      'Information about cookies, browser storage, and external requests on the MailerForm website.',
   },
   gdpr: {
     path: '/gdpr',

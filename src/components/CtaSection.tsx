@@ -241,7 +241,15 @@ export default function CtaSection() {
 
               {state !== 'success' && (
                 <p className="mt-4 text-xs text-gray-600">
-                  Invitation request only · No payment · No account created
+                  Invitation request only · No payment · No account created.{' '}
+                  <a
+                    href="/privacy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline focus-ring rounded-sm"
+                  >
+                    Privacy policy (opens in a new tab)
+                  </a>
                 </p>
               )}
             </>

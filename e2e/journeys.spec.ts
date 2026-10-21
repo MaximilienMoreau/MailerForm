@@ -6,9 +6,6 @@ test.beforeEach(async ({ page }) => {
     throw error
   })
   await page.route('https://formspree.io/**', (route) => route.abort())
-  await page.addInitScript(() => {
-    localStorage.setItem('mailerform_cookie_consent', 'declined')
-  })
 })
 
 test('keyboard navigation reaches the main content', async ({ page }) => {
@@ -119,4 +116,41 @@ test('newsletter requires consent and sends a separate request', async ({ page }
     'Subscription request received'
   )
   expect(submissions).toBe(1)
+})
+
+test('billing changes update an existing request and repeated anchors scroll again', async ({
+  page,
+}) => {
+  await page.goto('/?plan=growth&billing=monthly#pricing')
+  await page.getByRole('switch').click()
+  await expect(page).toHaveURL(/billing=yearly/)
+  await page.locator('#pricing').getByRole('link', { name: 'Request early access' }).first().click()
+  await expect(page.locator('#cta')).toContainText('yearly billing')
+  const changePlan = page.locator('#cta').getByRole('link', { name: 'Change plan' })
+  await changePlan.click()
+  const heading = page.getByRole('heading', { name: 'Choose your early-access plan' })
+  await expect(heading).toBeInViewport()
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }))
+  // Activate the same URL again without introducing a different fragment.
+  await page.evaluate(() =>
+    document.querySelector<HTMLAnchorElement>('#cta a[href$="#pricing"]')!.click()
+  )
+  await expect(heading).toBeInViewport()
+})
+
+test('complete content remains readable without JavaScript', async ({ browser, baseURL }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false })
+  const page = await context.newPage()
+  await page.goto(`${baseURL}/`)
+  await expect(page.getByRole('heading', { name: 'Choose your early-access plan' })).toBeVisible()
+  await expect(page.locator('#cta')).toContainText('Request early access')
+  await expect(page.getByText('5 sending domains', { exact: true })).toBeVisible()
+  await expect(
+    page.locator('#faq noscript p').filter({ hasText: 'No account is created and no trial starts' })
+  ).toBeVisible()
+  await expect(page.getByRole('form')).toHaveCount(0)
+  // Vite preview does not apply Vercel's extensionless route rewrites.
+  await page.goto(`${baseURL}/privacy/index.html`)
+  await expect(page.getByRole('heading', { name: '8. Changes' })).toBeVisible()
+  await context.close()
 })

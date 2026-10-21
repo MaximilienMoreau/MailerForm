@@ -6,7 +6,6 @@ import { MotionConfig } from 'framer-motion'
 import ErrorBoundary from '@/components/ErrorBoundary'
 import SkipLink from '@/components/SkipLink'
 import ScrollToTop from '@/components/ScrollToTop'
-import CookieBanner from '@/components/CookieBanner'
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 import ProblemSection from '@/components/ProblemSection'
@@ -103,17 +102,22 @@ function PageRoutes() {
   )
 }
 
-export default function App() {
+export function AppContent() {
   return (
     <ErrorBoundary>
       <MotionConfig reducedMotion="user">
-        <BrowserRouter>
-          <ScrollToTop />
-          <SkipLink />
-          <PageRoutes />
-          <CookieBanner />
-        </BrowserRouter>
+        <ScrollToTop />
+        <SkipLink />
+        <PageRoutes />
       </MotionConfig>
     </ErrorBoundary>
+  )
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   )
 }

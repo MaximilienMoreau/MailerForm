@@ -67,6 +67,11 @@ function FaqRow({ item, defaultOpen = false }: { item: FaqItem; defaultOpen?: bo
 
       {/* Wrapper always present so aria-controls always resolves */}
       <div id={answerId}>
+        {!open && (
+          <noscript>
+            <p className="pb-5 text-sm text-gray-400 leading-relaxed pr-8">{item.answer}</p>
+          </noscript>
+        )}
         <AnimatePresence initial={false}>
           {open && (
             <motion.div

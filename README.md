@@ -49,8 +49,8 @@ separate configuration. Run `npm audit` to check the full dependency tree.
 | `src/lib/seo.ts` | Metadata and article schema shared by build and browser |
 | `src/hooks/useMeta.ts` | Route metadata ownership, creation, and cleanup |
 | `src/hooks/useFormRequest.ts` | One active request per form, deadline, cancellation, and cleanup |
-| `src/lib/consent.ts` | Shared preference store with guarded storage access |
-| `scripts/static-pages.ts` | Static HTML documents and a standalone not-found page |
+| `scripts/static-pages.ts` | Metadata, sitemap, complete static documents, and standalone 404 |
+| `scripts/render-pages.tsx` | Build-time React rendering of every public route |
 
 The `@/` alias resolves to `src/`. Components use typed props; domain rules belong
 in plain data/functions rather than JSX. Internal `SiteLink` links use React
@@ -76,17 +76,22 @@ A request failure does not label a valid email as invalid. Entered values remain
 available for retry. The newsletter privacy link announces its new tab so reading
 the policy does not discard the original form.
 
-Cookie preferences synchronize within the page and across tabs using a small
-external store. Storage failures keep the choice in memory for the current
-session. Preferences are not newsletter consent and are never submitted as such.
+The marketing site does not display a cookie consent banner or read/write a consent
+preference. It has no analytics or advertising script. An older
+`mailerform_cookie_consent` local-storage value is harmless and unused.
+Newsletter consent is collected separately by its form.
 
 ## Routing, metadata, and deployment
 
 The production build emits an HTML document for every known public route. Page
 metadata and article schema come from the same definitions used at runtime.
-Guide documents contain the full readable article, and the blog index links to
-all guides; other pages include a readable introduction before React renders.
-This is static generation, not a runtime rendering server or React hydration.
+Every public document contains the complete page content rendered from the same
+React components as the browser app, including lazy sections, legal policies, and
+guides. Entrance-animation styles are made visible in static HTML so the content
+remains readable without JavaScript. The browser then mounts the interactive app;
+this is build-time rendering, not a runtime rendering server or React hydration.
+Forms, billing switches, and other interactive demonstrations require JavaScript;
+the static document also includes email contact links in the footer.
 
 Known routes in `vercel.json` map to their generated documents. Unmatched paths
 use the generated `404.html`, with `noindex, follow` and no canonical URL, according
@@ -110,7 +115,7 @@ it from the SVG on Linux with system librsvg and Cairo installed, run
 ## Verification
 
 Vitest and Testing Library cover real request outcomes, timeouts, cancellation,
-concurrent submission, plan selection/history, preference synchronization,
+concurrent submission, plan selection/history, repeated anchor navigation,
 keyboard navigation, route focus, reduced motion, metadata transitions, generated
 HTML escaping, and the copied SDK example against a mock provider. Tests do not
 submit real forms or send emails.
@@ -159,3 +164,13 @@ effect once the file is merged there. Dependabot security alerts/updates have
 separate repository settings and limits; the weekly version-update schedule does
 not enable or replace those settings. See the
 [GitHub configuration reference](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference).
+
+## Preview content
+
+Privacy, cookies, data protection, and terms pages describe the website preview.
+They do not promise production hosting regions, completed audits, retention periods,
+SLAs, or billing behavior that this repository does not implement. Confirm those
+operational details and applicable agreements before activating a production service.
+The website privacy text follows the [CNIL information guidance](https://www.cnil.fr/fr/informer-les-personnes)
+for explaining purposes, request data, rights, and retention criteria. Provider and
+operator details still need to match the real deployment and handling of requests.

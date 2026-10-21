@@ -1,248 +1,43 @@
-import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import LegalLayout from '@/components/LegalLayout'
-import { useConsent } from '@/lib/consent'
-
-function ConsentManager() {
-  const [consent, setConsent] = useConsent()
-  const [reset, setReset] = useState(false)
-
-  useEffect(() => {
-    if (!reset) return
-    const t = setTimeout(() => setReset(false), 3000)
-    return () => clearTimeout(t)
-  }, [reset])
-
-  function handleReset() {
-    setConsent(null)
-    setReset(true)
-  }
-
-  const statusLabel =
-    consent === 'accepted' ? 'Accepted' : consent === 'declined' ? 'Declined' : 'Not set'
-
-  const statusColor =
-    consent === 'accepted'
-      ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20'
-      : consent === 'declined'
-        ? 'text-red-400 bg-red-500/10 border-red-500/20'
-        : 'text-gray-400 bg-white/5 border-white/10'
-
-  return (
-    <div className="flex flex-wrap items-center gap-3 mt-2">
-      <span
-        className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border ${statusColor}`}
-      >
-        {statusLabel}
-      </span>
-      {consent !== null && (
-        <button
-          type="button"
-          onClick={handleReset}
-          className="text-xs font-semibold py-1.5 px-3 rounded-lg bg-white/5 hover:bg-white/10 text-gray-300 border border-white/10 transition-all"
-        >
-          Reset my preference
-        </button>
-      )}
-      {reset && consent === null && (
-        <span className="text-xs text-emerald-400">Done: the banner will reappear shortly.</span>
-      )}
-    </div>
-  )
-}
-
-interface CookieRow {
-  name: string
-  purpose: string
-  duration: string
-  type: 'Essential' | 'Preference'
-  scope: string
-}
-
-const cookies: CookieRow[] = [
-  {
-    name: 'mf_session',
-    purpose: 'Authenticates your dashboard session',
-    duration: '7 days',
-    type: 'Essential',
-    scope: 'app.mailerform.io',
-  },
-  {
-    name: 'mf_csrf',
-    purpose: 'Prevents cross-site request forgery attacks',
-    duration: 'Session',
-    type: 'Essential',
-    scope: 'app.mailerform.io',
-  },
-  {
-    name: 'mf_billing',
-    purpose: 'Keeps billing country / VAT preference',
-    duration: '90 days',
-    type: 'Preference',
-    scope: 'app.mailerform.io',
-  },
-]
-
-const typeColors: Record<CookieRow['type'], string> = {
-  Essential: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
-  Preference: 'text-amber-400 bg-amber-500/10 border-amber-500/20',
-}
 
 export default function CookiesPage() {
   return (
     <LegalLayout
       title="Cookie Policy"
-      subtitle="What cookies MailerForm uses and why, kept short and honest."
-      lastUpdated="October 20, 2026"
+      subtitle="Cookies, browser storage, and external requests on this website."
+      lastUpdated="October 21, 2026"
     >
-      <div className="section-box">
-        <p>
-          We keep our cookie footprint as small as possible. MailerForm uses{' '}
-          <strong>no third-party advertising cookies</strong> and{' '}
-          <strong>no cross-site tracking</strong>. This page explains every cookie set across
-          mailerform.io and the dashboard, why it&apos;s set, and how you can control it.
-        </p>
-      </div>
-
-      <h2>1. What Is a Cookie?</h2>
+      <h2>1. Current Website</h2>
       <p>
-        A cookie is a small text file stored in your browser when you visit a website. Cookies allow
-        the site to remember information between page loads (e.g., that you&apos;re logged in) or
-        between separate visits (e.g., your preferences).
+        The MailerForm website code does not set cookies, run analytics or advertising scripts, or
+        store a cookie consent preference. There are no optional trackers to enable, so the site
+        does not display an accept or decline banner.
       </p>
+      <h2>2. Previous Preferences</h2>
       <p>
-        Some cookies are deleted when you close your browser (&ldquo;session cookies&rdquo;); others
-        persist for a set duration (&ldquo;persistent cookies&rdquo;).
+        An earlier version stored a banner choice in local storage under{' '}
+        <code>mailerform_cookie_consent</code>. The current website does not read or use that value.
+        You can remove it through your browser&apos;s site data settings.
       </p>
-
-      <h2>2. Cookies We Use</h2>
+      <h2>3. External Requests</h2>
       <p>
-        The marketing site at <strong>mailerform.io</strong> (the one you&apos;re on now) does not
-        set any HTTP cookies at all. The only preference it remembers, your cookie banner choice, is
-        stored in your browser&apos;s <strong>local storage</strong> under the key{' '}
-        <code className="text-xs font-mono text-gray-300 bg-white/5 px-1.5 py-0.5 rounded-sm">
-          mailerform_cookie_consent
-        </code>
-        , not as a cookie, and it never leaves your device.
+        Your browser loads fonts from Google Fonts. If a form is configured and you submit it, the
+        details you provide are sent to Formspree. Viewing a form does not submit your email
+        address. The website host and external providers may process technical request information
+        as described in our <Link to="/privacy">Privacy Policy</Link>.
       </p>
+      <h2>4. Future Platform</h2>
       <p>
-        The table below lists the cookies set once you sign in and use the dashboard at{' '}
-        <strong>app.mailerform.io</strong>. We do not use any cookies from advertising networks,
-        social media platforms, or data brokers, on either domain.
+        This policy covers the website preview. Cookies and storage for any future dashboard will be
+        documented before activation. Previously listed example dashboard cookie names are not a
+        description of an operating service.
       </p>
-
-      {/* Cookie table */}
-      <div className="overflow-x-auto rounded-xl border border-white/[0.07] mb-6">
-        <table
-          className="w-full min-w-[600px] text-sm"
-          aria-label="List of cookies used by MailerForm"
-        >
-          <thead>
-            <tr className="border-b border-white/[0.07]">
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                Name
-              </th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                Purpose
-              </th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                Duration
-              </th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                Type
-              </th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                Set on
-              </th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-white/[0.05]">
-            {cookies.map((c) => (
-              <tr key={c.name} className="hover:bg-white/[0.02] transition-colors">
-                <td className="px-4 py-3 font-mono text-xs text-gray-300">{c.name}</td>
-                <td className="px-4 py-3 text-gray-400">{c.purpose}</td>
-                <td className="px-4 py-3 text-gray-500">{c.duration}</td>
-                <td className="px-4 py-3">
-                  <span
-                    className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold border ${typeColors[c.type]}`}
-                  >
-                    {c.type}
-                  </span>
-                </td>
-                <td className="px-4 py-3 text-gray-500 font-mono text-xs">{c.scope}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      <h2>3. Cookie Categories Explained</h2>
-
-      <h3>Essential cookies</h3>
+      <h2>5. Changes and Contact</h2>
       <p>
-        Strictly necessary for the platform to work. Without them you cannot log in or use the
-        dashboard. These cookies cannot be disabled while using the service.
-      </p>
-
-      <h3>Preference cookies</h3>
-      <p>
-        Remember your choices (billing region, etc.) so you don&apos;t have to repeat them on every
-        visit. These are optional and can be cleared via your browser.
-      </p>
-
-      <h3>Analytics</h3>
-      <p>
-        We do not currently run any analytics or tracking script on this marketing site. If that
-        changes, this page will be updated before the change takes effect, and, where required, a
-        fresh cookie consent banner will be shown.
-      </p>
-
-      <h2>4. Managing Cookies</h2>
-      <p>You can control cookies through several mechanisms:</p>
-      <div className="section-box mb-4">
-        <p className="text-sm text-gray-400 mb-1">Your current preference on this browser:</p>
-        <ConsentManager />
-      </div>
-      <ul>
-        <li>
-          <strong>Cookie banner</strong>: when you first visit mailerform.io we ask for your
-          preference. You can reset it at any time by clearing the{' '}
-          <code className="text-xs font-mono text-gray-300 bg-white/5 px-1.5 py-0.5 rounded-sm">
-            mailerform_cookie_consent
-          </code>{' '}
-          key from your browser&apos;s local storage.
-        </li>
-        <li>
-          <strong>Browser settings</strong>: all modern browsers allow you to view, block, or delete
-          cookies. Note that blocking essential cookies will prevent you from logging in. See your
-          browser&apos;s documentation for instructions.
-        </li>
-      </ul>
-
-      <h2>5. Third-Party Embeds</h2>
-      <p>
-        Our marketing website does not embed any third-party scripts (no YouTube, no social widgets,
-        no Intercom, no Hotjar, no analytics). Web fonts are served from{' '}
-        <code className="text-xs font-mono text-gray-300 bg-white/5 px-1.5 py-0.5 rounded-sm">
-          fonts.googleapis.com
-        </code>{' '}
-        and{' '}
-        <code className="text-xs font-mono text-gray-300 bg-white/5 px-1.5 py-0.5 rounded-sm">
-          fonts.gstatic.com
-        </code>
-        , which does not set any cookie. When you submit an early-access or newsletter form, we also
-        send the information you provide to Formspree at formspree.io to process your request.
-        Merely viewing the form does not submit it.
-      </p>
-
-      <h2>6. Changes to This Policy</h2>
-      <p>
-        If we add new cookies or change existing ones, we will update this page and, if the changes
-        are significant, display a fresh cookie consent banner.
-      </p>
-
-      <h2>7. Contact</h2>
-      <p>
-        Questions about cookies? <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a>
+        We will update this page if storage or tracking changes. Any choices needed for optional
+        tracking will be provided before it is enabled. For questions, email{' '}
+        <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a>.
       </p>
     </LegalLayout>
   )

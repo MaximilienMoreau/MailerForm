@@ -130,3 +130,21 @@ it('stops waiting for an unknown fragment instead of observing forever', async (
   view.unmount()
   vi.useRealTimers()
 })
+
+it('scrolls again when the same anchor is clicked after scrolling away', () => {
+  const scroll = vi
+    .spyOn(window.HTMLElement.prototype, 'scrollIntoView')
+    .mockImplementation(() => {})
+  render(
+    <MemoryRouter>
+      <Fixture />
+    </MemoryRouter>
+  )
+  const link = screen.getByRole('link', { name: 'Read section' })
+  fireEvent.click(link)
+  scroll.mockClear()
+  screen.getByRole('button', { name: 'Back' }).focus()
+  fireEvent.click(link)
+  expect(scroll).toHaveBeenCalledTimes(1)
+  expect(screen.getByRole('heading', { name: 'Section title' })).toHaveFocus()
+})
