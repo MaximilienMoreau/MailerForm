@@ -1,26 +1,23 @@
 import { plans, formatPrice } from '@/data/plans'
 import { parsePlanSelection, planRequestPath } from '@/lib/planSelection'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Zap } from 'lucide-react'
 import { EASE, VP, staggerContainer, staggerItem } from '@/lib/motion'
 
 export default function PricingSection() {
-  const { search } = useLocation()
-  const [yearly, setYearly] = useState(() => parsePlanSelection(search).billing === 'yearly')
+  const { pathname, search, hash } = useLocation()
+  const navigate = useNavigate()
+  const yearly = parsePlanSelection(search).billing === 'yearly'
   const [expanded, setExpanded] = useState<string[]>([])
   const [billingAnnouncement, setBillingAnnouncement] = useState('')
 
-  const [previousSearch, setPreviousSearch] = useState(search)
-  if (search !== previousSearch) {
-    setPreviousSearch(search)
-    setYearly(parsePlanSelection(search).billing === 'yearly')
-  }
-
   function handleBillingToggle() {
     const next = !yearly
-    setYearly(next)
+    const params = new URLSearchParams(search)
+    params.set('billing', next ? 'yearly' : 'monthly')
+    navigate({ pathname, search: params.toString(), hash }, { replace: true })
     setBillingAnnouncement(
       next ? 'Yearly billing selected, annual prices displayed' : 'Monthly billing selected'
     )

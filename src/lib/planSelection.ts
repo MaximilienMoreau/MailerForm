@@ -12,6 +12,7 @@ export function parsePlanSelection(search: string) {
 
 export function planRequestPath(plan: PlanId, billing: BillingInterval, search = '') {
   const params = new URLSearchParams(search)
+  params.delete('billing')
   params.set('plan', plan)
   params.set('billing', billing)
   return `/?${params.toString()}#cta`

@@ -1,4 +1,5 @@
-import type { Plugin } from 'vite'
+import { createServer, type Plugin } from 'vite'
+import { fileURLToPath, URL } from 'node:url'
 import { sitePages, notFoundMeta, siteUrl } from '../src/data/site'
 import { articleSchema, pageMetaTags, SCHEMA_ID } from '../src/lib/seo'
 import { posts } from '../src/data/posts'
@@ -75,7 +76,11 @@ export function renderStaticPage(template: string, item: StaticPage): string {
     )
     .replace(/<link\b[^>]*rel=["']canonical["'][^>]*>/gi, '')
     .replace('</head>', () => `${head.join('\n')}</head>`)
-    .replace('<div id="root"></div>', () => `<div id="root">${item.content}</div>`)
+    .replace(
+      '<div id="root"></div>',
+      () =>
+        `<div id="root">${item.content}</div><noscript><style>form{display:none!important}[id^="features-"]{display:block!important}</style><p class="text-center p-6 text-gray-300">Interactive controls require JavaScript. To request access or newsletter updates, <a class="underline" href="mailto:hello@mailerform.io">email hello@mailerform.io</a>.</p></noscript>`
+    )
 }
 
 export function renderNotFoundPage(template: string) {
@@ -94,21 +99,35 @@ export function staticPagesPlugin(): Plugin {
     name: 'mailerform-static-pages',
     apply: 'build',
     enforce: 'post',
-    generateBundle(_, bundle) {
+    async generateBundle(_, bundle) {
       const index = bundle['index.html']
       if (!index || index.type !== 'asset') throw new Error('Missing Vite HTML entry')
       const template = String(index.source)
       this.emitFile({ type: 'asset', fileName: 'sitemap.xml', source: renderSitemap() })
       this.emitFile({ type: 'asset', fileName: '404.html', source: renderNotFoundPage(template) })
-      for (const item of staticPages) {
-        const html = renderStaticPage(template, item)
-        if (item.path === '/') index.source = html
-        else
-          this.emitFile({
-            type: 'asset',
-            fileName: `${item.path.slice(1)}/index.html`,
-            source: html,
-          })
+      const renderer = await createServer({
+        configFile: false,
+        esbuild: { jsx: 'automatic' },
+        server: { middlewareMode: true, ws: false, hmr: false, watch: null },
+        appType: 'custom',
+        resolve: { alias: { '@': fileURLToPath(new URL('../src', import.meta.url)) } },
+      })
+      try {
+        const { renderPage } = (await renderer.ssrLoadModule('/scripts/render-pages.tsx')) as {
+          renderPage: (path: string) => Promise<string>
+        }
+        for (const item of staticPages) {
+          const html = renderStaticPage(template, { ...item, content: await renderPage(item.path) })
+          if (item.path === '/') index.source = html
+          else
+            this.emitFile({
+              type: 'asset',
+              fileName: `${item.path.slice(1)}/index.html`,
+              source: html,
+            })
+        }
+      } finally {
+        await renderer.close()
       }
     },
   }

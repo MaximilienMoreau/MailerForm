@@ -5,206 +5,101 @@ export default function PrivacyPage() {
   return (
     <LegalLayout
       title="Privacy Policy"
-      subtitle="How MailerForm collects, uses, and protects your personal data."
-      lastUpdated="October 20, 2026"
+      subtitle="Personal data used by the MailerForm website preview."
+      lastUpdated="October 21, 2026"
     >
       <div className="section-box">
         <p>
-          MailerForm SAS (&ldquo;MailerForm&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or
-          &ldquo;our&rdquo;) operates the website <a href="https://mailerform.io">mailerform.io</a>{' '}
-          and the email infrastructure platform accessible at{' '}
-          <a href="https://app.mailerform.io">app.mailerform.io</a>. This Privacy Policy explains
-          what personal data we collect, why we collect it, how we use it, and your rights regarding
-          that data.
-        </p>
-        <p>
-          By using MailerForm&apos;s services you agree to the practices described in this policy.
-          If you do not agree, please discontinue use of the platform.
+          This policy covers the MailerForm website and invitation and newsletter requests. The
+          product is in early access. This website does not create accounts, take payments, or
+          process your email messages for delivery.
         </p>
       </div>
-
-      <h2>1. Information We Collect</h2>
-
-      <h3>1.1 Account & billing data</h3>
+      <h2>1. Who to Contact</h2>
       <p>
-        When you create an account we collect your name, email address, company name, and billing
-        information (processed securely through Stripe: we never store raw card numbers).
+        MailerForm manages requests received through this website. For questions about your data,
+        contact <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a>.
       </p>
-
-      <h3>1.2 Platform usage data</h3>
+      <h2>2. Data You Provide</h2>
       <p>
-        We collect data about how you use the platform: API calls, dashboard interactions, email
-        sends, bounce and complaint events, and feature usage. This data is used to operate and
-        improve the service.
-      </p>
-
-      <h3>1.3 Email content & recipient data</h3>
-      <p>
-        To deliver emails on your behalf we process the content, headers, and recipient addresses of
-        messages you send. We act as a <strong>data processor</strong> for this information; you
-        remain the data controller responsible for obtaining appropriate consent from your
-        recipients.
-      </p>
-
-      <h3>1.4 Technical data</h3>
-      <p>
-        We automatically collect IP addresses, browser type, operating system, referrer URLs, and
-        device identifiers when you access our website or dashboard. This information is used for
-        security monitoring and analytics.
-      </p>
-
-      <h3>1.5 Communications</h3>
-      <p>
-        If you contact our support team or respond to our emails, we store those communications to
-        provide assistance and improve our service.
-      </p>
-
-      <h3>1.6 Website forms</h3>
-      <p>
-        Early-access requests send your email and, when selected, your plan and billing interval to
-        Formspree for processing. Newsletter requests send your email, subscription purpose, and
-        consent choice. These are separate requests: asking for early access does not subscribe you
-        to the newsletter. Form data is transmitted when you submit the relevant form.
-      </p>
-
-      <h2>2. How We Use Your Data</h2>
-      <ul>
-        <li>To provision, operate, and maintain the MailerForm platform</li>
-        <li>To process payments and manage your subscription</li>
-        <li>To send you transactional emails (account alerts, invoices, security notices)</li>
-        <li>To send product updates and newsletters: you can opt out at any time</li>
-        <li>To detect and prevent fraud, abuse, and security incidents</li>
-        <li>To comply with legal obligations</li>
-        <li>To analyze aggregate usage and improve platform features</li>
-      </ul>
-
-      <h2>3. Legal Basis for Processing (GDPR)</h2>
-      <p>For users in the European Economic Area, we rely on the following legal bases:</p>
-      <ul>
-        <li>
-          <strong>Contract</strong>: processing necessary to provide the service you&apos;ve signed
-          up for
-        </li>
-        <li>
-          <strong>Legitimate interests</strong>: security monitoring, fraud prevention, and product
-          improvement
-        </li>
-        <li>
-          <strong>Legal obligation</strong>: compliance with applicable laws
-        </li>
-        <li>
-          <strong>Consent</strong>: marketing emails (you can withdraw consent at any time)
-        </li>
-      </ul>
-
-      <h2>4. Data Sharing</h2>
-      <p>We do not sell your personal data. We share data only with:</p>
-      <ul>
-        <li>
-          <strong>Sub-processors</strong>: infrastructure providers (AWS, Cloudflare), payment
-          processor (Stripe), font delivery (Google Fonts), and form handling (Formspree). See our{' '}
-          <Link to="/gdpr">GDPR page</Link> for the full sub-processor list.
-        </li>
-        <li>
-          <strong>Legal authorities</strong>: when required by law, court order, or to protect the
-          safety of MailerForm users.
-        </li>
-        <li>
-          <strong>Business transfers</strong>: in the event of a merger or acquisition, your data
-          may transfer to the acquiring entity under the same protections.
-        </li>
-      </ul>
-
-      <h2>5. Data Retention</h2>
-      <p>
-        We retain your account data for as long as your account is active. After account deletion we
-        purge personal data within 30 days, except where retention is required by law (e.g., billing
-        records for 7 years in some jurisdictions).
+        An early-access request includes your email address and, if selected, your plan and billing
+        interval. We use these details to respond to your request and discuss availability and
+        onboarding. Our basis for this processing is taking steps at your request before entering
+        into a possible service agreement.
       </p>
       <p>
-        Email delivery logs are retained for 90 days on the Starter plan, 12 months on Growth, and
-        24 months on Scale. You can request earlier deletion at any time.
+        A newsletter request includes your email address and explicit consent. We use your consent
+        to send the guides and product updates you requested. Early-access requests do not subscribe
+        you to the newsletter.
       </p>
-
-      <h2>6. Data Security</h2>
       <p>
-        Certification evidence is not published on this site. Contact us for security documentation.
-        We use TLS 1.3 for data in transit, AES-256 encryption at rest, role-based access controls,
-        and third-party penetration testing, with our first assessment completed before general
-        availability. In the event of a data breach affecting your personal data, we will notify you
-        within 72 hours in accordance with GDPR Article 33.
+        If you contact us by email, we use your message and contact details to respond. Our
+        legitimate interest is handling enquiries about MailerForm.
       </p>
-
-      <h2>7. International Transfers</h2>
+      <h2>3. Providers and Technical Requests</h2>
       <p>
-        Our primary infrastructure is in the United States. For EU customers on the Scale plan we
-        offer EU data residency (all data stays within the EU region). For other users, transfers to
-        the US are covered by Standard Contractual Clauses (SCCs) under GDPR Article 46.
+        When configured, the forms send your details to Formspree over HTTPS. Otherwise, the site
+        provides an email contact link. A successful form submission records a request; newsletter
+        delivery and invitation handling happen separately.
       </p>
-
-      <h2>8. Your Rights</h2>
       <p>
-        Depending on your location you may have the following rights regarding your personal data:
+        Your browser requests fonts from Google Fonts. The website host and font provider receive
+        technical information needed to serve these requests, including your IP address. This site
+        does not run an analytics or advertising script.
       </p>
-      <ul>
-        <li>
-          <strong>Access</strong>: request a copy of the data we hold about you
-        </li>
-        <li>
-          <strong>Rectification</strong>: correct inaccurate data
-        </li>
-        <li>
-          <strong>Erasure</strong>: request deletion of your personal data
-        </li>
-        <li>
-          <strong>Restriction</strong>: limit how we process your data
-        </li>
-        <li>
-          <strong>Portability</strong>: receive your data in a machine-readable format
-        </li>
-        <li>
-          <strong>Objection</strong>: object to processing based on legitimate interests
-        </li>
-        <li>
-          <strong>Withdraw consent</strong>: for any consent-based processing at any time
-        </li>
-      </ul>
       <p>
-        To exercise any of these rights, email us at{' '}
-        <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a>. We will respond within 30
-        days. You also have the right to lodge a complaint with your local data protection
-        authority.
+        Provider processing locations and retention depend on their services and the deployment
+        configuration. See{' '}
+        <a href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noreferrer">
+          Formspree&apos;s privacy policy
+        </a>{' '}
+        and{' '}
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">
+          Google&apos;s privacy policy
+        </a>
+        . This preview makes no EU-only data residency guarantee.
       </p>
-
-      <h2>9. Cookies</h2>
+      <h2>4. Retention</h2>
       <p>
-        We use a minimal set of cookies. For full details, see our{' '}
-        <Link to="/cookies">Cookie Policy</Link>.
+        Request details are used while handling your enquiry and any resulting onboarding
+        discussion. Newsletter details are used while your subscription remains active. You can ask
+        us to delete a request or withdraw newsletter consent at any time by emailing the address
+        above. Provider copies and technical logs are subject to the relevant provider&apos;s
+        retention settings and obligations.
       </p>
-
-      <h2>10. Children&apos;s Privacy</h2>
+      <h2>5. Your Choices and Rights</h2>
       <p>
-        MailerForm is not directed at children under 16. We do not knowingly collect personal data
-        from anyone under 16. If you believe we have collected such data, contact us at{' '}
-        <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a> and we will delete it
-        promptly.
+        You can request access, correction, deletion, restriction, or portability of your personal
+        data, and object to processing where applicable. You can withdraw newsletter consent without
+        affecting the lawfulness of earlier processing. Email{' '}
+        <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a> to make a request or
+        unsubscribe.
       </p>
-
-      <h2>11. Changes to This Policy</h2>
       <p>
-        We may update this Privacy Policy from time to time. We will notify you of significant
-        changes by email or by posting a prominent notice in the dashboard. Continued use of the
-        platform after the effective date constitutes acceptance of the updated policy.
+        You can also contact your data protection authority, including the{' '}
+        <a href="https://www.cnil.fr" target="_blank" rel="noreferrer">
+          CNIL
+        </a>{' '}
+        in France.
       </p>
-
-      <h2>12. Contact</h2>
-      <p>For privacy-related questions or to exercise your rights:</p>
-      <ul>
-        <li>
-          Email: <a href="mailto:privacy@mailerform.io">privacy@mailerform.io</a>
-        </li>
-        <li>Postal: MailerForm SAS, 48 rue de la Victoire, 75009 Paris, France</li>
-      </ul>
+      <h2>6. Cookies and Storage</h2>
+      <p>
+        The website code does not set cookies or store a cookie consent preference. See the{' '}
+        <Link to="/cookies">Cookie Policy</Link> for details about browser requests and legacy
+        preferences.
+      </p>
+      <h2>7. Future Platform Processing</h2>
+      <p>
+        Production security measures, hosting regions, sub-processors, retention periods, and any
+        data processing agreement must be confirmed before platform activation. Preview plans and
+        demonstrations are not evidence of an operating delivery service or a completed security
+        audit. See our <Link to="/gdpr">data protection overview</Link>.
+      </p>
+      <h2>8. Changes</h2>
+      <p>
+        We will update this policy when website processing changes. The date above identifies the
+        current version.
+      </p>
     </LegalLayout>
   )
 }

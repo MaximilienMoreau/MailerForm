@@ -26,7 +26,7 @@ function isAvailable(target: HTMLElement) {
 }
 
 export default function ScrollToTop() {
-  const { pathname, search, hash } = useLocation()
+  const { pathname, search, hash, key } = useLocation()
   const previousPath = useRef<string | null>(null)
   useEffect(() => {
     const changedPage = previousPath.current !== null && previousPath.current !== pathname
@@ -83,6 +83,6 @@ export default function ScrollToTop() {
       clearTimeout(deadline)
       observer.disconnect()
     }
-  }, [pathname, search, hash])
+  }, [pathname, search, hash, key])
   return null
 }
