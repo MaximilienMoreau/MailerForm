@@ -2,7 +2,7 @@ import { plans, formatPrice } from '@/data/plans'
 import { parsePlanSelection, planRequestPath } from '@/lib/planSelection'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion } from '@/components/Motion'
 import { ArrowRight, CheckCircle2, Zap } from 'lucide-react'
 import { EASE, VP, staggerContainer, staggerItem } from '@/lib/motion'
 

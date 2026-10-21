@@ -14,32 +14,18 @@ export interface StaticPage {
   path: string
   title: string
   description: string
-  content: string
   article?: (typeof posts)[number]
   noindex?: boolean
 }
 
-const page = (path: string, title: string, description: string): StaticPage => ({
-  path,
-  title,
-  description,
-  content: `<main id="main-content" class="max-w-3xl mx-auto px-6 pt-32 pb-20"><a href="/" class="text-brand-300">MailerForm</a><h1 class="text-4xl font-bold text-white mt-8">${escape(title)}</h1><p class="mt-6 text-gray-300">${escape(description)}</p><a href="/#cta" class="btn-primary mt-8">Request early access</a></main>`,
-})
-
+/** Route metadata only; React is the sole source of page content. */
 export const staticPages: StaticPage[] = [
-  ...Object.values(sitePages)
-    .filter((item) => item.path !== '/blog')
-    .map((item) => page(item.path, item.title, item.description)),
-  {
-    ...page(sitePages.blog.path, sitePages.blog.title, sitePages.blog.description),
-    content: `<main id="main-content" class="max-w-3xl mx-auto px-6 pt-32 pb-20"><a href="/" class="text-brand-300">MailerForm</a><h1 class="text-4xl font-bold text-white mt-8">Email engineering guides</h1><ul class="mt-8 space-y-6">${posts.map((post) => `<li><h2><a class="text-brand-300" href="/blog/${post.slug}">${escape(post.title)}</a></h2><p class="mt-2 text-gray-300">${escape(post.excerpt)}</p></li>`).join('')}</ul></main>`,
-  },
+  ...Object.values(sitePages),
   ...posts.map((post) => ({
     path: `/blog/${post.slug}`,
     title: `${post.title} | MailerForm`,
     description: post.excerpt,
     article: post,
-    content: `<main id="main-content" class="max-w-3xl mx-auto px-6 pt-32 pb-20"><a href="/blog" class="text-brand-300">All guides</a><article><h1 class="text-4xl font-bold text-white mt-8">${escape(post.title)}</h1><p class="mt-4 text-gray-400">MailerForm editorial · <time datetime="${post.isoDate}">${escape(post.date)}</time></p><p class="mt-8 text-gray-300">${escape(post.excerpt)}</p>${post.body.map((section) => `<section class="mt-8"><h2 class="text-xl font-bold text-white">${escape(section.heading)}</h2><p class="mt-3 text-gray-300 leading-relaxed">${escape(section.text)}</p></section>`).join('')}</article><a href="/#cta" class="btn-primary mt-8">Request early access</a></main>`,
   })),
 ]
 
@@ -49,7 +35,7 @@ export function renderSitemap(pages: readonly StaticPage[] = staticPages): strin
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((url) => `  <url><loc>${escape(url)}</loc></url>`).join('\n')}\n</urlset>\n`
 }
 
-export function renderStaticPage(template: string, item: StaticPage): string {
+export function renderStaticPage(template: string, item: StaticPage, content: string): string {
   // Keep Vite's asset links, charset, viewport, favicon, and font hints intact.
   const head = [
     `<title>${escape(item.title)}</title>`,
@@ -79,18 +65,8 @@ export function renderStaticPage(template: string, item: StaticPage): string {
     .replace(
       '<div id="root"></div>',
       () =>
-        `<div id="root">${item.content}</div><noscript><style>form{display:none!important}[id^="features-"]{display:block!important}</style><p class="text-center p-6 text-gray-300">Interactive controls require JavaScript. To request access or newsletter updates, <a class="underline" href="mailto:hello@mailerform.io">email hello@mailerform.io</a>.</p></noscript>`
+        `<div id="root">${content}</div><noscript><style>form,.requires-js{display:none!important}[id^="features-"]{display:block!important}</style><p class="text-center p-6 text-gray-300">Interactive controls require JavaScript. To request access or newsletter updates, <a class="underline" href="mailto:hello@mailerform.io">email hello@mailerform.io</a>.</p></noscript>`
     )
-}
-
-export function renderNotFoundPage(template: string) {
-  const html = renderStaticPage(template, {
-    path: '/404',
-    ...notFoundMeta,
-    content:
-      '<main id="main-content" class="min-h-screen flex flex-col items-center justify-center px-6 text-center"><p class="text-brand-300">404</p><h1 class="mt-4 text-4xl font-bold text-white">Page not found</h1><p class="mt-6 text-gray-300">The requested page could not be found. Check the address or return to the homepage.</p><a href="/" class="btn-primary mt-8">Back to homepage</a></main>',
-  })
-  return html
 }
 
 /** Emit metadata and readable article HTML without requiring a JavaScript crawler. */
@@ -108,7 +84,6 @@ export function staticPagesPlugin(): Plugin {
       if (!index || index.type !== 'asset') throw new Error('Missing Vite HTML entry')
       const template = String(index.source)
       this.emitFile({ type: 'asset', fileName: 'sitemap.xml', source: renderSitemap() })
-      this.emitFile({ type: 'asset', fileName: '404.html', source: renderNotFoundPage(template) })
       const renderer = await createServer({
         configFile: false,
         root: buildConfig.root,
@@ -130,8 +105,17 @@ export function staticPagesPlugin(): Plugin {
         const { renderPage } = (await renderer.ssrLoadModule('/scripts/render-pages.tsx')) as {
           renderPage: (path: string) => Promise<string>
         }
+        this.emitFile({
+          type: 'asset',
+          fileName: '404.html',
+          source: renderStaticPage(
+            template,
+            { path: '/404', ...notFoundMeta },
+            await renderPage('/404')
+          ),
+        })
         for (const item of staticPages) {
-          const html = renderStaticPage(template, { ...item, content: await renderPage(item.path) })
+          const html = renderStaticPage(template, item, await renderPage(item.path))
           if (item.path === '/') index.source = html
           else
             this.emitFile({

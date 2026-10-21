@@ -1,6 +1,6 @@
 import { sitePages } from '@/data/site'
 import { Suspense, lazy } from 'react'
-import { motion } from 'framer-motion'
+import { motion } from '@/components/Motion'
 import { ArrowRight, Briefcase, Clock, Heart, MapPin, Rocket, Sparkles } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import { EASE, VP, staggerContainer, staggerItem } from '@/lib/motion'

@@ -1,7 +1,8 @@
 import SiteLink from '@/components/SiteLink'
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from '@/components/Motion'
+import { AnimatePresence } from 'framer-motion'
 import { Menu, X, Zap } from 'lucide-react'
 import { EASE } from '@/lib/motion'
 

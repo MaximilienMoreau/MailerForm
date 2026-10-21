@@ -1,3 +1,4 @@
+import { features } from '../src/data/features'
 import { test, expect } from '@playwright/test'
 
 test.beforeEach(async ({ page }) => {
@@ -121,6 +122,7 @@ test('newsletter requires consent and sends a separate request', async ({ page }
 test('billing changes update an existing request and repeated anchors scroll again', async ({
   page,
 }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.goto('/?plan=growth&billing=monthly#pricing')
   await page.getByRole('switch').click()
   await expect(page).toHaveURL(/billing=yearly/)
@@ -144,6 +146,16 @@ test('complete content remains readable without JavaScript', async ({ browser, b
   await page.goto(`${baseURL}/`)
   await expect(page.getByRole('heading', { name: 'Choose your early-access plan' })).toBeVisible()
   await expect(page.locator('#cta')).toContainText('Request early access')
+  for (const feature of features) {
+    await expect(
+      page.locator('#features').getByText(feature.description, { exact: true })
+    ).toBeVisible()
+    await expect(
+      page.locator('#features').getByText(feature.items.join(' · '), { exact: true })
+    ).toBeVisible()
+  }
+  await expect(page.getByRole('button', { name: 'Next feature' })).toBeHidden()
+  await expect(page.getByRole('button', { name: 'Previous feature' })).toBeHidden()
   await expect(page.getByText('5 sending domains', { exact: true })).toBeVisible()
   await expect(
     page.locator('#faq noscript p').filter({ hasText: 'No account is created and no trial starts' })

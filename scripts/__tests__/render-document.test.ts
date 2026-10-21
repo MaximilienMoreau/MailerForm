@@ -17,7 +17,7 @@ afterEach(() => {
   vi.resetAllMocks()
 })
 
-it('waits for complete content and only removes hidden entrance styles', async () => {
+it('waits for complete content and preserves the rendered HTML unchanged', async () => {
   stream.pipe = vi.fn((destination) => {
     destination.end(
       '<h1 style="opacity:0;transform:translateY(20px)">Ready</h1><span style="opacity:0.5">Dimmed</span>'
@@ -28,7 +28,7 @@ it('waits for complete content and only removes hidden entrance styles', async (
   expect(stream.pipe).not.toHaveBeenCalled()
   renderer.mock.calls[0][1]!.onAllReady!()
   await expect(result).resolves.toBe(
-    '<h1 style="opacity:1">Ready</h1><span style="opacity:0.5">Dimmed</span>'
+    '<h1 style="opacity:0;transform:translateY(20px)">Ready</h1><span style="opacity:0.5">Dimmed</span>'
   )
   expect(vi.getTimerCount()).toBe(0)
   expect(stream.abort).not.toHaveBeenCalled()

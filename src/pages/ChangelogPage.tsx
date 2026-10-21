@@ -1,7 +1,7 @@
 import { sitePages } from '@/data/site'
 import { Suspense, lazy } from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion } from '@/components/Motion'
 import { Zap } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import ProductStatusNotice from '@/components/ProductStatusNotice'

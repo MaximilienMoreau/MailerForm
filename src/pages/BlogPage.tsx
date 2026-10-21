@@ -1,6 +1,6 @@
 import { sitePages } from '@/data/site'
 import { Suspense, lazy } from 'react'
-import { motion } from 'framer-motion'
+import { motion } from '@/components/Motion'
 import { Newspaper } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import NewsletterForm from '@/components/NewsletterForm'

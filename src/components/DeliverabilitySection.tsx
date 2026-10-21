@@ -1,5 +1,5 @@
 import SiteLink from '@/components/SiteLink'
-import { motion } from 'framer-motion'
+import { motion } from '@/components/Motion'
 import { ArrowRight, CheckCircle2, Cpu } from 'lucide-react'
 import AnalyzerDemo from '@/components/AnalyzerDemo'
 import { EASE, VP_SM } from '@/lib/motion'

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion } from '@/components/Motion'
 import { AlertTriangle, CheckCircle2, XCircle } from 'lucide-react'
 import { EASE, VP_MD } from '@/lib/motion'
 
