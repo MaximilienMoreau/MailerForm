@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion } from '@/components/Motion'
 import { ArrowRight, Zap } from 'lucide-react'
 import { EASE, VP, staggerContainer, staggerItem } from '@/lib/motion'
 

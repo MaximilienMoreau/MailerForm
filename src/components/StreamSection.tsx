@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion } from '@/components/Motion'
 import { GitBranch, Lock, Mail, Megaphone, TrendingUp } from 'lucide-react'
 import { EASE, VP_SM, staggerContainer, staggerItem } from '@/lib/motion'
 

@@ -1,12 +1,39 @@
-import { expect, it } from 'vitest'
-import { readFileSync } from 'node:fs'
+import { afterAll, beforeAll, expect, it } from 'vitest'
+import { readFileSync, mkdtempSync, rmSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
+import { execFile } from 'node:child_process'
+import { promisify } from 'node:util'
 import { renderStaticPage, renderSitemap, staticPages } from '../static-pages'
 import { posts } from '../../src/data/posts'
 
 const template = readFileSync('index.html', 'utf8')
+const outputDirectory = mkdtempSync(join(tmpdir(), 'mailerform-static-test-'))
+
+beforeAll(async () => {
+  // Exercise the production plugin and React renderer in Node, outside the simulated browser.
+  await promisify(execFile)(
+    process.execPath,
+    ['node_modules/vite/bin/vite.js', 'build', '--outDir', outputDirectory],
+    { timeout: 60_000, env: { ...process.env, VITE_FORMSPREE_ID: 'static-test-form' } }
+  )
+}, 90_000)
+
+afterAll(() => rmSync(outputDirectory, { recursive: true, force: true }))
+
+function publishedDocument(path: string) {
+  const file = path === '/' ? 'index.html' : `${path.slice(1)}/index.html`
+  return new DOMParser().parseFromString(
+    readFileSync(join(outputDirectory, file), 'utf8'),
+    'text/html'
+  )
+}
 
 it('lists every indexable generated page exactly once in the sitemap', () => {
-  const document = new DOMParser().parseFromString(renderSitemap(), 'application/xml')
+  const document = new DOMParser().parseFromString(
+    readFileSync(join(outputDirectory, 'sitemap.xml'), 'utf8'),
+    'application/xml'
+  )
   const urls = Array.from(document.querySelectorAll('loc'), (node) => node.textContent)
   expect(urls).toEqual(staticPages.map((page) => `https://mailerform.io${page.path}`))
   expect(new Set(urls).size).toBe(urls.length)
@@ -26,8 +53,7 @@ it('excludes non-indexable pages, deduplicates URLs and escapes XML', () => {
 
 it('provides distinct canonical and social metadata for every page', () => {
   for (const page of staticPages) {
-    const html = renderStaticPage(template, page)
-    const document = new DOMParser().parseFromString(html, 'text/html')
+    const document = publishedDocument(page.path)
     expect(document.title).toBe(page.title)
     expect(document.querySelector('meta[name="description"]')?.getAttribute('content')).toBe(
       page.description
@@ -53,7 +79,7 @@ it('provides distinct canonical and social metadata for every page', () => {
 it('includes every complete guide and structured data in the HTML without JavaScript', () => {
   for (const post of posts) {
     const page = staticPages.find((item) => item.path === `/blog/${post.slug}`)!
-    const document = new DOMParser().parseFromString(renderStaticPage(template, page), 'text/html')
+    const document = publishedDocument(page.path)
     expect(document.querySelector('h1')?.textContent).toBe(post.title)
     for (const section of post.body)
       expect(document.querySelector('article')?.textContent).toContain(section.text)
@@ -66,15 +92,19 @@ it('includes every complete guide and structured data in the HTML without JavaSc
   }
 })
 
-it('escapes titles, descriptions, content, and inline structured data', () => {
+it('escapes titles, descriptions, and inline structured data', () => {
   const page = staticPages.find((item) => item.article)!
   const hostile = '</script><script>alert("test")</script> & "quoted" $& $1'
-  const result = renderStaticPage(template, {
-    ...page,
-    title: hostile,
-    description: hostile,
-    article: { ...page.article!, title: hostile },
-  })
+  const result = renderStaticPage(
+    template,
+    {
+      ...page,
+      title: hostile,
+      description: hostile,
+      article: { ...page.article!, title: hostile },
+    },
+    '<main>Trusted React output</main>'
+  )
   const document = new DOMParser().parseFromString(result, 'text/html')
   expect(document.title).toBe(hostile)
   expect(document.querySelector('meta[name="description"]')?.getAttribute('content')).toBe(hostile)
@@ -104,18 +134,33 @@ it('ships a 1200 by 630 PNG social preview', () => {
   expect(png.readUInt32BE(20)).toBe(630)
 })
 
-it('renders a standalone non-indexable 404 without a canonical URL', async () => {
-  const { renderNotFoundPage } = await import('../static-pages')
-  const document = new DOMParser().parseFromString(renderNotFoundPage(template), 'text/html')
+it('renders a standalone non-indexable 404 without a canonical URL', () => {
+  const document = new DOMParser().parseFromString(
+    readFileSync(join(outputDirectory, '404.html'), 'utf8'),
+    'text/html'
+  )
   expect(document.querySelector('h1')).toHaveTextContent('Page not found')
   expect(document.querySelector('meta[name="robots"]')).toHaveAttribute(
     'content',
     'noindex, follow'
   )
   expect(document.querySelector('link[rel="canonical"]')).toBeNull()
-  expect(document.querySelector('a[href="/"]')).toHaveTextContent('Back to homepage')
+  expect(document.querySelector('a[aria-label="Back to MailerForm homepage"]')).toHaveAttribute(
+    'href',
+    '/'
+  )
   const deployment = JSON.parse(readFileSync('vercel.json', 'utf8'))
   expect(
     deployment.rewrites.every((route: { source: string }) => !route.source.includes('*'))
   ).toBe(true)
+})
+
+it('publishes a complete homepage and policies rather than placeholder introductions', () => {
+  const home = publishedDocument('/')
+  expect(home.querySelector('#pricing')).not.toBeNull()
+  expect(home.querySelector('#cta')).not.toBeNull()
+  expect(publishedDocument('/privacy').querySelector('main')?.textContent).toContain('8. Changes')
+  expect(publishedDocument('/terms').querySelector('main')?.textContent).toContain(
+    '9. Confidentiality'
+  )
 })

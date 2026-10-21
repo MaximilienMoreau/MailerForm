@@ -1,5 +1,6 @@
 import { useState, useId } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from '@/components/Motion'
+import { AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import { EASE, VP } from '@/lib/motion'
 

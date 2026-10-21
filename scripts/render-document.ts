@@ -29,13 +29,7 @@ export function renderDocument(element: ReactNode, timeoutMs = 30_000): Promise<
       if (settled) return
       settled = true
       clearTimeout(timeout)
-      // Motion entrance styles must not hide the document without JavaScript.
-      resolve(
-        html.replace(/style="([^"]*)"/g, (attribute, styles: string) => {
-          if (!/(?:^|;)opacity:0(?:;|$)/.test(styles)) return attribute
-          return `style="${styles.replace(/(^|;)opacity:0(?=;|$)/, '$1opacity:1').replace(/(^|;)transform:[^;]*/g, '')}"`
-        })
-      )
+      resolve(html)
     })
 
     try {

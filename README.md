@@ -41,6 +41,7 @@ separate configuration. Run `npm audit` to check the full dependency tree.
 | `src/App.tsx` | Routes, page boundaries, and lazy section loading |
 | `src/pages/` | Routed pages and editorial/legal content |
 | `src/components/` | UI sections and small shared UI components |
+| `src/components/Motion.tsx` | Shared motion components with a visible build-time state |
 | `src/data/site.ts` | Public paths, page metadata, canonical origin, and social assets |
 | `src/data/plans.ts` | Plan definitions and numeric prices in USD |
 | `src/lib/planSelection.ts` | Validated query parameters and plan request links |
@@ -49,7 +50,7 @@ separate configuration. Run `npm audit` to check the full dependency tree.
 | `src/lib/seo.ts` | Metadata and article schema shared by build and browser |
 | `src/hooks/useMeta.ts` | Route metadata ownership, creation, and cleanup |
 | `src/hooks/useFormRequest.ts` | One active request per form, deadline, cancellation, and cleanup |
-| `scripts/static-pages.ts` | Metadata, sitemap, complete static documents, and standalone 404 |
+| `scripts/static-pages.ts` | Route metadata, sitemap, and React-generated HTML documents |
 | `scripts/render-pages.tsx` | Build-time React rendering of every public route |
 | `scripts/render-document.ts` | Complete stream rendering, deadlines, and cleanup on failure |
 
@@ -92,9 +93,11 @@ a partial page.
 
 Every public document contains the complete page content rendered from the same
 React components as the browser app, including lazy sections, legal policies, and
-guides. Entrance-animation styles are made visible in static HTML so the content
-remains readable without JavaScript. The browser then mounts the interactive app;
-this is build-time rendering, not a runtime rendering server or React hydration.
+guides. Motion components render their final animation state during the build so the
+content remains readable without JavaScript. HTML styles are not rewritten after rendering.
+The feature carousel exposes every feature without JavaScript and hides its inactive
+controls. The browser then mounts the interactive app; this is build-time rendering,
+not a runtime rendering server or React hydration.
 Forms, billing switches, and other interactive demonstrations require JavaScript;
 the static document also includes email contact links in the footer.
 
@@ -118,6 +121,9 @@ it from the SVG on Linux with system librsvg and Cairo installed, run
 `python3 scripts/render-og.py`. Normal builds require no image tools.
 
 ## Verification
+
+Static document tests build into a temporary directory and inspect the published HTML,
+including complete guides, policies, metadata, and the 404 page.
 
 Vitest and Testing Library cover real request outcomes, timeouts, cancellation,
 concurrent submission, plan selection/history, repeated anchor navigation,

@@ -1,12 +1,48 @@
 import { useState, useCallback, useRef, useId, type KeyboardEvent } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from '@/components/Motion'
+import { AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { features } from '@/data/features'
+import { features, type Feature } from '@/data/features'
 import { EASE, VP } from '@/lib/motion'
 
 const slideVariants = {
   enter: (dir: number) => ({ x: dir > 0 ? 60 : -60, opacity: 0 }),
   center: { x: 0, opacity: 1 },
+}
+
+function FeatureContent({ feature }: { feature: Feature }) {
+  const Icon = feature.icon
+  return (
+    <>
+      {/* Mobile: icon+badge row above title / Desktop: all on same row */}
+      <div className="flex items-center justify-between gap-3 mb-3 sm:hidden">
+        <div
+          className={`shrink-0 w-12 h-12 rounded-xl ${feature.bg} border ${feature.border} flex items-center justify-center`}
+        >
+          <Icon size={22} className={feature.color} aria-hidden />
+        </div>
+        <span className={`shrink-0 tag text-xs border ${feature.tagColor}`}>{feature.tag}</span>
+      </div>
+      <h3 className="text-2xl sm:hidden font-extrabold text-white leading-tight tracking-tight text-center mb-4">
+        {feature.title}
+      </h3>
+      <div className="hidden sm:flex items-center gap-4 mb-6">
+        <div
+          className={`shrink-0 w-16 h-16 rounded-xl ${feature.bg} border ${feature.border} flex items-center justify-center`}
+        >
+          <Icon size={30} className={feature.color} aria-hidden />
+        </div>
+        <h3 className="flex-1 text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight text-center lg:leading-none">
+          {feature.title}
+        </h3>
+        <span className={`shrink-0 tag text-sm border ${feature.tagColor}`}>{feature.tag}</span>
+      </div>
+      <p className="text-gray-400 leading-relaxed text-base sm:text-lg mb-6 sm:leading-7">
+        {feature.description}
+      </p>
+      <p className="text-sm text-gray-600">{feature.items.join(' · ')}</p>
+    </>
+  )
 }
 
 export default function FeaturesSection() {
@@ -57,7 +93,6 @@ export default function FeaturesSection() {
   }
 
   const feature = features[index]
-  const Icon = feature.icon
 
   return (
     <section
@@ -102,7 +137,7 @@ export default function FeaturesSection() {
             <button
               onClick={prev}
               aria-label="Previous feature"
-              className="shrink-0 w-10 h-10 rounded-full border border-white/[0.10] bg-white/[0.03] flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/[0.07] transition-all focus-ring"
+              className="requires-js shrink-0 w-10 h-10 rounded-full border border-white/[0.10] bg-white/[0.03] flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/[0.07] transition-all focus-ring"
             >
               <ChevronLeft size={18} aria-hidden />
             </button>
@@ -125,37 +160,7 @@ export default function FeaturesSection() {
                   transition={{ duration: 0.25, ease: EASE }}
                   className="card py-6 px-4 sm:py-10 sm:px-8"
                 >
-                  {/* Mobile: icon+badge row above title / Desktop: all on same row */}
-                  <div className="flex items-center justify-between gap-3 mb-3 sm:hidden">
-                    <div
-                      className={`shrink-0 w-12 h-12 rounded-xl ${feature.bg} border ${feature.border} flex items-center justify-center`}
-                    >
-                      <Icon size={22} className={feature.color} aria-hidden />
-                    </div>
-                    <span className={`shrink-0 tag text-xs border ${feature.tagColor}`}>
-                      {feature.tag}
-                    </span>
-                  </div>
-                  <h3 className="text-2xl sm:hidden font-extrabold text-white leading-tight tracking-tight text-center mb-4">
-                    {feature.title}
-                  </h3>
-                  <div className="hidden sm:flex items-center gap-4 mb-6">
-                    <div
-                      className={`shrink-0 w-16 h-16 rounded-xl ${feature.bg} border ${feature.border} flex items-center justify-center`}
-                    >
-                      <Icon size={30} className={feature.color} aria-hidden />
-                    </div>
-                    <h3 className="flex-1 text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight text-center lg:leading-none">
-                      {feature.title}
-                    </h3>
-                    <span className={`shrink-0 tag text-sm border ${feature.tagColor}`}>
-                      {feature.tag}
-                    </span>
-                  </div>
-                  <p className="text-gray-400 leading-relaxed text-base sm:text-lg mb-6 sm:leading-7">
-                    {feature.description}
-                  </p>
-                  <p className="text-sm text-gray-600">{feature.items.join(' · ')}</p>
+                  <FeatureContent feature={feature} />
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -164,14 +169,14 @@ export default function FeaturesSection() {
             <button
               onClick={next}
               aria-label="Next feature"
-              className="shrink-0 w-10 h-10 rounded-full border border-white/[0.10] bg-white/[0.03] flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/[0.07] transition-all focus-ring"
+              className="requires-js shrink-0 w-10 h-10 rounded-full border border-white/[0.10] bg-white/[0.03] flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/[0.07] transition-all focus-ring"
             >
               <ChevronRight size={18} aria-hidden />
             </button>
           </div>
 
           {/* Dots + counter */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mt-6">
+          <div className="requires-js flex flex-wrap items-center justify-center gap-2 mt-6">
             <div
               className="flex flex-wrap justify-center gap-1"
               role="tablist"
@@ -212,6 +217,19 @@ export default function FeaturesSection() {
             </span>
           </div>
         </motion.div>
+        <noscript>
+          <div className="mt-6 space-y-6">
+            {features.slice(1).map((item) => (
+              <article
+                key={item.title}
+                className="card py-6 px-4 sm:py-10 sm:px-8"
+                aria-label={item.title}
+              >
+                <FeatureContent feature={item} />
+              </article>
+            ))}
+          </div>
+        </noscript>
       </div>
     </section>
   )

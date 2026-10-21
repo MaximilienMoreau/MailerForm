@@ -1,7 +1,7 @@
 import SiteLink from '@/components/SiteLink'
 import { sitePages } from '@/data/site'
 import { Suspense, lazy } from 'react'
-import { motion } from 'framer-motion'
+import { motion } from '@/components/Motion'
 import { ArrowRight, Zap, Target, Users, Globe } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import { EASE, VP, fadeUpView, staggerContainer, staggerItem } from '@/lib/motion'

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
+import { motion } from '@/components/Motion'
 import { Code2, Copy, CheckCheck } from 'lucide-react'
 import { renderTokens } from '@/lib/tokenize'
 import { sdks, apiStats, codeExample } from '@/data/api'

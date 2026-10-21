@@ -1,5 +1,5 @@
 import SiteLink from '@/components/SiteLink'
-import { motion } from 'framer-motion'
+import { motion } from '@/components/Motion'
 import { ArrowRight, Shield } from 'lucide-react'
 import { EASE } from '@/lib/motion'
 

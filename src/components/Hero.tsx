@@ -1,6 +1,7 @@
 import SiteLink from '@/components/SiteLink'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion } from '@/components/Motion'
+import { useInView } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Zap } from 'lucide-react'
 import DeliverabilityCard from './DeliverabilityCard'
 import { EASE, fadeUp, staggerContainer, staggerItem } from '@/lib/motion'

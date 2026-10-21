@@ -1,3 +1,4 @@
+import { features } from '../src/data/features'
 import { test, expect } from '@playwright/test'
 
 test.beforeEach(async ({ page }) => {
@@ -144,6 +145,16 @@ test('complete content remains readable without JavaScript', async ({ browser, b
   await page.goto(`${baseURL}/`)
   await expect(page.getByRole('heading', { name: 'Choose your early-access plan' })).toBeVisible()
   await expect(page.locator('#cta')).toContainText('Request early access')
+  for (const feature of features) {
+    await expect(
+      page.locator('#features').getByText(feature.description, { exact: true })
+    ).toBeVisible()
+    await expect(
+      page.locator('#features').getByText(feature.items.join(' · '), { exact: true })
+    ).toBeVisible()
+  }
+  await expect(page.getByRole('button', { name: 'Next feature' })).toBeHidden()
+  await expect(page.getByRole('button', { name: 'Previous feature' })).toBeHidden()
   await expect(page.getByText('5 sending domains', { exact: true })).toBeVisible()
   await expect(
     page.locator('#faq noscript p').filter({ hasText: 'No account is created and no trial starts' })
