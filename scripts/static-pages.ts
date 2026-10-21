@@ -107,6 +107,12 @@ export function staticPagesPlugin(): Plugin {
       this.emitFile({ type: 'asset', fileName: '404.html', source: renderNotFoundPage(template) })
       const renderer = await createServer({
         configFile: false,
+        ssr: {
+          noExternal: ['react-router', 'react-router-dom'],
+          resolve: {
+            conditions: ['module-sync', 'node', 'import'],
+          },
+        },
         esbuild: { jsx: 'automatic' },
         server: { middlewareMode: true, ws: false, hmr: false, watch: null },
         appType: 'custom',
