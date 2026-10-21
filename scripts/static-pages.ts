@@ -1,4 +1,4 @@
-import { createServer, type Plugin } from 'vite'
+import { createServer, type Plugin, type ResolvedConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
 import { sitePages, notFoundMeta, siteUrl } from '../src/data/site'
 import { articleSchema, pageMetaTags, SCHEMA_ID } from '../src/lib/seo'
@@ -95,10 +95,14 @@ export function renderNotFoundPage(template: string) {
 
 /** Emit metadata and readable article HTML without requiring a JavaScript crawler. */
 export function staticPagesPlugin(): Plugin {
+  let buildConfig: ResolvedConfig
   return {
     name: 'mailerform-static-pages',
     apply: 'build',
     enforce: 'post',
+    configResolved(config) {
+      buildConfig = config
+    },
     async generateBundle(_, bundle) {
       const index = bundle['index.html']
       if (!index || index.type !== 'asset') throw new Error('Missing Vite HTML entry')
@@ -107,6 +111,10 @@ export function staticPagesPlugin(): Plugin {
       this.emitFile({ type: 'asset', fileName: '404.html', source: renderNotFoundPage(template) })
       const renderer = await createServer({
         configFile: false,
+        root: buildConfig.root,
+        mode: buildConfig.mode,
+        envDir: buildConfig.envDir,
+        envPrefix: buildConfig.envPrefix,
         ssr: {
           noExternal: ['react-router', 'react-router-dom'],
           resolve: {

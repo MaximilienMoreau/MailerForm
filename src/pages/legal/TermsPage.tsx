@@ -6,7 +6,7 @@ export default function TermsPage() {
     <LegalLayout
       title="Terms of Service"
       subtitle="Using the MailerForm website and requesting early access."
-      lastUpdated="October 21, 2026"
+      lastUpdated="October 22, 2026"
     >
       <h2>1. Website Preview</h2>
       <p>
@@ -49,7 +49,35 @@ export default function TermsPage() {
         <Link to="/privacy">Privacy Policy</Link> for how request data is handled and how to contact
         us about your data.
       </p>
-      <h2>7. Contact and Updates</h2>
+      <h2>7. Data Ownership & License</h2>
+      <p>
+        You retain full ownership of your data, including contact lists, email content, and
+        analytics. Any license to process production data will be defined by the agreement for the
+        activated service.
+      </p>
+      <p>
+        The website demonstrations use preset data. Sending an invitation request does not grant
+        permission to process recipient lists or email content.
+      </p>
+
+      <h2>8. Intellectual Property</h2>
+      <p>
+        MailerForm retains its rights in its own software, design, documentation, and brand assets.
+        Third-party components remain subject to their respective licenses. Nothing in these Terms
+        transfers intellectual property rights to you. Use of our trademarks, logos, or brand assets
+        requires prior written consent.
+      </p>
+
+      <h2>9. Confidentiality</h2>
+      <p>
+        Each party agrees to keep confidential any non-public information shared by the other party
+        in connection with MailerForm (&ldquo;Confidential Information&rdquo;), and not to disclose
+        it to third parties or use it for any purpose other than performing under these Terms. This
+        obligation does not apply to information that is publicly known, independently developed, or
+        required to be disclosed by law.
+      </p>
+
+      <h2>10. Contact and Updates</h2>
       <p>
         For questions about access or these terms, email{' '}
         <a href="mailto:legal@mailerform.io">legal@mailerform.io</a>. Changes to the website terms
