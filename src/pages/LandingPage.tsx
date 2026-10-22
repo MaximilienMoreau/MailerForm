@@ -2,7 +2,6 @@ import { sitePages } from '@/data/site'
 import { useMeta } from '@/hooks/useMeta'
 import SiteLayout from '@/components/SiteLayout'
 import Hero from '@/components/Hero'
-import ProblemSection from '@/components/ProblemSection'
 import FeaturesSection from '@/components/FeaturesSection'
 import DeliverabilitySection from '@/components/DeliverabilitySection'
 import StreamSection from '@/components/StreamSection'
@@ -20,7 +19,6 @@ export default function LandingPage() {
     <SiteLayout>
       <Hero />
       <DeliverabilitySection />
-      <ProblemSection />
       <FeaturesSection />
       <StreamSection />
       <ApiSection />

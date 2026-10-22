@@ -166,3 +166,22 @@ test('complete content remains readable without JavaScript', async ({ browser, b
   await expect(page.getByRole('heading', { name: '8. Changes' })).toBeVisible()
   await context.close()
 })
+
+test('named feature tabs expose each topic and keep mobile content within the viewport', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  await page.goto('/#features')
+  const section = page.locator('#features')
+  for (const feature of features) {
+    const tab = section.getByRole('tab', { name: feature.title, exact: true })
+    await expect(tab).toHaveText(feature.title)
+    await tab.click()
+    await expect(tab).toHaveAttribute('aria-selected', 'true')
+    await expect(section.getByRole('tabpanel')).toContainText(feature.description)
+    const bounds = await section.getByRole('tabpanel').boundingBox()
+    expect(bounds).not.toBeNull()
+    expect(bounds!.x).toBeGreaterThanOrEqual(0)
+    expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(page.viewportSize()!.width)
+  }
+})

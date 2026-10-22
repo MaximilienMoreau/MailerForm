@@ -32,7 +32,7 @@ function FeatureContent({ feature }: { feature: Feature }) {
         >
           <Icon size={30} className={feature.color} aria-hidden />
         </div>
-        <h3 className="flex-1 text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight text-center lg:leading-none">
+        <h3 className="flex-1 text-3xl lg:text-4xl font-extrabold text-white leading-tight tracking-tight text-center lg:leading-none">
           {feature.title}
         </h3>
         <span className={`shrink-0 tag text-sm border ${feature.tagColor}`}>{feature.tag}</span>
@@ -107,21 +107,17 @@ export default function FeaturesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VP}
           transition={{ duration: 0.5, ease: EASE }}
-          className="text-center mb-16"
+          className="text-center mb-8"
         >
           <span className="tag bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-4 inline-flex">
             Everything you need
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight max-w-3xl mx-auto sm:leading-10 lg:leading-none">
-            SendGrid + Postmark + Customer.io
-            <br />
-            <span className="text-transparent bg-clip-text bg-linear-to-r/srgb from-brand-400 to-sky-400">
-              in a single platform
-            </span>
+            Explore your email workflow
           </h2>
           <p className="mt-5 text-lg text-gray-400 max-w-2xl mx-auto">
-            Stop stitching together 4 tools. MailerForm covers your full email infrastructure from a
-            single dashboard and API.
+            Explore planned capabilities, from pre-send checks to delivery events. Select a topic
+            below; availability and scope are confirmed during onboarding.
           </p>
         </motion.div>
 
@@ -131,13 +127,43 @@ export default function FeaturesSection() {
           viewport={VP}
           transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
         >
+          {/* Named tabs make every topic discoverable before opening a panel. */}
+          <div className="requires-js flex flex-wrap items-center justify-center gap-2 mb-6">
+            <div
+              className="flex flex-wrap justify-center gap-2"
+              role="tablist"
+              aria-label="Features"
+            >
+              {features.map((f, i) => (
+                <button
+                  key={f.title}
+                  ref={(node) => {
+                    tabs.current[i] = node
+                  }}
+                  id={`${uid}-tab-${i}`}
+                  role="tab"
+                  tabIndex={i === index ? 0 : -1}
+                  aria-controls={`${uid}-panel`}
+                  onKeyDown={(event) => handleTabKey(event, i)}
+                  aria-selected={i === index}
+                  aria-label={f.title}
+                  onClick={() => goTo(i)}
+                  className={`min-h-11 px-3 py-2 text-xs sm:text-sm font-semibold flex items-center justify-center rounded-lg transition-all duration-300 focus-ring ${
+                    i === index ? `bg-white/10 text-white` : 'hover:bg-white/5 text-gray-400'
+                  }`}
+                >
+                  {f.title}
+                </button>
+              ))}
+            </div>
+          </div>
           {/* Slider */}
-          <div className="flex items-center gap-4">
+          <div className="grid grid-cols-2 items-center gap-3 sm:flex sm:gap-4">
             {/* Left arrow */}
             <button
               onClick={prev}
               aria-label="Previous feature"
-              className="requires-js shrink-0 w-11 h-11 rounded-full border border-white/[0.10] bg-white/[0.03] flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/[0.07] transition-all focus-ring"
+              className="requires-js justify-self-end shrink-0 w-11 h-11 rounded-full border border-white/[0.10] bg-white/[0.03] flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/[0.07] transition-all focus-ring"
             >
               <ChevronLeft size={18} aria-hidden />
             </button>
@@ -148,7 +174,7 @@ export default function FeaturesSection() {
               role="tabpanel"
               aria-labelledby={`${uid}-tab-${index}`}
               tabIndex={0}
-              className="flex-1 overflow-hidden focus-ring rounded-2xl"
+              className="order-first col-span-2 sm:order-none min-w-0 flex-1 overflow-hidden focus-ring rounded-2xl"
             >
               <AnimatePresence custom={direction} initial={false}>
                 <motion.div
@@ -169,44 +195,13 @@ export default function FeaturesSection() {
             <button
               onClick={next}
               aria-label="Next feature"
-              className="requires-js shrink-0 w-11 h-11 rounded-full border border-white/[0.10] bg-white/[0.03] flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/[0.07] transition-all focus-ring"
+              className="requires-js justify-self-start shrink-0 w-11 h-11 rounded-full border border-white/[0.10] bg-white/[0.03] flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/[0.07] transition-all focus-ring"
             >
               <ChevronRight size={18} aria-hidden />
             </button>
           </div>
 
-          {/* Dots + counter */}
-          <div className="requires-js flex flex-wrap items-center justify-center gap-2 mt-6">
-            <div
-              className="flex flex-wrap justify-center gap-1"
-              role="tablist"
-              aria-label="Features"
-            >
-              {features.map((f, i) => (
-                <button
-                  key={f.title}
-                  ref={(node) => {
-                    tabs.current[i] = node
-                  }}
-                  id={`${uid}-tab-${i}`}
-                  role="tab"
-                  tabIndex={i === index ? 0 : -1}
-                  aria-controls={`${uid}-panel`}
-                  onKeyDown={(event) => handleTabKey(event, i)}
-                  aria-selected={i === index}
-                  aria-label={f.title}
-                  onClick={() => goTo(i)}
-                  className={`h-11 min-w-11 flex items-center justify-center rounded-lg transition-all duration-300 focus-ring ${
-                    i === index ? `bg-white/10 text-white` : 'hover:bg-white/5 text-gray-400'
-                  }`}
-                >
-                  <span
-                    aria-hidden
-                    className={`h-1.5 rounded-full ${i === index ? `w-6 ${feature.dot}` : 'w-1.5 bg-white/30'}`}
-                  />
-                </button>
-              ))}
-            </div>
+          <div className="requires-js mt-4 text-center">
             <span
               className="text-xs text-gray-400 tabular-nums"
               aria-live="polite"

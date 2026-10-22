@@ -1,3 +1,4 @@
+import SiteLink from '@/components/SiteLink'
 import { CheckCircle2 } from 'lucide-react'
 
 const criteria = [
@@ -46,9 +47,12 @@ export default function ComparisonSection() {
                 {title}
               </h3>
               <p className="text-sm text-gray-400 mt-3 mb-4">{question}</p>
-              <a href={href} className="text-sm text-brand-300 underline focus-ring rounded-sm">
+              <SiteLink
+                href={href}
+                className="text-sm text-brand-300 underline focus-ring rounded-sm"
+              >
                 {label}
-              </a>
+              </SiteLink>
             </li>
           ))}
         </ul>
