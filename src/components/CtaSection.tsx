@@ -223,7 +223,10 @@ export default function CtaSection() {
                       className="btn-primary text-sm px-6 py-3.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0 whitespace-nowrap"
                     >
                       {state === 'loading' ? (
-                        <Loader2 size={15} className="animate-spin" aria-label="Loading…" />
+                        <>
+                          <Loader2 size={15} className="animate-spin" aria-hidden />
+                          Sending…
+                        </>
                       ) : (
                         <>
                           Request early access <ArrowRight size={15} aria-hidden />
@@ -241,7 +244,7 @@ export default function CtaSection() {
               )}
 
               {state !== 'success' && (
-                <p className="mt-4 text-xs text-gray-600">
+                <p className="mt-4 text-xs text-gray-400">
                   Invitation request only · No payment · No account created.{' '}
                   <a
                     href="/privacy"
