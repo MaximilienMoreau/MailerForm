@@ -164,3 +164,13 @@ it('publishes a complete homepage and policies rather than placeholder introduct
     '9. Confidentiality'
   )
 })
+
+it('publishes one main landmark, navigation, and footer on every public page', () => {
+  for (const page of staticPages) {
+    const document = publishedDocument(page.path)
+    expect(document.querySelectorAll('main#main-content'), page.path).toHaveLength(1)
+    expect(document.querySelectorAll('footer'), page.path).toHaveLength(1)
+    expect(document.querySelector('nav'), page.path).not.toBeNull()
+    expect(document.querySelector('main footer'), page.path).toBeNull()
+  }
+})

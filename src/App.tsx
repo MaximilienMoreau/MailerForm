@@ -1,29 +1,14 @@
 import { sitePages } from '@/data/site'
-import { useMeta } from '@/hooks/useMeta'
 import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { MotionConfig } from 'framer-motion'
 import ErrorBoundary from '@/components/ErrorBoundary'
 import SkipLink from '@/components/SkipLink'
 import ScrollToTop from '@/components/ScrollToTop'
-import Navbar from '@/components/Navbar'
-import Hero from '@/components/Hero'
-import ProblemSection from '@/components/ProblemSection'
-import FeaturesSection from '@/components/FeaturesSection'
-import DeliverabilitySection from '@/components/DeliverabilitySection'
-import StreamSection from '@/components/StreamSection'
-import ApiSection from '@/components/ApiSection'
 import PageLoading from '@/components/PageLoading'
-import DeferredSection from '@/components/DeferredSection'
 import NotFound from '@/pages/NotFound'
 
-// Sections below the fold, lazy loaded after the critical path renders
-const IntegrationsSection = lazy(() => import('@/components/IntegrationsSection'))
-const ComparisonSection = lazy(() => import('@/components/ComparisonSection'))
-const PricingSection = lazy(() => import('@/components/PricingSection'))
-const FaqSection = lazy(() => import('@/components/FaqSection'))
-const CtaSection = lazy(() => import('@/components/CtaSection'))
-const Footer = lazy(() => import('@/components/Footer'))
+import LandingPage from '@/pages/LandingPage'
 
 // Secondary pages
 const AboutPage = lazy(() => import('@/pages/AboutPage'))
@@ -36,42 +21,6 @@ const PrivacyPage = lazy(() => import('@/pages/legal/PrivacyPage'))
 const TermsPage = lazy(() => import('@/pages/legal/TermsPage'))
 const CookiesPage = lazy(() => import('@/pages/legal/CookiesPage'))
 const GdprPage = lazy(() => import('@/pages/legal/GdprPage'))
-
-function LandingPage() {
-  useMeta(sitePages.home)
-
-  return (
-    <div className="min-h-screen">
-      <Navbar />
-      <main id="main-content">
-        <Hero />
-        <DeliverabilitySection />
-        <ProblemSection />
-        <FeaturesSection />
-        <StreamSection />
-        <ApiSection />
-        <DeferredSection>
-          <IntegrationsSection />
-        </DeferredSection>
-        <DeferredSection>
-          <ComparisonSection />
-        </DeferredSection>
-        <DeferredSection>
-          <PricingSection />
-        </DeferredSection>
-        <DeferredSection>
-          <FaqSection />
-        </DeferredSection>
-        <DeferredSection>
-          <CtaSection />
-        </DeferredSection>
-      </main>
-      <DeferredSection>
-        <Footer />
-      </DeferredSection>
-    </div>
-  )
-}
 
 const secondaryRoutes = [
   { path: sitePages.about.path, Component: AboutPage },

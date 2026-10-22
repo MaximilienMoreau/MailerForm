@@ -1,10 +1,8 @@
-import { Suspense, lazy, type ReactNode } from 'react'
-import Navbar from './Navbar'
+import SiteLayout from '@/components/SiteLayout'
+import type { ReactNode } from 'react'
 import { useLocation } from 'react-router-dom'
 import { sitePages } from '@/data/site'
 import { useMeta } from '@/hooks/useMeta'
-
-const Footer = lazy(() => import('./Footer'))
 
 interface LegalLayoutProps {
   title: string
@@ -19,36 +17,28 @@ export default function LegalLayout({ title, subtitle, lastUpdated, children }: 
   useMeta(metadata ?? { title, description: subtitle })
 
   return (
-    <div className="min-h-screen">
-      <Navbar />
-
-      <main id="main-content">
-        {/* Header */}
-        <div className="relative pt-32 pb-16 overflow-hidden">
-          <div
-            className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(51,102,255,0.1),transparent)]"
-            aria-hidden
-          />
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p className="text-xs text-brand-400 font-semibold uppercase tracking-widest mb-4">
-              Last updated: {lastUpdated}
-            </p>
-            <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-4 leading-tight sm:leading-none">
-              {title}
-            </h1>
-            {subtitle && <p className="text-lg text-gray-400 max-w-xl mx-auto">{subtitle}</p>}
-          </div>
+    <SiteLayout>
+      {/* Header */}
+      <div className="relative pt-32 pb-16 overflow-hidden">
+        <div
+          className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(51,102,255,0.1),transparent)]"
+          aria-hidden
+        />
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-xs text-brand-400 font-semibold uppercase tracking-widest mb-4">
+            Last updated: {lastUpdated}
+          </p>
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-4 leading-tight sm:leading-none">
+            {title}
+          </h1>
+          {subtitle && <p className="text-lg text-gray-400 max-w-xl mx-auto">{subtitle}</p>}
         </div>
+      </div>
 
-        {/* Content */}
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
-          <div className="prose-legal">{children}</div>
-        </div>
-      </main>
-
-      <Suspense fallback={null}>
-        <Footer />
-      </Suspense>
-    </div>
+      {/* Content */}
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+        <div className="prose-legal">{children}</div>
+      </div>
+    </SiteLayout>
   )
 }
