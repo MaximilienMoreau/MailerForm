@@ -96,7 +96,9 @@ React components as the browser app, including lazy sections, legal policies, an
 guides. Motion components render their final animation state during the build so the
 content remains readable without JavaScript. HTML styles are not rewritten after rendering.
 The feature carousel exposes every feature without JavaScript and hides its inactive
-controls. The browser then mounts the interactive app; this is build-time rendering,
+controls. Below-the-fold sections load within 600px of the viewport. Anchor navigation loads all
+sections to preserve destination positioning; build-time rendering always includes them.
+The browser then mounts the interactive app; this is build-time rendering,
 not a runtime rendering server or React hydration.
 Forms, billing switches, and other interactive demonstrations require JavaScript;
 the static document also includes email contact links in the footer.

@@ -34,7 +34,7 @@ it.each([
     const checkbox = screen.queryByRole('checkbox')
     if (checkbox) fireEvent.click(checkbox)
     fireEvent.submit(screen.getByRole('form', { name: label }))
-    expect(screen.getByRole('button', { name: /Loading|Subscribing/i })).toBeDisabled()
+    expect(screen.getByRole('button', { name: /Sending|Subscribing/i })).toBeDisabled()
     await act(async () => {
       await vi.advanceTimersByTimeAsync(FORM_TIMEOUT_MS)
     })

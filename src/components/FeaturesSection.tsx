@@ -40,7 +40,7 @@ function FeatureContent({ feature }: { feature: Feature }) {
       <p className="text-gray-400 leading-relaxed text-base sm:text-lg mb-6 sm:leading-7">
         {feature.description}
       </p>
-      <p className="text-sm text-gray-600">{feature.items.join(' · ')}</p>
+      <p className="text-sm text-gray-400">{feature.items.join(' · ')}</p>
     </>
   )
 }

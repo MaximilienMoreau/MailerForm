@@ -103,7 +103,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 bg-brand-500/10 border border-brand-500/20 rounded-full px-4 py-1.5 text-sm text-brand-400 font-medium mb-8"
         >
           <Zap size={13} fill="currentColor" aria-hidden />
-          Email Infrastructure Platform. Built for SaaS
+          Email infrastructure preview · Early access
         </motion.div>
 
         <motion.h1
@@ -127,7 +127,8 @@ export default function Hero() {
           className="mt-6 text-lg sm:text-xl text-gray-400 max-w-2xl leading-relaxed sm:leading-7"
         >
           Analyze your email, fix delivery risks, then send through one API. Built for SaaS teams
-          managing transactional and marketing traffic.
+          managing transactional and marketing traffic. Explore preset demonstrations; production
+          capabilities and availability are confirmed before activation.
         </motion.p>
 
         <motion.div

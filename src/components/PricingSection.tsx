@@ -46,8 +46,8 @@ export default function PricingSection() {
             Choose your early-access plan
           </h2>
           <p className="text-gray-400 max-w-lg mx-auto">
-            Preview pricing. Request access to discuss availability, volume, and billing before
-            committing.
+            Preview pricing and planned features. Request access to confirm availability, volume,
+            and billing before committing.
           </p>
         </motion.div>
 
@@ -216,7 +216,8 @@ export default function PricingSection() {
           <div>
             <p className="text-white font-semibold">Need custom volume or white-label?</p>
             <p className="text-sm text-gray-400 mt-0.5">
-              Enterprise plans with dedicated infrastructure, custom contracts, and SLA.
+              Discuss planned enterprise options, including dedicated infrastructure, custom
+              contracts, and SLA requirements. Availability and terms must be confirmed.
             </p>
           </div>
           <a href="mailto:sales@mailerform.io" className="btn-secondary text-sm shrink-0">

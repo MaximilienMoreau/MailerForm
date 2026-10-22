@@ -14,6 +14,7 @@ import DeliverabilitySection from '@/components/DeliverabilitySection'
 import StreamSection from '@/components/StreamSection'
 import ApiSection from '@/components/ApiSection'
 import PageLoading from '@/components/PageLoading'
+import DeferredSection from '@/components/DeferredSection'
 import NotFound from '@/pages/NotFound'
 
 // Sections below the fold, lazy loaded after the critical path renders
@@ -44,30 +45,30 @@ function LandingPage() {
       <Navbar />
       <main id="main-content">
         <Hero />
+        <DeliverabilitySection />
         <ProblemSection />
         <FeaturesSection />
-        <DeliverabilitySection />
         <StreamSection />
         <ApiSection />
-        <Suspense fallback={<div className="py-16" />}>
+        <DeferredSection>
           <IntegrationsSection />
-        </Suspense>
-        <Suspense fallback={<div className="py-16" />}>
+        </DeferredSection>
+        <DeferredSection>
           <ComparisonSection />
-        </Suspense>
-        <Suspense fallback={<div className="py-16" />}>
+        </DeferredSection>
+        <DeferredSection>
           <PricingSection />
-        </Suspense>
-        <Suspense fallback={<div className="py-16" />}>
+        </DeferredSection>
+        <DeferredSection>
           <FaqSection />
-        </Suspense>
-        <Suspense fallback={<div className="py-16" />}>
+        </DeferredSection>
+        <DeferredSection>
           <CtaSection />
-        </Suspense>
+        </DeferredSection>
       </main>
-      <Suspense fallback={<div className="py-8" />}>
+      <DeferredSection>
         <Footer />
-      </Suspense>
+      </DeferredSection>
     </div>
   )
 }
