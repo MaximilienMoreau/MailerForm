@@ -38,7 +38,9 @@ separate configuration. Run `npm audit` to check the full dependency tree.
 
 | Location | Responsibility |
 | --- | --- |
-| `src/App.tsx` | Routes, page boundaries, and lazy section loading |
+| `src/App.tsx` | Routes, error boundaries, and lazy secondary pages |
+| `src/pages/LandingPage.tsx` | Immediate rendering of all homepage sections |
+| `src/components/SiteLayout.tsx` | Shared navigation, main landmark, and footer |
 | `src/pages/` | Routed pages and editorial/legal content |
 | `src/components/` | UI sections and small shared UI components |
 | `src/components/Motion.tsx` | Shared motion components with a visible build-time state |
@@ -92,12 +94,14 @@ A render error or timeout aborts the stream and fails the build rather than publ
 a partial page.
 
 Every public document contains the complete page content rendered from the same
-React components as the browser app, including lazy sections, legal policies, and
+React components as the browser app, including homepage sections, legal policies, and
 guides. Motion components render their final animation state during the build so the
 content remains readable without JavaScript. HTML styles are not rewritten after rendering.
 The feature carousel exposes every feature without JavaScript and hides its inactive
-controls. Below-the-fold sections load within 600px of the viewport. Anchor navigation loads all
-sections to preserve destination positioning; build-time rendering always includes them.
+controls. All homepage sections render immediately in the browser, so searching the page
+and navigating to anchors do not depend on scrolling or viewport observers. Secondary
+pages retain route-based code splitting. Shared navigation, main landmarks, and footer
+live in `SiteLayout`.
 The browser then mounts the interactive app; this is build-time rendering,
 not a runtime rendering server or React hydration.
 Forms, billing switches, and other interactive demonstrations require JavaScript;

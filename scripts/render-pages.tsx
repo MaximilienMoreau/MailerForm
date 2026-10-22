@@ -3,7 +3,7 @@ import { AppContent } from '../src/App'
 import { StaticRenderingContext } from '../src/lib/staticRendering'
 import { renderDocument } from './render-document'
 
-/** Wait for lazy routes and sections before emitting a complete static document. */
+/** Wait for lazy routes before emitting a complete static document. */
 export async function renderPage(path: string): Promise<string> {
   try {
     return await renderDocument(
