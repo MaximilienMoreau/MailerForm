@@ -137,7 +137,7 @@ export default function FeaturesSection() {
             <button
               onClick={prev}
               aria-label="Previous feature"
-              className="requires-js shrink-0 w-10 h-10 rounded-full border border-white/[0.10] bg-white/[0.03] flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/[0.07] transition-all focus-ring"
+              className="requires-js shrink-0 w-11 h-11 rounded-full border border-white/[0.10] bg-white/[0.03] flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/[0.07] transition-all focus-ring"
             >
               <ChevronLeft size={18} aria-hidden />
             </button>
@@ -169,7 +169,7 @@ export default function FeaturesSection() {
             <button
               onClick={next}
               aria-label="Next feature"
-              className="requires-js shrink-0 w-10 h-10 rounded-full border border-white/[0.10] bg-white/[0.03] flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/[0.07] transition-all focus-ring"
+              className="requires-js shrink-0 w-11 h-11 rounded-full border border-white/[0.10] bg-white/[0.03] flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/[0.07] transition-all focus-ring"
             >
               <ChevronRight size={18} aria-hidden />
             </button>
@@ -196,7 +196,7 @@ export default function FeaturesSection() {
                   aria-selected={i === index}
                   aria-label={f.title}
                   onClick={() => goTo(i)}
-                  className={`h-11 min-w-8 flex items-center justify-center rounded-lg transition-all duration-300 focus-ring ${
+                  className={`h-11 min-w-11 flex items-center justify-center rounded-lg transition-all duration-300 focus-ring ${
                     i === index ? `bg-white/10 text-white` : 'hover:bg-white/5 text-gray-400'
                   }`}
                 >

@@ -17,7 +17,7 @@ export default function BlogPage() {
       {/* Header */}
       <div className="relative pt-32 pb-16 overflow-hidden">
         <div
-          className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(51,102,255,0.1),transparent)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(51,102,255,0.1),transparent)]"
           aria-hidden
         />
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

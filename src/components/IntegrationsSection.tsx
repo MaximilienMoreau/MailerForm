@@ -1,5 +1,5 @@
 import { motion } from '@/components/Motion'
-import { ArrowRight, Zap } from 'lucide-react'
+import { ArrowRight, Mail, Zap } from 'lucide-react'
 import { EASE, VP, staggerContainer, staggerItem } from '@/lib/motion'
 
 interface Integration {
@@ -123,11 +123,11 @@ export default function IntegrationsSection() {
   return (
     <section id="integrations" className="py-16 relative overflow-hidden">
       <div
-        className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_50%,rgba(51,102,255,0.05),transparent)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_50%,rgba(51,102,255,0.05),transparent)]"
         aria-hidden
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -174,14 +174,14 @@ export default function IntegrationsSection() {
           initial="hidden"
           whileInView="visible"
           viewport={VP}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"
+          className="grid grid-cols-1 min-[400px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"
           aria-label="Integration examples and plans"
         >
           {integrations.map((intg) => (
             <motion.li
               key={intg.name}
               variants={staggerItem}
-              className="group bg-white/[0.02] border border-white/[0.07] hover:bg-white/[0.05] hover:border-white/[0.12] rounded-2xl p-5 transition-all duration-300 flex flex-col"
+              className="bg-white/[0.02] border border-white/[0.07] rounded-2xl p-5 flex flex-col"
             >
               <div className="flex items-start justify-between mb-3">
                 <div
@@ -211,10 +211,14 @@ export default function IntegrationsSection() {
                     ? 'View Node.js code example'
                     : `Discuss ${intg.name} availability`
                 }
-                className="mt-4 inline-flex items-center gap-1 text-xs text-brand-300 underline focus-ring rounded-sm py-2"
+                className="mt-4 min-h-11 inline-flex items-center justify-center gap-2 rounded-lg border border-brand-400/30 bg-brand-500/10 px-3 py-2 text-xs font-semibold text-brand-200 underline underline-offset-4 transition-colors hover:border-brand-400/60 hover:bg-brand-500/20 hover:text-white focus-ring"
               >
                 {intg.status === 'example' ? 'View code example' : 'Discuss availability'}
-                <ArrowRight size={12} aria-hidden />
+                {intg.status === 'example' ? (
+                  <ArrowRight size={14} className="shrink-0" aria-hidden />
+                ) : (
+                  <Mail size={14} className="shrink-0" aria-hidden />
+                )}
               </a>
             </motion.li>
           ))}
@@ -232,15 +236,23 @@ export default function IntegrationsSection() {
             <p className="text-white font-semibold">Don&apos;t see your stack?</p>
             <p className="text-sm text-gray-400 mt-0.5">
               Tell us your language, hosting environment, and sending workflow so we can discuss
-              compatibility before activation.
+              compatibility before activation. Availability links open your email app. You can also
+              email us directly at{}
+              <a
+                href="mailto:hello@mailerform.io"
+                className="text-brand-300 underline underline-offset-4 hover:text-white focus-ring rounded-sm"
+              >
+                hello@mailerform.io
+              </a>
+              .
             </p>
           </div>
           <a
             href="mailto:hello@mailerform.io?subject=Integration%20requirements"
             className="btn-secondary text-sm shrink-0"
           >
-            Discuss your stack
-            <ArrowRight size={14} aria-hidden />
+            Email us about your stack
+            <Mail size={14} aria-hidden />
           </a>
         </motion.div>
       </div>

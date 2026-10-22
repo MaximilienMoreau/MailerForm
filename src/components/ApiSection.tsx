@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from '@/components/Motion'
-import { Code2, Copy, CheckCheck } from 'lucide-react'
+import { Code2, Copy, CheckCheck, Mail } from 'lucide-react'
 import { renderTokens } from '@/lib/tokenize'
 import { sdks, apiStats, codeExample } from '@/data/api'
 import { EASE, VP } from '@/lib/motion'
@@ -55,7 +55,7 @@ export default function ApiSection() {
   return (
     <section id="api" className="py-16 relative overflow-hidden">
       <div
-        className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_20%_50%,rgba(51,102,255,0.07),transparent)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_20%_50%,rgba(51,102,255,0.07),transparent)]"
         aria-hidden
       />
 
@@ -83,16 +83,16 @@ export default function ApiSection() {
                   type="button"
                   onClick={handleCopy}
                   aria-label={copied ? 'Copied to clipboard' : 'Copy code to clipboard'}
-                  className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-300 transition-colors focus-ring rounded-sm px-1.5 py-0.5"
+                  className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center gap-2 rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm font-semibold text-gray-200 transition-colors hover:bg-white/10 hover:text-white focus-ring"
                 >
                   {copied ? (
                     <>
-                      <CheckCheck size={12} className="text-emerald-400" aria-hidden />
+                      <CheckCheck size={15} className="text-emerald-400" aria-hidden />
                       <span className="text-emerald-400">Copied!</span>
                     </>
                   ) : (
                     <>
-                      <Copy size={12} aria-hidden />
+                      <Copy size={15} aria-hidden />
                       Copy
                     </>
                   )}
@@ -180,16 +180,18 @@ export default function ApiSection() {
                   <li key={sdk.lang}>
                     <a
                       href={sdk.href}
-                      target="_blank"
-                      rel="noreferrer"
                       aria-label={`Discuss ${sdk.lang} SDK availability`}
-                      className={`text-xs font-semibold font-mono px-3 py-1.5 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all focus-ring ${sdk.color}`}
+                      className={`inline-flex min-h-11 items-center gap-2 text-xs font-semibold font-mono px-3 py-2 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all focus-ring ${sdk.color}`}
                     >
                       {sdk.lang}
+                      <Mail size={14} className="shrink-0" aria-hidden />
                     </a>
                   </li>
                 ))}
               </ul>
+              <p className="mt-3 text-xs text-gray-400">
+                Email us to discuss SDK availability. These links open your email app.
+              </p>
             </motion.div>
 
             <motion.div

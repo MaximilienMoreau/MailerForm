@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion } from '@/components/Motion'
 import { AnimatePresence } from 'framer-motion'
-import { Menu, X, Zap } from 'lucide-react'
+import { ExternalLink, Menu, X, Zap } from 'lucide-react'
 import { EASE } from '@/lib/motion'
 
 const links = [
@@ -171,7 +171,7 @@ export default function Navbar() {
                   key={l.label}
                   href={l.href.startsWith('#') && pathname !== '/' ? `/${l.href}` : l.href}
                   {...(isExternal ? { target: '_blank', rel: 'noreferrer' } : {})}
-                  className={`text-sm px-3 py-2 rounded-lg transition-all focus-ring ${
+                  className={`inline-flex min-h-11 items-center gap-1.5 text-sm px-3 py-2 rounded-lg transition-all focus-ring ${
                     isActive
                       ? 'text-white bg-white/5'
                       : 'text-gray-400 hover:text-white hover:bg-white/5'
@@ -179,6 +179,12 @@ export default function Navbar() {
                   aria-current={isActive ? 'location' : undefined}
                 >
                   {l.label}
+                  {isExternal && (
+                    <>
+                      <ExternalLink size={13} className="shrink-0" aria-hidden />
+                      <span className="sr-only"> (opens in a new tab)</span>
+                    </>
+                  )}
                 </SiteLink>
               )
             })}
@@ -189,9 +195,11 @@ export default function Navbar() {
               href="https://app.mailerform.io/login"
               target="_blank"
               rel="noreferrer"
-              className="text-sm text-gray-400 hover:text-white transition-colors font-medium focus-ring rounded-lg px-2 py-1"
+              className="inline-flex min-h-11 items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors font-medium focus-ring rounded-lg px-2 py-1"
             >
               Sign in
+              <ExternalLink size={13} className="shrink-0" aria-hidden />
+              <span className="sr-only"> (opens in a new tab)</span>
             </SiteLink>
             <SiteLink
               href={pathname === '/' ? '#cta' : '/#cta'}
@@ -203,7 +211,7 @@ export default function Navbar() {
 
           <button
             ref={toggleRef}
-            className="md:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-all focus-ring"
+            className="md:hidden min-h-11 min-w-11 inline-flex items-center justify-center p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-all focus-ring"
             onClick={() => setOpen((prev) => !prev)}
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
@@ -247,9 +255,15 @@ export default function Navbar() {
                     href={l.href.startsWith('#') && pathname !== '/' ? `/${l.href}` : l.href}
                     {...(isExternal ? { target: '_blank', rel: 'noreferrer' } : {})}
                     onClick={() => !isExternal && setOpen(false)}
-                    className="text-sm text-gray-400 hover:text-white px-3 py-2.5 rounded-lg hover:bg-white/5 transition-all focus-ring"
+                    className="inline-flex min-h-11 items-center gap-1.5 text-sm text-gray-400 hover:text-white px-3 py-2.5 rounded-lg hover:bg-white/5 transition-all focus-ring"
                   >
                     {l.label}
+                    {isExternal && (
+                      <>
+                        <ExternalLink size={13} className="shrink-0" aria-hidden />
+                        <span className="sr-only"> (opens in a new tab)</span>
+                      </>
+                    )}
                   </SiteLink>
                 )
               })}
@@ -262,6 +276,8 @@ export default function Navbar() {
                   className="btn-secondary text-sm py-2.5 justify-center"
                 >
                   Sign in
+                  <ExternalLink size={13} className="shrink-0" aria-hidden />
+                  <span className="sr-only"> (opens in a new tab)</span>
                 </SiteLink>
                 <SiteLink
                   href={pathname === '/' ? '#cta' : '/#cta'}
