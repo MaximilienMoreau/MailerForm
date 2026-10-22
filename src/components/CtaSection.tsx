@@ -89,11 +89,11 @@ export default function CtaSection() {
   return (
     <section id="cta" className="py-16 relative overflow-hidden">
       <div
-        className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_50%,rgba(51,102,255,0.12),transparent)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_50%,rgba(51,102,255,0.12),transparent)]"
         aria-hidden
       />
       <div
-        className="absolute inset-0 bg-grid-white [mask-image:radial-gradient(ellipse_at_center,transparent_30%,black)]"
+        className="pointer-events-none absolute inset-0 bg-grid-white [mask-image:radial-gradient(ellipse_at_center,transparent_30%,black)]"
         aria-hidden
       />
 

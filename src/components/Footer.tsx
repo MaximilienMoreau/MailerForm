@@ -91,8 +91,8 @@ export default function Footer() {
                     {item.external ? (
                       <a
                         href={item.href}
-                        target="_blank"
-                        rel="noreferrer"
+                        target={item.href.startsWith('mailto:') ? undefined : '_blank'}
+                        rel={item.href.startsWith('mailto:') ? undefined : 'noreferrer'}
                         className="text-sm text-gray-400 hover:text-gray-200 transition-colors focus-ring rounded-sm"
                       >
                         {item.label}

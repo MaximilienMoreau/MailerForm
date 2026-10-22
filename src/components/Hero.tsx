@@ -85,11 +85,11 @@ export default function Hero() {
   return (
     <section className="relative flex flex-col items-center justify-center pt-16 overflow-hidden">
       <div
-        className="absolute inset-0 bg-grid-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"
+        className="pointer-events-none absolute inset-0 bg-grid-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"
         aria-hidden
       />
       <div
-        className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(51,102,255,0.15),transparent)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(51,102,255,0.15),transparent)]"
         aria-hidden
       />
       <div

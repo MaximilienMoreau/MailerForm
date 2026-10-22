@@ -3,7 +3,7 @@ import { parsePlanSelection, planRequestPath } from '@/lib/planSelection'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { motion } from '@/components/Motion'
-import { ArrowRight, CheckCircle2, Zap } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Mail, Zap } from 'lucide-react'
 import { EASE, VP, staggerContainer, staggerItem } from '@/lib/motion'
 
 export default function PricingSection() {
@@ -26,7 +26,7 @@ export default function PricingSection() {
   return (
     <section id="pricing" className="py-16 relative overflow-hidden">
       <div
-        className="absolute inset-0 bg-[radial-gradient(ellipse_80%_40%_at_50%_100%,rgba(51,102,255,0.07),transparent)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_40%_at_50%_100%,rgba(51,102,255,0.07),transparent)]"
         aria-hidden
       />
 
@@ -217,12 +217,23 @@ export default function PricingSection() {
             <p className="text-white font-semibold">Need custom volume or white-label?</p>
             <p className="text-sm text-gray-400 mt-0.5">
               Discuss planned enterprise options, including dedicated infrastructure, custom
-              contracts, and SLA requirements. Availability and terms must be confirmed.
+              contracts, and SLA requirements. Availability and terms must be confirmed. Email us at{' '}
+              <a
+                href="mailto:sales@mailerform.io"
+                className="text-brand-300 underline underline-offset-4 hover:text-white focus-ring rounded-sm"
+              >
+                sales@mailerform.io
+              </a>
+              .
             </p>
           </div>
-          <a href="mailto:sales@mailerform.io" className="btn-secondary text-sm shrink-0">
+          <a
+            href="mailto:sales@mailerform.io"
+            title="Open your email app to contact sales@mailerform.io"
+            className="btn-secondary text-sm shrink-0"
+          >
             Talk to sales
-            <ArrowRight size={14} aria-hidden />
+            <Mail size={14} aria-hidden />
           </a>
         </motion.div>
       </div>
