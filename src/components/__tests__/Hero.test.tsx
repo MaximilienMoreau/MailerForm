@@ -57,3 +57,11 @@ describe('Hero', () => {
     expect(screen.getByText('Example report')).toBeInTheDocument()
   })
 })
+
+it('links the example card directly to interactive sample reports', () => {
+  renderHero()
+  expect(screen.getByRole('link', { name: 'Explore sample reports' })).toHaveAttribute(
+    'href',
+    '/#analyzer-demo'
+  )
+})

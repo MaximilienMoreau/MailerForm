@@ -1,3 +1,4 @@
+import SiteLink from '@/components/SiteLink'
 import { motion } from '@/components/Motion'
 import { ArrowRight, Mail, Zap } from 'lucide-react'
 import { EASE, VP, staggerContainer, staggerItem } from '@/lib/motion'
@@ -200,7 +201,7 @@ export default function IntegrationsSection() {
                 {intg.status === 'example' ? 'Code example' : 'Planned'}
               </p>
               <p className="text-xs text-gray-400 mt-2 flex-1">{intg.description}</p>
-              <a
+              <SiteLink
                 href={
                   intg.status === 'example'
                     ? '#api'
@@ -219,7 +220,7 @@ export default function IntegrationsSection() {
                 ) : (
                   <Mail size={14} className="shrink-0" aria-hidden />
                 )}
-              </a>
+              </SiteLink>
             </motion.li>
           ))}
         </motion.ul>

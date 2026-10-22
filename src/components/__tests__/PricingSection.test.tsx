@@ -1,5 +1,5 @@
 import { beforeEach, describe, it, expect } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MotionConfig } from 'framer-motion'
 import { BrowserRouter } from 'react-router-dom'
@@ -93,4 +93,13 @@ it('keeps plan volume and differences visible while letting mobile visitors expa
   expect(toggle).toHaveAttribute('aria-expanded', 'true')
   expect(details).toHaveClass('block')
   expect(details).not.toHaveClass('hidden')
+})
+
+it('keeps key plan differences visible outside expandable details and explains monthly billing', () => {
+  renderPricing()
+  const growth = screen.getByRole('article', { name: 'Growth plan' })
+  const highlights = within(growth).getByRole('list', { name: 'Growth highlights' })
+  expect(highlights).toHaveTextContent('5 sending domains')
+  expect(highlights).toHaveTextContent('Transactional + Marketing streams')
+  expect(within(growth).getByText('$29 billed monthly')).toBeInTheDocument()
 })

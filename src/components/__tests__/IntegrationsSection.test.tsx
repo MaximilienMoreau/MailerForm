@@ -1,12 +1,17 @@
+import { BrowserRouter } from 'react-router-dom'
 import { expect, it } from 'vitest'
 import { render, screen, within } from '@testing-library/react'
 import IntegrationsSection from '@/components/IntegrationsSection'
 
 it('distinguishes a working code example from planned integrations and offers useful actions', () => {
-  render(<IntegrationsSection />)
+  render(
+    <BrowserRouter>
+      <IntegrationsSection />
+    </BrowserRouter>
+  )
   expect(screen.getByRole('link', { name: 'View Node.js code example' })).toHaveAttribute(
     'href',
-    '#api'
+    '/#api'
   )
   const cards = within(
     screen.getByRole('list', { name: 'Integration examples and plans' })

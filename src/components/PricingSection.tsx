@@ -46,8 +46,8 @@ export default function PricingSection() {
             Choose your early-access plan
           </h2>
           <p className="text-gray-400 max-w-lg mx-auto">
-            Preview pricing and planned features. Request access to confirm availability, volume,
-            and billing before committing.
+            Compare monthly email volume and planned capabilities. Choose a plan to request access;
+            availability and final terms are confirmed before activation.
           </p>
         </motion.div>
 
@@ -138,12 +138,14 @@ export default function PricingSection() {
                     {yearly ? plan.yearlySub : plan.sub}
                   </span>
                 </div>
-                {yearly && plan.annualPrice > 0 && (
+                {plan.monthlyPrice > 0 && (
                   <p className="text-sm text-brand-300 mb-2">
-                    {formatPrice(plan.annualPrice)} total / year
+                    {yearly
+                      ? `${formatPrice(plan.annualPrice)} total / year`
+                      : `${formatPrice(plan.monthlyPrice)} billed monthly`}
                   </p>
                 )}
-                <p className="text-sm text-gray-400">{plan.description}</p>
+                <p className="text-sm text-gray-300">{plan.description}</p>
                 <div className="mt-4 rounded-xl border border-white/10 bg-gray-950/40 p-4">
                   <p className="text-2xl font-bold text-white tabular-nums">
                     {plan.volume}
@@ -154,6 +156,18 @@ export default function PricingSection() {
                   <p className="mt-3 text-sm text-brand-200 leading-relaxed">{plan.summary}</p>
                 </div>
               </div>
+
+              <ul
+                className="mb-5 space-y-2 text-sm text-gray-200"
+                aria-label={`${plan.name} highlights`}
+              >
+                {plan.features.slice(1, 3).map((highlight) => (
+                  <li key={highlight} className="flex items-start gap-2">
+                    <CheckCircle2 size={14} className="mt-1 shrink-0 text-brand-300" aria-hidden />
+                    {highlight}
+                  </li>
+                ))}
+              </ul>
 
               <Link
                 to={planRequestPath(plan.id, yearly ? 'yearly' : 'monthly', search)}
@@ -184,7 +198,7 @@ export default function PricingSection() {
                   className={`${expanded.includes(plan.name) ? 'block' : 'hidden'} md:block space-y-2.5 p-3 md:p-0`}
                   aria-label={`${plan.name} features`}
                 >
-                  {plan.features.slice(1).map((f) => (
+                  {plan.features.slice(3).map((f) => (
                     <li key={f} className="flex items-start gap-2.5 text-sm text-gray-300">
                       <CheckCircle2
                         size={14}

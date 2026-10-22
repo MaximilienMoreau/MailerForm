@@ -13,6 +13,9 @@ it('supports roving focus, wrapping arrow keys, Home, End, and panel relationshi
     </MotionConfig>
   )
   const tabs = screen.getAllByRole('tab')
+  for (const [i, tab] of tabs.entries()) {
+    expect(tab).toHaveTextContent(features[i].title)
+  }
   const panel = screen.getByRole('tabpanel')
   tabs[0].focus()
   await user.keyboard('{ArrowRight}')
