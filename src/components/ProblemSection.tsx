@@ -118,7 +118,7 @@ export default function ProblemSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VP_MD}
           transition={{ duration: 0.5, delay: 0.45, ease: EASE }}
-          className="text-center text-sm text-gray-500 mt-10 max-w-lg mx-auto"
+          className="text-center text-sm text-gray-400 mt-10 max-w-lg mx-auto"
         >
           Just like SEO tools shifted from measuring rankings to predicting them, MailerForm shifts
           email from reactive sending to{' '}

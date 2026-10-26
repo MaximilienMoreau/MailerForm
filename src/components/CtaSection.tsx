@@ -214,7 +214,7 @@ export default function CtaSection() {
                         autoComplete="email"
                         aria-invalid={emailInvalid}
                         aria-describedby={state === 'error' ? 'cta-email-error' : undefined}
-                        className="w-full h-full bg-white/[0.06] border border-white/[0.12] rounded-xl px-4 py-3.5 text-sm text-white placeholder:text-gray-500 focus:outline-hidden focus:border-brand-500/60 focus:bg-white/[0.08] transition-all aria-[invalid=true]:border-red-500/50"
+                        className="w-full h-full bg-white/[0.06] border border-white/[0.12] rounded-xl px-4 py-3.5 text-sm text-white placeholder:text-gray-400 focus:outline-hidden focus:border-brand-500/60 focus:bg-white/[0.08] transition-all aria-[invalid=true]:border-red-500/50"
                       />
                     </div>
                     <button
@@ -269,7 +269,7 @@ export default function CtaSection() {
         >
           {['No payment required', 'Personal onboarding', 'Plan confirmed before activation'].map(
             (item) => (
-              <span key={item} className="flex items-center gap-1.5 text-xs text-gray-500">
+              <span key={item} className="flex items-center gap-1.5 text-xs text-gray-400">
                 <CheckCircle2 size={12} className="text-emerald-500" aria-hidden />
                 {item}
               </span>

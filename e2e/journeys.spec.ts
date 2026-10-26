@@ -140,6 +140,33 @@ test('billing changes update an existing request and repeated anchors scroll aga
   await expect(heading).toBeInViewport()
 })
 
+test('billing changes preserve scroll and focus after leaving an earlier anchor', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  await page.goto('/#features')
+  const toggle = page.getByRole('switch')
+  await toggle.scrollIntoViewIfNeeded()
+  await toggle.focus()
+  const scrollBefore = await page.evaluate(() => window.scrollY)
+  await page.keyboard.press('Space')
+  await expect(toggle).toHaveAttribute('aria-checked', 'true')
+  await expect(page).toHaveURL(/billing=yearly#features$/)
+  await expect(toggle).toBeFocused()
+  expect(await page.evaluate(() => window.scrollY)).toBeCloseTo(scrollBefore, 0)
+})
+
+test('the primary hero action fits in the first mobile screen', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  await page.goto('/')
+  const action = page
+    .locator('main section')
+    .first()
+    .getByRole('link', { name: 'Request early access' })
+  await expect(action).toBeInViewport({ ratio: 1 })
+})
+
 test('complete content remains readable without JavaScript', async ({ browser, baseURL }) => {
   const context = await browser.newContext({ javaScriptEnabled: false })
   const page = await context.newPage()

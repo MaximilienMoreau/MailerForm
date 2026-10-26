@@ -61,7 +61,7 @@ export default function PricingSection() {
         >
           <span
             id="billing-monthly"
-            className={`text-sm font-medium transition-colors ${!yearly ? 'text-white' : 'text-gray-500'}`}
+            className={`text-sm font-medium transition-colors ${!yearly ? 'text-white' : 'text-gray-400'}`}
           >
             Monthly
           </span>
@@ -83,7 +83,7 @@ export default function PricingSection() {
           </button>
           <span
             id="billing-yearly"
-            className={`text-sm font-medium transition-colors ${yearly ? 'text-white' : 'text-gray-500'}`}
+            className={`text-sm font-medium transition-colors ${yearly ? 'text-white' : 'text-gray-400'}`}
           >
             Yearly
             <span className="ml-2 text-xs bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 rounded-full px-2 py-0.5 font-semibold">
@@ -134,7 +134,7 @@ export default function PricingSection() {
                       ? 'Free'
                       : formatPrice(yearly ? plan.annualPrice / 12 : plan.monthlyPrice)}
                   </motion.span>
-                  <span className="text-gray-500 text-sm">
+                  <span className="text-gray-400 text-sm">
                     {yearly ? plan.yearlySub : plan.sub}
                   </span>
                 </div>

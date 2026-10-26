@@ -77,7 +77,7 @@ export default function ApiSection() {
                     <span className="w-3 h-3 rounded-full bg-amber-500/60" />
                     <span className="w-3 h-3 rounded-full bg-emerald-500/60" />
                   </div>
-                  <span className="text-xs text-gray-500 ml-2 font-mono">send-email.ts</span>
+                  <span className="text-xs text-gray-400 ml-2 font-mono">send-email.ts</span>
                 </div>
                 <button
                   type="button"
@@ -169,7 +169,7 @@ export default function ApiSection() {
               transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
               className="mb-8"
             >
-              <p className="text-xs text-gray-500 mb-3 font-semibold uppercase tracking-wider">
+              <p className="text-xs text-gray-400 mb-3 font-semibold uppercase tracking-wider">
                 Planned SDKs
               </p>
               <ul
@@ -208,7 +208,7 @@ export default function ApiSection() {
                   className="bg-white/[0.03] border border-white/[0.07] rounded-xl p-4 text-center"
                 >
                   <p className="text-xl font-extrabold text-white tabular-nums">{stat.value}</p>
-                  <p className="text-xs text-gray-500 mt-1">{stat.label}</p>
+                  <p className="text-xs text-gray-400 mt-1">{stat.label}</p>
                 </div>
               ))}
             </motion.div>

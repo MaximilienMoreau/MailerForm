@@ -27,11 +27,15 @@ function isAvailable(target: HTMLElement) {
 
 export default function ScrollToTop() {
   const { pathname, search, hash, key } = useLocation()
-  const previousPath = useRef<string | null>(null)
+  const previousLocation = useRef<{ pathname: string; search: string; hash: string } | null>(null)
   useEffect(() => {
-    const changedPage = previousPath.current !== null && previousPath.current !== pathname
-    const firstVisit = previousPath.current === null
-    previousPath.current = pathname
+    const previous = previousLocation.current
+    const changedPage = previous !== null && previous.pathname !== pathname
+    const firstVisit = previous === null
+    previousLocation.current = { pathname, search, hash }
+    // Updating filters or billing must preserve scroll and keyboard focus.
+    // Repeated clicks on an unchanged anchor still need to scroll again.
+    if (previous && !changedPage && previous.hash === hash && previous.search !== search) return
     if (!hash) {
       if (changedPage || firstVisit) window.scrollTo(0, 0)
       if (!changedPage) return
