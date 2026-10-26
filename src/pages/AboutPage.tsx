@@ -201,7 +201,7 @@ export default function AboutPage() {
                   {s.decimals > 0 ? s.value.toFixed(s.decimals) : s.value}
                   {s.suffix}
                 </div>
-                <div className="text-sm text-gray-500">{s.label}</div>
+                <div className="text-sm text-gray-400">{s.label}</div>
               </motion.div>
             ))}
           </motion.div>

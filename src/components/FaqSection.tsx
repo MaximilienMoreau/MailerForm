@@ -62,7 +62,7 @@ function FaqRow({ item, defaultOpen = false }: { item: FaqItem; defaultOpen?: bo
         <ChevronDown
           size={16}
           aria-hidden
-          className={`text-gray-500 shrink-0 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
+          className={`text-gray-400 shrink-0 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
         />
       </button>
 

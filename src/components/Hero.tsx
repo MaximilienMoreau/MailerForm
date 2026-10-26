@@ -64,7 +64,7 @@ function StatItem({ stat }: { stat: Stat }) {
 
   return (
     <motion.div ref={ref} variants={staggerItem} className="flex flex-col-reverse items-center">
-      <dt className="text-sm text-gray-500 mt-1 text-center">{stat.label}</dt>
+      <dt className="text-sm text-gray-400 mt-1 text-center">{stat.label}</dt>
       <dd className="text-3xl font-extrabold text-white tracking-tight tabular-nums">
         <span aria-hidden>
           {stat.prefix}
@@ -97,10 +97,10 @@ export default function Hero() {
         aria-hidden
       />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12 flex flex-col items-center text-center">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-24 pb-12 flex flex-col items-center text-center">
         <motion.div
           {...fadeUp(0)}
-          className="inline-flex items-center gap-2 bg-brand-500/10 border border-brand-500/20 rounded-full px-4 py-1.5 text-sm text-brand-400 font-medium mb-8"
+          className="inline-flex items-center gap-2 bg-brand-500/10 border border-brand-500/20 rounded-full px-4 py-1.5 text-sm text-brand-400 font-medium mb-6 sm:mb-8"
         >
           <Zap size={13} fill="currentColor" aria-hidden />
           Email infrastructure preview · Early access
@@ -126,9 +126,8 @@ export default function Hero() {
           {...fadeUp(0.2)}
           className="mt-6 text-lg sm:text-xl text-gray-400 max-w-2xl leading-relaxed sm:leading-7"
         >
-          Analyze your email, fix delivery risks, then send through one API. Built for SaaS teams
-          managing transactional and marketing traffic. Explore preset demonstrations; production
-          capabilities and availability are confirmed before activation.
+          Analyze your email, fix delivery risks, then send through one API. Explore sample demos;
+          production availability is confirmed before activation.
         </motion.p>
 
         <motion.div
@@ -136,7 +135,7 @@ export default function Hero() {
           className="mt-6 flex flex-wrap items-center justify-center gap-3"
         >
           {trust.map((t) => (
-            <span key={t} className="flex items-center gap-1.5 text-xs text-gray-500 font-medium">
+            <span key={t} className="flex items-center gap-1.5 text-xs text-gray-400 font-medium">
               <CheckCircle2 size={13} className="text-emerald-500" aria-hidden />
               {t}
             </span>
@@ -145,7 +144,7 @@ export default function Hero() {
 
         <motion.div
           {...fadeUp(0.38)}
-          className="mt-10 flex flex-col sm:flex-row items-center gap-4"
+          className="mt-6 sm:mt-10 flex flex-col sm:flex-row items-center gap-4"
         >
           <SiteLink href="#cta" className="btn-primary text-base px-8 py-3.5">
             Request early access

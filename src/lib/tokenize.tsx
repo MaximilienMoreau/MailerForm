@@ -120,7 +120,7 @@ export function tokenizeLine(line: string): Token[] {
 const TOKEN_CLASS: Record<TokenType, string> = {
   keyword: 'text-pink-400',
   string: 'text-emerald-400',
-  comment: 'text-gray-500',
+  comment: 'text-gray-400',
   number: 'text-orange-400',
   plain: 'text-gray-300',
 }

@@ -191,7 +191,7 @@ export default function CareersPage() {
               >
                 <div>
                   <p className="text-sm font-semibold text-white">{job.title}</p>
-                  <p className="text-xs text-gray-500 mt-1 flex items-center gap-3 flex-wrap">
+                  <p className="text-xs text-gray-400 mt-1 flex items-center gap-3 flex-wrap">
                     <span>{job.department}</span>
                     <span className="flex items-center gap-1">
                       <MapPin size={11} aria-hidden />

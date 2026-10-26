@@ -80,7 +80,7 @@ export default function PressPage() {
                 >
                   <Icon size={18} className="text-brand-400 mx-auto mb-3" aria-hidden />
                   <dd className="text-sm font-bold text-white">{f.value}</dd>
-                  <dt className="text-xs text-gray-500 mt-1">{f.label}</dt>
+                  <dt className="text-xs text-gray-400 mt-1">{f.label}</dt>
                 </motion.div>
               )
             })}
@@ -142,11 +142,11 @@ export default function PressPage() {
                 >
                   <div>
                     <p className="text-sm font-semibold text-white">{a.name}</p>
-                    <p className="text-xs text-gray-500 mt-0.5">{a.description}</p>
+                    <p className="text-xs text-gray-400 mt-0.5">{a.description}</p>
                   </div>
                   <Download
                     size={16}
-                    className="text-gray-500 group-hover:text-brand-400 transition-colors shrink-0"
+                    className="text-gray-400 group-hover:text-brand-400 transition-colors shrink-0"
                     aria-hidden
                   />
                 </a>
@@ -158,7 +158,7 @@ export default function PressPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VP}
             transition={{ duration: 0.4, delay: 0.1, ease: EASE }}
-            className="mt-5 flex items-center gap-3 text-xs text-gray-500"
+            className="mt-5 flex items-center gap-3 text-xs text-gray-400"
           >
             <span className="w-4 h-4 rounded-full bg-brand-500 shrink-0" aria-hidden />
             Brand color:{' '}

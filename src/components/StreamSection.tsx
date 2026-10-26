@@ -64,7 +64,7 @@ export default function StreamSection() {
             </p>
             <ul className="space-y-2" aria-label="Transactional email types">
               {transactionalItems.map((item) => (
-                <li key={item} className="flex items-center gap-2 text-xs text-gray-500">
+                <li key={item} className="flex items-center gap-2 text-xs text-gray-400">
                   <Mail size={11} className="text-sky-400 shrink-0" aria-hidden />
                   {item}
                 </li>
@@ -72,7 +72,7 @@ export default function StreamSection() {
             </ul>
             <div className="mt-5 pt-4 border-t border-white/[0.06]">
               <div className="flex justify-between text-xs mb-1.5">
-                <span className="text-gray-500">Sample inbox rate</span>
+                <span className="text-gray-400">Sample inbox rate</span>
                 <span className="text-sky-400 font-semibold tabular-nums">
                   {TRANSACTIONAL_RATE}%
                 </span>
@@ -105,7 +105,7 @@ export default function StreamSection() {
               <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
                 <GitBranch size={16} className="text-gray-400" />
               </div>
-              <p className="text-xs text-gray-500 text-center leading-relaxed">
+              <p className="text-xs text-gray-400 text-center leading-relaxed">
                 Isolated IP pools &amp;
                 <br />
                 independent reputation
@@ -129,7 +129,7 @@ export default function StreamSection() {
             </p>
             <ul className="space-y-2" aria-label="Marketing email types">
               {marketingItems.map((item) => (
-                <li key={item} className="flex items-center gap-2 text-xs text-gray-500">
+                <li key={item} className="flex items-center gap-2 text-xs text-gray-400">
                   <Megaphone size={11} className="text-orange-400 shrink-0" aria-hidden />
                   {item}
                 </li>
@@ -137,7 +137,7 @@ export default function StreamSection() {
             </ul>
             <div className="mt-5 pt-4 border-t border-white/[0.06]">
               <div className="flex justify-between text-xs mb-1.5">
-                <span className="text-gray-500">Sample inbox rate</span>
+                <span className="text-gray-400">Sample inbox rate</span>
                 <span className="text-orange-400 font-semibold tabular-nums">
                   {MARKETING_RATE}%
                 </span>
