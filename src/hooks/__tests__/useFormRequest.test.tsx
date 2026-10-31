@@ -24,7 +24,7 @@ it('aborts pending work and clears its deadline when the form unmounts', async (
 
 it('rejects concurrent submissions without sending a second request and permits retry after completion', async () => {
   let complete: ((response: Response) => void) | undefined
-  const fetch = vi.fn(
+  const fetch = vi.fn<typeof globalThis.fetch>(
     () =>
       new Promise<Response>((resolve) => {
         complete = resolve
@@ -38,6 +38,11 @@ it('rejects concurrent submissions without sending a second request and permits 
   )
   expect(fetch).toHaveBeenCalledTimes(1)
   expect(result.current.isPending()).toBe(true)
+  expect(fetch.mock.calls[0][1]).toMatchObject({
+    credentials: 'omit',
+    redirect: 'error',
+    referrerPolicy: 'strict-origin-when-cross-origin',
+  })
   complete?.({ ok: true } as Response)
   await first
   expect(result.current.isPending()).toBe(false)

@@ -20,7 +20,7 @@ const MARKETING_RATE = 96.1
 
 export default function StreamSection() {
   return (
-    <section id="streams" className="py-16 relative">
+    <section id="streams" className="py-10 sm:py-16 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -96,10 +96,10 @@ export default function StreamSection() {
           {/* Divider */}
           <motion.div
             variants={staggerItem}
-            className="flex flex-col items-center justify-center py-8 lg:py-0"
+            className="flex flex-col items-center justify-center py-2 lg:py-0"
             aria-hidden
           >
-            <div className="w-px h-16 bg-linear-to-b/srgb from-transparent via-white/10 to-transparent lg:hidden" />
+            <div className="w-px h-8 bg-linear-to-b/srgb from-transparent via-white/10 to-transparent lg:hidden" />
             <div className="hidden lg:flex flex-col items-center gap-3 w-full">
               <div className="h-px w-full bg-linear-to-r/srgb from-sky-500/20 via-white/10 to-orange-500/20" />
               <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">

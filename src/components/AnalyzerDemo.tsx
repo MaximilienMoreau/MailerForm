@@ -35,7 +35,7 @@ export default function AnalyzerDemo() {
       className="scroll-mt-24 rounded-2xl border border-white/10 bg-gray-900/80 p-5 sm:p-6 text-left shadow-xl"
     >
       <h3 className="text-lg font-bold text-white">Try a sample analysis</h3>
-      <p className="mt-2 text-xs text-gray-400">
+      <p className="mt-2 text-sm text-gray-400">
         Interactive demonstration with preset data. No email is uploaded or sent. Scores illustrate
         risks; they do not guarantee inbox placement.
       </p>
@@ -45,7 +45,7 @@ export default function AnalyzerDemo() {
           {examples.map((item, index) => (
             <label
               key={item.name}
-              className={`cursor-pointer rounded-lg border px-3 py-2 text-xs ${selected === index ? 'border-brand-400 bg-brand-500/10 text-white' : 'border-white/10 text-gray-300'}`}
+              className={`cursor-pointer rounded-lg border px-3 py-2 text-sm ${selected === index ? 'border-brand-400 bg-brand-500/10 text-white' : 'border-white/10 text-gray-300'}`}
             >
               <input
                 type="radio"

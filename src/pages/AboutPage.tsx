@@ -7,7 +7,6 @@ import { EASE, VP, fadeUpView, staggerContainer, staggerItem } from '@/lib/motio
 import { useMeta } from '@/hooks/useMeta'
 import ProductStatusNotice from '@/components/ProductStatusNotice'
 import { productStages } from '@/data/product'
-import { stats } from '@/data/stats'
 
 const values = [
   {
@@ -105,9 +104,6 @@ export default function AboutPage() {
 
       {/* Values */}
       <section className="py-16">
-        <p className="text-xs text-gray-400 text-center mb-6">
-          Explore the workflow before requesting access
-        </p>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2
             {...fadeUpView()}
@@ -178,33 +174,6 @@ export default function AboutPage() {
               ))}
             </motion.ol>
           </div>
-        </div>
-      </section>
-
-      {/* Numbers */}
-      <section className="py-16">
-        <p className="text-xs text-gray-400 text-center mb-6">
-          Explore the workflow before requesting access
-        </p>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={VP}
-            className="grid grid-cols-2 sm:grid-cols-4 gap-6"
-          >
-            {stats.map((s) => (
-              <motion.div key={s.label} variants={staggerItem} className="text-center">
-                <div className="text-3xl sm:text-4xl font-extrabold text-white mb-1 tabular-nums">
-                  {s.prefix}
-                  {s.decimals > 0 ? s.value.toFixed(s.decimals) : s.value}
-                  {s.suffix}
-                </div>
-                <div className="text-sm text-gray-400">{s.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
         </div>
       </section>
 

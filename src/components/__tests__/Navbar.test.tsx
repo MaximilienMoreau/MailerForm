@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { describe, it, expect, vi } from 'vitest'
+import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MotionConfig } from 'framer-motion'
 import { BrowserRouter, MemoryRouter } from 'react-router-dom'
@@ -94,4 +94,31 @@ it('uses router location for section links on secondary pages', () => {
     'href',
     '/#cta'
   )
+})
+
+it('marks the last reached section in page order as active', () => {
+  const view = render(
+    <MemoryRouter>
+      <Navbar />
+      <section id="deliverability" />
+      <section id="features" />
+      <section id="pricing" />
+    </MemoryRouter>
+  )
+  const positions = { deliverability: -800, features: -100, pricing: 1000 }
+  for (const [id, top] of Object.entries(positions)) {
+    vi.spyOn(view.container.querySelector(`#${id}`)!, 'getBoundingClientRect').mockReturnValue({
+      top,
+    } as DOMRect)
+  }
+  try {
+    fireEvent.scroll(window)
+    expect(screen.getByRole('link', { name: 'Features' })).toHaveAttribute(
+      'aria-current',
+      'location'
+    )
+    expect(screen.getByRole('link', { name: 'Deliverability' })).not.toHaveAttribute('aria-current')
+  } finally {
+    vi.restoreAllMocks()
+  }
 })

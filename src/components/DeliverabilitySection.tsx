@@ -6,7 +6,7 @@ import { EASE, VP_SM } from '@/lib/motion'
 
 export default function DeliverabilitySection() {
   return (
-    <section id="deliverability" className="py-16 relative overflow-hidden">
+    <section id="deliverability" className="py-10 sm:py-16 relative overflow-hidden">
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_80%_50%,rgba(51,102,255,0.07),transparent)]"
         aria-hidden

@@ -7,7 +7,7 @@ It does not implement an email delivery backend or operate a newsletter service.
 
 ## Development
 
-Use **Node 20.19+** (`.nvmrc` selects the Node 20 release line).
+Use **Node 22.13+ or Node 24+** (`.nvmrc` selects the maintained Node 22 release line).
 
 ```sh
 npm ci
@@ -29,6 +29,8 @@ npm run format        # Apply the shared formatting rules
 ```
 
 CI runs the same type checks, lint, formatting checks, tests, and production build.
+It also audits dependencies on pushes, pull requests, and every Monday: moderate or
+higher production vulnerabilities and high or critical development vulnerabilities fail CI.
 `package-lock.json` is committed; use `npm ci` to reproduce the dependency tree.
 
 Tailwind 4 uses its dedicated Vite plugin; PostCSS and Autoprefixer do not need
@@ -64,7 +66,7 @@ new-tab/download links to the browser. Do not recreate lazy components in render
 Styles use Tailwind 4 and shared classes in `src/index.css`; the CSS `@theme`
 block holds the fonts and preserved brand/UI color tokens. Explicit `@source`
 paths cover the app and generated HTML. Motion presets live in `src/lib/motion.ts`. Reduced-motion
-preferences apply to CSS scrolling and custom counters as well as Framer Motion.
+preferences apply to CSS scrolling as well as Framer Motion.
 
 ## Forms and preferences
 
@@ -191,3 +193,21 @@ operational details and applicable agreements before activating a production ser
 The website privacy text follows the [CNIL information guidance](https://www.cnil.fr/fr/informer-les-personnes)
 for explaining purposes, request data, rights, and retention criteria. Provider and
 operator details still need to match the real deployment and handling of requests.
+
+## Security
+
+See [the security review](docs/security-review.md) for the threat model, changes,
+verification, and remaining operational requirements. `vercel.json` defines the
+production security headers; Vite preview applies the same headers so browser
+tests exercise the actual CSP. Development mode keeps Vite's HMR support.
+
+The CSP permits scripts only from the site, denies inline event handlers, framing,
+plugins, and base-URL changes, and limits connections to the site and Formspree.
+Inline styles remain necessary for Framer Motion and the no-JavaScript fallback.
+Google Fonts styles and fonts are explicitly allowed. Form requests omit credentials,
+reject redirects, and send only the origin as the cross-origin referrer.
+
+The public Formspree form ID is not a secret or an authorization mechanism.
+Configure provider-side spam protection, domain restrictions, request validation,
+and newsletter consent handling before accepting public requests. Client-side
+validation and the honeypot can be bypassed by a direct HTTP client.
