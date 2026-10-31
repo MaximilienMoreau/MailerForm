@@ -4,7 +4,6 @@ export interface Feature {
   icon: LucideIcon
   color: string
   bg: string
-  dot: string
   border: string
   tag: string
   tagColor: string
@@ -18,7 +17,6 @@ export const features: Feature[] = [
     icon: Radar,
     color: 'text-violet-400',
     bg: 'bg-violet-500/10',
-    dot: 'bg-violet-500',
     border: 'border-violet-500/20',
     tag: 'Core differentiator',
     tagColor: 'bg-violet-500/10 text-violet-400 border-violet-500/20',
@@ -36,7 +34,6 @@ export const features: Feature[] = [
     icon: GitBranch,
     color: 'text-sky-400',
     bg: 'bg-sky-500/10',
-    dot: 'bg-sky-500',
     border: 'border-sky-500/20',
     tag: 'Smart infrastructure',
     tagColor: 'bg-sky-500/10 text-sky-400 border-sky-500/20',
@@ -54,7 +51,6 @@ export const features: Feature[] = [
     icon: Users,
     color: 'text-emerald-400',
     bg: 'bg-emerald-500/10',
-    dot: 'bg-emerald-500',
     border: 'border-emerald-500/20',
     tag: 'Email-first CRM',
     tagColor: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
@@ -71,7 +67,6 @@ export const features: Feature[] = [
     icon: Code2,
     color: 'text-brand-400',
     bg: 'bg-brand-500/10',
-    dot: 'bg-brand-500',
     border: 'border-brand-500/20',
     tag: 'API-first',
     tagColor: 'bg-brand-500/10 text-brand-400 border-brand-500/20',
@@ -84,7 +79,6 @@ export const features: Feature[] = [
     icon: BarChart3,
     color: 'text-amber-400',
     bg: 'bg-amber-500/10',
-    dot: 'bg-amber-500',
     border: 'border-amber-500/20',
     tag: 'Observability',
     tagColor: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
@@ -101,7 +95,6 @@ export const features: Feature[] = [
     icon: Lock,
     color: 'text-rose-400',
     bg: 'bg-rose-500/10',
-    dot: 'bg-rose-500',
     border: 'border-rose-500/20',
     tag: 'Compliance',
     tagColor: 'bg-rose-500/10 text-rose-400 border-rose-500/20',

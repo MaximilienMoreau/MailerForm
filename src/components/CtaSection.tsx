@@ -1,4 +1,4 @@
-import { formspreeEndpoint } from '@/lib/forms'
+import { EMAIL_MAX_LENGTH, formspreeEndpoint } from '@/lib/forms'
 import SiteLink from '@/components/SiteLink'
 import { parsePlanSelection, type PlanId, type BillingInterval } from '@/lib/planSelection'
 import { useLocation } from 'react-router-dom'
@@ -32,7 +32,7 @@ export default function CtaSection() {
     e.preventDefault()
     if (isPending() || !endpoint) return
     const value = email.trim()
-    if (!inputRef.current?.validity.valid) {
+    if (!inputRef.current?.validity.valid || value.length > EMAIL_MAX_LENGTH) {
       setEmailInvalid(true)
       setState('error')
       setErrorMsg(
@@ -87,7 +87,7 @@ export default function CtaSection() {
   }
 
   return (
-    <section id="cta" className="py-16 relative overflow-hidden">
+    <section id="cta" className="py-10 sm:py-16 relative overflow-hidden">
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_50%,rgba(51,102,255,0.12),transparent)]"
         aria-hidden
@@ -116,7 +116,7 @@ export default function CtaSection() {
           transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
           className="text-4xl sm:text-5xl font-extrabold text-white leading-tight mb-6 sm:leading-none"
         >
-          Build a more reliable email workflow.{' '}
+          Ready to explore your workflow?{' '}
           <span className="text-transparent bg-clip-text bg-linear-to-r/srgb from-brand-400 to-sky-400">
             Get early access.
           </span>
@@ -129,8 +129,7 @@ export default function CtaSection() {
           transition={{ duration: 0.5, delay: 0.15, ease: EASE }}
           className="text-lg text-gray-400 mb-10 max-w-xl mx-auto"
         >
-          Leave your email to request an invitation. We will contact you about availability and
-          onboarding.
+          Request an invitation. We will contact you to discuss availability and onboarding.
         </motion.p>
 
         <motion.div
@@ -183,7 +182,7 @@ export default function CtaSection() {
                       We will contact {request?.email} to confirm availability and discuss
                       onboarding.
                     </p>
-                    <p className="text-xs text-gray-400">
+                    <p className="text-sm text-gray-400">
                       Your plan and billing terms will be confirmed before activation. No trial has
                       started and no payment has been taken.
                     </p>
@@ -194,12 +193,12 @@ export default function CtaSection() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     onSubmit={handleSubmit}
-                    className="flex flex-col sm:flex-row items-stretch gap-3 max-w-md mx-auto"
+                    className="flex flex-col sm:flex-row items-stretch gap-3 max-w-xl mx-auto"
                     aria-label="Request MailerForm early access"
                     noValidate
                   >
                     <Honeypot />
-                    <div className="flex-1 relative">
+                    <div className="flex-1 min-w-0 relative">
                       <label htmlFor="cta-email" className="sr-only">
                         Email address
                       </label>
@@ -211,10 +210,11 @@ export default function CtaSection() {
                         onChange={handleChange}
                         placeholder="you@company.com"
                         required
+                        maxLength={EMAIL_MAX_LENGTH}
                         autoComplete="email"
                         aria-invalid={emailInvalid}
                         aria-describedby={state === 'error' ? 'cta-email-error' : undefined}
-                        className="w-full h-full bg-white/[0.06] border border-white/[0.12] rounded-xl px-4 py-3.5 text-sm text-white placeholder:text-gray-400 focus:outline-hidden focus:border-brand-500/60 focus:bg-white/[0.08] transition-all aria-[invalid=true]:border-red-500/50"
+                        className="w-full h-full bg-white/[0.06] border border-white/[0.12] rounded-xl px-4 py-3.5 text-base text-white placeholder:text-gray-400 focus:outline-hidden focus:border-brand-500/60 focus:bg-white/[0.08] transition-all aria-[invalid=true]:border-red-500/50"
                       />
                     </div>
                     <button
@@ -238,13 +238,13 @@ export default function CtaSection() {
               </AnimatePresence>
 
               {state === 'error' && (
-                <p id="cta-email-error" role="alert" className="mt-2 text-xs text-red-400">
+                <p id="cta-email-error" role="alert" className="mt-2 text-sm text-red-400">
                   {errorMsg}
                 </p>
               )}
 
               {state !== 'success' && (
-                <p className="mt-4 text-xs text-gray-400">
+                <p className="mt-4 text-sm text-gray-400">
                   Invitation request only · No payment · No account created.{' '}
                   <a
                     href="/privacy"
@@ -269,7 +269,7 @@ export default function CtaSection() {
         >
           {['No payment required', 'Personal onboarding', 'Plan confirmed before activation'].map(
             (item) => (
-              <span key={item} className="flex items-center gap-1.5 text-xs text-gray-400">
+              <span key={item} className="flex items-center gap-1.5 text-sm text-gray-400">
                 <CheckCircle2 size={12} className="text-emerald-500" aria-hidden />
                 {item}
               </span>

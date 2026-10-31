@@ -13,7 +13,8 @@ const links = [
   { label: 'Docs', href: 'https://docs.mailerform.io', external: true },
 ] as const
 
-const sectionIds = ['features', 'deliverability', 'pricing']
+// Follow the section order in LandingPage so later sections take precedence.
+const sectionIds = ['deliverability', 'features', 'pricing']
 
 const FOCUSABLE = [
   'a[href]',

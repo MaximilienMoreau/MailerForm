@@ -53,7 +53,7 @@ export default function ApiSection() {
   }
 
   return (
-    <section id="api" className="py-16 relative overflow-hidden">
+    <section id="api" className="py-10 sm:py-16 relative overflow-hidden">
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_20%_50%,rgba(51,102,255,0.07),transparent)]"
         aria-hidden

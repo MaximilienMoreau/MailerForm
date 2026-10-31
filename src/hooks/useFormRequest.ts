@@ -48,6 +48,9 @@ export function useFormRequest() {
     try {
       request = fetch(url, {
         method: 'POST',
+        credentials: 'omit',
+        redirect: 'error',
+        referrerPolicy: 'strict-origin-when-cross-origin',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(body),
         signal: controller.signal,

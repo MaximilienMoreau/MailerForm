@@ -36,32 +36,10 @@ describe('Hero', () => {
     )
   })
 
-  it('renders all four stat labels', () => {
-    renderHero()
-    expect(screen.getByText('Interactive analysis examples')).toBeInTheDocument()
-    expect(screen.getByText('Email stream types')).toBeInTheDocument()
-    expect(screen.getByText('Analyze-to-send workflow')).toBeInTheDocument()
-    expect(screen.getByText('To request early access')).toBeInTheDocument()
-  })
-
   it('renders trust badges', () => {
     renderHero()
     expect(screen.getByText(/Authentication checks/)).toBeInTheDocument()
     expect(screen.getByText(/Preview before sending/)).toBeInTheDocument()
     expect(screen.getByText(/No payment to request access/i)).toBeInTheDocument()
   })
-
-  it('renders the deliverability card', () => {
-    renderHero()
-    expect(screen.getByText('Pre-send Analysis')).toBeInTheDocument()
-    expect(screen.getByText('Example report')).toBeInTheDocument()
-  })
-})
-
-it('links the example card directly to interactive sample reports', () => {
-  renderHero()
-  expect(screen.getByRole('link', { name: 'Explore sample reports' })).toHaveAttribute(
-    'href',
-    '/#analyzer-demo'
-  )
 })

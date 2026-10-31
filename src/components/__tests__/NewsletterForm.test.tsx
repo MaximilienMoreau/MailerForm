@@ -72,3 +72,17 @@ it('keeps the contact fallback when the example environment value has not been r
   )
   expect(screen.queryByRole('form')).not.toBeInTheDocument()
 })
+
+it('rejects oversized addresses even when a script bypasses the input length limit', () => {
+  vi.stubEnv('VITE_FORMSPREE_ID', 'newsletter-test')
+  const submit = vi.fn()
+  vi.stubGlobal('fetch', submit)
+  render(<NewsletterForm />)
+  fireEvent.change(screen.getByRole('textbox'), {
+    target: { value: `${'a'.repeat(250)}@example.com` },
+  })
+  fireEvent.click(screen.getByRole('checkbox'))
+  fireEvent.submit(screen.getByRole('form'))
+  expect(submit).not.toHaveBeenCalled()
+  expect(screen.getByRole('alert')).toHaveTextContent('254 characters or fewer')
+})

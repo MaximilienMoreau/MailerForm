@@ -30,14 +30,14 @@ const criteria = [
 
 export default function ComparisonSection() {
   return (
-    <section id="comparison" className="py-16 relative">
+    <section id="comparison" className="py-10 sm:py-16 relative">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl sm:text-4xl text-center font-extrabold text-white">
           Compare what matters to your team
         </h2>
         <p className="mt-4 mb-10 text-gray-400 text-center max-w-2xl mx-auto">
-          Use the same questions when evaluating any provider. These criteria explain the MailerForm
-          approach without assigning unverified competitor ratings.
+          Check authentication, traffic isolation, integration effort, and cost before choosing your
+          email provider.
         </p>
         <ul className="grid sm:grid-cols-2 gap-4">
           {criteria.map(([title, question, label, href]) => (

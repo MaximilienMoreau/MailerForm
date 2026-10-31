@@ -95,6 +95,16 @@ describe('CtaSection', () => {
     expect(fetch).not.toHaveBeenCalled()
     expect(screen.queryByRole('status')).not.toBeInTheDocument()
   })
+
+  it('rejects an oversized address even when submitted programmatically', () => {
+    renderCta()
+    fireEvent.change(screen.getByLabelText(/email address/i), {
+      target: { value: `${'a'.repeat(250)}@example.com` },
+    })
+    fireEvent.submit(screen.getByRole('form', { name: /early access/i }))
+    expect(fetch).not.toHaveBeenCalled()
+    expect(screen.getByRole('alert')).toHaveTextContent('Please enter a valid email address.')
+  })
 })
 
 it('includes the selected plan and billing in the early-access request', async () => {

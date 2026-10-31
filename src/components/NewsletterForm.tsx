@@ -1,4 +1,4 @@
-import { formspreeEndpoint } from '@/lib/forms'
+import { EMAIL_MAX_LENGTH, formspreeEndpoint } from '@/lib/forms'
 import Honeypot from '@/components/Honeypot'
 import { useFormRequest, FormTimeoutError, FormCancelledError } from '@/hooks/useFormRequest'
 import { useId, useState, type FormEvent } from 'react'
@@ -11,13 +11,19 @@ export default function NewsletterForm() {
   const endpoint = formspreeEndpoint(import.meta.env.VITE_FORMSPREE_ID)
   async function subscribe(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    if (isPending() || !endpoint || !event.currentTarget.reportValidity()) return
+    if (isPending() || !endpoint) return
     const data = new FormData(event.currentTarget)
+    const email = String(data.get('email') ?? '').trim()
+    if (email.length > EMAIL_MAX_LENGTH) {
+      setError(`Please enter an email address of ${EMAIL_MAX_LENGTH} characters or fewer.`)
+      setState('error')
+      return
+    }
+    if (!event.currentTarget.reportValidity()) return
     if (data.get('_gotcha')) {
       setState('success')
       return
     }
-    const email = String(data.get('email') ?? '').trim()
     if (!email || !data.has('consent')) return
     setState('sending')
     setError('')
@@ -65,16 +71,17 @@ export default function NewsletterForm() {
             name="email"
             type="email"
             required
+            maxLength={EMAIL_MAX_LENGTH}
             autoComplete="email"
             className="w-full bg-gray-900 border border-white/20 rounded-lg px-4 py-3 text-white focus-ring"
             placeholder="you@company.com"
           />
           <Honeypot />
-          <label className="flex gap-2 text-xs text-gray-300">
+          <label className="flex gap-2 text-sm text-gray-300">
             <input type="checkbox" required name="consent" className="accent-blue-500" />I agree to
             receive newsletter emails. I can unsubscribe at any time.
           </label>
-          <p className="text-xs text-gray-400">
+          <p className="text-sm text-gray-400">
             See our{' '}
             <a
               href="/privacy"

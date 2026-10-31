@@ -1,3 +1,6 @@
+/** Product limit for contact addresses, enforced independently of native form validity. */
+export const EMAIL_MAX_LENGTH = 254
+
 /** The example value must never turn an unconfigured site into a broken form. */
 export function formspreeEndpoint(formId: string | undefined): string | null {
   const id = formId?.trim()

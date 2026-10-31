@@ -4,6 +4,7 @@ import { motion } from '@/components/Motion'
 import { Building2, Calendar, Download, Mail, Newspaper, Users } from 'lucide-react'
 import { EASE, VP, staggerContainer, staggerItem } from '@/lib/motion'
 import { useMeta } from '@/hooks/useMeta'
+import ProductStatusNotice from '@/components/ProductStatusNotice'
 
 const facts = [
   { icon: Calendar, label: 'Founded', value: '2026' },
@@ -57,6 +58,7 @@ export default function PressPage() {
           >
             Company facts, brand assets, and media contact for MailerForm.
           </motion.p>
+          <ProductStatusNotice />
         </div>
       </div>
 
@@ -102,12 +104,12 @@ export default function PressPage() {
               About MailerForm
             </p>
             <p className="text-gray-400 leading-relaxed">
-              MailerForm is an email infrastructure platform for SaaS teams that combines
-              transactional delivery, marketing automation, and deliverability intelligence in one
-              API-first product. Its pre-send analysis engine scores every email before it goes out,
-              so teams can fix deliverability issues before they damage sender reputation instead of
-              finding out after the fact. MailerForm is bootstrapped and remote-first, founded in
-              Paris in 2026.
+              MailerForm is an early-access email infrastructure project for SaaS teams. The planned
+              platform brings pre-send analysis, transactional delivery, and marketing workflows
+              together through one API. The website offers sample analysis reports and an
+              illustrative SDK workflow. Production capabilities and service terms are confirmed
+              during onboarding. MailerForm is bootstrapped and remote-first, founded in Paris in
+              2026.
             </p>
           </motion.div>
         </div>
