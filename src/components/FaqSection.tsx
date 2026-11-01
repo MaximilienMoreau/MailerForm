@@ -2,7 +2,7 @@ import { useState, useId } from 'react'
 import { motion } from '@/components/Motion'
 import { AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
-import { EASE, VP } from '@/lib/motion'
+import { EASE, fadeUpView } from '@/lib/motion'
 
 interface FaqItem {
   question: string
@@ -96,13 +96,7 @@ export default function FaqSection() {
   return (
     <section id="faq" className="py-10 sm:py-16 relative">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={VP}
-          transition={{ duration: 0.5, ease: EASE }}
-          className="text-center mb-12"
-        >
+        <motion.div {...fadeUpView()} className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
             Frequently asked questions
           </h2>
@@ -119,10 +113,7 @@ export default function FaqSection() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={VP}
-          transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
+          {...fadeUpView(0.1)}
           className="bg-white/[0.02] border border-white/[0.07] rounded-2xl px-6"
         >
           {faqs.map((item, i) => (

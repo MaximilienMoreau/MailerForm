@@ -2,7 +2,7 @@ import SiteLink from '@/components/SiteLink'
 import { motion } from '@/components/Motion'
 import { ArrowRight, CheckCircle2, Cpu } from 'lucide-react'
 import AnalyzerDemo from '@/components/AnalyzerDemo'
-import { EASE, VP_SM } from '@/lib/motion'
+import { EASE, VP_SM, fadeUpView } from '@/lib/motion'
 
 export default function DeliverabilitySection() {
   return (
@@ -17,10 +17,7 @@ export default function DeliverabilitySection() {
           {/* Copy */}
           <div>
             <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={VP_SM}
-              transition={{ duration: 0.5, ease: EASE }}
+              {...fadeUpView(0, VP_SM)}
               className="tag bg-violet-500/10 text-violet-400 border border-violet-500/20 inline-flex mb-4"
             >
               <Cpu size={12} aria-hidden />
@@ -28,10 +25,7 @@ export default function DeliverabilitySection() {
             </motion.span>
 
             <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={VP_SM}
-              transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
+              {...fadeUpView(0.1, VP_SM)}
               className="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-6 sm:leading-10"
             >
               Find risks, apply fixes,{' '}
@@ -40,22 +34,13 @@ export default function DeliverabilitySection() {
               </span>
             </motion.h2>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={VP_SM}
-              transition={{ duration: 0.5, delay: 0.15, ease: EASE }}
-              className="text-gray-400 leading-relaxed mb-8"
-            >
+            <motion.p {...fadeUpView(0.15, VP_SM)} className="text-gray-400 leading-relaxed mb-8">
               Explore three sample reports. See how authentication and content issues change the
               score, then apply the suggested corrections.
             </motion.p>
 
             <motion.ul
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={VP_SM}
-              transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
+              {...fadeUpView(0.2, VP_SM)}
               className="space-y-3 mb-8"
               aria-label="Deliverability analysis capabilities"
             >
@@ -71,13 +56,7 @@ export default function DeliverabilitySection() {
               ))}
             </motion.ul>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={VP_SM}
-              transition={{ duration: 0.5, delay: 0.25, ease: EASE }}
-              className="flex items-center gap-4"
-            >
+            <motion.div {...fadeUpView(0.25, VP_SM)} className="flex items-center gap-4">
               <SiteLink href="#analyzer-demo" className="btn-primary text-sm">
                 Explore sample reports <ArrowRight size={14} aria-hidden />
               </SiteLink>

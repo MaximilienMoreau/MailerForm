@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { motion } from '@/components/Motion'
 import { ArrowRight, CheckCircle2, Mail, Zap } from 'lucide-react'
-import { EASE, VP, staggerContainer, staggerItem } from '@/lib/motion'
+import { EASE, VP, staggerContainer, staggerItem, fadeUpView } from '@/lib/motion'
 
 export default function PricingSection() {
   const { pathname, search, hash } = useLocation()
@@ -31,13 +31,7 @@ export default function PricingSection() {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={VP}
-          transition={{ duration: 0.5, ease: EASE }}
-          className="text-center mb-10"
-        >
+        <motion.div {...fadeUpView()} className="text-center mb-10">
           <span className="tag bg-brand-500/10 text-brand-400 border border-brand-500/20 inline-flex mb-4">
             <Zap size={12} fill="currentColor" aria-hidden />
             Simple pricing
@@ -221,10 +215,7 @@ export default function PricingSection() {
         </p>
         {/* Enterprise callout */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={VP}
-          transition={{ duration: 0.5, delay: 0.3, ease: EASE }}
+          {...fadeUpView(0.3)}
           className="mt-8 max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 bg-white/[0.03] border border-white/[0.07] rounded-2xl px-8 py-5"
         >
           <div>

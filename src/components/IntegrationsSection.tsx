@@ -1,7 +1,7 @@
 import SiteLink from '@/components/SiteLink'
 import { motion } from '@/components/Motion'
 import { ArrowRight, Mail, Zap } from 'lucide-react'
-import { EASE, VP, staggerContainer, staggerItem } from '@/lib/motion'
+import { VP, staggerContainer, staggerItem, fadeUpView } from '@/lib/motion'
 
 interface Integration {
   name: string
@@ -127,13 +127,7 @@ export default function IntegrationsSection() {
       />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={VP}
-          transition={{ duration: 0.5, ease: EASE }}
-          className="text-center mb-6"
-        >
+        <motion.div {...fadeUpView()} className="text-center mb-6">
           <span className="tag bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-4 inline-flex">
             <Zap size={12} fill="currentColor" aria-hidden />
             Integration preview
@@ -219,10 +213,7 @@ export default function IntegrationsSection() {
 
         {/* Bottom CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={VP}
-          transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
+          {...fadeUpView(0.2)}
           className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white/[0.03] border border-white/[0.07] rounded-2xl px-8 py-5 max-w-4xl mx-auto"
         >
           <div>
