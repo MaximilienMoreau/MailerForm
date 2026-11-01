@@ -32,11 +32,11 @@ export function fadeUp(delay = 0) {
 }
 
 /** Scroll-triggered fade-up (for sections below the fold). */
-export function fadeUpView(delay = 0) {
+export function fadeUpView(delay = 0, viewport: { once: boolean; amount: number } = VP) {
   return {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: VP,
+    viewport,
     transition: { duration: 0.5, delay, ease: EASE },
   }
 }

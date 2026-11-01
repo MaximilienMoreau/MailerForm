@@ -8,7 +8,7 @@ import { useRef, useState, type ChangeEvent, type FormEvent } from 'react'
 import { motion } from '@/components/Motion'
 import { AnimatePresence } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Loader2, Zap } from 'lucide-react'
-import { EASE, VP_LG } from '@/lib/motion'
+import { EASE, VP_LG, fadeUpView } from '@/lib/motion'
 
 type FormState = 'idle' | 'loading' | 'success' | 'error'
 
@@ -110,10 +110,7 @@ export default function CtaSection() {
         </motion.div>
 
         <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={VP_LG}
-          transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
+          {...fadeUpView(0.1, VP_LG)}
           className="text-4xl sm:text-5xl font-extrabold text-white leading-tight mb-6 sm:leading-none"
         >
           Ready to explore your workflow?{' '}
@@ -123,21 +120,13 @@ export default function CtaSection() {
         </motion.h2>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={VP_LG}
-          transition={{ duration: 0.5, delay: 0.15, ease: EASE }}
+          {...fadeUpView(0.15, VP_LG)}
           className="text-lg text-gray-400 mb-10 max-w-xl mx-auto"
         >
           Request an invitation. We will contact you to discuss availability and onboarding.
         </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={VP_LG}
-          transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
-        >
+        <motion.div {...fadeUpView(0.2, VP_LG)}>
           {plan && state !== 'success' && (
             <p className="mb-4 text-sm text-brand-300">
               Selected plan: <strong className="capitalize">{plan}</strong> · {billing} billing{' '}

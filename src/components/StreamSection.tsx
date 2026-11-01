@@ -1,6 +1,6 @@
 import { motion } from '@/components/Motion'
 import { GitBranch, Lock, Mail, Megaphone, TrendingUp } from 'lucide-react'
-import { EASE, VP_SM, staggerContainer, staggerItem } from '@/lib/motion'
+import { VP_SM, staggerContainer, staggerItem, fadeUpView } from '@/lib/motion'
 
 const transactionalItems = [
   'Password resets',
@@ -22,13 +22,7 @@ export default function StreamSection() {
   return (
     <section id="streams" className="py-10 sm:py-16 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={VP_SM}
-          transition={{ duration: 0.5, ease: EASE }}
-          className="text-center mb-16"
-        >
+        <motion.div {...fadeUpView(0, VP_SM)} className="text-center mb-16">
           <span className="tag bg-sky-500/10 text-sky-400 border border-sky-500/20 inline-flex mb-4">
             <GitBranch size={12} aria-hidden />
             Stream Separation
@@ -159,13 +153,7 @@ export default function StreamSection() {
           </motion.div>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={VP_SM}
-          transition={{ duration: 0.5, delay: 0.3, ease: EASE }}
-          className="mt-12 flex justify-center"
-        >
+        <motion.div {...fadeUpView(0.3, VP_SM)} className="mt-12 flex justify-center">
           <div className="flex items-center gap-3 bg-white/[0.03] border border-white/[0.07] rounded-full px-6 py-3">
             <TrendingUp size={15} className="text-emerald-400 shrink-0" aria-hidden />
             <p className="text-sm text-gray-400">

@@ -3,7 +3,7 @@ import { motion } from '@/components/Motion'
 import { Code2, Copy, CheckCheck, Mail } from 'lucide-react'
 import { renderTokens } from '@/lib/tokenize'
 import { sdks, apiStats, codeExample } from '@/data/api'
-import { EASE, VP } from '@/lib/motion'
+import { EASE, VP, fadeUpView } from '@/lib/motion'
 
 export default function ApiSection() {
   const mounted = useRef(false)
@@ -131,10 +131,7 @@ export default function ApiSection() {
           {/* Copy */}
           <div className="order-1 lg:order-2">
             <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={VP}
-              transition={{ duration: 0.5, ease: EASE }}
+              {...fadeUpView()}
               className="tag bg-brand-500/10 text-brand-400 border border-brand-500/20 inline-flex mb-4"
             >
               <Code2 size={12} aria-hidden />
@@ -142,33 +139,18 @@ export default function ApiSection() {
             </motion.span>
 
             <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={VP}
-              transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
+              {...fadeUpView(0.1)}
               className="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-5 sm:leading-10"
             >
               Analyze, correct, send <span className="text-brand-400">in your workflow</span>
             </motion.h2>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={VP}
-              transition={{ duration: 0.5, delay: 0.15, ease: EASE }}
-              className="text-gray-400 leading-relaxed mb-8"
-            >
+            <motion.p {...fadeUpView(0.15)} className="text-gray-400 leading-relaxed mb-8">
               Use the analysis result to decide whether to send or fix the message. This
               illustrative SDK example shows the intended workflow.
             </motion.p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={VP}
-              transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
-              className="mb-8"
-            >
+            <motion.div {...fadeUpView(0.2)} className="mb-8">
               <p className="text-xs text-gray-400 mb-3 font-semibold uppercase tracking-wider">
                 Planned SDKs
               </p>
@@ -195,10 +177,7 @@ export default function ApiSection() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={VP}
-              transition={{ duration: 0.5, delay: 0.25, ease: EASE }}
+              {...fadeUpView(0.25)}
               className="grid grid-cols-3 gap-4"
               aria-label="Analysis and sending workflow"
             >

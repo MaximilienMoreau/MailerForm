@@ -3,7 +3,7 @@ import { motion } from '@/components/Motion'
 import { AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { features, type Feature } from '@/data/features'
-import { EASE, VP } from '@/lib/motion'
+import { EASE, fadeUpView } from '@/lib/motion'
 
 const slideVariants = {
   enter: (dir: number) => ({ x: dir > 0 ? 60 : -60, opacity: 0 }),
@@ -102,13 +102,7 @@ export default function FeaturesSection() {
       aria-label="Product features"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={VP}
-          transition={{ duration: 0.5, ease: EASE }}
-          className="text-center mb-8"
-        >
+        <motion.div {...fadeUpView()} className="text-center mb-8">
           <span className="tag bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-4 inline-flex">
             Everything you need
           </span>
@@ -121,12 +115,7 @@ export default function FeaturesSection() {
           </p>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={VP}
-          transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
-        >
+        <motion.div {...fadeUpView(0.1)}>
           {/* Named tabs make every topic discoverable before opening a panel. */}
           <div className="requires-js flex flex-wrap items-center justify-center gap-2 mb-6">
             <div

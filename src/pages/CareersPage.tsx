@@ -2,7 +2,7 @@ import SiteLayout from '@/components/SiteLayout'
 import { sitePages } from '@/data/site'
 import { motion } from '@/components/Motion'
 import { ArrowRight, Briefcase, Clock, Heart, MapPin, Rocket, Sparkles } from 'lucide-react'
-import { EASE, VP, staggerContainer, staggerItem } from '@/lib/motion'
+import { EASE, VP, staggerContainer, staggerItem, fadeUpView } from '@/lib/motion'
 import { useMeta } from '@/hooks/useMeta'
 
 const howWeWork = [
@@ -126,10 +126,7 @@ export default function CareersPage() {
       <section className="py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={VP}
-            transition={{ duration: 0.5, ease: EASE }}
+            {...fadeUpView()}
             className="text-2xl sm:text-3xl font-extrabold text-white mb-10 text-center"
           >
             How we work
@@ -167,10 +164,7 @@ export default function CareersPage() {
       <section className="py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={VP}
-            transition={{ duration: 0.5, ease: EASE }}
+            {...fadeUpView()}
             className="text-2xl sm:text-3xl font-extrabold text-white mb-10 text-center"
           >
             Open positions
@@ -217,10 +211,7 @@ export default function CareersPage() {
       <section className="py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={VP}
-            transition={{ duration: 0.5, ease: EASE }}
+            {...fadeUpView()}
             className="text-2xl sm:text-3xl font-extrabold text-white mb-10 text-center"
           >
             Benefits
@@ -251,10 +242,7 @@ export default function CareersPage() {
       <section className="py-16 pb-28">
         <div className="max-w-xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={VP}
-            transition={{ duration: 0.5, ease: EASE }}
+            {...fadeUpView()}
             className="bg-brand-500/[0.07] border border-brand-500/20 rounded-2xl p-8 sm:p-10"
           >
             <h2 className="text-2xl font-extrabold text-white mb-3">Don&apos;t see your role?</h2>

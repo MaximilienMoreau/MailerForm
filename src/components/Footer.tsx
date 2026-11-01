@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Zap } from 'lucide-react'
+import SiteLink from '@/components/SiteLink'
 
 type NavItem = { label: string; href: string; external?: boolean }
 
@@ -80,7 +81,7 @@ export default function Footer() {
           </div>
 
           {/* Navigation columns */}
-          {(Object.entries(nav) as [string, NavItem[]][]).map(([group, items]) => (
+          {Object.entries(nav).map(([group, items]) => (
             <div key={group}>
               <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">
                 {group}
@@ -88,23 +89,18 @@ export default function Footer() {
               <ul className="space-y-2.5">
                 {items.map((item) => (
                   <li key={item.label}>
-                    {item.external ? (
-                      <a
-                        href={item.href}
-                        target={item.href.startsWith('mailto:') ? undefined : '_blank'}
-                        rel={item.href.startsWith('mailto:') ? undefined : 'noreferrer'}
-                        className="text-sm text-gray-400 hover:text-gray-200 transition-colors focus-ring rounded-sm"
-                      >
-                        {item.label}
-                      </a>
-                    ) : (
-                      <Link
-                        to={item.href}
-                        className="text-sm text-gray-400 hover:text-gray-200 transition-colors focus-ring rounded-sm"
-                      >
-                        {item.label}
-                      </Link>
-                    )}
+                    <SiteLink
+                      href={item.href}
+                      target={
+                        item.external && !item.href.startsWith('mailto:') ? '_blank' : undefined
+                      }
+                      rel={
+                        item.external && !item.href.startsWith('mailto:') ? 'noreferrer' : undefined
+                      }
+                      className="text-sm text-gray-400 hover:text-gray-200 transition-colors focus-ring rounded-sm"
+                    >
+                      {item.label}
+                    </SiteLink>
                   </li>
                 ))}
               </ul>
