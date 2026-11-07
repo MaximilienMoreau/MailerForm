@@ -1,9 +1,27 @@
-# MailerForm
+# MailerForm: Landing Page
+
+![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white)
+[![Tests](https://github.com/maximilienmoreau/MailerForm/actions/workflows/ci.yml/badge.svg)](https://github.com/maximilienmoreau/MailerForm/actions/workflows/ci.yml)
 
 A React and TypeScript website presenting the MailerForm early-access product.
 It includes preset analysis demonstrations, an illustrative SDK example, plan
 comparisons, editorial guides, and separate invitation and newsletter requests.
 It does not implement an email delivery backend or operate a newsletter service.
+
+## Table of contents
+
+- [Development](#development)
+- [Structure and conventions](#structure-and-conventions)
+- [Forms and preferences](#forms-and-preferences)
+- [Routing, metadata, and deployment](#routing-metadata-and-deployment)
+- [Verification](#verification)
+- [Browser journeys](#browser-journeys)
+- [Dependency maintenance](#dependency-maintenance)
+- [Preview content](#preview-content)
+- [Security](#security)
 
 ## Development
 
@@ -38,25 +56,25 @@ separate configuration. Run `npm audit` to check the full dependency tree.
 
 ## Structure and conventions
 
-| Location | Responsibility |
-| --- | --- |
-| `src/App.tsx` | Routes, error boundaries, and lazy secondary pages |
-| `src/pages/LandingPage.tsx` | Immediate rendering of all homepage sections |
-| `src/components/SiteLayout.tsx` | Shared navigation, main landmark, and footer |
-| `src/pages/` | Routed pages and editorial/legal content |
-| `src/components/` | UI sections and small shared UI components |
-| `src/components/Motion.tsx` | Shared motion components with a visible build-time state |
-| `src/data/site.ts` | Public paths, page metadata, canonical origin, and social assets |
-| `src/data/plans.ts` | Plan definitions and numeric prices in USD |
-| `src/lib/planSelection.ts` | Validated query parameters and plan request links |
-| `src/data/product.ts` | Shared early-access positioning and stages |
-| `src/data/posts.ts` | Guide metadata and complete guide text |
-| `src/lib/seo.ts` | Metadata and article schema shared by build and browser |
-| `src/hooks/useMeta.ts` | Route metadata ownership, creation, and cleanup |
-| `src/hooks/useFormRequest.ts` | One active request per form, deadline, cancellation, and cleanup |
-| `scripts/static-pages.ts` | Route metadata, sitemap, and React-generated HTML documents |
-| `scripts/render-pages.tsx` | Build-time React rendering of every public route |
-| `scripts/render-document.ts` | Complete stream rendering, deadlines, and cleanup on failure |
+| Location                        | Responsibility                                                   |
+| ------------------------------- | ---------------------------------------------------------------- |
+| `src/App.tsx`                   | Routes, error boundaries, and lazy secondary pages               |
+| `src/pages/LandingPage.tsx`     | Immediate rendering of all homepage sections                     |
+| `src/components/SiteLayout.tsx` | Shared navigation, main landmark, and footer                     |
+| `src/pages/`                    | Routed pages and editorial/legal content                         |
+| `src/components/`               | UI sections and small shared UI components                       |
+| `src/components/Motion.tsx`     | Shared motion components with a visible build-time state         |
+| `src/data/site.ts`              | Public paths, page metadata, canonical origin, and social assets |
+| `src/data/plans.ts`             | Plan definitions and numeric prices in USD                       |
+| `src/lib/planSelection.ts`      | Validated query parameters and plan request links                |
+| `src/data/product.ts`           | Shared early-access positioning and stages                       |
+| `src/data/posts.ts`             | Guide metadata and complete guide text                           |
+| `src/lib/seo.ts`                | Metadata and article schema shared by build and browser          |
+| `src/hooks/useMeta.ts`          | Route metadata ownership, creation, and cleanup                  |
+| `src/hooks/useFormRequest.ts`   | One active request per form, deadline, cancellation, and cleanup |
+| `scripts/static-pages.ts`       | Route metadata, sitemap, and React-generated HTML documents      |
+| `scripts/render-pages.tsx`      | Build-time React rendering of every public route                 |
+| `scripts/render-document.ts`    | Complete stream rendering, deadlines, and cleanup on failure     |
 
 The `@/` alias resolves to `src/`. Components use typed props; domain rules belong
 in plain data/functions rather than JSX. Internal `SiteLink` links use React
