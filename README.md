@@ -25,7 +25,8 @@ It does not implement an email delivery backend or operate a newsletter service.
 
 ## Development
 
-Use **Node 22.13+ or Node 24+** (`.nvmrc` selects the maintained Node 22 release line).
+Use **Node 22.13.x through 22.x, or Node 24+**; Node 23 is excluded.
+The `.nvmrc` file selects the maintained Node 22 release line.
 
 ```sh
 npm ci
@@ -159,8 +160,10 @@ submit real forms or send emails.
 
 TypeScript checks both application code (`tsconfig.json`) and build scripts,
 configuration, and Node-based tests (`tsconfig.tools.json`). ESLint covers the
-whole repository, and Prettier formatting is enforced in CI. Add regression tests
-for behavior changes; keep visual-only changes lightweight.
+whole repository. CI enforces Prettier formatting for the source and configuration
+paths listed in `format:check`; this does not include every repository file,
+and `README.md` is excluded. Add regression tests for behavior changes; keep
+visual-only changes lightweight.
 
 ## Browser journeys
 
@@ -171,8 +174,9 @@ also installs required system libraries. CI runs these journeys automatically.
 The Playwright suite tests the production build in Chromium with desktop and
 Pixel 7 viewport/touch settings. It covers keyboard navigation, mobile dialog
 focus and dismissal, yearly plan persistence, form validation, failed requests
-and retry, and newsletter consent. Animations run normally. Mobile emulation is
-not a physical-device test or coverage of Safari/Firefox.
+and retry, and newsletter consent. Animations run normally unless a test explicitly
+enables reduced motion; some journeys do so. Mobile emulation is not a
+physical-device test or coverage of Safari/Firefox.
 
 Tests build into `dist-e2e/` with a dummy Formspree ID. All Formspree traffic is
 blocked unless a test supplies a simulated response; no live request is sent.
